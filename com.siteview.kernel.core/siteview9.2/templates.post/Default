@@ -1,5 +1,0 @@
-monitor name=<name>
-group=<group>
-status=<state>
-sample=<sample>
-time=<time>

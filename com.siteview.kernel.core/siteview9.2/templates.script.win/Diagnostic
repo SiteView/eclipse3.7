@@ -1,8 +1,0 @@
-Monitor: <name>
-Group: <group>
-Status: <state>
-Sample: <sample>
-Time: <time>
-<mainParameters>
-<mainStateProperties>
-Diagnostic: <diagnosticText>

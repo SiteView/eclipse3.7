@@ -1,1 +1,0 @@
-cscript ..\scripts\diskSpace.vbs %1 %2
