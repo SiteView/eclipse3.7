@@ -18,6 +18,7 @@ package COM.dragonflow.Api;
  */
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -26,6 +27,7 @@ import jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.SiteView.Group;
+import COM.dragonflow.SiteViewException.SiteViewException;
 import COM.dragonflow.SiteViewException.SiteViewOperationalException;
 import COM.dragonflow.SiteViewException.SiteViewParameterException;
 
@@ -610,6 +612,11 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         return getAllAllowedGroups();
+    }
+    
+    public ArrayList getTopLevelAllowedGroupInstances()  throws SiteViewException
+    {
+            return getTopLevelAllowedGroups();
     }
 
     public java.util.Collection getChildGroupInstances(String s)

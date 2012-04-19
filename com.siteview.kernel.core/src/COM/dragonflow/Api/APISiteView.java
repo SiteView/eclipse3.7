@@ -34,6 +34,7 @@ import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.CompareSlot;
 import COM.dragonflow.SiteView.FindRunningMonitors;
 import COM.dragonflow.SiteView.Platform;
+import COM.dragonflow.SiteView.SiteViewGroup;
 import COM.dragonflow.SiteViewException.SiteViewOperationalException;
 import COM.dragonflow.SiteViewException.SiteViewParameterException;
 import COM.dragonflow.StandardMonitor.ADReplicationMonitor;
@@ -2367,6 +2368,24 @@ public class APISiteView
             if(!s.equals("__Health__"))
             {
                 arraylist.add(siteviewgroup.getGroup(s));
+            }
+        }
+
+        return arraylist;
+    }
+    
+    protected  ArrayList getTopLevelAllowedGroups()
+    {
+        Array array = getAllAllowedGroupIDs();
+        ArrayList arraylist = new ArrayList(array.size());
+        SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
+        for(int i = 0; i < array.size(); i++)
+        {
+            String s = (String)array.at(i);
+            String parent = siteviewgroup.getGroup(s).getProperty("_parent");
+            if(!s.equals("__Health__") && parent.isEmpty())
+            {            	
+            	arraylist.add(siteviewgroup.getGroup(s));
             }
         }
 
