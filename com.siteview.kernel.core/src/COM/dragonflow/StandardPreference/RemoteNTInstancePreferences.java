@@ -250,7 +250,7 @@ public class RemoteNTInstancePreferences extends COM.dragonflow.SiteView.Prefere
         ArrayList array = new ArrayList();
         HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         String s1;
-        for (Enumeration enumeration = hashmap.values(s); enumeration.hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils.stringToHashMap(s1))) {
+        for (Enumeration enumeration = (Enumeration) hashmap.values(s); enumeration.hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils.stringToHashMap(s1))) {
             s1 = (String) enumeration.nextElement();
             if (s1.indexOf("_id") >= 0) {
                 continue;

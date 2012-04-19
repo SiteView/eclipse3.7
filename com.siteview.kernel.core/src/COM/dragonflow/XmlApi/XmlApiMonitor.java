@@ -17,6 +17,7 @@ package COM.dragonflow.XmlApi;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -75,7 +76,7 @@ public class XmlApiMonitor {
                     hashmap.remove("runTimeout");
                 }
                 SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s8 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s8, hashmap.get(s8));
@@ -223,7 +224,7 @@ public class XmlApiMonitor {
                 String s5 = (String) array3.get(i);
                 HashMap hashmap = (HashMap) array1.get(i);
                 SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s6 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s6, hashmap.get(s6));
@@ -296,7 +297,7 @@ public class XmlApiMonitor {
         try {
             java.util.Vector vector = new Vector();
             SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 String s1 = (String) enumeration.nextElement();
                 String s2 = (String) hashmap.get(s1);
@@ -322,7 +323,7 @@ public class XmlApiMonitor {
         try {
             java.util.Vector vector = new Vector();
             SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 String s2 = (String) enumeration.nextElement();
                 String s3 = (String) hashmap.get(s2);
@@ -349,7 +350,7 @@ public class XmlApiMonitor {
         try {
             java.util.Vector vector = new Vector();
             SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 String s2 = (String) enumeration.nextElement();
                 String s3 = (String) hashmap.get(s2);
@@ -372,7 +373,7 @@ public class XmlApiMonitor {
         try {
             java.util.Vector vector = new Vector();
             SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 String s3 = (String) enumeration.nextElement();
                 String s4 = (String) hashmap.get(s3);
@@ -395,7 +396,7 @@ public class XmlApiMonitor {
         try {
             java.util.Vector vector = new Vector();
             SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 String s3 = (String) enumeration.nextElement();
                 String s4 = (String) hashmap.get(s3);
@@ -505,7 +506,7 @@ public class XmlApiMonitor {
                     s5 = (String) hashmap.get("webserviceurl");
                 }
                 SSInstanceProperty assinstanceproperty[] = new SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s6 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s6, hashmap.get(s6));

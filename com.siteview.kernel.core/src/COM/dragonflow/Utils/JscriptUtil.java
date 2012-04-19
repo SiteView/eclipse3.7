@@ -37,7 +37,7 @@ public class JscriptUtil
     private static String createArray(String s, String as[])
     {
         StringBuffer stringbuffer = new StringBuffer();
-        stringbuffer.append("var " + s + "= new Array(");
+        stringbuffer.append("var " + s + "= new ArrayList(");
         for(int i = 0; i < as.length; i++)
         {
             stringbuffer.append("\"" + as[i] + "\"");
@@ -54,12 +54,12 @@ public class JscriptUtil
     public static String createArrayFromInstancePropsFunc(String s, COM.dragonflow.Properties.StringProperty astringproperty[])
     {
         StringBuffer stringbuffer = new StringBuffer();
-        stringbuffer.append("function " + s + "(){\n" + "   var propsArray = new Array(\n");
+        stringbuffer.append("function " + s + "(){\n" + "   var propsArray = new ArrayList(\n");
         for(int i = 0; i < astringproperty.length; i++)
         {
             String s1 = astringproperty[i].getLabel();
             String s2 = astringproperty[i].getDescription();
-            stringbuffer.append("       new Array(\"" + s1 + "\",\"" + s2 + "\")");
+            stringbuffer.append("       new ArrayList(\"" + s1 + "\",\"" + s2 + "\")");
             if(i < astringproperty.length - 1)
             {
                 stringbuffer.append(",\n");

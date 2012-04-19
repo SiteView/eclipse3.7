@@ -255,7 +255,7 @@ public class JdbcConfig extends Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -307,7 +307,7 @@ public class JdbcConfig extends Action {
             debugPrint(1, "writeFrame  Error, bad param");
             return;
         }
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         try {
             boolean flag1 = (hashmap.get("noSlotFilter") == null ? s3 != null : false);
             while (enumeration.hasMoreElements()) {
@@ -512,7 +512,7 @@ public class JdbcConfig extends Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -548,10 +548,10 @@ public class JdbcConfig extends Action {
                         ((HashMap) (obj1)).add(s2, s4);
                     } else {
                         Object obj2 = ((HashMap) (obj1)).get(s2);
-                        if (obj2 instanceof Array) {
-                            String s6 = (String) ((Array) obj2).popBack();
+                        if (obj2 instanceof ArrayList) {
+                            String s6 = (String) ((ArrayList) obj2).popBack();
                             s6 = s6 + s4;
-                            ((Array) obj2).add(s6);
+                            ((ArrayList) obj2).add(s6);
                         } else if (obj2 instanceof String) {
                             String s7 = (String) obj2;
                             ((HashMap) (obj1)).put(s2, s7 + s4);

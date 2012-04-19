@@ -16,6 +16,8 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.SiteView.CompareSlot;
 import COM.dragonflow.SiteView.PortalFilter;
@@ -1335,7 +1337,7 @@ label1:
                     }
                 }
             } while(true);
-            jgl.Sorting.sort(array, new CompareSlot("title", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
+            Sorting.sort(array, new CompareSlot("title", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
             enumeration = (Enumeration) array.iterator();
             ArrayList array1 = COM.dragonflow.Page.CGI.getGroupFilterForAccount(httprequest);
             do

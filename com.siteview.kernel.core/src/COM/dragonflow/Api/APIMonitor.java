@@ -769,7 +769,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @deprecated Method runExisting is deprecated
      */
@@ -882,7 +882,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @deprecated Method runTemporary is deprecated
      */
@@ -961,7 +961,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -976,7 +976,7 @@ public class APIMonitor extends APISiteView
         assinstanceproperty = null;
         int i = 0;
         assinstanceproperty = new SSInstanceProperty[hashmap.size()];
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();)
         {
             String s1 = (String)enumeration.nextElement();
             String s2 = "";
@@ -1536,7 +1536,7 @@ public class APIMonitor extends APISiteView
         try
         {
             int i = findType("Monitor");
-            ArrayList array = (jgl.Array)ssChildObjects.elementAt(i);
+            ArrayList array = (ArrayList)ssChildObjects.elementAt(i);
             assstringreturnvalue = new SSStringReturnValue[array.size()];
             for(int j = 0; j < array.size(); j++)
             {
@@ -1609,7 +1609,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -2703,7 +2703,7 @@ public class APIMonitor extends APISiteView
     private void validateCustomProperties(HashMap hashmap, AtomicMonitor atomicmonitor, HashMap hashmap1)
     {
         HashMap hashmap2 = MasterConfig.getMasterConfig();
-        Enumeration enumeration = hashmap2.values("_monitorEditCustom");
+        Enumeration enumeration = (Enumeration) hashmap2.values("_monitorEditCustom");
         while (enumeration.hasMoreElements()) {
             String s = "";
             String s1 = (String)enumeration.nextElement();
@@ -2763,7 +2763,7 @@ public class APIMonitor extends APISiteView
                 while (enumeration.hasMoreElements()) {
                     COM.dragonflow.Properties.StringProperty stringproperty = (COM.dragonflow.Properties.StringProperty)enumeration.nextElement();
                     String s1 = stringproperty.getName();
-                    Enumeration enumeration2 = hashmap.values(s1);
+                    Enumeration enumeration2 = (Enumeration) hashmap.values(s1);
                     hashmap.remove(s1);
                     if(!stringproperty.isThreshold())
                     {
@@ -2796,7 +2796,7 @@ public class APIMonitor extends APISiteView
             {
                 java.util.HashMap hashmap3 = new java.util.HashMap();
                 COM.dragonflow.Properties.StringProperty stringproperty1;
-                for(Enumeration enumeration1 = hashmap2.keys(); enumeration1.hasMoreElements(); hashmap3.put(stringproperty1.getName(), hashmap2.get(stringproperty1)))
+                for(Enumeration enumeration1 = (Enumeration) (Enumeration) hashmap2.keys(); enumeration1.hasMoreElements(); hashmap3.put(stringproperty1.getName(), hashmap2.get(stringproperty1)))
                 {
                     stringproperty1 = (COM.dragonflow.Properties.StringProperty)enumeration1.nextElement();
                 }
@@ -3042,7 +3042,7 @@ public class APIMonitor extends APISiteView
                         }
 
                         int k1 = 0;
-                        Enumeration enumeration = hashmap2.keys();
+                        Enumeration enumeration = (Enumeration) hashmap2.keys();
                         as = new String[hashmap2.size()];
                         while(enumeration.hasMoreElements()) 
                         {
@@ -3052,7 +3052,7 @@ public class APIMonitor extends APISiteView
                 } else
                 if((atomicmonitor instanceof NTCounterBase) && stringproperty.getName() != null && stringproperty.getName().equals("availableCounters"))
                 {
-                    ArrayList array2 = new Array(0);
+                    ArrayList array2 = new ArrayList(0);
                     StringBuffer stringbuffer2 = new StringBuffer();
                     ArrayList array8 = new ArrayList();
                     String s13 = (String)hashmap.get("_machine");
@@ -3074,7 +3074,7 @@ public class APIMonitor extends APISiteView
                             }
 
                             int k3 = 0;
-                            Enumeration enumeration1 = hashmap4.keys();
+                            Enumeration enumeration1 = (Enumeration) hashmap4.keys();
                             as = new String[hashmap4.size()];
                             while(enumeration1.hasMoreElements()) 
                             {
@@ -3090,7 +3090,7 @@ public class APIMonitor extends APISiteView
                             }
 
                             k3 = 0;
-                            enumeration1 = hashmap4.keys();
+                            enumeration1 = (Enumeration) hashmap4.keys();
                             as1 = new String[hashmap4.size()];
                             while(enumeration1.hasMoreElements()) 
                             {
@@ -3101,7 +3101,7 @@ public class APIMonitor extends APISiteView
                 } else
                 if((atomicmonitor instanceof NTCounterBase) && stringproperty.getName() != null && stringproperty.getName().equals("availableInstances"))
                 {
-                    ArrayList array4 = new Array(0);
+                    ArrayList array4 = new ArrayList(0);
                     StringBuffer stringbuffer3 = new StringBuffer();
                     ArrayList array9 = new ArrayList();
                     String s14 = (String)hashmap.get("_machine");
@@ -3123,7 +3123,7 @@ public class APIMonitor extends APISiteView
                             }
 
                             int i4 = 0;
-                            Enumeration enumeration2 = hashmap5.keys();
+                            Enumeration enumeration2 = (Enumeration) hashmap5.keys();
                             as = new String[hashmap5.size()];
                             while(enumeration2.hasMoreElements()) 
                             {
@@ -3489,7 +3489,7 @@ public class APIMonitor extends APISiteView
         {
             vector1.add(vector.elementAt(0));
             vector1.add(vector.elementAt(1));
-            hashset.add(((String)vector.elementAt(0)).toLowerCase());
+            hashset.add((String)vector.elementAt(0)).toLowerCase());
         }
         for(int i = vector.size() - 2; i > 0; i -= 2)
         {
@@ -3612,7 +3612,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -3671,7 +3671,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param atomicmonitor
@@ -3882,7 +3882,7 @@ public class APIMonitor extends APISiteView
                 HashMap hashmap4 = BrowsableCache.getCache(s19, true, false);
                 HashMap hashmap5 = (HashMap)hashmap4.get("selectNames");
                 HashMap hashmap6 = (HashMap)hashmap4.get("selectIDs");
-                for(Enumeration enumeration4 = hashmap5.keys(); enumeration4.hasMoreElements();)
+                for(Enumeration enumeration4 = (Enumeration) hashmap5.keys(); enumeration4.hasMoreElements();)
                 {
                     String s35 = (String)enumeration4.nextElement();
                     String s36 = (String)hashmap6.get(s35);
@@ -3985,7 +3985,7 @@ public class APIMonitor extends APISiteView
                     MonitorGroup monitorgroup = (MonitorGroup)siteviewgroup.getElement(s33);
                     String s37 = monitorgroup.getProperty(Monitor.pGroupID);
                     ArrayList array5 = monitorgroup.getMonitorsOfClass("", s37);
-                    Enumeration enumeration5 = array5.elements();
+                    Enumeration enumeration5 = (Enumeration) array5.iterator();
                     int j5 = 0;
                     while (enumeration5.hasMoreElements())
                         {
@@ -4064,7 +4064,7 @@ public class APIMonitor extends APISiteView
             }
             if(array2 != null && array2.size() > 0)
             {
-                Enumeration enumeration3 = array2.elements();
+                Enumeration enumeration3 = (Enumeration) array2.iterator();
                 while(enumeration3.hasMoreElements()) 
                 {
                     atomicmonitor.addProperty(stringproperty, (String)enumeration3.nextElement());
@@ -4134,7 +4134,7 @@ public class APIMonitor extends APISiteView
                 hashmap.remove("_id");
                 hashmap.put("_id", s3);
                 hashmap.put("_class", atomicmonitor.getClassProperty("class"));
-                array.insert(i, hashmap);
+                array.add(i, hashmap);
                 String s4 = COM.dragonflow.Utils.TextUtils.increment(s3);
                 hashmap1.put("_nextID", s4);
             } else
@@ -4142,7 +4142,7 @@ public class APIMonitor extends APISiteView
                 int j = monitorUtils.findMonitorIndex(array, s1);
                 java.lang.Object obj = array.get(j);
                 array.remove(obj);
-                array.insert(j, hashmap);
+                array.add(j, hashmap);
             }
 //            if(TopazConfigurator.configInTopazAndRegistered())
 //            {
@@ -4264,7 +4264,7 @@ public class APIMonitor extends APISiteView
     private void saveCustomProperties(Monitor monitor, HashMap hashmap)
     {
         HashMap hashmap1 = MasterConfig.getMasterConfig();
-        Enumeration enumeration = hashmap1.values("_monitorEditCustom");
+        Enumeration enumeration = (Enumeration) hashmap1.values("_monitorEditCustom");
         while (enumeration.hasMoreElements()) {
             String s = (String)enumeration.nextElement();
             String as[] = COM.dragonflow.Utils.TextUtils.split(s, "|");
@@ -4702,7 +4702,7 @@ public class APIMonitor extends APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * @param s
      * @param s1
      * @return

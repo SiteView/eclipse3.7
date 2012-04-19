@@ -135,7 +135,7 @@ public class SiteViewLogReader extends LogReader {
         return s;
     }
 
-    public void processPortal(Array array, Date date, Date date1, int i,
+    public void processPortal(ArrayList array, Date date, Date date1, int i,
              ArrayList array1,  ArrayList array2,  ArrayList array3, long l, long l1, long l2,
             String s, HashMap hashmap, boolean flag) {
         HashMap hashmap1 = new HashMap();
@@ -202,31 +202,31 @@ public class SiteViewLogReader extends LogReader {
 
     }
 
-    public void process(Array array, Date date, Date date1, int i, int j) {
+    public void process(ArrayList array, Date date, Date date1, int i, int j) {
         process(array, date, date1, i, j, false);
     }
 
-    public void process(Array array, Date date, Date date1, int i, int j,
+    public void process(ArrayList array, Date date, Date date1, int i, int j,
             boolean flag) {
         process(array, date, date1, i, j, null, null, null, 0L, 0L, 0L, null,
                 flag);
     }
 
-    public void process(Array array, Date date, Date date1, int i,
+    public void process(ArrayList array, Date date, Date date1, int i,
              ArrayList array1,  ArrayList array2,  ArrayList array3, long l, long l1, long l2,
             HashMap hashmap, boolean flag) {
         process(array, date, date1, 0L, i, array1, array2, array3, l, l1, l2,
                 hashmap, flag);
     }
 
-    public void process(Array array, Date date, Date date1, long l, int i,
+    public void process(ArrayList array, Date date, Date date1, long l, int i,
              ArrayList array1,  ArrayList array2,  ArrayList array3, long l1, long l2,
             long l3, HashMap hashmap) {
         process(array, date, date1, l, i, array1, array2, array3, l1, l2, l3,
                 hashmap, false);
     }
 
-    public void process(Array array, Date date, Date date1, long l, int i,
+    public void process(ArrayList array, Date date, Date date1, long l, int i,
              ArrayList array1,  ArrayList array2,  ArrayList array3, long l1, long l2,
             long l3, HashMap hashmap, boolean flag) {
         HashMap hashmap1 = new HashMap(true);
@@ -413,7 +413,7 @@ public class SiteViewLogReader extends LogReader {
                                             (int) l16)) {
                                 s7 = Monitor.FILTERED_CATEGORY;
                             }
-                            for (Enumeration enumeration1 = hashmap1.values(s6); enumeration1
+                            for (Enumeration enumeration1 = (Enumeration) hashmap1.values(s6); enumeration1
                                     .hasMoreElements();) {
                                 SampleCollector samplecollector1 = (SampleCollector) enumeration1
                                         .nextElement();
@@ -619,11 +619,11 @@ public class SiteViewLogReader extends LogReader {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     static {
         HashMap hashmap = MasterConfig.getMasterConfig();
-        Enumeration enumeration = hashmap.values("_maxStatusLength");
+        Enumeration enumeration = (Enumeration) hashmap.values("_maxStatusLength");
         String s = "";
         while (enumeration.hasMoreElements()) {
             String s1 = (String) enumeration.nextElement();

@@ -22,6 +22,9 @@ import java.util.Date;
 
 import java.util.ArrayList;
 
+import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 // Referenced classes of package COM.dragonflow.Utils:
 // GreaterFileModified, TextUtils, FileUtils
 
@@ -150,8 +153,8 @@ public class TempFileManager implements java.lang.Runnable {
 
     public static void controlDirSize(java.io.File file, int i, java.io.FilenameFilter filenamefilter) {
         if (file.exists()) {
-            ArrayList array = new Array(file.listFiles(filenamefilter));
-            jgl.Sorting.sort(array, new GreaterFileModified(false));
+            ArrayList array = new ArrayList(file.listFiles(filenamefilter));
+            Sorting.sort(array, new GreaterFileModified(false));
             long l = 0L;
             for (int j = 0; j < array.size(); j ++) {
                 java.io.File file1 = (java.io.File) array.get(j);

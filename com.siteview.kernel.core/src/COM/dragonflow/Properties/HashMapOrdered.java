@@ -36,9 +36,9 @@ public class HashMapOrdered extends HashMap
      if(allowsDuplicates())
      {
          Object obj1 = get(obj);
-         if(obj1 != null && (obj1 instanceof Array))
+         if(obj1 != null && (obj1 instanceof ArrayList))
          {
-             return ((Array)obj1).size();
+             return ((ArrayList)obj1).size();
          }
      }
      return super.count(obj);
@@ -51,9 +51,9 @@ public class HashMapOrdered extends HashMap
          Object obj2 = get(obj);
          if(obj2 != null)
          {
-             if(obj2 instanceof Array)
+             if(obj2 instanceof ArrayList)
              {
-                 ((Array)obj2).add(obj1);
+                 ((ArrayList)obj2).add(obj1);
              } else
              {
                   ArrayList array = new ArrayList();
@@ -72,9 +72,9 @@ public class HashMapOrdered extends HashMap
      if(allowsDuplicates())
      {
          Object obj1 = get(obj);
-         if(obj1 != null && (obj1 instanceof Array))
+         if(obj1 != null && (obj1 instanceof ArrayList))
          {
-             return ((Array)obj1).elements();
+             return ((ArrayList)obj1).elements();
          }
      }
      return super.values(obj);

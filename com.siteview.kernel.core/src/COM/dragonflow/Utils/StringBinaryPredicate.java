@@ -8,6 +8,10 @@
  */
 package COM.dragonflow.Utils;
 
+import com.recursionsw.jgl.BinaryPredicate;
+
+//import com.recursionsw.BinaryPredicate;
+
 /**
  * Comment for <code></code>
  * 
@@ -17,7 +21,7 @@ package COM.dragonflow.Utils;
  * 
  */
 
-class StringBinaryPredicate implements jgl.BinaryPredicate {
+class StringBinaryPredicate implements BinaryPredicate {
 
     boolean _bCaseSensitive;
 

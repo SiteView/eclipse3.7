@@ -20,6 +20,8 @@ package COM.dragonflow.Log;
 import java.io.File;
 import java.util.Date;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Log:
 // BaseFileLogger, FileWithPath, LogManager
 

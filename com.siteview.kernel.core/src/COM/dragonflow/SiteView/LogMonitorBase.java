@@ -165,7 +165,7 @@ public abstract class LogMonitorBase extends ServerMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -477,7 +477,7 @@ public abstract class LogMonitorBase extends ServerMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringbuffer
      * @param l
@@ -667,7 +667,7 @@ public abstract class LogMonitorBase extends ServerMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -762,7 +762,7 @@ public abstract class LogMonitorBase extends ServerMonitor {
                     j++;
                     array1 = new ArrayList();
                     StringBuffer stringbuffer2 = new StringBuffer();
-                    array2 = (Array) enumeration.nextElement();
+                    array2 = (ArrayList) enumeration.nextElement();
                     String s7 = (String) array2.get(0);
                     String s9 = (String) array2.get(1);
                     s10 = (String) array2.get(2);
@@ -997,7 +997,7 @@ public abstract class LogMonitorBase extends ServerMonitor {
         System.out.println("read: " + j + ", time: " + (System.currentTimeMillis() - l));
     }
 
-    private void addValuesPropertiesToArray(Array array) {
+    private void addValuesPropertiesToArray(ArrayList array) {
         String s = getProperty(getMatchProperty());
         int i = 0;
         if (s.length() > 0) {

@@ -17,6 +17,7 @@ package COM.dragonflow.XmlApi;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -53,7 +54,7 @@ public class XmlApiPreference {
                     hashmap.remove("testPreference");
                 }
                 COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 int j = 0;
                 Object obj1 = null;
                 while (enumeration1.hasMoreElements()) {
@@ -105,7 +106,7 @@ public class XmlApiPreference {
                 String s5 = (String) array4.get(i);
                 HashMap hashmap = (HashMap) array2.get(i);
                 COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s6 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s6, hashmap.get(s6));

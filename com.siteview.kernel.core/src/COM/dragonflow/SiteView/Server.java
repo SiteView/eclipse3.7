@@ -43,7 +43,7 @@ public class Server {
     public Server() {
     }
 
-    public static HashMap findServer(Array array, String s) {
+    public static HashMap findServer(ArrayList array, String s) {
         for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements();) {
             HashMap hashmap = (HashMap) enumeration.nextElement();
@@ -220,7 +220,7 @@ public class Server {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -238,7 +238,7 @@ public class Server {
                 hashmap.put("server", "_local");
                 serversCache.add(hashmap);
             }
-            Enumeration enumeration = serversCache.elements();
+            Enumeration enumeration = (Enumeration) serversCache.iterator();
             while (enumeration.hasMoreElements()) {
                 HashMap hashmap1 = (HashMap) enumeration.nextElement();
                 if (hashmap1 != null) {
@@ -260,14 +260,14 @@ public class Server {
                 }
             } 
             
-            enumeration = serversCache.elements();
+            enumeration = (Enumeration) serversCache.iterator();
             while (enumeration.hasMoreElements()) {
                 HashMap hashmap2 = (HashMap) enumeration.nextElement();
                 String s1 = TextUtils.getValue(hashmap2, "parent");
                 if (s1.length() != 0) {
                     HashMap hashmap3 = (HashMap) nameCache.get(s1);
                     if (hashmap3 != null) {
-                         ArrayList array = (Array) hashmap3.get("_items");
+                         ArrayList array = (ArrayList) hashmap3.get("_items");
                         array.add(hashmap2);
                     }
                 }
@@ -276,14 +276,14 @@ public class Server {
         return serversCache;
     }
 
-    public static void writeServers(Array array) throws IOException {
+    public static void writeServers(ArrayList array) throws IOException {
         FrameFile.writeToFile(Platform.getRoot() + "/groups/" + "multi.config",
                 array, "_", false);
         unloadServers();
         loadServers();
     }
 
-    public static void writeFileServers(Array array) throws IOException {
+    public static void writeFileServers(ArrayList array) throws IOException {
         FrameFile.writeToFile(Platform.getRoot() + "/groups/" + "multi.config",
                 array, "_", false);
     }
@@ -297,7 +297,7 @@ public class Server {
             if (TextUtils.getValue(hashmap, "class").length() == 0) {
                 array.add(hashmap);
             } else {
-                 ArrayList array1 = (Array) hashmap.get("_items");
+                 ArrayList array1 = (ArrayList) hashmap.get("_items");
                 HashMap hashmap1;
                 for (Enumeration enumeration = (Enumeration) array1.iterator(); enumeration
                         .hasMoreElements(); addServers(hashmap1, array)) {
@@ -326,7 +326,7 @@ public class Server {
     }
 
     public static  ArrayList loadItems(HashMap hashmap) {
-         ArrayList array = (Array) hashmap.get("_items");
+         ArrayList array = (ArrayList) hashmap.get("_items");
         if (array != null) {
             return array;
         } else {
@@ -337,7 +337,7 @@ public class Server {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -360,9 +360,9 @@ public class Server {
         } else {
             HashMap hashmap = findServer(array1, s);
             if (hashmap != null) {
-                 ArrayList array2 = (Array) hashmap.get("_items");
+                 ArrayList array2 = (ArrayList) hashmap.get("_items");
                 HashMap hashmap2;
-                for (Enumeration enumeration1 = array2.elements(); enumeration1
+                for (Enumeration enumeration1 = (Enumeration) array2.iterator(); enumeration1
                         .hasMoreElements(); array.add(hashmap2)) {
                     hashmap2 = (HashMap) enumeration1.nextElement();
                 }

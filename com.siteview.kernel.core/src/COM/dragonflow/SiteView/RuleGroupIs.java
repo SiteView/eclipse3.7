@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.SiteView;
 
+import com.recursionsw.jgl.UnaryPredicate;
+
 /**
  * Comment for <code>RuleGroupIs</code>
  * 
@@ -17,7 +19,7 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.UnaryPredicate;
+//import jgl.UnaryPredicate;
 
 // Referenced classes of package COM.dragonflow.SiteView:
 // Rule

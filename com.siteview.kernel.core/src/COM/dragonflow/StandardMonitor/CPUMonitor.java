@@ -21,6 +21,9 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.servicePage;
 import COM.dragonflow.Properties.NumericProperty;

@@ -611,7 +611,7 @@ public class SiteViewXMLQuery
         if(hashmap != null)
         {
             String s1;
-            for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); array.add(s + "=" + s1))
+            for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); array.add(s + "=" + s1))
             {
                 s1 = (String)enumeration.nextElement();
             }

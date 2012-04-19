@@ -37,9 +37,12 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import HashMapIterator;
-import jgl.Reversing;
-import jgl.Sorting;
+import com.recursionsw.jgl.HashMapIterator;
+import com.recursionsw.jgl.algorithms.Reversing;
+import com.recursionsw.jgl.algorithms.Sorting;
+//import HashMapIterator;
+//import Reversing;
+//import Sorting;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.HTTP.HTTPServer;
@@ -504,7 +507,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -1020,7 +1023,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param i
@@ -1284,11 +1287,11 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      */
-    protected void removeGroups(Array array) {
+    protected void removeGroups(ArrayList array) {
         Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             File file = (File) enumeration.nextElement();
@@ -1325,12 +1328,12 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    private Enumeration addGroups(Array array) {
+    private Enumeration addGroups(ArrayList array) {
          ArrayList array1 = new ArrayList();
         Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
@@ -1372,7 +1375,7 @@ public class SiteViewGroup extends MonitorGroup {
         return (Enumeration) array1.iterator();
     }
 
-    public synchronized void adjustGroups(Array array,  ArrayList array1,  ArrayList array2, HashMap hashmap) {
+    public synchronized void adjustGroups(ArrayList array,  ArrayList array1,  ArrayList array2, HashMap hashmap) {
         monitorScheduler.suspendScheduler();
         monitorsStarted = 0;
         removeGroups(array2);
@@ -1435,7 +1438,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      */
@@ -1478,7 +1481,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      */
@@ -1661,7 +1664,7 @@ public class SiteViewGroup extends MonitorGroup {
         }
     }
 
-    boolean isParentInFilter(Array array, String s) {
+    boolean isParentInFilter(ArrayList array, String s) {
         for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             if (CGI.isRelated(s, s1)) {
@@ -1673,7 +1676,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param httprequest
      * @return
@@ -2282,7 +2285,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2430,12 +2433,12 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    private  ArrayList sortClassList(Array array) {
+    private  ArrayList sortClassList(ArrayList array) {
          ArrayList array1 = new ArrayList();
         boolean flag = false;
         Enumeration enumeration = (Enumeration) array.iterator();
@@ -2449,7 +2452,7 @@ public class SiteViewGroup extends MonitorGroup {
                     while (i < array1.size()) {
                         String s1 = (String) array1.get(i);
                         if (s.toLowerCase().compareTo(s1.toLowerCase()) <= 0) {
-                            array1.insert(i, s);
+                            array1.add(i, s);
                             break;
                         }
                         i ++;
@@ -2488,7 +2491,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2508,7 +2511,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */

@@ -17,6 +17,10 @@ package COM.dragonflow.StandardAction;
  * 
  */
 
+import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.StringProperty;
 
 public class DatabaseAlert extends COM.dragonflow.SiteView.Action {

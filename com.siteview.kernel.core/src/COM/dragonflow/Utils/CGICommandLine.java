@@ -19,6 +19,8 @@ package COM.dragonflow.Utils;
 
 import java.util.ArrayList;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Utils:
 // RemoteCommandLine, TextUtils, SocketSession
 

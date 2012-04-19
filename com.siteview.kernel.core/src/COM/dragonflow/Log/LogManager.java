@@ -22,6 +22,7 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.HashMapIterator;
 
 // Referenced classes of package COM.dragonflow.Log:
 // LogThread, ConsoleLogger, DailyFileLogger, FileLogger,
@@ -154,7 +155,7 @@ public class LogManager {
     }
 
     public static void unregisterLogger(String s, COM.dragonflow.Log.Logger logger) {
-        Enumeration enumeration = loggers.values(s.toLowerCase());
+        Enumeration enumeration = (Enumeration) loggers.values(s.toLowerCase());
         while (enumeration.hasMoreElements()) {
             COM.dragonflow.Log.Logger logger1 = (COM.dragonflow.Log.Logger) enumeration.nextElement();
             if (logger.equals(logger1)) {
@@ -235,7 +236,7 @@ public class LogManager {
         s = s.toLowerCase();
         try {
             boolean flag = false;
-            Enumeration enumeration = loggers.values(s);
+            Enumeration enumeration = (Enumeration) loggers.values(s);
             while (enumeration.hasMoreElements()) {
                 COM.dragonflow.Log.Logger logger = (COM.dragonflow.Log.Logger) enumeration.nextElement();
                 logger.log(s, date, s1);
@@ -277,7 +278,7 @@ public class LogManager {
         }
         s = s.toLowerCase();
         boolean flag = false;
-        Enumeration enumeration = loggers.values(s);
+        Enumeration enumeration = (Enumeration) loggers.values(s);
         while (enumeration.hasMoreElements()) {
             COM.dragonflow.Log.Logger logger = (COM.dragonflow.Log.Logger) enumeration.nextElement();
             String s2 = logger.getClass().getName();

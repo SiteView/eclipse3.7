@@ -15,6 +15,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.Properties.LessEqualPropertyName;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -621,8 +623,8 @@ public class overviewPage extends COM.dragonflow.Page.CGI
                 {
                     if(COM.dragonflow.Page.overviewPage.getValue(hashmap1, "class").length() > 0)
                     {
-                        ArrayList array2 = (jgl.Array)hashmap1.get("_items");
-                        Enumeration enumeration1 = array2.elements();
+                        ArrayList array2 = (ArrayList)hashmap1.get("_items");
+                        Enumeration enumeration1 = (Enumeration) array2.iterator();
                         while(enumeration1.hasMoreElements()) 
                         {
                             HashMap hashmap2 = (HashMap)enumeration1.nextElement();
@@ -692,7 +694,7 @@ label0:
                 outputStream.println("<TR>" + obj + "</TR>");
                 continue;
             }
-            ArrayList array3 = (jgl.Array)obj;
+            ArrayList array3 = (ArrayList)obj;
             int l = array3.size();
             int i1 = COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Page.overviewPage.getValue(hashmap, "_overviewColumns"));
             if(i1 < 0)
@@ -940,7 +942,7 @@ label0:
         int i = 0;
         if(array != null && array.size() > 0)
         {
-            ArrayList array1 = (jgl.Array)array.get(0);
+            ArrayList array1 = (ArrayList)array.get(0);
             if(array1.size() >= 6)
             {
                 i = COM.dragonflow.Utils.TextUtils.toInt((String)array1.get(5));
@@ -1001,20 +1003,20 @@ label0:
 label0:
         for(int j1 = 0; j1 < array1.size(); j1++)
         {
-            ArrayList array6 = (jgl.Array)array1.get(j1);
+            ArrayList array6 = (ArrayList)array1.get(j1);
             ArrayList array7 = null;
             if(j1 + 1 < array1.size())
             {
-                array7 = (jgl.Array)array1.get(j1 + 1);
+                array7 = (ArrayList)array1.get(j1 + 1);
             }
-            Enumeration enumeration = array6.elements();
+            Enumeration enumeration = (Enumeration) array6.iterator();
             do
             {
                 if(!enumeration.hasMoreElements())
                 {
                     continue label0;
                 }
-                ArrayList array8 = (jgl.Array)enumeration.nextElement();
+                ArrayList array8 = (ArrayList)enumeration.nextElement();
                 if(array8.size() == 5)
                 {
                     if(l == -1 || l > i1)
@@ -1117,10 +1119,10 @@ label0:
     {
         StringBuffer stringbuffer = new StringBuffer();
         HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         ArrayList array = new ArrayList();
         for(; enumeration.hasMoreElements(); array.add(enumeration.nextElement())) { }
-        jgl.Sorting.sort(array, new LessEqualPropertyName());
+        Sorting.sort(array, new LessEqualPropertyName());
         String s;
         String s1;
         for(Enumeration enumeration1 = (Enumeration) array.iterator(); enumeration1.hasMoreElements(); stringbuffer.append("<option value=\"" + s + "\">" + s + "=" + s1 + ""))
@@ -1443,7 +1445,7 @@ label0:
             outputStream.println("<p>Select one or more servers:<blockquote>(Click the <img src=/SiteView/htdocs/artwork/Plus.gif alt=\"open\"> to expand an item, and the <img src=/SiteView/htdocs/artwork/Minus.gif alt=\"close\"> to collapse an item).<P><TABLE BORDER=0>");
             ArrayList array2 = COM.dragonflow.SiteView.Server.getServers("", false);
             HashMap hashmap5;
-            for(Enumeration enumeration5 = array2.elements(); enumeration5.hasMoreElements(); printItem(hashmap5, hashmap, hashmap3, 0))
+            for(Enumeration enumeration5 = (Enumeration) array2.iterator(); enumeration5.hasMoreElements(); printItem(hashmap5, hashmap, hashmap3, 0))
             {
                 hashmap5 = (HashMap)enumeration5.nextElement();
             }

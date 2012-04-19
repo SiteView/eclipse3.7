@@ -20,6 +20,9 @@ package COM.dragonflow.StandardAction;
 import java.util.Vector;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.BooleanProperty;
 import COM.dragonflow.Properties.ScalarProperty;
 import COM.dragonflow.Properties.StringProperty;

@@ -33,10 +33,12 @@ import java.util.GregorianCalendar;
 import java.util.Hashtable;
 
 import java.util.ArrayList;
-import jgl.ArrayIterator;
+//import ArrayListIterator;
 import com.recursionsw.jgl.HashMap;
-import jgl.Reversing;
-import jgl.Sorting;
+import com.recursionsw.jgl.algorithms.Reversing;
+import com.recursionsw.jgl.algorithms.Sorting;
+//import Reversing;
+//import Sorting;
 import COM.dragonflow.Chart.BarChart;
 import COM.dragonflow.Chart.DrawerGD;
 import COM.dragonflow.Chart.LineChart;
@@ -350,7 +352,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param printwriter
@@ -379,7 +381,7 @@ public class HistoryReport extends SiteViewObject {
             historyreport = historyreport1;
             if (hashmap != null) {
                 String s2;
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 while (enumeration1.hasMoreElements()) {
                     s2 = (String) enumeration1.nextElement();
                     historyreport1.setProperty(s2, (String) hashmap.get(s2));
@@ -553,7 +555,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     void readFromHashMap(HashMap hashmap) {
         Enumeration enumeration = hashmap.values("groups");
@@ -600,7 +602,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @throws SiteViewException
      */
@@ -681,7 +683,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @throws SiteViewException
@@ -775,7 +777,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -788,7 +790,7 @@ public class HistoryReport extends SiteViewObject {
             while (enumeration.hasMoreElements()) {
                 String s1 = (String) enumeration.nextElement();
                 hashmap = TextUtils.stringToHashMap(s1);
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 while (enumeration1.hasMoreElements()) {
                     String s2 = (String) enumeration1.nextElement();
                     String s4 = (String) hashmap.get(s2);
@@ -806,7 +808,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @throws SiteViewException
@@ -1234,7 +1236,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param array
@@ -1688,7 +1690,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -1705,7 +1707,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param i
@@ -1754,7 +1756,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param i
@@ -1811,7 +1813,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -1849,7 +1851,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -1882,7 +1884,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -1915,7 +1917,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -2005,7 +2007,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -2025,7 +2027,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -2087,7 +2089,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2186,7 +2188,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -2323,7 +2325,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -2373,7 +2375,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -2406,10 +2408,10 @@ public class HistoryReport extends SiteViewObject {
         if (flag) {
             for (int i1 = 0; i1 < array.size(); i1 ++) {
                 HashMap hashmap1 = (HashMap) array.get(i1);
-                for (Enumeration enumeration1 = hashmap1.keys(); enumeration1.hasMoreElements();) {
+                for (Enumeration enumeration1 = (Enumeration) hashmap1.keys(); enumeration1.hasMoreElements();) {
                     String s4 = (String) enumeration1.nextElement();
                     i = s4.length() <= i ? i : s4.length();
-                     ArrayList array2 = (Array) hashmap1.get(s4);
+                     ArrayList array2 = (ArrayList) hashmap1.get(s4);
                     int k1 = 0;
                     while (k1 < array2.size()) {
                         HashMap hashmap3 = (HashMap) array2.get(k1);
@@ -2443,9 +2445,9 @@ public class HistoryReport extends SiteViewObject {
         stringbuffer.append(s1);
         for (int j1 = 0; j1 < array.size(); j1 ++) {
             HashMap hashmap2 = (HashMap) array.get(j1);
-            for (Enumeration enumeration2 = hashmap2.keys(); enumeration2.hasMoreElements();) {
+            for (Enumeration enumeration2 = (Enumeration) hashmap2.keys(); enumeration2.hasMoreElements();) {
                 String s5 = (String) enumeration2.nextElement();
-                 ArrayList array3 = (Array) hashmap2.get(s5);
+                 ArrayList array3 = (ArrayList) hashmap2.get(s5);
                 int l1 = 0;
                 while (l1 < array3.size()) {
                     HashMap hashmap4 = (HashMap) array3.get(l1);
@@ -2496,7 +2498,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2554,7 +2556,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2575,7 +2577,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2609,7 +2611,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2647,7 +2649,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -2682,7 +2684,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -2717,7 +2719,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -2752,7 +2754,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -2948,7 +2950,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hashmap
      * @param s
@@ -3014,7 +3016,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param array
@@ -3337,7 +3339,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @throws SiteViewException
      */
@@ -3364,12 +3366,12 @@ public class HistoryReport extends SiteViewObject {
              ArrayList array2 = new ArrayList();
              ArrayList array3 = siteviewgroup.getElementsOfClass("COM.dragonflow.SiteView.MonitorGroup", false);
             String s2;
-            for (Enumeration enumeration1 = array3.elements(); enumeration1.hasMoreElements(); array2.add(s2)) {
+            for (Enumeration enumeration1 = (Enumeration) array3.iterator(); enumeration1.hasMoreElements(); array2.add(s2)) {
                 MonitorGroup monitorgroup1 = (MonitorGroup) enumeration1.nextElement();
                 s2 = monitorgroup1.getFullID();
             }
 
-            enumeration = array2.elements();
+            enumeration = (Enumeration) array2.iterator();
         } else {
             enumeration = getMultipleValues(pTargets);
         }
@@ -3516,7 +3518,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param historyreport
      * @param s
@@ -3600,7 +3602,7 @@ public class HistoryReport extends SiteViewObject {
             }
 
             FileUtils.copyFile(new File(Platform.getRoot() + File.separator + "htdocs" + File.separator + "artwork" + File.separator + logoFile), new File(file1, logoFile));
-            Enumeration enumeration = hashmap1.keys();
+            Enumeration enumeration = (Enumeration) hashmap1.keys();
             while (enumeration.hasMoreElements()) {
                 File file9 = new File(file1, (String) enumeration.nextElement());
                 boolean flag4 = file9.delete();
@@ -3952,7 +3954,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringbuffer
      * @param s
@@ -4023,7 +4025,7 @@ public class HistoryReport extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param monitor
      * @param array
@@ -4093,8 +4095,8 @@ public class HistoryReport extends SiteViewObject {
         int l = i <= j ? j : i;
         l = l <= k ? k : l;
         Enumeration enumeration1 = (Enumeration) array1.iterator();
-        Enumeration enumeration2 = array2.elements();
-        Enumeration enumeration3 = array3.elements();
+        Enumeration enumeration2 = (Enumeration) array2.iterator();
+        Enumeration enumeration3 = (Enumeration) array3.iterator();
         for (int i1 = 0; i1 < l; i1 ++) {
             HashMap hashmap = new HashMap();
             if (enumeration1.hasMoreElements()) {

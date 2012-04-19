@@ -164,7 +164,7 @@ public class MirrorConfiguration extends Action {
             return;
         }
         HashMap hashmap1 = getMirrorConfig();
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         String s;
         Object obj;
         for (Enumeration enumeration1 = hashmap.elements(); enumeration
@@ -411,7 +411,7 @@ public class MirrorConfiguration extends Action {
         mirrorConfig.put("username", s2);
         mirrorConfig.put("password", s3);
         mirrorConfig.put("isSecure", s4);
-         ArrayList array = (Array) mirrorConfig.get("masterExclusion");
+         ArrayList array = (ArrayList) mirrorConfig.get("masterExclusion");
         for (int i = 0; i < masterConfigExcludes.length; i++) {
             if (array == null || !array.contains(masterConfigExcludes[i])) {
                 mirrorConfig.add("masterExclusion", masterConfigExcludes[i]);
@@ -426,7 +426,7 @@ public class MirrorConfiguration extends Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      * @return
@@ -445,11 +445,11 @@ public class MirrorConfiguration extends Action {
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         Object obj = null;
         HashMapOrdered hashmapordered = new HashMapOrdered(true);
-        Enumeration enumeration = mirrorConfig.values("masterExclusion");
+        Enumeration enumeration = (Enumeration) mirrorConfig.values("masterExclusion");
         if (enumeration.hasMoreElements()) {
             Object obj1 = enumeration.nextElement();
-            if (obj1 instanceof Array) {
-                 ArrayList array = (Array) obj1;
+            if (obj1 instanceof ArrayList) {
+                 ArrayList array = (ArrayList) obj1;
                 for (int i = 0; array != null && i < array.size(); i++) {
                     String s5 = (String) array.get(i);
                     String s6 = siteviewgroup.getSetting(s5);
@@ -478,8 +478,8 @@ public class MirrorConfiguration extends Action {
         LogManager.log("Mirror", "Mirroring configuration started from: " + s4);
         HashMap hashmap = new HashMap();
         Object obj2 = mirrorConfig.get("fileExclusion");
-        if (obj2 instanceof Array) {
-             ArrayList array1 = (Array) obj2;
+        if (obj2 instanceof ArrayList) {
+             ArrayList array1 = (ArrayList) obj2;
             for (int j = 0; array1 != null && j < array1.size(); j++) {
                 String s9 = (String) array1.get(j);
                 hashmap.put(s9.toUpperCase(), new Boolean("false"));
@@ -506,8 +506,8 @@ public class MirrorConfiguration extends Action {
         }
         HashMap hashmap1 = new HashMap();
         Object obj3 = mirrorConfig.get("fileExclusionRegex");
-        if (obj3 instanceof Array) {
-             ArrayList array2 = (Array) obj3;
+        if (obj3 instanceof ArrayList) {
+             ArrayList array2 = (ArrayList) obj3;
             for (int l = 0; array2 != null && l < array2.size(); l++) {
                 String s12 = (String) array2.get(l);
                 hashmap1.put(s12.toUpperCase(), new Boolean("false"));
@@ -526,7 +526,7 @@ public class MirrorConfiguration extends Action {
             siteviewgroup.loadSettings();
             String s11;
             String s13;
-            for (Enumeration enumeration1 = hashmapordered.keys(); enumeration1
+            for (Enumeration enumeration1 = (Enumeration) hashmapordered.keys(); enumeration1
                     .hasMoreElements(); siteviewgroup.setProperty(s11, s13)) {
                 s11 = (String) enumeration1.nextElement();
                 s13 = (String) hashmapordered.get(s11);
@@ -866,7 +866,7 @@ public class MirrorConfiguration extends Action {
 
     boolean excludeFileRegEx(String s, HashMap hashmap, boolean flag) {
         String s1 = s.toUpperCase();
-        for (Enumeration enumeration = hashmap.keys(); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                 .hasMoreElements();) {
             String s2 = (String) enumeration.nextElement();
              ArrayList array = new ArrayList();
@@ -884,7 +884,7 @@ public class MirrorConfiguration extends Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -897,7 +897,7 @@ public class MirrorConfiguration extends Action {
             if (mirrorConfig.get(s2) == null) {
                 break label0;
             }
-            Enumeration enumeration = mirrorConfig.values(s2);
+            Enumeration enumeration = (Enumeration) mirrorConfig.values(s2);
             String s3;
             do {
                 if (!enumeration.hasMoreElements()) {

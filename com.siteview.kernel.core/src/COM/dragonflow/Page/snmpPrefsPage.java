@@ -328,7 +328,7 @@ label1:
         COM.dragonflow.StandardAction.SNMPTrap snmptrap = new SNMPTrap();
         if(hashmap != null)
         {
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             do
             {
                 if(!enumeration.hasMoreElements())

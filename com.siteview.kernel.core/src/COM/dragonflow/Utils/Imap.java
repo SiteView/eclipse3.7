@@ -22,6 +22,8 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Utils:
 // popStatus, TextUtils
 
@@ -98,7 +100,7 @@ public class Imap {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */

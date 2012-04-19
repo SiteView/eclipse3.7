@@ -19,6 +19,8 @@ package COM.dragonflow.Utils;
 
 import java.util.Vector;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Utils:
 // TextUtils
 
@@ -136,7 +138,7 @@ public class ThreadPool {
 	        }
 		
 //        /**
-//         * CAUTION: Decompiled by hand.
+//         * 
 //         */
 //        public void run() {
 //            try {

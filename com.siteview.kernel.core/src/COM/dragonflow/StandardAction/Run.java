@@ -23,6 +23,9 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.ScalarProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -248,7 +251,7 @@ public class Run extends COM.dragonflow.SiteView.ServerAction
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */

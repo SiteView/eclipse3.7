@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -35,6 +35,8 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.w3c.dom.Document;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
@@ -162,7 +164,7 @@ public abstract class ExchangeMsgTrafficBase extends ExchangeToolBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     protected boolean update() {
         try {
@@ -272,7 +274,7 @@ public abstract class ExchangeMsgTrafficBase extends ExchangeToolBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param map
      * @param i
@@ -301,7 +303,7 @@ public abstract class ExchangeMsgTrafficBase extends ExchangeToolBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param map
      * @param i
@@ -344,7 +346,7 @@ public abstract class ExchangeMsgTrafficBase extends ExchangeToolBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param vector
      * @return
@@ -374,7 +376,7 @@ public abstract class ExchangeMsgTrafficBase extends ExchangeToolBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param map
      * @param s

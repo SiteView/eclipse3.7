@@ -10,6 +10,7 @@
 package COM.dragonflow.Page;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 
@@ -153,7 +154,7 @@ public class GenerateProgress extends COM.dragonflow.SiteView.Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param monitor
@@ -232,7 +233,7 @@ public class GenerateProgress extends COM.dragonflow.SiteView.Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param httprequest
@@ -445,8 +446,7 @@ public class GenerateProgress extends COM.dragonflow.SiteView.Action {
                     }
                 }
                 printwriter.print("<TR><TD></TD></TR><TR><TD></TD></TR>");
-                for (Enumeration enumeration4 = COM.dragonflow.SiteView.ProgressLogger.cProgressLogger.history
-                        .elements(); enumeration4.hasMoreElements(); printwriter
+                for (Enumeration enumeration4 = (Enumeration) COM.dragonflow.SiteView.ProgressLogger.cProgressLogger.history.iterator(); enumeration4.hasMoreElements(); printwriter
                         .print("</TR>\n")) {
                     String s9 = (String) enumeration4
                             .nextElement();
@@ -476,7 +476,7 @@ public class GenerateProgress extends COM.dragonflow.SiteView.Action {
                 ArrayList array2 = COM.dragonflow.SiteView.LogPuller
                         .getPortals();
                 COM.dragonflow.SiteView.PortalSiteView portalsiteview;
-                Enumeration enumeration2 = array2.elements();
+                Enumeration enumeration2 = (Enumeration) array2.iterator();
                 while (enumeration2.hasMoreElements()) {
                     portalsiteview = (COM.dragonflow.SiteView.PortalSiteView) enumeration2
                             .nextElement();

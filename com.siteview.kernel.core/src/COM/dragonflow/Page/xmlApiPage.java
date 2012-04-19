@@ -11,6 +11,8 @@ package COM.dragonflow.Page;
 
 import java.util.Enumeration;
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.XmlApi.XmlApiRequestXML;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -48,7 +50,7 @@ public class xmlApiPage extends COM.dragonflow.Page.CGI {
                 s6);
         COM.dragonflow.XmlApi.XmlApiObject xmlapiobject = (COM.dragonflow.XmlApi.XmlApiObject) xmlapirequestxml
                 .getAPIRequest();
-        Enumeration enumeration = xmlapiobject.elements();
+        Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
         COM.dragonflow.XmlApi.XmlApiObject xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration
                 .nextElement();
         String s7 = xmlapiobject1.getName();

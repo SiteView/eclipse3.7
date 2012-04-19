@@ -181,7 +181,7 @@ public class User extends SiteViewObject {
         return hashmap1;
     }
 
-    public static HashMap findUser(Array array, String s) {
+    public static HashMap findUser(ArrayList array, String s) {
         for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             HashMap hashmap = (HashMap) enumeration.nextElement();
             if (s.equals(TextUtils.getValue(hashmap, "_id"))) {
@@ -209,7 +209,7 @@ public class User extends SiteViewObject {
         return usersCache;
     }
 
-    public static void initializeUsersList(Array array, HashMap hashmap) {
+    public static void initializeUsersList(ArrayList array, HashMap hashmap) {
         if (array.size() == 0) {
             HashMap hashmap1 = new HashMap();
             hashmap1.put("_nextID", "1");
@@ -223,7 +223,7 @@ public class User extends SiteViewObject {
         }
     }
 
-    public static void writeUsers(Array array) throws IOException {
+    public static void writeUsers(ArrayList array) throws IOException {
         FrameFile.writeToFile(Platform.getRoot() + "/groups/" + "users.config", array);
         unloadUsers();
         loadUsers();
@@ -268,9 +268,9 @@ public class User extends SiteViewObject {
 
     public static  ArrayList findUsersForLogin(String s, String s1) {
          ArrayList array = new ArrayList();
-        for (Enumeration enumeration = accountTable.keys(); enumeration.hasMoreElements();) {
+        for (Enumeration enumeration = (Enumeration) accountTable.keys(); enumeration.hasMoreElements();) {
             String s2 = (String) enumeration.nextElement();
-            Enumeration enumeration1 = accountTable.values(s2);
+            Enumeration enumeration1 = (Enumeration) accountTable.values(s2);
             while (enumeration1.hasMoreElements()) {
                 User user = (User) enumeration1.nextElement();
                 if (user.getProperty(pLogin).equalsIgnoreCase(s) && user.getProperty(pPassword).equals(s1)) {
@@ -386,7 +386,7 @@ public class User extends SiteViewObject {
         if (accountTable.size() == 0) {
             getUserForAccount(s);
         }
-        return accountTable.values(s);
+        return (Enumeration) accountTable.values(s);
     }
 
     public static User getFirstUserForAccount(String s) {
@@ -399,7 +399,7 @@ public class User extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -419,7 +419,7 @@ public class User extends SiteViewObject {
                 return null;
             }
             HashMap hashmap = (HashMap) array.get(0);
-            registerUsers(null, s, hashmap.values("_user"), hashmap);
+            registerUsers(null, s, (Enumeration) hashmap.values("_user"), hashmap);
             user = getFirstUserForAccount(s);
         } catch (Exception exception) {
             System.out.println("Could not read group file for " + s + " : " + exception);
@@ -440,7 +440,7 @@ public class User extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -448,7 +448,7 @@ public class User extends SiteViewObject {
     public Vector getPermissions(String s) {
         Vector vector = new Vector();
         if (permissions != null) {
-            Enumeration enumeration = permissions.values(s);
+            Enumeration enumeration = (Enumeration) permissions.values(s);
             String as[] = new String[2];
             while (enumeration.hasMoreElements()) {
                 String s1 = (String) enumeration.nextElement();
@@ -468,7 +468,7 @@ public class User extends SiteViewObject {
         if (permissions == null) {
             return "";
         }
-        for (Enumeration enumeration = permissions.values(s); enumeration.hasMoreElements();) {
+        for (Enumeration enumeration = (Enumeration) permissions.values(s); enumeration.hasMoreElements();) {
             String s2 = (String) enumeration.nextElement();
             String as[] = TextUtils.split(s2, ",");
             if (as.length == 2 && as[0].equals(s1)) {

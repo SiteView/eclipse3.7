@@ -106,7 +106,7 @@ public class UnixCounterMonitor extends ServerMonitor
             } else
             {
                 String s1 = Platform.getRoot() + File.separator + "templates.perfmon" + File.separator + getProperty(pPMCFile);
-                countersCache = (Array)allSettings.get(s1);
+                countersCache = (ArrayList)allSettings.get(s1);
                 if(countersCache == null)
                 {
                     try

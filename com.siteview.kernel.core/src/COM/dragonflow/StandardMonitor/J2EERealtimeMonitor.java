@@ -146,7 +146,7 @@ public class J2EERealtimeMonitor extends J2EEMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     protected boolean update() {
         if (stillActive()) {
@@ -318,7 +318,7 @@ public class J2EERealtimeMonitor extends J2EEMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -367,7 +367,7 @@ public class J2EERealtimeMonitor extends J2EEMonitor {
         if (array.size() == 0) {
             array = makeGroupStatePropertyArray(allGroups.toArray());
         }
-         ArrayList array1 = new Array(array);
+         ArrayList array1 = new ArrayList(array);
         array1.add(pAvailabilityIndicator);
         return (Enumeration) array1.iterator();
     }
@@ -458,7 +458,7 @@ public class J2EERealtimeMonitor extends J2EEMonitor {
                 s = (String) hashmap1.get("_server");
                 HashMap hashmap2 = (HashMap) hashmap.get("selectNames");
                 String s2;
-                for (Enumeration enumeration2 = hashmap2.keys(); enumeration2.hasMoreElements(); allGroups.add(J2EEConnection.getGroupFromCounterName(HTTPRequest.decodeString(s2)))) {
+                for (Enumeration enumeration2 = (Enumeration) hashmap2.keys(); enumeration2.hasMoreElements(); allGroups.add(J2EEConnection.getGroupFromCounterName(HTTPRequest.decodeString(s2)))) {
                     s2 = (String) enumeration2.nextElement();
                 }
 

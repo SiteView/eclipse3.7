@@ -22,7 +22,9 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import jgl.LessString;
+import com.recursionsw.jgl.algorithms.Sorting;
+import com.recursionsw.jgl.predicates.LessString;
+//import jgl.LessString;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.BooleanProperty;
 import COM.dragonflow.Properties.ScalarProperty;
@@ -126,7 +128,7 @@ public class UserInstancePreferences extends COM.dragonflow.SiteView.Preferences
             HashMap hashmap2 = new HashMap(true);
             HashMap hashmap3 = (HashMap) array.get(0);
             for (int i = 0; i < hashmap.size(); i ++) {
-                for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();) {
+                for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();) {
                     String s1 = (String) enumeration.nextElement();
                     String s3 = (String) hashmap.get(s1);
                     COM.dragonflow.Properties.StringProperty stringproperty = getPropertyObject(s1);
@@ -141,7 +143,7 @@ public class UserInstancePreferences extends COM.dragonflow.SiteView.Preferences
                 if (hashmap1.size() > 0) {
                     java.util.HashMap hashmap4 = new java.util.HashMap();
                     COM.dragonflow.Properties.StringProperty stringproperty1;
-                    for (Enumeration enumeration1 = hashmap1.keys(); enumeration1.hasMoreElements(); hashmap4.put(stringproperty1.getName(), hashmap1.get(stringproperty1))) {
+                    for (Enumeration enumeration1 = (Enumeration) hashmap1.keys(); enumeration1.hasMoreElements(); hashmap4.put(stringproperty1.getName(), hashmap1.get(stringproperty1))) {
                         stringproperty1 = (COM.dragonflow.Properties.StringProperty) enumeration1.nextElement();
                     }
 
@@ -180,7 +182,7 @@ public class UserInstancePreferences extends COM.dragonflow.SiteView.Preferences
                 HashMap hashmap2 = (HashMap) array.get(i);
                 String s2 = (String) hashmap2.get(s);
                 if (s2.equals(s1)) {
-                    for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();) {
+                    for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();) {
                         String s3 = (String) enumeration.nextElement();
                         String s4 = (String) hashmap.get(s3);
                         hashmap2.put(s3, s4);
@@ -278,7 +280,7 @@ public class UserInstancePreferences extends COM.dragonflow.SiteView.Preferences
                 }
             }
 
-            jgl.Sorting.sort(array1, new LessString());
+            Sorting.sort(array1, new LessString());
             for (int j = 0; j < array1.size(); j ++) {
                 String s1 = (String) array1.get(j);
                 String s2 = (String) hashmap.get(s1);

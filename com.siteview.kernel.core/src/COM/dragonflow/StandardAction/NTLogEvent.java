@@ -17,8 +17,11 @@ package COM.dragonflow.StandardAction;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.Properties.ScalarProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -178,7 +181,7 @@ public class NTLogEvent extends COM.dragonflow.SiteView.Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public boolean execute() {
         boolean flag;

@@ -17,6 +17,7 @@ package COM.dragonflow.XmlApi;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -49,7 +50,7 @@ public class XmlApiAlert {
                 String s2 = (String) array1.get(i);
                 HashMap hashmap = (HashMap) array2.get(i);
                 COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s3 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s3, hashmap.get(s3));
@@ -86,7 +87,7 @@ public class XmlApiAlert {
                 String s1 = (String) array1.get(i);
                 HashMap hashmap = (HashMap) array2.get(i);
                 COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s2 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s2, hashmap.get(s2));

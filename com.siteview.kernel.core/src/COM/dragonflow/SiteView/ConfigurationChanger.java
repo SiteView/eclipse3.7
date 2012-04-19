@@ -101,7 +101,7 @@ public class ConfigurationChanger {
         groups = new HashMap();
     }
 
-    public ConfigurationChanger(Array array,  ArrayList array1) {
+    public ConfigurationChanger(ArrayList array,  ArrayList array1) {
         configInTopaz = false;
         operation = "";
         monitorIDList = null;
@@ -121,7 +121,7 @@ public class ConfigurationChanger {
 //        configInTopaz = TopazConfigurator.configInTopazAndRegistered();
     }
 
-    public static void delete(Array array,  ArrayList array1, HTTPRequest httprequest, PrintWriter printwriter) throws Exception {
+    public static void delete(ArrayList array,  ArrayList array1, HTTPRequest httprequest, PrintWriter printwriter) throws Exception {
         change("delete", array, array1, httprequest, printwriter);
     }
 
@@ -224,7 +224,7 @@ public class ConfigurationChanger {
                 continue;
             }
              ArrayList array;
-            if ((array = (Array) hashmap.get(s3)) == null) {
+            if ((array = (ArrayList) hashmap.get(s3)) == null) {
                 array = new ArrayList();
                 hashmap.put(s3, array);
             }
@@ -232,7 +232,7 @@ public class ConfigurationChanger {
         }
 
         String s2;
-        for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); setMonitorTopazLogProperties(s2, (Array) hashmap.get(s2), s)) {
+        for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); setMonitorTopazLogProperties(s2, (ArrayList) hashmap.get(s2), s)) {
             s2 = (String) enumeration.nextElement();
         }
 
@@ -268,7 +268,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param array
@@ -312,7 +312,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -502,7 +502,7 @@ public class ConfigurationChanger {
     }
 
     private  ArrayList getGroupFrames(String s) throws Exception {
-         ArrayList array = (Array) groups.get(s);
+         ArrayList array = (ArrayList) groups.get(s);
         if (array == null) {
             array = CGI.ReadGroupFrames(s, request);
             groups.put(s, array);
@@ -512,15 +512,15 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @throws Exception
      */
     public void saveGroups() throws Exception {
-        Enumeration enumeration = groups.keys();
+        Enumeration enumeration = (Enumeration) groups.keys();
         while (enumeration.hasMoreElements()) {
             String s = (String) enumeration.nextElement();
-             ArrayList array = (Array) groups.get(s);
+             ArrayList array = (ArrayList) groups.get(s);
             if (array != null) {
                 printProgressMessage("Saving group configuration for " + CGI.getGroupName(array, s) + "<BR>");
                 CGI.WriteGroupFrames(s, array, request);
@@ -535,7 +535,7 @@ public class ConfigurationChanger {
         groups.clear();
     }
 
-    boolean exceedsLicenseLimit(Array array, String s) {
+    boolean exceedsLicenseLimit(ArrayList array, String s) {
         boolean flag = LUtils.wouldExceedLimit(array, s);
         if (flag) {
             String s1 = LUtils.getLicenseExceededHTML();
@@ -544,7 +544,7 @@ public class ConfigurationChanger {
         return flag;
     }
 
-    public  ArrayList manageMonitors(Array array,  ArrayList array1, String s, boolean flag, String as[]) throws Exception {
+    public  ArrayList manageMonitors(ArrayList array,  ArrayList array1, String s, boolean flag, String as[]) throws Exception {
         if (!flag && exceedsLicenseLimit(array, null)) {
             return null;
         }
@@ -627,7 +627,7 @@ public class ConfigurationChanger {
         return array3;
     }
 
-    public void manageGroups(Array array,  ArrayList array1, String s, boolean flag, String as[]) throws Exception {
+    public void manageGroups(ArrayList array,  ArrayList array1, String s, boolean flag, String as[]) throws Exception {
          ArrayList array2 = new ArrayList();
         for (int i = 0; i < array.size(); i ++) {
             String s1 = (String) array.get(i);
@@ -720,7 +720,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param array
@@ -800,7 +800,7 @@ public class ConfigurationChanger {
          ArrayList array = null;
         try {
             if (!request.isStandardAccount()) {
-                array = (Array) groups.get(request.getAccount());
+                array = (ArrayList) groups.get(request.getAccount());
                 if (array == null) {
                     array = CGI.ReadGroupFrames(request.getAccount(), request);
                 }
@@ -819,7 +819,7 @@ public class ConfigurationChanger {
         return array;
     }
 
-    private void saveReportFrameList(Array array, String s) {
+    private void saveReportFrameList(ArrayList array, String s) {
         try {
             if (!Platform.isStandardAccount(s)) {
                 groups.remove(s);
@@ -836,7 +836,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      */
@@ -865,7 +865,7 @@ public class ConfigurationChanger {
                 HashMap hashmap1 = copyHashMap(hashmap);
                 hashmap1.remove("monitors");
                 String s5 = TextUtils.getValue(hashmap1, "title");
-                Enumeration enumeration1 = hashmap.values("monitors");
+                Enumeration enumeration1 = (Enumeration) hashmap.values("monitors");
                 while (enumeration1.hasMoreElements()) {
                     String s6 = (String) enumeration1.nextElement();
                     String as[] = TextUtils.split(s6);
@@ -885,7 +885,7 @@ public class ConfigurationChanger {
                         }
                     }
                 }
-                enumeration1 = hashmap1.values("monitors");
+                enumeration1 = (Enumeration) hashmap1.values("monitors");
                 if (enumeration1.hasMoreElements()) {
                     array.add(hashmap1);
                 } else {
@@ -934,7 +934,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @throws Exception
@@ -1014,7 +1014,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hashmap
      * @return
@@ -1027,7 +1027,7 @@ public class ConfigurationChanger {
             obj = new HashMap();
         }
         Object obj1;
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         while (enumeration.hasMoreElements()) {
             obj1 = enumeration.nextElement();
             ((HashMap) (obj)).put(obj1, hashmap.get(obj1));
@@ -1325,7 +1325,7 @@ public class ConfigurationChanger {
         return hashmap;
     }
 
-    private static int getNextId(Array array, boolean flag) {
+    private static int getNextId(ArrayList array, boolean flag) {
         HashMap hashmap = (HashMap) array.get(0);
         int i = 1;
         int j = TextUtils.toInt(TextUtils.getValue(hashmap, SiteViewObject.pNextID.getName()));
@@ -1353,7 +1353,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param vector
      * @param vector1
@@ -1378,7 +1378,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param enumeration
      * @param vector
@@ -1402,7 +1402,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param vector
      * @param vector1
@@ -1464,7 +1464,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param monitorgroup
      * @param vector
@@ -1513,7 +1513,7 @@ public class ConfigurationChanger {
         return collection;
     }
 
-    public static Collection notifyAdjustedGroups(Array array,  ArrayList array1,  ArrayList array2) {
+    public static Collection notifyAdjustedGroups(ArrayList array,  ArrayList array1,  ArrayList array2) {
 //        if (TopazFileLogger.getLogger().isLoggable(Level.INFO)) {
 //            TopazFileLogger.getLogger().info("Received notification that SiteView configuration changes have occurred.");
 //        }
@@ -1597,7 +1597,7 @@ public class ConfigurationChanger {
         return getFilesFromMonitorGroups(collection);
     }
 
-    private static boolean listContainsFile(Array array, String s) {
+    private static boolean listContainsFile(ArrayList array, String s) {
         for (int i = 0; array != null && i < array.size(); i ++) {
             File file = (File) array.get(i);
             if (file.getAbsolutePath().endsWith(s)) {
@@ -1619,7 +1619,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param collection
      * @return
@@ -1639,7 +1639,7 @@ public class ConfigurationChanger {
         return vector;
     }
 
-    private static Vector getGroupsFromFile(Array array) {
+    private static Vector getGroupsFromFile(ArrayList array) {
         Vector vector = new Vector();
         for (int i = 0; array != null && i < array.size(); i ++) {
             File file = (File) array.get(i);
@@ -1671,7 +1671,7 @@ public class ConfigurationChanger {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param collection
      * @param vector

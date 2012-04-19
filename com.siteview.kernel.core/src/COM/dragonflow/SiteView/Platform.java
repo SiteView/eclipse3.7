@@ -216,7 +216,7 @@ public class Platform {
         if (args.length > 1 && args[0].equals("-machine"))
             s = args[1];
         HashMap hashmap = MasterConfig.getMasterConfig();
-        Machine.registerMachines(hashmap.values("_remoteMachine"));
+        Machine.registerMachines((Enumeration) hashmap.values("_remoteMachine"));
         long al[] = cpuUsed(s, 0L, 0L, new long[16]);
         if (al != null) {
             System.out.println("cpu: " + al[0] + "% used");
@@ -717,7 +717,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -1087,7 +1087,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param l
@@ -1375,22 +1375,22 @@ public class Platform {
         return array;
     }
 
-    public static int readProcessList(Array array, String s,
+    public static int readProcessList(ArrayList array, String s,
             CounterLock counterlock) {
         return readProcessList(array, s, counterlock, false);
     }
 
-    public static int readProcessList(Array array, String s,
+    public static int readProcessList(ArrayList array, String s,
             CounterLock counterlock, boolean flag) {
         return readProcessList(array, s, counterlock, flag, false);
     }
 
-    public static int readProcessList(Array array, String s,
+    public static int readProcessList(ArrayList array, String s,
             CounterLock counterlock, boolean flag, boolean flag1) {
         return readProcessList(array, s, counterlock, flag, flag1, null);
     }
 
-    public static int readProcessList(Array array, String s,
+    public static int readProcessList(ArrayList array, String s,
             CounterLock counterlock, boolean flag, boolean flag1,
             AtomicMonitor atomicmonitor) {
         int i = Machine.getOS(s);
@@ -1478,7 +1478,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -1550,7 +1550,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -1746,7 +1746,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -1919,7 +1919,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param i
@@ -2334,7 +2334,7 @@ public class Platform {
         }
     }
 
-    private static Calendar parseDateFromUnixDateOutput(Array array,
+    private static Calendar parseDateFromUnixDateOutput(ArrayList array,
             StringBuffer stringbuffer) {
         SimpleDateFormat simpledateformat = new SimpleDateFormat(
                 "MM/dd/yyyy HH:mm:ss");
@@ -2389,7 +2389,7 @@ public class Platform {
         return gregoriancalendar;
     }
 
-    private static Calendar parseDateFromNetTimeOutput(Array array, String s) {
+    private static Calendar parseDateFromNetTimeOutput(ArrayList array, String s) {
         SimpleDateFormat simpledateformat = new SimpleDateFormat(
                 "'Current time at " + s + " is' M/d/yyyy hh:mm aa");
         SimpleDateFormat simpledateformat1 = new SimpleDateFormat(
@@ -2549,7 +2549,7 @@ public class Platform {
             return getRoot() + File.separator + s;
     }
 
-    private static String[][] parseUnixFileList(Array array,
+    private static String[][] parseUnixFileList(ArrayList array,
             StringBuffer stringbuffer) {
         String as[][] = new String[array.size()][2];
         for (int i = 0; i < array.size(); i++) {
@@ -2570,7 +2570,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -2855,7 +2855,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -2931,7 +2931,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -3044,7 +3044,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -3182,7 +3182,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -3245,7 +3245,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -3313,7 +3313,7 @@ public class Platform {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param file
      * @return

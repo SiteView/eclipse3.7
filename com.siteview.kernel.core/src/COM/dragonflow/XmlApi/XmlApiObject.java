@@ -17,11 +17,12 @@ package COM.dragonflow.XmlApi;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import com.recursionsw.jgl.HashMap;
 
-public class XmlApiObject extends jgl.Array
+public class XmlApiObject extends ArrayList
 {
 
     private String name;
@@ -242,7 +243,7 @@ public class XmlApiObject extends jgl.Array
             HashMap hashmap1 = xmlapiobject.getProperties(flag);
             String s;
             String s1;
-            for(Enumeration enumeration = hashmap1.keys(); enumeration.hasMoreElements(); hashmap.put(s, s1))
+            for(Enumeration enumeration = (Enumeration) hashmap1.keys(); enumeration.hasMoreElements(); hashmap.put(s, s1))
             {
                 s = (String)enumeration.nextElement();
                 s1 = (String)hashmap1.get(s);
@@ -305,7 +306,7 @@ public class XmlApiObject extends jgl.Array
             stringbuffer.append(" Request(");
             if(properties != null)
             {
-                Enumeration enumeration = properties.keys();
+                Enumeration enumeration = (Enumeration) properties.keys();
                 boolean flag = true;
                 String s;
                 for(; enumeration.hasMoreElements(); stringbuffer.append(s + "=" + properties.get(s)))
@@ -324,7 +325,7 @@ public class XmlApiObject extends jgl.Array
         stringbuffer.append((inRequest ? " Response" : " ResponseOnly") + "(");
         if(resultProperties != null)
         {
-            Enumeration enumeration1 = resultProperties.keys();
+            Enumeration enumeration1 = (Enumeration) resultProperties.keys();
             boolean flag1 = true;
             String s1;
             for(; enumeration1.hasMoreElements(); stringbuffer.append(s1 + "=" + resultProperties.get(s1)))

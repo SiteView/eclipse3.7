@@ -10,6 +10,9 @@
 package COM.dragonflow.Page;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.SiteView.User;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -66,9 +69,9 @@ public class accountPrefsPage extends COM.dragonflow.Page.prefsPage
                     java.lang.Object obj = hashmap.get("_user");
                     ArrayList array1 = new ArrayList();
                     array1.add(COM.dragonflow.Utils.TextUtils.hashMapToString(user1.getValuesTable()));
-                    if(obj != null && (obj instanceof jgl.Array))
+                    if(obj != null && (obj instanceof ArrayList))
                     {
-                        ArrayList array2 = (jgl.Array)obj;
+                        ArrayList array2 = (ArrayList)obj;
                         for(int j = 1; j < array2.size(); j++)
                         {
                             array1.add(array2.get(j));

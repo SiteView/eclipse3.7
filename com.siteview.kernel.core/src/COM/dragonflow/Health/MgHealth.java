@@ -18,9 +18,11 @@ package COM.dragonflow.Health;
  */
 
 import java.io.File;
-import java.util.HashMap;
+//import java.util.HashMap;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.Health:
 // FileBase
@@ -30,7 +32,7 @@ public class MgHealth extends COM.dragonflow.Health.FileBase
 
     private String mgFiles[];
     private ArrayList mgs;
-    private java.util.HashMap groupsHM;
+    private HashMap groupsHM;
     ArrayList checks;
 
     public MgHealth()
@@ -197,7 +199,7 @@ public class MgHealth extends COM.dragonflow.Health.FileBase
 
         for(int i1 = 0; i1 < mgFiles.length; i1++)
         {
-            ArrayList array1 = (jgl.Array)mgs.get(i1);
+            ArrayList array1 = (ArrayList)mgs.get(i1);
             if(array1.size() <= 0)
             {
                 continue;
@@ -245,7 +247,7 @@ public class MgHealth extends COM.dragonflow.Health.FileBase
                 ArrayList array2 = null;
                 if(j >= 0 && j < array1.size())
                 {
-                    array2 = (jgl.Array)array1.get(j);
+                    array2 = (ArrayList)array1.get(j);
                 }
                 String s3 = "ERROR, Group File: '" + healthnode.fileName + "' did not find sub-group file(_group=): '" + s2 + "' with ID: '" + s + "'";
                 COM.dragonflow.Health.FileBase.ErrorMessage errormessage = new FileBase.ErrorMessage("OrphanGroup", s3, healthnode.fileName);
@@ -311,7 +313,7 @@ public class MgHealth extends COM.dragonflow.Health.FileBase
             {
                 s1 = s.substring(0, l);
             }
-            ArrayList array = (jgl.Array)mgs.get(i);
+            ArrayList array = (ArrayList)mgs.get(i);
             String s2 = "error.log MgHealth: Group: '" + s + "' file is empty; it has no lines.";
             COM.dragonflow.Health.FileBase.ErrorMessage errormessage = new FileBase.ErrorMessage("OrphanGroup", s2, s);
             if(!checkCondition(array.size() > 0, errormessage))
@@ -328,12 +330,12 @@ public class MgHealth extends COM.dragonflow.Health.FileBase
             errormessage = new FileBase.ErrorMessage("OrphanGroup", s2, s);
             checkCondition(obj != null, errormessage);
             boolean flag = false;
-            if(!(obj instanceof jgl.Array))
+            if(!(obj instanceof ArrayList))
             {
                 continue;
             }
             ArrayList array1 = new ArrayList();
-            array1 = (jgl.Array)obj;
+            array1 = (ArrayList)obj;
             int i1 = 0;
             do
             {

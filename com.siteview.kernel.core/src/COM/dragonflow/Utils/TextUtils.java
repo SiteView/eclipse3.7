@@ -31,6 +31,8 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import jgl.LessString;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.oroinc.text.perl.Perl5Util;
@@ -311,9 +313,9 @@ public class TextUtils
     {
         java.lang.Object obj = hashmap.get(s);
         ArrayList array;
-        if(obj instanceof jgl.Array)
+        if(obj instanceof ArrayList)
         {
-            array = (jgl.Array)obj;
+            array = (ArrayList)obj;
         } else
         if(obj instanceof String)
         {
@@ -487,7 +489,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param date
      * @param s
@@ -757,7 +759,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -843,7 +845,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -926,7 +928,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -955,7 +957,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -990,7 +992,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -1033,7 +1035,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -1083,7 +1085,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -1625,7 +1627,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -1645,7 +1647,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -2255,7 +2257,7 @@ public class TextUtils
 
     public static String hashMapToString(HashMap hashmap)
     {
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         StringBuffer stringbuffer = new StringBuffer();
         String s;
         for(; enumeration.hasMoreElements(); stringbuffer.append(s))
@@ -2308,7 +2310,7 @@ public class TextUtils
 
     public static String hashMapToOrderedString(HashMap hashmap)
     {
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         StringBuffer stringbuffer = new StringBuffer();
         ArrayList array = new ArrayList();
         StringBuffer stringbuffer1;
@@ -2332,7 +2334,7 @@ public class TextUtils
             stringbuffer1.append(s1);
         }
 
-        jgl.Sorting.sort(array, new LessString());
+        Sorting.sort(array, new com.recursionsw.jgl.predicates.LessString());
         enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             String s = (String)enumeration.nextElement();
@@ -2749,7 +2751,7 @@ public class TextUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -3072,7 +3074,7 @@ public class TextUtils
                 int k1 = java.lang.Integer.parseInt(s.substring(l + 1, i1));
                 if(array1.size() >= j1 && k1 > 0 && k1 < 30)
                 {
-                    ArrayList array2 = (jgl.Array)array1.get(j1 - 1);
+                    ArrayList array2 = (ArrayList)array1.get(j1 - 1);
                     if(array2.size() >= k1)
                     {
                         String s3 = (String)array2.get(k1 - 1);
@@ -3162,13 +3164,15 @@ public class TextUtils
 
     public static ArrayList sortStrings(ArrayList array, boolean flag)
     {
-        jgl.Sorting.sort(array.begin(), array.end(), new StringBinaryPredicate(flag));
+//        Sorting.sort(array.begin(), array.end(), new StringBinaryPredicate(flag));
+    	Sorting.sort(array, new StringBinaryPredicate(flag));
         return array;
     }
 
     public static ArrayList sortStringHashMapArray(ArrayList array, String as[], boolean flag)
     {
-        jgl.Sorting.sort(array.begin(), array.end(), new StringHashMapBinaryPredicate(as, flag));
+//        Sorting.sort(array.begin(), array.end(), new StringHashMapBinaryPredicate(as, flag));
+    	Sorting.sort(array, new StringHashMapBinaryPredicate(as, flag));
         return array;
     }
 
@@ -3260,7 +3264,7 @@ public class TextUtils
     public static String replaceInHashMap(HashMap hashmap, String as[], HashMap hashmap1)
     {
         String s = "";
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         while (enumeration.hasMoreElements()) {
             java.lang.Object obj = enumeration.nextElement();
             if(hashmap1 != null)
@@ -3283,9 +3287,9 @@ public class TextUtils
                         hashmap.put(obj, s2);
                     }
                 } else
-                if(obj1 instanceof jgl.Array)
+                if(obj1 instanceof ArrayList)
                 {
-                    ArrayList array = (jgl.Array)obj1;
+                    ArrayList array = (ArrayList)obj1;
                     int i = 0;
                     while(i < array.size()) 
                     {
@@ -3355,7 +3359,7 @@ public class TextUtils
             {
                 continue;
             }
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             Enumeration enumeration1 = hashmap.elements();
             while(enumeration.hasMoreElements()) 
             {
@@ -3383,7 +3387,7 @@ public class TextUtils
         {
             throw new NullPointerException();
         }
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         while (enumeration.hasMoreElements()) {
             java.lang.Object obj = enumeration.nextElement();
             if(hashmap1.get(obj) == null && flag1 || flag)

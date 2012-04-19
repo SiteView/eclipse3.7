@@ -33,9 +33,9 @@ public interface BrowsableMonitor {
 
     public abstract String getBrowseID();
 
-    public abstract String setBrowseName(Array array);
+    public abstract String setBrowseName(ArrayList array);
 
-    public abstract String setBrowseID(Array array);
+    public abstract String setBrowseID(ArrayList array);
 
     public abstract boolean isUsingCountersCache();
 

@@ -11,6 +11,7 @@ package COM.dragonflow.Page;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import com.recursionsw.jgl.HashMap;
@@ -141,7 +142,7 @@ public class demoAppPage extends COM.dragonflow.Page.CGI
                 hashmap.add(s2, hashmap1);
             }
         }
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         if(!enumeration.hasMoreElements())
         {
             outputStream.println("<H3>No items in in-basket</H3>,");
@@ -184,7 +185,7 @@ public class demoAppPage extends COM.dragonflow.Page.CGI
             hashmap = new HashMap();
             shoppingBasket.add(s, hashmap);
         }
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         if(!enumeration.hasMoreElements())
         {
             outputStream.println("<H3>No items in in-basket</H3>,");
@@ -253,7 +254,7 @@ public class demoAppPage extends COM.dragonflow.Page.CGI
             hashmap = new HashMap();
             shoppingBasket.add(s, hashmap);
         }
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         if(!enumeration.hasMoreElements())
         {
             outputStream.println("<H3>No items in in-basket</H3>,");

@@ -21,6 +21,9 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.ScalarProperty;
 
 public class Mailto extends COM.dragonflow.SiteView.Action {
@@ -136,7 +139,7 @@ public class Mailto extends COM.dragonflow.SiteView.Action {
             Enumeration enumeration = null;
             if (httprequest.isStandardAccount()) {
                 HashMap hashmap = cgi.getMasterConfig();
-                enumeration = hashmap.values("_additionalMail");
+                enumeration = (Enumeration) hashmap.values("_additionalMail");
             } else {
                 COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
                 COM.dragonflow.SiteView.SiteViewObject siteviewobject = siteviewgroup.getElement(httprequest.getAccount());
@@ -235,7 +238,7 @@ public class Mailto extends COM.dragonflow.SiteView.Action {
         HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         int j = hashmap.count("_additionalMail");
         String as1[] = new String[j + array.size() + 1];
-        Enumeration enumeration = hashmap.values("_additionalMail");
+        Enumeration enumeration = (Enumeration) hashmap.values("_additionalMail");
         int l = 0;
         while (enumeration.hasMoreElements()) {
             HashMap hashmap1 = COM.dragonflow.Utils.TextUtils.stringToHashMap((String) enumeration.nextElement());

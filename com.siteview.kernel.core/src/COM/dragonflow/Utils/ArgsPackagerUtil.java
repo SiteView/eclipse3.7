@@ -46,7 +46,7 @@ public class ArgsPackagerUtil
                 s = (String)obj;
             } else
             {
-                ArrayList array1 = (jgl.Array)array.get(l);
+                ArrayList array1 = (ArrayList)array.get(l);
                 s = COM.dragonflow.Utils.ArgsPackagerUtil.packageArgs(array1, 0, array1.size() - 1);
             }
             stringbuffer.append(COM.dragonflow.Utils.ArgsPackagerUtil.packageArg(s));
@@ -125,7 +125,7 @@ public class ArgsPackagerUtil
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param bufferedreader
      * @param stringbuffer

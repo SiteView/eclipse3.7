@@ -24,7 +24,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import jgl.Sorting;
+import com.recursionsw.jgl.algorithms.Sorting;
+//import Sorting;
 import COM.dragonflow.Utils.TextUtils;
 
 // Referenced classes of package COM.dragonflow.SiteView:
@@ -77,7 +78,7 @@ public class AlertReport {
         generateReport(array, printwriter, s, flag, date, date1, i, s4, s2, s3);
     }
 
-    public static void generateXMLReport(Array array, PrintWriter printwriter,
+    public static void generateXMLReport(ArrayList array, PrintWriter printwriter,
             Date date, Date date1, int i) {
         printwriter.println("<alerts>");
         if (date != null && date1 != null) {
@@ -96,7 +97,7 @@ public class AlertReport {
         }
         for (int j = 0; j < array.size(); j++) {
             HashMap hashmap = (HashMap) array.get(j);
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             printwriter.print("<alert>");
             while (enumeration.hasMoreElements()) {
                 String s = (String) enumeration.nextElement();
@@ -120,7 +121,7 @@ public class AlertReport {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @param printwriter
@@ -133,7 +134,7 @@ public class AlertReport {
      * @param s2
      * @param s3
      */
-    public static void generateReport(Array array, PrintWriter printwriter,
+    public static void generateReport(ArrayList array, PrintWriter printwriter,
             String s, boolean flag, Date date, Date date1, int i, String s1,
             String s2, String s3) {
          ArrayList array1 = new ArrayList();
@@ -234,7 +235,7 @@ public class AlertReport {
         return action;
     }
 
-    public static String[] createSummaryMessage(Array array, long l) {
+    public static String[] createSummaryMessage(ArrayList array, long l) {
         StringBuffer stringbuffer = new StringBuffer();
         StringBuffer stringbuffer1 = new StringBuffer();
         HashMap hashmap = new HashMap();

@@ -9,6 +9,7 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -1170,7 +1171,7 @@ public class tranWizardPage extends COM.dragonflow.Page.monitorPage
         HashMap hashmap1 = new HashMap();
         boolean flag1 = false;
         ArrayList array2 = COM.dragonflow.Properties.StringProperty.sortByOrder(atomicmonitor.getProperties());
-        Enumeration enumeration2 = array2.elements();
+        Enumeration enumeration2 = (Enumeration) array2.iterator();
         do
         {
             if(!enumeration2.hasMoreElements())
@@ -1187,7 +1188,7 @@ public class tranWizardPage extends COM.dragonflow.Page.monitorPage
         outputStream.println("<P><HR><CENTER><B>Advanced Settings</B></CENTER><P>");
         outputStream.println("<TABLE>");
         array2 = COM.dragonflow.Properties.StringProperty.sortByOrder(atomicmonitor.getProperties());
-        enumeration2 = array2.elements();
+        enumeration2 = (Enumeration) array2.iterator();
         do
         {
             if(!enumeration2.hasMoreElements())

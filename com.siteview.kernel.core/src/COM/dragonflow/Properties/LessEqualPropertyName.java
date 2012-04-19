@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Properties;
 
+import com.recursionsw.jgl.BinaryPredicate;
+
 /**
  * Comment for <code>LessEqualPropertyName</code>
  * 
@@ -17,7 +19,7 @@ package COM.dragonflow.Properties;
  * 
  * 
  */
-import jgl.BinaryPredicate;
+//import BinaryPredicate;
 
 // Referenced classes of package COM.dragonflow.Properties:
 // StringProperty

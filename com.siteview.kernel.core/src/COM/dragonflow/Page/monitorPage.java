@@ -17,7 +17,11 @@ import java.util.Enumeration;
 import java.util.TreeMap;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.BinaryPredicate;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.SiteView.AtomicMonitor;
 import COM.dragonflow.SiteView.BrowsableBase;
@@ -48,7 +52,7 @@ import COM.dragonflow.Utils.GreaterCounterByXml;
 public class monitorPage extends COM.dragonflow.Page.CGI
 {
     class lessMonitor
-        implements jgl.BinaryPredicate
+        implements BinaryPredicate
     {
 
         public boolean execute(java.lang.Object obj, java.lang.Object obj1)
@@ -709,7 +713,7 @@ label0:
         array2 = COM.dragonflow.Properties.StringProperty.sortByOrder(array2);
         int i = calculateVariablePropertyCount(array2, atomicmonitor);
         String s18 = atomicmonitor.getProperty("_URLEncoding");
-        Enumeration enumeration = array2.elements();
+        Enumeration enumeration = (Enumeration) array2.iterator();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -760,7 +764,7 @@ label0:
             s19 = "Update";
         }
         outputStream.println("</TABLE><TABLE WIDTH=100%><TR><TD><input type=submit value=" + s19 + "> " + s6 + " Monitor\n" + "</TD></TR></TABLE>" + "<p><HR><CENTER><H3>Advanced Options</H3></CENTER><TABLE>");
-        enumeration = array2.elements();
+        enumeration = (Enumeration) array2.iterator();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -961,7 +965,7 @@ label0:
     void printThresholds(AtomicMonitor atomicmonitor, HashMap hashmap)
     {
         boolean flag = atomicmonitor.hasValue(Monitor.pBaselineDate);
-        Enumeration enumeration = atomicmonitor.getProperties().elements();
+        Enumeration enumeration = (Enumeration) atomicmonitor.getProperties().iterator();
         Enumeration enumeration1 = atomicmonitor.getStatePropertyObjects(false);
         boolean flag1 = false;
         boolean flag2 = false;
@@ -1132,7 +1136,7 @@ label0:
 
                 } else
                 {
-                    Enumeration enumeration4 = atomicmonitor.getProperties().elements();
+                    Enumeration enumeration4 = (Enumeration) atomicmonitor.getProperties().iterator();
                     do
                     {
                         if(!enumeration4.hasMoreElements())
@@ -1283,7 +1287,7 @@ label0:
     void printCustomProperties(Monitor monitor)
     {
         HashMap hashmap = getMasterConfig();
-        Enumeration enumeration = hashmap.values("_monitorEditCustom");
+        Enumeration enumeration = (Enumeration) hashmap.values("_monitorEditCustom");
         do
         {
             if(!enumeration.hasMoreElements())
@@ -1340,7 +1344,7 @@ label0:
     void saveCustomProperties(Monitor monitor, COM.dragonflow.HTTP.HTTPRequest httprequest)
     {
         HashMap hashmap = getMasterConfig();
-        Enumeration enumeration = hashmap.values("_monitorEditCustom");
+        Enumeration enumeration = (Enumeration) hashmap.values("_monitorEditCustom");
         do
         {
             if(!enumeration.hasMoreElements())
@@ -1560,7 +1564,7 @@ label2:
                             atomicmonitor.unsetProperty(s18 + k3);
                         }
 
-                        Enumeration enumeration3 = hashmap2.keys();
+                        Enumeration enumeration3 = (Enumeration) hashmap2.keys();
                         String s30 = "";
                         boolean flag = (atomicmonitor instanceof BrowsableBase) && ((BrowsableBase)atomicmonitor).isSortedCounters();
                         if(flag)
@@ -1573,7 +1577,7 @@ label2:
                             }
                             ArrayList array6 = new ArrayList();
                             for(; enumeration3.hasMoreElements(); array6.add(enumeration3.nextElement())) { }
-                            jgl.Sorting.sort(array6, new GreaterCounterByXml(document));
+                            Sorting.sort(array6, new GreaterCounterByXml(document));
                             for(int j4 = 0; j4 < array6.size(); j4++)
                             {
                                 String s31 = (String)array6.get(j4);
@@ -1709,7 +1713,7 @@ label2:
                                             MonitorGroup monitorgroup = (MonitorGroup)siteviewgroup.getElement(request.getAccount());
                                             String s36 = monitorgroup.getProperty(Monitor.pGroupID);
                                             ArrayList array5 = monitorgroup.getMonitorsOfClass("", s36);
-                                            Enumeration enumeration5 = array5.elements();
+                                            Enumeration enumeration5 = (Enumeration) (Enumeration) array5.iterator();
                                             int l4 = 0;
                                             while (enumeration5.hasMoreElements())
                                                 {
@@ -1825,7 +1829,7 @@ label2:
                                         for(; enumeration2.hasMoreElements(); atomicmonitor.addProperty(stringproperty1, (String)enumeration2.nextElement())) { }
                                         if(array4 != null && array4.size() > 0)
                                         {
-                                            Enumeration enumeration4 = array4.elements();
+                                            Enumeration enumeration4 = (Enumeration) array4.iterator();
                                             while(enumeration4.hasMoreElements()) 
                                             {
                                                 atomicmonitor.addProperty(stringproperty1, (String)enumeration4.nextElement());
@@ -1902,7 +1906,7 @@ label2:
                         hashmap5.remove("_id");
                         atomicmonitor.setProperty(Monitor.pID, s16);
                         hashmap5.put("_class", request.getValue("class"));
-                        array3.insert(k1, hashmap5);
+                        array3.add(k1, hashmap5);
                         String s25 = COM.dragonflow.Utils.TextUtils.increment(s16);
                         hashmap6.put("_nextID", s25);
                     } else
@@ -1910,7 +1914,7 @@ label2:
                         s16 = request.getValue("id");
                         int j3 = monitorUtils.findMonitorIndex(array3, s16);
                         java.lang.Object obj1 = array3.get(j3);
-                        array3.insert(k1, hashmap5);
+                        array3.add(k1, hashmap5);
                         array3.remove(obj1);
                     }
                     if(!request.isPost() || !COM.dragonflow.Page.treeControl.notHandled(request))
@@ -1967,7 +1971,7 @@ label2:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @param s
@@ -2137,7 +2141,7 @@ label2:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param array
@@ -2258,7 +2262,7 @@ label2:
                 }
                 catch(java.lang.Exception exception) { }
             } while(true);
-            jgl.Sorting.sort(monitorNames, new lessMonitor());
+            Sorting.sort(monitorNames, new lessMonitor());
         }
         int ai[] = new int[monitorNames.size()];
         int k = 0;
@@ -2370,7 +2374,7 @@ label2:
                 hashmap1.remove("monitors");
                 boolean flag = false;
                 String s4 = COM.dragonflow.Utils.TextUtils.getValue(hashmap1, "title");
-                Enumeration enumeration1 = hashmap.values("monitors");
+                Enumeration enumeration1 = (Enumeration) hashmap.values("monitors");
                 do
                 {
                     if(!enumeration1.hasMoreElements())
@@ -2395,7 +2399,7 @@ label2:
                         }
                     }
                 } while(true);
-                enumeration1 = hashmap1.values("monitors");
+                enumeration1 = (Enumeration) hashmap1.values("monitors");
                 if(enumeration1.hasMoreElements())
                 {
                     array1.add(hashmap1);
@@ -2857,7 +2861,7 @@ label2:
                             printstream2.println("<TR><TD>" + stringproperty.getName() + "</TD><TD>" + stringproperty.getLabel() + "</TD><TD></TD></TR>");
                             i1++;
                         } while(true);
-                        Enumeration enumeration = monitor3.getImmediateProperties().elements();
+                        Enumeration enumeration = (Enumeration) monitor3.getImmediateProperties().iterator();
                         do
                         {
                             if(!enumeration.hasMoreElements())

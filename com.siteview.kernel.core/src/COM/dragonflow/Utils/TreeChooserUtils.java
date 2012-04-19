@@ -20,6 +20,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import jgl.LessString;
 import COM.dragonflow.Properties.HashMapOrdered;
 
@@ -163,7 +165,7 @@ public class TreeChooserUtils {
             }
         } 
         String s4;
-        for (Enumeration enumeration1 = hashmap1.keys(); enumeration1.hasMoreElements(); hashmap.put(s4, hashmap1.get(s4))) {
+        for (Enumeration enumeration1 = (Enumeration) hashmap1.keys(); enumeration1.hasMoreElements(); hashmap.put(s4, hashmap1.get(s4))) {
             s4 = (String) enumeration1.nextElement();
         }
 
@@ -189,7 +191,7 @@ public class TreeChooserUtils {
         Enumeration enumeration = conditions.elements();
         while (enumeration.hasMoreElements()) {
             HashMap hashmap2 = (HashMap) enumeration.nextElement();
-            ArrayList array = (jgl.Array) hashmap2.get("printable");
+            ArrayList array = (ArrayList) hashmap2.get("printable");
             String s = (String) hashmap2.get("fullID");
             boolean flag = hashmap.get(s) != null;
             int i = 0;
@@ -219,7 +221,7 @@ public class TreeChooserUtils {
                     } else {
                         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
                         ArrayList array4 = getGroupNameList(hashmapordered);
-                        for (Enumeration enumeration1 = array4.elements(); enumeration1.hasMoreElements();) {
+                        for (Enumeration enumeration1 = (Enumeration) array4.iterator(); enumeration1.hasMoreElements();) {
                             String s5 = (String) enumeration1.nextElement();
                             Enumeration enumeration2 = hashmapordered.values(s5);
                             while (enumeration2.hasMoreElements()) {
@@ -247,7 +249,7 @@ public class TreeChooserUtils {
         Enumeration enumeration = conditions.elements();
         while (enumeration.hasMoreElements()) {
             HashMap hashmap2 = (HashMap) enumeration.nextElement();
-            ArrayList array = (jgl.Array) hashmap2.get("printable");
+            ArrayList array = (ArrayList) hashmap2.get("printable");
             String s = (String) hashmap2.get("id");
             boolean flag = hashmap.get(s) != null;
             int i = 0;
@@ -271,8 +273,8 @@ public class TreeChooserUtils {
                         array1.add(array2.get(1));
                     }
                 } catch (java.lang.ClassCastException classcastexception) {
-                    ArrayList array3 = (jgl.Array) hashmap2.get("monitors");
-                    Enumeration enumeration1 = array3.elements();
+                    ArrayList array3 = (ArrayList) hashmap2.get("monitors");
+                    Enumeration enumeration1 = (Enumeration) array3.iterator();
                     while (enumeration1.hasMoreElements()) {
                         String s4 = (String) enumeration1.nextElement();
                         ArrayList array4 = COM.dragonflow.SiteView.Platform.split(' ', s4);
@@ -315,7 +317,7 @@ public class TreeChooserUtils {
                 s = s1;
             }
         } 
-        jgl.Sorting.sort(array1, new LessString());
+        Sorting.sort(array1, new com.recursionsw.jgl.predicates.LessString());
         return array1;
     }
 
@@ -323,11 +325,11 @@ public class TreeChooserUtils {
         String s3 = printGroup(s, s1, hashmap, hashmap1, i, s2);
         boolean flag = hashmap.get(s) != null;
         if (flag) {
-            ArrayList array = (jgl.Array) groupHashMap.get(s);
+            ArrayList array = (ArrayList) groupHashMap.get(s);
             if (array != null) {
                 outputStream.println("<tr><td><table cellpadding=\"0\">");
                 for (int j = 0; j < array.size(); j ++) {
-                    printAlertOrReport((jgl.Array) array.get(j), s3);
+                    printAlertOrReport((ArrayList) array.get(j), s3);
                 }
 
                 outputStream.println("</table></td></tr>");
@@ -346,11 +348,11 @@ public class TreeChooserUtils {
                 } else {
                     printMonitor(monitor, hashmap1, s, s2, s3);
                     String s5 = s + " " + monitor.getProperty(COM.dragonflow.SiteView.Monitor.pID);
-                    ArrayList array1 = (jgl.Array) groupHashMap.get(s5);
+                    ArrayList array1 = (ArrayList) groupHashMap.get(s5);
                     if (array1 != null) {
                         outputStream.println("<tr><td><table cellpadding=\"0\">");
                         for (int k = 0; k < array1.size(); k ++) {
-                            printAlertOrReport((jgl.Array) array1.get(k), getIndentHTML(i + 6));
+                            printAlertOrReport((ArrayList) array1.get(k), getIndentHTML(i + 6));
                         }
 
                         outputStream.println("</table></td></tr>");
@@ -432,7 +434,7 @@ public class TreeChooserUtils {
                 String s5 = (String) hashmap.get("monitors");
                 getReportMonitors(s5, monitorgroup, array);
             } catch (java.lang.ClassCastException classcastexception) {
-                ArrayList array1 = (jgl.Array) hashmap.get("monitors");
+                ArrayList array1 = (ArrayList) hashmap.get("monitors");
                 String s7;
                 for (Enumeration enumeration = (Enumeration) array1.iterator(); enumeration.hasMoreElements(); getReportMonitors(s7, monitorgroup, array)) {
                     s7 = (String) enumeration.nextElement();

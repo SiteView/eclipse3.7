@@ -167,8 +167,8 @@ public class SunOneMonitor extends BrowsableURLContentBase
     public  ArrayList getConnectionProperties()
     {
          ArrayList array = super.getConnectionProperties();
-        array.insert(0, pURL);
-        array.insert(1, pPostData);
+        array.add(0, pURL);
+        array.add(1, pPostData);
         return array;
     }
 

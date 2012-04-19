@@ -9,6 +9,7 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import COM.dragonflow.HTTP.HTTPRequestException;
@@ -102,7 +103,7 @@ public class twdPrefsPage extends COM.dragonflow.Page.prefsPage
 //        {
 //            return;
 //        }
-//        Enumeration enumeration = hashmap.keys();
+//        Enumeration enumeration = (Enumeration) hashmap.keys();
 //        int i = hashmap.size();
 //        outputStream.print("<INPUT TYPE='HIDDEN' ID='numberOfHosts' value='" + i + "'>\n" + "<TABLE width=\"80%\" border=2>\n" + "<TR align=\"middle\"><th colspan=\"3\" bgcolor=\"darkblue\"> <font color=\"white\"> " + COM.dragonflow.TopazWatchdog.WatchdogConfig.getWatchdogDisplayedName() + " Machine View</font></th></TR>\n" + "<TR><TH align=left>Name</TH><TH align=left>Location</TH><TH align=left>" + COM.dragonflow.SiteView.TopazInfo.getTopazName() + " Services</TH></TR>\n");
 //        StringBuffer stringbuffer = new StringBuffer();

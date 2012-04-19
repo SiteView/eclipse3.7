@@ -80,7 +80,7 @@ public class Health implements CfgChangesSink {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      */
     private static void insureMinHealth() {
@@ -155,7 +155,7 @@ public class Health implements CfgChangesSink {
                     HashMap hashmap3 = new HashMap();
                     hashmap3.put("_id", s5);
                     String s6;
-                    for (Enumeration enumeration = hashmap2.keys(); enumeration
+                    for (Enumeration enumeration = (Enumeration) hashmap2.keys(); enumeration
                             .hasMoreElements(); hashmap3.put(s6, hashmap2
                             .get(s6))) {
                         s6 = (String) enumeration.nextElement();
@@ -286,7 +286,7 @@ public class Health implements CfgChangesSink {
     }
 
    /**
-    * CAUTION: Decompiled by hand.
+    * 
     *
     */
     public static void loadHealthGroupList() {
@@ -334,7 +334,7 @@ public class Health implements CfgChangesSink {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param subgroup
      */
@@ -392,7 +392,7 @@ public class Health implements CfgChangesSink {
     private void updateMaster(HashMap hashmap) {
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         String s;
-        for (Enumeration enumeration = hashmap.keys(); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                 .hasMoreElements(); siteviewgroup.setProperty(s,
                 (String) hashmap.get(s))) {
             s = (String) enumeration.nextElement();

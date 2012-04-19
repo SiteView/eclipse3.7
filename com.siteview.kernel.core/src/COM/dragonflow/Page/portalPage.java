@@ -12,6 +12,9 @@ package COM.dragonflow.Page;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.SiteView.PortalFilter;
 import COM.dragonflow.SiteView.PortalQuery;
 

@@ -152,7 +152,7 @@ public abstract class BrowsableExeBase extends BrowsableBase {
         return i;
     }
 
-    String saveResultProps(Array array, int i) {
+    String saveResultProps(ArrayList array, int i) {
         String s = "";
         HashMap hashmap = new HashMap();
         for (int j = i; j < array.size(); j++) {
@@ -182,7 +182,7 @@ public abstract class BrowsableExeBase extends BrowsableBase {
         return s;
     }
 
-    int getFirstValidIndex(Array array) {
+    int getFirstValidIndex(ArrayList array) {
         if (array == null) {
             return -1;
         }

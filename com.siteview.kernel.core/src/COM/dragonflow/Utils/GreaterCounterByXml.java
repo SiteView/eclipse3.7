@@ -17,9 +17,10 @@ package COM.dragonflow.Utils;
  * 
  */
 
+import com.recursionsw.jgl.BinaryPredicate;
 import com.recursionsw.jgl.HashMap;
 
-public final class GreaterCounterByXml implements jgl.BinaryPredicate {
+public final class GreaterCounterByXml implements BinaryPredicate {
 
     private HashMap countersWithSortIndex;
 

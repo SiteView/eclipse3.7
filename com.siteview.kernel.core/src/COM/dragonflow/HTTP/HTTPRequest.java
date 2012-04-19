@@ -24,6 +24,9 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.Utils.Base64Decoder;
 
@@ -1025,10 +1028,10 @@ public class HTTPRequest
     {
         if(variables != null)
         {
-            return variables.values(s);
+            return (Enumeration) variables.values(s);
         } else
         {
-            return (new Array(0)).elements();
+            return (Enumeration) (new ArrayList(0)).iterator();
         }
     }
 
@@ -1083,10 +1086,10 @@ public class HTTPRequest
     {
         if(variables != null)
         {
-            return variables.keys();
+            return (Enumeration) variables.keys();
         } else
         {
-            return (new Array(0)).elements();
+            return (Enumeration) (new ArrayList(0)).iterator();
         }
     }
 

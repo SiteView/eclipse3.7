@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import java.util.ArrayList;
-import jgl.ArrayIterator;
+//import ArrayListIterator;
 import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.HashMapOrdered;
 
@@ -84,7 +84,7 @@ public class MgParser
         java.lang.System.out.println("monitors used: " + aobj[1]);
         java.lang.System.out.println("monitor types used: ");
         HashMap hashmap = (HashMap)aobj[2];
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); java.lang.System.out.println())
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); java.lang.System.out.println())
         {
             String s = (String)enumeration.nextElement();
             java.lang.System.out.print("   " + s + ": " + COM.dragonflow.Utils.TextUtils.getValue(hashmap, s) + " monitor");
@@ -149,7 +149,7 @@ public class MgParser
                 java.lang.System.out.println("readFromFile " + vector.elementAt(i1) + " failed");
                 return null;
             }
-            jgl.ArrayIterator arrayiterator = new ArrayIterator(array, 0);
+            ArrayListIterator arrayiterator = new ArrayIterator(array, 0);
             HashMap hashmap1 = new HashMap();
             while (arrayiterator.hasMoreElements())
                 {
@@ -293,7 +293,7 @@ public class MgParser
 
     private int _countURLSequenceMonitor(HashMap hashmap)
     {
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         String s = "";
         int i = 0;
         while (enumeration.hasMoreElements()) {

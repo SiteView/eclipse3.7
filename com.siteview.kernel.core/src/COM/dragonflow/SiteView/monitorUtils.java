@@ -68,14 +68,14 @@ public class monitorUtils {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @param s
      * @return
      * @throws Exception
      */
-    public static int findMonitorIndex(Array array, String s) throws Exception {
+    public static int findMonitorIndex(ArrayList array, String s) throws Exception {
         if (s.equals("_config")) {
             return 0;
         }
@@ -100,13 +100,13 @@ public class monitorUtils {
         }
     }
 
-    public static HashMap findMonitor(Array array, String s) throws Exception {
+    public static HashMap findMonitor(ArrayList array, String s) throws Exception {
         int i = findMonitorIndex(array, s);
         return (HashMap) array.get(i);
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -135,7 +135,7 @@ public class monitorUtils {
         if (hashmap == null) {
             return "";
         }
-        for (Enumeration enumeration = hashmap.values(s); enumeration.hasMoreElements();) {
+        for (Enumeration enumeration = (Enumeration) hashmap.values(s); enumeration.hasMoreElements();) {
             String s2 = (String) enumeration.nextElement();
             String as[] = TextUtils.split(s2, ",");
             if (as.length == 2 && as[0].equals(s1)) {

@@ -172,7 +172,7 @@ public class NTDialupMonitor extends AtomicMonitor
                  ArrayList array2 = getMonitorsToRun();
                 long l6 = getSettingAsLong("_NTDialupMonitorStartupTime", 500);
                 long l7 = getSettingAsLong("_NTDialupMonitorDelay", 500);
-                Enumeration enumeration2 = array2.elements();
+                Enumeration enumeration2 = (Enumeration) array2.iterator();
                 try
                 {
                     do

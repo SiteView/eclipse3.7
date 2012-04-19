@@ -290,12 +290,12 @@ public class TivoliDmPassiveMonitor extends AtomicMonitor
         return "_browseNameid";
     }
 
-//    public String setBrowseName(Array ids)
+//    public String setBrowseName(ArrayList ids)
 //    {
 //        return subscriber_.nameFromComponents(ids);
 //    }
 //
-//    public String setBrowseID(Array ids)
+//    public String setBrowseID(ArrayList ids)
 //    {
 //        return subscriber_.idFromComponents(ids);
 //    }
@@ -584,12 +584,12 @@ public class TivoliDmPassiveMonitor extends AtomicMonitor
         }
     }
 
-	public String setBrowseName(Array array) {
+	public String setBrowseName(ArrayList array) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String setBrowseID(Array array) {
+	public String setBrowseID(ArrayList array) {
 		// TODO Auto-generated method stub
 		return null;
 	}

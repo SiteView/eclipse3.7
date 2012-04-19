@@ -9,7 +9,11 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
 
 import COM.dragonflow.SiteView.CompareSlot;
 
@@ -51,7 +55,7 @@ public abstract class machineChooserPage extends COM.dragonflow.Page.CGI {
     java.util.Vector addNTSSHServers(java.util.Vector vector, String s)
             throws java.io.IOException {
         ArrayList array = readMachines(s);
-        jgl.Sorting.sort(array, new CompareSlot("_name",
+        Sorting.sort(array, new CompareSlot("_name",
                 COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
         boolean flag = s.indexOf("NT") == -1;
         for (int i = 0; i < array.size(); i++) {
@@ -77,7 +81,7 @@ public abstract class machineChooserPage extends COM.dragonflow.Page.CGI {
     public java.util.Vector addServers(java.util.Vector vector,
             String s) throws java.io.IOException {
         ArrayList array = readMachines(s);
-        jgl.Sorting.sort(array, new CompareSlot("_name",
+        Sorting.sort(array, new CompareSlot("_name",
                 COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
         boolean flag = s.indexOf("NT") == -1;
         for (int i = 0; i < array.size(); i++) {

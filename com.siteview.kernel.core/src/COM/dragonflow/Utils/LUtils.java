@@ -383,7 +383,7 @@ public class LUtils
                 ArrayList array1 = new ArrayList();
                 HashMap hashmap = (HashMap)array.get(j);
                 String s2 = null;
-                Enumeration enumeration = hashmap.keys();
+                Enumeration enumeration = (Enumeration) hashmap.keys();
                 Enumeration enumeration1 = hashmap.elements();
                 while (enumeration.hasMoreElements() && enumeration1.hasMoreElements())
                     {
@@ -1733,10 +1733,10 @@ public class LUtils
 
     public static Enumeration getMonitorsFromType(int i)
     {
-        Enumeration enumeration = monNameToType.keys(new Integer(i));
+        Enumeration enumeration = (Enumeration) monNameToType.keys(new Integer(i));
         if(!enumeration.hasMoreElements())
         {
-            enumeration = siteSeerMonNameToType.keys(new Integer(i));
+            enumeration = (Enumeration) siteSeerMonNameToType.keys(new Integer(i));
         }
         return enumeration;
     }

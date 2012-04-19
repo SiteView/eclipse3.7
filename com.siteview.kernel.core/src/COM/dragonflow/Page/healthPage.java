@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
+
 // Referenced classes of package COM.dragonflow.Page:
 // CGI
 

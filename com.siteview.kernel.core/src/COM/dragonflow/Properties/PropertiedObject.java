@@ -26,8 +26,11 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import HashMapIterator;
-import jgl.Sorting;
+import com.recursionsw.jgl.HashMultiSetIterator;
+import com.recursionsw.jgl.algorithms.Sorting;
+
+//import HashMapIterator;
+//import Sorting;
 
 import org.w3c.dom.Document;
 
@@ -107,7 +110,7 @@ public class PropertiedObject {
 
     public void printValuesTable() {
         if (valuesTable != null) {
-            for (HashMapIterator hashmapiterator = valuesTable.begin(); !hashmapiterator.atEnd(); hashmapiterator
+            for (HashMultiSetIterator hashmapiterator = valuesTable.begin(); !hashmapiterator.atEnd(); hashmapiterator
                     .advance()) {
                 System.out.println(hashmapiterator.key() + "=" + hashmapiterator.value());
             }
@@ -212,7 +215,7 @@ public class PropertiedObject {
     static void resolveTemplateReferences(HashMap hashmap) {
         if (hashmap != null) {
             HashMap hashmap1;
-            for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); resolveTemplateReferences(
+            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); resolveTemplateReferences(
                                                                                                                     hashmap,
                                                                                                                     hashmap1,
                                                                                                                     0,
@@ -236,7 +239,7 @@ public class PropertiedObject {
             HashMap hashmap2 = (HashMap) hashmap.get(s);
             if (hashmap2 != null) {
                 resolveTemplateReferences(hashmap, hashmap2, i + 1, j);
-                Enumeration enumeration1 = hashmap2.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap2.keys();
                 while (enumeration1.hasMoreElements()) {
                     String s1 = (String) enumeration1.nextElement();
                     if (hashmap1.get(s1) == null)
@@ -295,14 +298,14 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hashmap
      * @param hashmap1
      * @param flag
      */
     public void initializeValuesTable(HashMap hashmap, HashMap hashmap1, boolean flag) {
-        for (HashMapIterator hashmapiterator = hashmap.begin(); !hashmapiterator.atEnd(); hashmapiterator.advance()) {
+        for (com.recursionsw.jgl.HashMapIterator hashmapiterator = hashmap.begin(); !hashmapiterator.atEnd(); hashmapiterator.advance()) {
             String s = (String) hashmapiterator.key();
             Object obj = hashmapiterator.value();
             StringProperty stringproperty = getPropertyObject(s);
@@ -313,8 +316,8 @@ public class PropertiedObject {
                 if (flag) {
                     hashmap1.remove(stringproperty);
                 }
-                if (obj instanceof Array) {
-                    for (Enumeration enumeration = ((Array) obj).elements(); enumeration.hasMoreElements(); hashmap1
+                if (obj instanceof ArrayList) {
+                    for (Enumeration enumeration = ((ArrayList) obj).elements(); enumeration.hasMoreElements(); hashmap1
                             .add(stringproperty, enumeration.nextElement()))
                         ;
                 } else {
@@ -326,8 +329,8 @@ public class PropertiedObject {
                 hashmap1.remove(s);
             }
 
-            if (obj instanceof Array) {
-                Enumeration enumeration1 = ((Array) obj).elements();
+            if (obj instanceof ArrayList) {
+                Enumeration enumeration1 = ((ArrayList) obj).elements();
                 while (enumeration1.hasMoreElements()) {
                     Object obj1 = enumeration1.nextElement();
                     if ((obj1 instanceof String)) {
@@ -342,7 +345,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringproperty
      * @return
@@ -374,9 +377,9 @@ public class PropertiedObject {
         HashMap hashmap = findTable(stringproperty);
         if (hashmap != null) {
             Object obj = hashmap.get(stringproperty);
-            if (obj != null && (obj instanceof Array)) {
+            if (obj != null && (obj instanceof ArrayList)) {
                 s = "";
-                 ArrayList array = (Array) obj;
+                 ArrayList array = (ArrayList) obj;
                 for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
                     if (s.length() != 0) {
                         s = s + stringproperty.multiLineDelimiter + " ";
@@ -399,8 +402,8 @@ public class PropertiedObject {
         HashMap hashmap = findTable(stringproperty);
         if (hashmap != null) {
             Object obj = hashmap.get(stringproperty);
-            if (obj != null && (obj instanceof Array)) {
-                array = (Array) obj;
+            if (obj != null && (obj instanceof ArrayList)) {
+                array = (ArrayList) obj;
             } else if (obj != null) {
                 array.add(obj);
             }
@@ -409,7 +412,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -433,14 +436,14 @@ public class PropertiedObject {
 
         if (obj instanceof String) {
             array.add(obj);
-        } else if (obj instanceof Array) {
-            array = (Array) obj;
+        } else if (obj instanceof ArrayList) {
+            array = (ArrayList) obj;
         }
         return array;
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -463,8 +466,8 @@ public class PropertiedObject {
             s1 = "";
         } else if (obj instanceof String) {
             s1 = (String) obj;
-        } else if (obj instanceof Array) {
-            s1 = (String) ((Array) obj).get(0);
+        } else if (obj instanceof ArrayList) {
+            s1 = (String) ((ArrayList) obj).get(0);
         } else {
             s1 = "";
         }
@@ -477,7 +480,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringproperty
      * @return
@@ -494,7 +497,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringproperty
      * @return
@@ -633,7 +636,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      */
@@ -735,7 +738,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param i
      * @return
@@ -758,7 +761,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      * @return
@@ -779,7 +782,7 @@ public class PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -845,7 +848,7 @@ public class PropertiedObject {
 
     static HashMap cClassValues = new HashMap();
 
-    static ArrayList cEmptyArray = new jgl.Array();
+    static ArrayList cEmptyArray = new ArrayList();
 
     protected static final boolean EDITABLE = true;
 

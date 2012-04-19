@@ -157,7 +157,7 @@ public class RemoteFile {
                     s = s + " | cat";
                 }
                 ArrayList array2 = remotecommandline.exec(s, machine1);
-                Enumeration enumeration1 = array2.elements();
+                Enumeration enumeration1 = (Enumeration) array2.iterator();
                 while (enumeration1.hasMoreElements()) {
                     String s3 = (String) enumeration1.nextElement();
                     s3 = s3.trim();

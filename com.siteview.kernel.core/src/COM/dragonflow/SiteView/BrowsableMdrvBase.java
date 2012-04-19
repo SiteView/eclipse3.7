@@ -18,11 +18,14 @@ package COM.dragonflow.SiteView;
  * 
  */
 import java.io.File;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.Utils.TextUtils;
@@ -175,7 +178,7 @@ public abstract class BrowsableMdrvBase extends BrowsableBase {
         return i;
     }
 
-    String saveResultProps(Array array) {
+    String saveResultProps(ArrayList array) {
         String s = "";
         HashMap hashmap = new HashMap();
         for (int i = 0; i < array.size(); i++) {

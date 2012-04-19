@@ -412,7 +412,7 @@ public abstract class FileBase {
         }
 
         /**
-         * CAUTION: Decompiled by hand.
+         * 
          * 
          * @param s
          * @param s1
@@ -537,7 +537,7 @@ public abstract class FileBase {
             parent = healthnode;
             parentFrameIndex = i;
             fileName = new String(s);
-            frames = new Array(array);
+            frames = new ArrayList(array);
             children = new ArrayList();
             if (parent != null) {
                 selfIndex = parent.children.size();

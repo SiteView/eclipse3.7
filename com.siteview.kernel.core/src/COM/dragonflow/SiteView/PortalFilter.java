@@ -93,7 +93,7 @@ public class PortalFilter {
         if (TextUtils.getValue(hashmap, "exp").length() > 0) {
             expressionFilter = new ArrayList();
             expressionStringFilter = new ArrayList();
-            for (Enumeration enumeration = hashmap.values("exp"); enumeration
+            for (Enumeration enumeration = (Enumeration) hashmap.values("exp"); enumeration
                     .hasMoreElements();) {
                 String s = (String) enumeration.nextElement();
                 Object obj = null;
@@ -112,7 +112,7 @@ public class PortalFilter {
                 || nameFilter.length() > 0 || statusFilter.length() > 0
                 || expressionFilter != null || expressionStringFilter != null;
         String as[];
-        for (Enumeration enumeration1 = hashmap.values("item"); enumeration1
+        for (Enumeration enumeration1 = (Enumeration) hashmap.values("item"); enumeration1
                 .hasMoreElements(); addItemToFilter(as[0], as[1], as[2])) {
             String s1 = (String) enumeration1.nextElement();
             as = Portal.getIDComponents(s1);
@@ -314,7 +314,7 @@ public class PortalFilter {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -354,7 +354,7 @@ public class PortalFilter {
             if (oneLevel) {
                 break label0;
             }
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             String s3;
             do {
                 if (!enumeration.hasMoreElements()) {
@@ -449,7 +449,7 @@ public class PortalFilter {
     public static HashMap setupQueryMap(HashMap hashmap, String s) {
         HashMapOrdered hashmapordered = null;
         String s1;
-        for (Enumeration enumeration = hashmap.values(s); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.values(s); enumeration
                 .hasMoreElements(); hashmapordered.put(s1, "true")) {
             s1 = (String) enumeration.nextElement();
             if (hashmapordered == null) {
@@ -469,7 +469,7 @@ public class PortalFilter {
                 return "could not find query ID " + rawQueryString;
             }
         }
-        Enumeration enumeration = rawQuery.values("item");
+        Enumeration enumeration = (Enumeration) rawQuery.values("item");
         StringBuffer stringbuffer = new StringBuffer();
         String s = "all servers";
         while (enumeration.hasMoreElements()) {
@@ -561,7 +561,7 @@ public class PortalFilter {
         if (itemFilter == null) {
             System.out.println("All servers allowed");
         } else {
-            for (Enumeration enumeration = itemFilter.keys(); enumeration
+            for (Enumeration enumeration = (Enumeration) itemFilter.keys(); enumeration
                     .hasMoreElements();) {
                 String s = (String) enumeration.nextElement();
                 Object obj = itemFilter.get(s);
@@ -570,7 +570,7 @@ public class PortalFilter {
                 } else {
                     System.out.println(s);
                     HashMap hashmap = (HashMap) obj;
-                    Enumeration enumeration3 = hashmap.keys();
+                    Enumeration enumeration3 = (Enumeration) hashmap.keys();
                     while (enumeration3.hasMoreElements()) {
                         String s1 = (String) enumeration3.nextElement();
                         Object obj1 = hashmap.get(s1);
@@ -580,7 +580,7 @@ public class PortalFilter {
                         } else {
                             System.out.println("  " + s1);
                             HashMap hashmap1 = (HashMap) obj1;
-                            Enumeration enumeration4 = hashmap1.keys();
+                            Enumeration enumeration4 = (Enumeration) hashmap1.keys();
                             while (enumeration4.hasMoreElements()) {
                                 String s2 = (String) enumeration4.nextElement();
                                 System.out.println("    " + s2);
@@ -599,7 +599,7 @@ public class PortalFilter {
         }
         if (categoryFilter != null) {
             System.out.print("Category:");
-            for (Enumeration enumeration1 = categoryFilter.keys(); enumeration1
+            for (Enumeration enumeration1 = (Enumeration) categoryFilter.keys(); enumeration1
                     .hasMoreElements(); System.out.print(" "
                     + enumeration1.nextElement())) {
             }
@@ -607,7 +607,7 @@ public class PortalFilter {
         }
         if (typeFilter != null) {
             System.out.print("Monitor Type:");
-            for (Enumeration enumeration2 = typeFilter.keys(); enumeration2
+            for (Enumeration enumeration2 = (Enumeration) typeFilter.keys(); enumeration2
                     .hasMoreElements(); System.out.print(" "
                     + enumeration2.nextElement())) {
             }

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.SSH:
 // SSHClientBase, ISSHSession
@@ -65,7 +66,7 @@ public class SSHPlinkClient extends COM.dragonflow.SSH.SSHClientBase implements 
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, int i, java.io.PrintWriter printwriter, ArrayList array) {
         timeoutTime = java.lang.System.currentTimeMillis() + (long) i;

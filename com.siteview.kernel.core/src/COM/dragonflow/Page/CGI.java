@@ -17,7 +17,9 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import jgl.LessString;
+import com.recursionsw.jgl.algorithms.Sorting;
+
+//import jgl.LessString;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.SiteView.Platform;
@@ -269,7 +271,7 @@ public abstract class CGI {
                 hashmap.put(s, "");
             }
         }
-        array = COM.dragonflow.Utils.TextUtils.enumToArray(hashmap.keys());
+        array = COM.dragonflow.Utils.TextUtils.enumToArray((Enumeration) hashmap.keys());
         return array;
     }
 
@@ -1513,7 +1515,7 @@ public abstract class CGI {
 
     public static Enumeration getValues(HashMap hashmap,
             String s) {
-        return hashmap.values(s);
+        return (Enumeration) hashmap.values(s);
     }
 
     public HashMap getMasterConfig() {
@@ -1589,7 +1591,7 @@ public abstract class CGI {
         if (request.isStandardAccount()) {
             saveMasterConfig(hashmap);
         } else {
-            settingsArray.put(0, hashmap);
+            settingsArray.set(0, hashmap);
             WriteGroupFrames(request.getAccount(), settingsArray);
             COM.dragonflow.SiteView.SiteViewGroup.updateStaticPages(request
                     .getAccount());
@@ -1656,7 +1658,7 @@ public abstract class CGI {
                 true);
         ArrayList array3 = getGroupNameList(hashmapordered, hashmap1, hashmap2,
                 false);
-        for (Enumeration enumeration = array3.elements(); enumeration
+        for (Enumeration enumeration = (Enumeration) array3.iterator(); enumeration
                 .hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             Enumeration enumeration1 = hashmapordered.values(s1);
@@ -1798,9 +1800,9 @@ public abstract class CGI {
             }
         } 
         
-        jgl.Sorting.sort(array1, new LessString());
+        Sorting.sort(array1, new com.recursionsw.jgl.predicates.LessString());
         if (s1 != null) {
-            array1.insert(0, s1);
+            array1.add(0, s1);
         }
         return array1;
     }
@@ -1883,7 +1885,7 @@ public abstract class CGI {
         }
 
         if (hashmap.size() > 0) {
-            for (Enumeration enumeration = hashmap.keys(); enumeration
+            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                     .hasMoreElements();) {
                 String s2 = (String) enumeration
                         .nextElement();
@@ -2074,7 +2076,7 @@ public abstract class CGI {
         ArrayList array = new ArrayList();
         HashMap hashmap = getMasterConfig();
         String s1;
-        for (Enumeration enumeration = hashmap.values(s); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.values(s); enumeration
                 .hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils
                 .stringToHashMap(s1))) {
             s1 = (String) enumeration.nextElement();

@@ -9,6 +9,7 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import com.recursionsw.jgl.HashMap;
@@ -81,7 +82,7 @@ public class portalManagePage extends COM.dragonflow.Page.portalChooserPage
             {
                 printProgressMessage(byte0 + " monitor" + (array2.size() <= 1 ? "" : "s") + "<BR>");
                 COM.dragonflow.SiteView.AtomicMonitor atomicmonitor;
-                for(Enumeration enumeration = array2.elements(); enumeration.hasMoreElements(); modifyMonitor(atomicmonitor, byte0, as))
+                for(Enumeration enumeration = (Enumeration) array2.iterator(); enumeration.hasMoreElements(); modifyMonitor(atomicmonitor, byte0, as))
                 {
                     atomicmonitor = (COM.dragonflow.SiteView.AtomicMonitor)enumeration.nextElement();
                 }
@@ -255,7 +256,7 @@ public class portalManagePage extends COM.dragonflow.Page.portalChooserPage
     private ArrayList getGroupFrames(String s)
         throws java.lang.Exception
     {
-        ArrayList array = (jgl.Array)groups.get(s);
+        ArrayList array = (ArrayList)groups.get(s);
         if(array == null)
         {
             array = ReadGroupFrames(s);
@@ -268,7 +269,7 @@ public class portalManagePage extends COM.dragonflow.Page.portalChooserPage
     private void saveGroups()
         throws java.lang.Exception
     {
-        Enumeration enumeration = groups.keys();
+        Enumeration enumeration = (Enumeration) groups.keys();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -276,7 +277,7 @@ public class portalManagePage extends COM.dragonflow.Page.portalChooserPage
                 break;
             }
             String s = (String)enumeration.nextElement();
-            ArrayList array = (jgl.Array)groups.get(s);
+            ArrayList array = (ArrayList)groups.get(s);
             if(array != null)
             {
                 printProgressMessage("Saving group configuration for " + COM.dragonflow.Page.portalManagePage.getGroupName(array, s) + "<BR>");

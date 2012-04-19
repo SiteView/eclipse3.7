@@ -14,10 +14,10 @@ import COM.dragonflow.Utils.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.HashSet;
 
-import jgl.*;
+//import jgl.*;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.HashMapIterator;
 
 public class SiteViewSupport
 {
@@ -354,7 +354,7 @@ public class SiteViewSupport
         }
         try
         {
-            Enumeration enumeration1 = hashmap.values("_urlLocation");
+            Enumeration enumeration1 = (Enumeration) hashmap.values("_urlLocation");
             HTTPUtils.locations = new ArrayList();
             if(enumeration1.hasMoreElements())
             {
@@ -494,7 +494,7 @@ label0:
         } while(!flag);
     }
 
-    public static void mergeDefault(Array array, String s)
+    public static void mergeDefault(ArrayList array, String s)
     {
         for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();)
             if(s.equals(enumeration.nextElement()))
@@ -503,12 +503,12 @@ label0:
         array.add(s);
     }
 
-    public static void mergeDefaults(Array array, Object obj)
+    public static void mergeDefaults(ArrayList array, Object obj)
     {
         if(obj != null)
-            if(obj instanceof Array)
+            if(obj instanceof ArrayList)
             {
-                for(Enumeration enumeration = ((Array)obj).elements(); enumeration.hasMoreElements(); mergeDefault(array, (String)enumeration.nextElement()));
+                for(Enumeration enumeration = (Enumeration) ((ArrayList)obj).iterator(); enumeration.hasMoreElements(); mergeDefault(array, (String)enumeration.nextElement()));
             } else
             {
                 mergeDefault(array, (String)obj);
@@ -542,7 +542,7 @@ label0:
         HashMap hashmap1 = null;
 		try
 		{
-			Array array = FrameFile.readFromFile(s);
+			ArrayList array = FrameFile.readFromFile(s);
 	        if(array != null && array.size() > 0)
 	        {
 	            hashmap1 = (HashMap)array.get(0);
@@ -566,7 +566,7 @@ label0:
                     hashmap.put(s1, obj3);
                     continue;
                 }
-                if(!(obj3 instanceof Array))
+                if(!(obj3 instanceof ArrayList))
                     continue;
                  ArrayList array2 = new ArrayList();
                 mergeDefaults(array2, obj2);

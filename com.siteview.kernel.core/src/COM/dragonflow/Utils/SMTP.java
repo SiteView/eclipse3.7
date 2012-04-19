@@ -25,6 +25,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Utils:
 // Base64Encoder, TextUtils, I18N, FileUtils
 

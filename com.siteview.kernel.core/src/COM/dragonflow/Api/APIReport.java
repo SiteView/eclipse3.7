@@ -76,7 +76,7 @@ public class APIReport extends COM.dragonflow.Api.APISiteView {
             httprequest = new HTTPRequest();
             httprequest.setUser(account);
             String s2;
-            for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); httprequest.setValue(s2, COM.dragonflow.Utils.TextUtils.getValue(hashmap, s2))) {
+            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); httprequest.setValue(s2, COM.dragonflow.Utils.TextUtils.getValue(hashmap, s2))) {
                 s2 = (String) enumeration.nextElement();
             }
 
@@ -130,7 +130,7 @@ public class APIReport extends COM.dragonflow.Api.APISiteView {
                             array2.add(invert(as1[k]));
                         }
 
-                        httprequest.setValues("monitors", array2.elements());
+                        httprequest.setValues("monitors", (Enumeration) array2.iterator());
                     } else {
                         httprequest.setValue("monitors", invert(as1[0]));
                     }

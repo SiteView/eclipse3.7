@@ -68,12 +68,12 @@ public class PropertyTable extends HashMap {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @param i
      */
-    public void getProperties(Array array, int i) {
+    public void getProperties(ArrayList array, int i) {
         if (parent != null) {
             parent.getProperties(array, i);
         }
@@ -87,7 +87,7 @@ public class PropertyTable extends HashMap {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param i
      * @return

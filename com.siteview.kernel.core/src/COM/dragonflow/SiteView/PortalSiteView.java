@@ -230,7 +230,7 @@ public class PortalSiteView extends MonitorGroup {
 
     public HashMap getMachineEntry(String s) {
         HashMap hashmap = getMasterConfig();
-        for (Enumeration enumeration = hashmap.values("_remoteMachine"); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.values("_remoteMachine"); enumeration
                 .hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             HashMap hashmap1 = TextUtils.stringToHashMap(s1);
@@ -279,7 +279,7 @@ public class PortalSiteView extends MonitorGroup {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      * @return

@@ -16,8 +16,11 @@ package COM.dragonflow.Log;
  * 
  * 
  */
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
 
 public abstract class Logger {
 

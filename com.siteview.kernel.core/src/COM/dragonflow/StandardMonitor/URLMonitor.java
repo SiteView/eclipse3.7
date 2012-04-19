@@ -1086,7 +1086,7 @@ public class URLMonitor extends AtomicMonitor
         }
     }
 
-    static Vector prepareParametersForApache(Array array)
+    static Vector prepareParametersForApache(ArrayList array)
     {
         Vector vector = new Vector();
         if(array != null)
@@ -1130,7 +1130,7 @@ public class URLMonitor extends AtomicMonitor
         return vector;
     }
 
-    static String getRequestCommand(Array array)
+    static String getRequestCommand(ArrayList array)
     {
         String s;
 label0:
@@ -1160,7 +1160,7 @@ label0:
         return s;
     }
 
-    static String getContentType(Array array)
+    static String getContentType(ArrayList array)
     {
         String s;
 label0:
@@ -1185,7 +1185,7 @@ label0:
         return s;
     }
 
-    static String getUserAgent(Array array)
+    static String getUserAgent(ArrayList array)
     {
         String s;
 label0:
@@ -1210,7 +1210,7 @@ label0:
         return s;
     }
 
-    static String getHostHeader(Array array, String s, int i, String s1)
+    static String getHostHeader(ArrayList array, String s, int i, String s1)
     {
         String s2;
 label0:
@@ -1250,7 +1250,7 @@ label0:
         return s2;
     }
 
-    static String checkPostFieldForRequestProtocol(Array array)
+    static String checkPostFieldForRequestProtocol(ArrayList array)
     {
         String s;
 label0:

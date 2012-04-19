@@ -292,7 +292,7 @@ public abstract class NTCounterBase extends ServerMonitor implements
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param array
@@ -340,7 +340,7 @@ public abstract class NTCounterBase extends ServerMonitor implements
                 if (as.length > 0) {
                     s4 = as[l].trim();
                 }
-                Enumeration enumeration = array2.elements();
+                Enumeration enumeration = (Enumeration) array2.iterator();
                 boolean flag1 = false;
                 boolean flag2 = false;
                 PerfCounter perfcounter = null;
@@ -511,7 +511,7 @@ public abstract class NTCounterBase extends ServerMonitor implements
                 }
             }
         } else {
-            Enumeration enumeration = mapObject.keys();
+            Enumeration enumeration = (Enumeration) mapObject.keys();
             while (enumeration.hasMoreElements())
             	strCmds.append("-o ").append("\"").append(
                         enumeration.nextElement()).append("\" ");
@@ -557,7 +557,7 @@ public abstract class NTCounterBase extends ServerMonitor implements
             LogManager.log("Error", ("Counter Monitor error, "
                     + (Object) stringbuffer + iExitCode + ", " + s
                     + ", monitor id: " + atomicmonitor.getFullID()));
-            Enumeration enumeration = array_55_.elements();
+            Enumeration enumeration = (Enumeration) array_55_.iterator();
             if (flag) {
                 while (enumeration.hasMoreElements())
                     LogManager.log("Error",
@@ -567,7 +567,7 @@ public abstract class NTCounterBase extends ServerMonitor implements
                                     .getFullID()));
             }
         } else {
-            Enumeration enumeration = array_55_.elements();
+            Enumeration enumeration = (Enumeration) array_55_.iterator();
             boolean bInstance = false;
             String strName = "";
             String strObject = "";
@@ -830,7 +830,7 @@ public abstract class NTCounterBase extends ServerMonitor implements
              ArrayList array2 = getPerfData(s, array, stringbuffer, showDebug, this,
                     array1, map);
             s3 = stringbuffer.toString();
-            enumeration = array2.elements();
+            enumeration = (Enumeration) array2.iterator();
             if (enumeration.hasMoreElements()) {
                 perfresult.measurementTime = TextUtils
                         .toLong((String) enumeration.nextElement());

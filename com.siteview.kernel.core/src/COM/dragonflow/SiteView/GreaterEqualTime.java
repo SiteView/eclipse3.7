@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.SiteView;
 
+//import com.recursionsw.BinaryPredicate;
+
 /**
  * Comment for <code>GreaterEqualTime</code>
  * 
@@ -17,12 +19,12 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.BinaryPredicate;
+//import BinaryPredicate;
 
 // Referenced classes of package COM.dragonflow.SiteView:
 // ScheduleEvent
 
-public class GreaterEqualTime implements BinaryPredicate {
+public class GreaterEqualTime implements com.recursionsw.jgl.BinaryPredicate {
 
     public GreaterEqualTime() {
     }

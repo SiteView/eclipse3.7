@@ -14,6 +14,8 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.CommandLine;
 import COM.dragonflow.Utils.SSHCommandLine;
@@ -275,7 +277,7 @@ public class servicePage extends COM.dragonflow.Page.machineChooserPage
             }
             ArrayList array1 = new ArrayList();
             for(Enumeration enumeration1 = hashmap1.elements(); enumeration1.hasMoreElements(); array1.add(enumeration1.nextElement())) { }
-            jgl.Sorting.sort(array1, new GreaterEqualProcessInfo());
+            Sorting.sort(array1, new GreaterEqualProcessInfo());
             Enumeration enumeration2 = (Enumeration) array1.iterator();
             do
             {

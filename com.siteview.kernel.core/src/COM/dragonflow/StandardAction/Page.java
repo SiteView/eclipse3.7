@@ -60,9 +60,9 @@ public class Page extends COM.dragonflow.SiteView.Action {
             setProperty(pTemplate, "Default");
         }
         unsetProperty(pPager);
-        for (Enumeration enumeration = hashmap.values("_id"); enumeration.hasMoreElements(); addProperty(pPager, (String) enumeration.nextElement())) {
+        for (Enumeration enumeration = (Enumeration) hashmap.values("_id"); enumeration.hasMoreElements(); addProperty(pPager, (String) enumeration.nextElement())) {
         }
-        Enumeration enumeration1 = hashmap.keys();
+        Enumeration enumeration1 = (Enumeration) hashmap.keys();
         while (enumeration1.hasMoreElements()) {
             String s = (String) enumeration1.nextElement();
             if (s.startsWith("_pager")) {
@@ -202,7 +202,7 @@ public class Page extends COM.dragonflow.SiteView.Action {
             Enumeration enumeration = null;
             if (httprequest.isStandardAccount()) {
                 HashMap hashmap = cgi.getMasterConfig();
-                enumeration = hashmap.values("_additionalPager");
+                enumeration = (Enumeration) hashmap.values("_additionalPager");
             } else {
                 COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
                 COM.dragonflow.SiteView.SiteViewObject siteviewobject = siteviewgroup.getElement(httprequest.getAccount());
@@ -272,7 +272,7 @@ public class Page extends COM.dragonflow.SiteView.Action {
                     if (s2.length() > 0) {
                         HashMap hashmap = COM.dragonflow.Utils.TextUtils.stringToHashMap(s2);
                         s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_name");
-                        Enumeration enumeration2 = hashmap.keys();
+                        Enumeration enumeration2 = (Enumeration) hashmap.keys();
                         while (enumeration2.hasMoreElements()) {
                             String s5 = (String) enumeration2.nextElement();
                             if (s5.startsWith("_pager")) {

@@ -12,6 +12,11 @@ package COM.dragonflow.Page;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.BinaryPredicate;
+import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.TextUtils;
 
@@ -19,7 +24,7 @@ import COM.dragonflow.Utils.TextUtils;
 // CGI, monitorPage
 
 public class browsePage extends COM.dragonflow.Page.CGI
-    implements jgl.BinaryPredicate
+    implements BinaryPredicate
 {
 
     public static final int SORT_NAME = 1;
@@ -70,7 +75,7 @@ public class browsePage extends COM.dragonflow.Page.CGI
         HashMap hashmap = monitor.getValuesTable();
         java.lang.Object obj;
         String s;
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); outputStream.println(COM.dragonflow.Utils.TextUtils.escapeXML("" + obj, s)))
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); outputStream.println(COM.dragonflow.Utils.TextUtils.escapeXML("" + obj, s)))
         {
             obj = enumeration.nextElement();
             s = "" + hashmap.get(obj);
@@ -81,7 +86,7 @@ public class browsePage extends COM.dragonflow.Page.CGI
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void printBody()
         throws java.lang.Exception
@@ -273,13 +278,13 @@ label0:
 
         if(array2.size() > 1)
         {
-            jgl.Sorting.sort(array2, this);
+            Sorting.sort(array2, this);
         }
         if(flag)
         {
             outputStream.println("<?xml version=\"1.0\"?>");
             outputStream.println("<siteview>");
-            for(Enumeration enumeration3 = array2.elements(); enumeration3.hasMoreElements(); outputStream.println("</monitor>"))
+            for(Enumeration enumeration3 = (Enumeration) array2.iterator(); enumeration3.hasMoreElements(); outputStream.println("</monitor>"))
             {
                 COM.dragonflow.SiteView.Monitor monitor1 = (COM.dragonflow.SiteView.Monitor)enumeration3.nextElement();
                 outputStream.println("<monitor>");
@@ -367,7 +372,7 @@ label0:
             String s23 = "<h2>Browse Monitors (" + array2.size() + " out of " + j + ")</h2>" + s22;
             if(request.getValue("justTitle").length() == 0)
             {
-                String s24 = COM.dragonflow.SiteView.MonitorGroup.printMonitorTable(outputStream, request, s23, "", ai, array2.elements());
+                String s24 = COM.dragonflow.SiteView.MonitorGroup.printMonitorTable(outputStream, request, s23, "", ai, (Enumeration) array2.iterator());
                 COM.dragonflow.SiteView.MonitorGroup.printCategoryInsertHTML(s24, siteviewgroup1, outputStream);
             }
             printFooter(outputStream);
@@ -407,7 +412,7 @@ label0:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return

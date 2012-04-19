@@ -156,7 +156,7 @@ public class MasterHealth extends COM.dragonflow.Health.FileBase
 
         for(int i1 = 0; i1 < mgFiles.length; i1++)
         {
-            ArrayList array = (jgl.Array)mgs.get(i1);
+            ArrayList array = (ArrayList)mgs.get(i1);
             new FileBase.HealthNode(null, 0, array, mgFiles[i1]);
         }
 

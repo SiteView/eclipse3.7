@@ -211,7 +211,7 @@ public class XmlApiRequestXML extends COM.dragonflow.XmlApi.XmlApiRequest {
     private void addXmlElement(COM.dragonflow.XmlApi.XmlApiObject xmlapiobject) {
         startXmlElement(xmlapiobject.getName(), xmlapiobject.getProperties(false));
         COM.dragonflow.XmlApi.XmlApiObject xmlapiobject1;
-        for (Enumeration enumeration = xmlapiobject.elements(); enumeration.hasMoreElements(); endXmlElement(xmlapiobject1)) {
+        for (Enumeration enumeration = (Enumeration) xmlapiobject.iterator(); enumeration.hasMoreElements(); endXmlElement(xmlapiobject1)) {
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             addXmlElement(xmlapiobject1);
         }
@@ -223,7 +223,7 @@ public class XmlApiRequestXML extends COM.dragonflow.XmlApi.XmlApiRequest {
         java.util.Vector vector = null;
         xmlResponse.append("<" + s);
         if (hashmap != null) {
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             while (enumeration.hasMoreElements()) {
                 String s1 = enumeration.nextElement().toString();
                 java.lang.Object obj = hashmap.get(s1);

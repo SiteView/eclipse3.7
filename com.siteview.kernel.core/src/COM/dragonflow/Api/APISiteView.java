@@ -28,6 +28,8 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.StringProperty;
@@ -755,7 +757,7 @@ public class APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      * @throws COM.dragonflow.SiteViewException.SiteViewException
@@ -1571,7 +1573,7 @@ public class APISiteView
         ArrayList array = new ArrayList();
         try
         {
-            array = (jgl.Array)groups.get(s);
+            array = (ArrayList)groups.get(s);
             array = ReadGroupFrames(s);
             groups.put(s, array);
         }
@@ -1775,10 +1777,10 @@ public class APISiteView
     {
         try
         {
-            Enumeration enumeration = groups.keys();
+            Enumeration enumeration = (Enumeration) groups.keys();
             while (enumeration.hasMoreElements()) {
                 String s = (String)enumeration.nextElement();
-                ArrayList array = (jgl.Array)groups.get(s);
+                ArrayList array = (ArrayList)groups.get(s);
                 if(array != null)
                 {
 //                    WriteGroupFrames(s, array);
@@ -1810,7 +1812,7 @@ public class APISiteView
     {
         String s = "";
         String s1 = "";
-        Enumeration enumeration = hashmap.values(scalarproperty.getName());
+        Enumeration enumeration = (Enumeration) hashmap.values(scalarproperty.getName());
         if(enumeration.hasMoreElements())
         {
             s = (String)enumeration.nextElement();
@@ -1864,7 +1866,7 @@ public class APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringproperty
      * @param i
@@ -2050,7 +2052,7 @@ public class APISiteView
     {
         COM.dragonflow.HTTP.HTTPRequest httprequest = new HTTPRequest();
         ArrayList array = readMachines(s);
-        jgl.Sorting.sort(array, new CompareSlot("_name", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
+        Sorting.sort(array, new CompareSlot("_name", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
         boolean flag1 = s.indexOf("NT") == -1;
         for(int i = 0; i < array.size(); i++)
         {
@@ -2091,7 +2093,7 @@ public class APISiteView
         ArrayList array = new ArrayList();
         HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         String s1;
-        for(Enumeration enumeration = hashmap.values(s); enumeration.hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils.stringToHashMap(s1)))
+        for(Enumeration enumeration = (Enumeration) hashmap.values(s); enumeration.hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils.stringToHashMap(s1)))
         {
             s1 = (String)enumeration.nextElement();
             if(s1.indexOf("_id") >= 0)

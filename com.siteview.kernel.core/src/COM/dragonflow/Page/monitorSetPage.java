@@ -430,7 +430,7 @@ public class monitorSetPage extends CGI
     {
         HashMap hashmap = Machine.getMachineTable();
         String s = "";
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         java.util.Vector vector = new Vector();
         for(; enumeration.hasMoreElements(); vector.addElement(enumeration.nextElement())) { }
         vector.addElement("other");
@@ -598,7 +598,7 @@ public class monitorSetPage extends CGI
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param as
      * @return
@@ -738,7 +738,7 @@ public class monitorSetPage extends CGI
             }
             HTMLPage.append("<TABLE BORDER=1 CELLSPACING=0 WIDTH=\"100%\">\n");
             HTMLPage.append("<TR><TH width=\"20%\">Property</TH><TH width=\"30%\">Value</TH><TH width=\"50%\"> Property or Syntax Errors</TH></TR>\n");
-            Enumeration enumeration2 = hashmap3.keys();
+            Enumeration enumeration2 = (Enumeration) hashmap3.keys();
             do
             {
                 if(!enumeration2.hasMoreElements())
@@ -817,7 +817,7 @@ public class monitorSetPage extends CGI
             if(ssrtn.isErrorList())
             {
                 HashMap hashmap5 = ssrtn.getErrorList();
-                for(Enumeration enumeration3 = hashmap5.keys(); enumeration3.hasMoreElements();)
+                for(Enumeration enumeration3 = (Enumeration) hashmap5.keys(); enumeration3.hasMoreElements();)
                 {
                     java.lang.Object obj = enumeration3.nextElement();
                     String s15 = (String)hashmap5.get(obj);
@@ -856,7 +856,7 @@ public class monitorSetPage extends CGI
         HTMLPage.append("<FORM ACTION=/SiteView/cgi/go.exe/SiteView method=POST>\n<input type=hidden name=page value=\"" + getNextPage(request.getValue("operation")) + "\">\n" + "<input type=hidden name=operation value=" + "monitorSetCreate" + " >\n" + "<input type=hidden name=account value= \"" + request.getAccount() + "\">\n" + "<input type=hidden name=group value= \"" + s1 + "\">\n" + "<input type=hidden name=" + "solution" + " value= \"" + request.getValue("solution") + "\">\n" + "<input type=hidden name=templatefile value= \"" + s + "\">\n");
         String s7;
         String s9;
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); HTMLPage.append("<input type=hidden name=\"" + s7 + "\" value=\"" + s9 + "\">\n"))
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); HTMLPage.append("<input type=hidden name=\"" + s7 + "\" value=\"" + s9 + "\">\n"))
         {
             s7 = (String)enumeration.nextElement();
             s9 = TextUtils.getValue(hashmap, s7);
@@ -881,7 +881,7 @@ public class monitorSetPage extends CGI
     protected HashMap populateForeachVariables()
     {
         HashMap hashmap = new HashMap(true);
-        Enumeration enumeration = request.variables.keys();
+        Enumeration enumeration = (Enumeration) request.variables.keys();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -951,7 +951,7 @@ public class monitorSetPage extends CGI
             HTMLPage.append("<p>Creating Monitor: " + s6 + ": " + s7 + " ... ");
             if(flag)
             {
-                Enumeration enumeration = hashmap2.keys();
+                Enumeration enumeration = (Enumeration) hashmap2.keys();
                 do
                 {
                     if(!enumeration.hasMoreElements())
@@ -1210,7 +1210,7 @@ public class monitorSetPage extends CGI
             }
             ArrayList array2 = atomicmonitor.getProperties();
             array2 = StringProperty.sortByOrder(array2);
-            for(Enumeration enumeration = array2.elements(); enumeration.hasMoreElements();)
+            for(Enumeration enumeration = (Enumeration) array2.iterator(); enumeration.hasMoreElements();)
             {
                 StringProperty stringproperty = (StringProperty)enumeration.nextElement();
                 String s7 = stringproperty.getName();
@@ -1267,7 +1267,7 @@ public class monitorSetPage extends CGI
             }
 
             HashMap hashmap5 = getMasterConfig();
-            Enumeration enumeration1 = hashmap5.values("_monitorEditCustom");
+            Enumeration enumeration1 = (Enumeration) hashmap5.values("_monitorEditCustom");
             do
             {
                 if(!enumeration1.hasMoreElements())
@@ -1340,7 +1340,7 @@ public class monitorSetPage extends CGI
         hashmap1.remove(Monitor.pID);
         hashmap1.remove("_id");
         hashmap1.put("_id", s4);
-        array.insert(j++, hashmap1);
+        array.add(j++, hashmap1);
         String s5 = TextUtils.increment(s4);
         hashmap3.put("_nextID", s5);
         WriteGroupFrames(s, array);

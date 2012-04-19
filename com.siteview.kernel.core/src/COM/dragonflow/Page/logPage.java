@@ -13,6 +13,9 @@ import java.io.File;
 import java.util.Date;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.SiteView.GreaterDate;
 
@@ -117,7 +120,7 @@ public class logPage extends COM.dragonflow.Page.CGI
             }
 
         }
-        jgl.Sorting.sort(array, new GreaterDate());
+        Sorting.sort(array, new GreaterDate());
         String s12 = "";
         if(array.size() == 0)
         {

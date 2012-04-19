@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 
 // Referenced classes of package COM.dragonflow.Page:

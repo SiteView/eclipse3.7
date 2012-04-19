@@ -230,7 +230,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @param s
 	 * @param s1
@@ -478,7 +478,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				.internalServerActive();
 		ArrayList array2 = action.getProperties();
 		array2 = COM.dragonflow.Properties.StringProperty.sortByOrder(array2);
-		Enumeration enumeration = array2.elements();
+		Enumeration enumeration = (Enumeration) array2.iterator();
 		while (enumeration.hasMoreElements()) {
 			COM.dragonflow.Properties.StringProperty stringproperty = (COM.dragonflow.Properties.StringProperty) enumeration
 					.nextElement();
@@ -579,7 +579,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		outputStream.println("<p><HR><H3>Advanced Options</H3>");
 		outputStream
 				.println("<table border=0 cellspacing=4><tr><td><img src=\"/SiteView/htdocs/artwork/LabelSpacer.gif\"></td><td></td><td></td></tr>\n");
-		enumeration = array2.elements();
+		enumeration = (Enumeration) array2.iterator();
 		boolean flag1 = action.showOptionalProperties();
 		while (enumeration.hasMoreElements()) {
 			COM.dragonflow.Properties.StringProperty stringproperty1 = (COM.dragonflow.Properties.StringProperty) enumeration
@@ -684,7 +684,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		String s36 = s12.indexOf("Any Monitor") == -1 ? ""
 				: " selected";
 		ArrayList array3 = COM.dragonflow.Page.monitorPage.getMonitorClasses();
-		enumeration1 = array3.elements();
+		enumeration1 = (Enumeration) array3.iterator();
 		s38 = "<option value=Any Monitor" + s36 + ">" + "Any Monitor "
 				+ "</option>\n";
 
@@ -903,7 +903,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @param s
 	 * @throws java.io.IOException
@@ -1243,7 +1243,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 					"group"), "true");
 		}
 
-		for (Enumeration enumeration = hashmap.keys(); enumeration
+		for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
 				.hasMoreElements(); COM.dragonflow.SiteView.SiteViewGroup
 				.SignalReload()) {
 			String s = (String) enumeration.nextElement();
@@ -1255,8 +1255,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			}
 			for (int j = 0; j < array1.size(); j++) {
 				HashMap hashmap2 = (HashMap) array1.get(j);
-				Enumeration enumeration1 = hashmap2
-						.values("_alertCondition");
+				Enumeration enumeration1 = (Enumeration) hashmap2.values("_alertCondition");
 				if (!enumeration1.hasMoreElements()) {
 					continue;
 				}
@@ -1673,8 +1672,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			}
 			ArrayList array1 = new ArrayList();
 			boolean flag = false;
-			Enumeration enumeration = hashmap
-					.values("_alertCondition");
+			Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition");
 			if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
 				java.lang.System.out
 						.println("alertPage: Attempting to replace id: " + s2);
@@ -2235,8 +2233,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
 			java.lang.System.out.println("=" + hashmap + "=");
 		}
-		for (Enumeration enumeration = hashmap
-				.values("_alertCondition"); enumeration.hasMoreElements();) {
+		for (Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition"); enumeration.hasMoreElements();) {
 			String s2 = (String) enumeration.nextElement();
 			if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
 				java.lang.System.out.println("<br>raw(" + s2 + ")");
@@ -2297,7 +2294,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @param array
 	 * @param s
@@ -2370,7 +2367,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @return
 	 * @throws java.io.IOException
@@ -2383,7 +2380,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		}
 		ArrayList array1 = new ArrayList();
 		ArrayList array2 = getAllowedGroupIDs();
-		for (Enumeration enumeration = array2.elements(); enumeration
+		for (Enumeration enumeration = (Enumeration) array2.iterator(); enumeration
 				.hasMoreElements();) {
 			String s = (String) enumeration.nextElement();
 			ArrayList array3 = ReadGroupFrames(s);
@@ -2544,8 +2541,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	void updateAlertStats(HashMap hashmap, HashMap hashmap1) {
-		for (Enumeration enumeration = hashmap
-				.values("_alertCondition"); enumeration.hasMoreElements(); COM.dragonflow.Utils.TextUtils
+		for (Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition"); enumeration.hasMoreElements(); COM.dragonflow.Utils.TextUtils
 				.incrementEntry(hashmap1, "TotalAlerts")) {
 			String s = (String) enumeration.nextElement();
 			ArrayList array = COM.dragonflow.SiteView.Platform.split('\t', s);
@@ -2557,7 +2553,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @param s
 	 */

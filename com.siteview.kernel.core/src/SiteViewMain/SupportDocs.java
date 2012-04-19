@@ -10,9 +10,11 @@ import java.util.Date;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
-import jgl.BinaryPredicate;
+//import BinaryPredicate;
+import com.recursionsw.jgl.BinaryPredicate;
 import com.recursionsw.jgl.HashMap;
-import jgl.Sorting;
+import com.recursionsw.jgl.algorithms.Sorting;
+//import Sorting;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -169,7 +171,7 @@ public class SupportDocs
             {
                 HashMap hashmap7 = (HashMap)array1.get(j1);
                 boolean flag1 = false;
-                Enumeration enumeration = hashmap7.values("topic");
+                Enumeration enumeration = (Enumeration) hashmap7.values("topic");
                 do
                 {
                     if(!enumeration.hasMoreElements())
@@ -183,7 +185,7 @@ public class SupportDocs
                 if(!flag1)
                     continue;
                 array2.add(hashmap7);
-                 ArrayList array4 = (Array)hashmap7.get("topicList");
+                 ArrayList array4 = (ArrayList)hashmap7.get("topicList");
                 if(array4 == null)
                 {
                     array4 = new ArrayList();
@@ -201,7 +203,7 @@ public class SupportDocs
                 HashMap hashmap8 = (HashMap)hashmap.get(s5);
                 if(hashmap8 == null)
                     continue;
-                 ArrayList array3 = (Array)hashmap8.get("topicList");
+                 ArrayList array3 = (ArrayList)hashmap8.get("topicList");
                 if(array3 == null)
                 {
                     array3 = new ArrayList();
@@ -306,8 +308,8 @@ public class SupportDocs
 
     static String writeTopicFile(String s, HashMap hashmap)
     {
-         ArrayList array = (Array)hashmap.get("notes");
-         ArrayList array1 = (Array)hashmap.get("topicList");
+         ArrayList array = (ArrayList)hashmap.get("notes");
+         ArrayList array1 = (ArrayList)hashmap.get("topicList");
         if(array == null && array1 == null)
         {
             System.out.println("No notes or subtopics for topic " + hashmap.get("title"));
@@ -471,7 +473,7 @@ public class SupportDocs
         {
             boolean flag1 = false;
             HashMap hashmap2 = (HashMap)array.get(i);
-             ArrayList array1 = (Array)hashmap2.get("notes");
+             ArrayList array1 = (ArrayList)hashmap2.get("notes");
             StringBuffer stringbuffer4 = new StringBuffer();
             if(array1 == null)
                 continue;

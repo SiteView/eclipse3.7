@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.StandardMonitor.J2EERealtimeMonitor;
 //import COM.dragonflow.TopazIntegration.TopazManager;
@@ -115,7 +117,7 @@ public class J2EEAttachObserver extends Thread //implements AttachObserver
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void run() {
         try {
@@ -169,7 +171,7 @@ public class J2EEAttachObserver extends Thread //implements AttachObserver
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     private void publishQueue() {
         synchronized (this.mQueue) {
@@ -208,7 +210,7 @@ public class J2EEAttachObserver extends Thread //implements AttachObserver
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param list
      * @return

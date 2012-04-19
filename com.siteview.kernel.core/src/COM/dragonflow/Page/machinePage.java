@@ -13,6 +13,9 @@ import java.io.PipedReader;
 import java.io.PipedWriter;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.Page:
 // remoteBase, MachineTestPrinter
@@ -273,7 +276,7 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
         if(!siteviewgroup.internalServerActive())
         {
             HashMap hashmap = getMasterConfig();
-            COM.dragonflow.SiteView.Machine.registerMachines(hashmap.values("_remoteMachine"));
+            COM.dragonflow.SiteView.Machine.registerMachines((Enumeration) hashmap.values("_remoteMachine"));
         }
         boolean flag1 = false;
         if(machine != null)

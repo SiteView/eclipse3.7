@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Page;
 
+import com.recursionsw.jgl.HashMap;
+
 class SSrtn {
 
     int m_status;

@@ -29,7 +29,7 @@ public class PQVMatchingObjects extends PortalQueryVisitor {
 
      ArrayList matchingObjects;
 
-    public PQVMatchingObjects(Array array) {
+    public PQVMatchingObjects(ArrayList array) {
         matchingObjects = null;
         matchingObjects = array;
     }

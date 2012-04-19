@@ -31,6 +31,8 @@ import COM.dragonflow.Utils.TextUtils;
 import java.util.Vector;
 import java.util.ArrayList;
 
+import com.recursionsw.jgl.HashMap;
+
 public class IPlanetAppServerMonitor extends BrowsableSNMPBase
 {
 

@@ -8,6 +8,10 @@
   */
   package COM.dragonflow.Utils;
 
+//import com.recursionsw.BinaryPredicate;
+import com.recursionsw.jgl.BinaryPredicate;
+import com.recursionsw.jgl.HashMap;
+
  /**
      * Comment for <code></code>
      * 
@@ -18,7 +22,7 @@
      */
 
 class StringHashMapBinaryPredicate
-    implements jgl.BinaryPredicate
+    implements BinaryPredicate
 {
 
     boolean _bCaseSensitive;

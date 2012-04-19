@@ -18,6 +18,7 @@ package COM.dragonflow.HTTP;
  */
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.zip.GZIPOutputStream;
@@ -97,7 +98,7 @@ public class BinaryFileRequestHandler {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param httprequest
      * @param outputstream

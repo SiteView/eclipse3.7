@@ -20,6 +20,9 @@ package COM.dragonflow.HTTP;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.HashMapOrdered;
 
 // Referenced classes of package COM.dragonflow.HTTP:

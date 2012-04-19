@@ -24,7 +24,7 @@ import java.util.Iterator;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import HashMapIterator;
+//import HashMapIterator;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Utils.FileUtils;
 
@@ -74,13 +74,13 @@ public class DetectConfigurationChange extends Action {
              ArrayList array1 = new ArrayList();
              ArrayList array2 = new ArrayList();
              ArrayList array3 = siteviewgroup.getGroupFiles();
-            Enumeration enumeration = array3.elements();
+            Enumeration enumeration = (Enumeration) array3.iterator();
             File file = null;
             File file1 = null;
             File file2 = null;
             File file3 = null;
             HashSet hashset = new HashSet();
-            for (Enumeration enumeration1 = fileNameMap.keys(); enumeration1
+            for (Enumeration enumeration1 = (Enumeration) fileNameMap.keys(); enumeration1
                     .hasMoreElements(); hashset.add(enumeration1.nextElement())) {
             }
             String s;
@@ -138,7 +138,7 @@ public class DetectConfigurationChange extends Action {
 
             HashMap hashmap = new HashMap();
             siteviewgroup.adjustGroups(array, array1, array2, hashmap);
-            for (HashMapIterator hashmapiterator = hashmap.begin(); !hashmapiterator
+            for (com.recursionsw.jgl.HashMapIterator hashmapiterator = hashmap.begin(); !hashmapiterator
                     .atEnd(); hashmapiterator.advance()) {
                 fileNameMap.put(hashmapiterator.key(), hashmapiterator.value());
             }

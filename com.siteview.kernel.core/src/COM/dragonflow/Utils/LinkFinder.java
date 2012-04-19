@@ -24,6 +24,8 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Utils:
 // URLInfo, HTMLTagParser, TextUtils, SocketSession,
 // FileUtils
@@ -170,7 +172,7 @@ public class LinkFinder
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      */
@@ -245,7 +247,7 @@ public class LinkFinder
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -312,7 +314,7 @@ public class LinkFinder
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param urlinfo
      * @param flag
@@ -352,7 +354,7 @@ public class LinkFinder
                     array = new ArrayList();
                 } else
                 {
-                    array = new Array(postData);
+                    array = new ArrayList(postData);
                 }
                 array.add("Method: HEAD");
                 al = checkOne(session, urlinfo.url, proxy, proxyUserName, proxyPassword, array, userName, password, stringbuffer, contentMax, timeout, stringbuffer1);

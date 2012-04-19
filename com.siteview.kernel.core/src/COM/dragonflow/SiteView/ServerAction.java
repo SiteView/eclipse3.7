@@ -60,7 +60,7 @@ public abstract class ServerAction extends Action {
         return s1;
     }
 
-    public void initializeMachine(Array array, HashMap hashmap) {
+    public void initializeMachine(ArrayList array, HashMap hashmap) {
         if (array.size() > 0) {
             String s = (String) array.get(0);
             if (s.startsWith(Machine.REMOTE_PREFIX)) {

@@ -96,7 +96,7 @@ public class vMachinePage extends COM.dragonflow.Page.prefsPage {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -150,7 +150,7 @@ public class vMachinePage extends COM.dragonflow.Page.prefsPage {
                 hashmap1.put("_group", COM.dragonflow.Page.vMachinePage
                         .getGroupIDRelative(s1));
                 hashmap1.put("_name", s2);
-                array1.insert(array1.size(), hashmap1);
+                array1.add(array1.size(), hashmap1);
                 String s6 = COM.dragonflow.Utils.TextUtils.increment(s5);
                 hashmap.put("_nextID", s6);
                 cgi.WriteGroupFrames(s3, array1);

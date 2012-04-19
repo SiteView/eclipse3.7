@@ -17,6 +17,7 @@ package COM.dragonflow.XmlApi;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -54,7 +55,7 @@ public class XmlApiGroup {
                 String s4 = (String) array1.get(i);
                 HashMap hashmap = (HashMap) array2.get(i);
                 COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s5 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s5, hashmap.get(s5));
@@ -93,7 +94,7 @@ public class XmlApiGroup {
                     hashmap.remove("_id");
                 }
                 COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 for (int j = 0; enumeration1.hasMoreElements(); j ++) {
                     String s2 = (String) enumeration1.nextElement();
                     assinstanceproperty[j] = new SSInstanceProperty(s2, hashmap.get(s2));

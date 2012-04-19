@@ -29,6 +29,8 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.datachannel.xml.om.Document;
 
 // Referenced classes of package COM.dragonflow.Utils:
@@ -214,7 +216,7 @@ public class SoapRpc
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param stringbuffer
@@ -318,7 +320,7 @@ public class SoapRpc
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1

@@ -156,7 +156,7 @@ public abstract class BrowsableBase extends AtomicMonitor implements
         return PROPERTY_NAME_COUNTER_ID;
     }
 
-    public String setBrowseName(Array array) {
+    public String setBrowseName(ArrayList array) {
         String s = "";
         if (array.size() <= 0)
             return s;
@@ -169,7 +169,7 @@ public abstract class BrowsableBase extends AtomicMonitor implements
         return s;
     }
 
-    public String setBrowseID(Array array) {
+    public String setBrowseID(ArrayList array) {
         String s = "";
         if (array.size() <= 0)
             return s;

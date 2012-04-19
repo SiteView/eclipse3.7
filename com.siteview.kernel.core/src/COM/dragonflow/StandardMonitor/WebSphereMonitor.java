@@ -234,7 +234,7 @@ public class WebSphereMonitor extends BrowsableBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param l
      * @param s
@@ -267,7 +267,7 @@ public class WebSphereMonitor extends BrowsableBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param stringbuffer
      * @return
@@ -393,7 +393,7 @@ public class WebSphereMonitor extends BrowsableBase {
         MasterConfig.saveMasterConfig(hashmap);
     }
 
-    public String setBrowseID(Array array) {
+    public String setBrowseID(ArrayList array) {
         StringBuffer stringbuffer = new StringBuffer();
         for (int i = array.size(); i > 0; i --) {
             if (i < array.size()) {
@@ -489,7 +489,7 @@ public class WebSphereMonitor extends BrowsableBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param awebspherecounter
      * @param stringbuffer

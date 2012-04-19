@@ -332,7 +332,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      */
     public String getHostname() {
@@ -426,7 +426,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     protected boolean update() {
         if (!Platform.getVersion().startsWith("7")) {
@@ -810,7 +810,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param l
@@ -889,7 +889,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public Enumeration getStatePropertyObjects(boolean flag) {
         Enumeration enumeration = super.getStatePropertyObjects(flag);
@@ -1096,13 +1096,13 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @param s
      * @return
      */
-    static String encodeParameters(Array array, String s) {
+    static String encodeParameters(ArrayList array, String s) {
         String s1 = "";
         s = s.toLowerCase();
         if (array != null) {
@@ -1138,12 +1138,12 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    static String getRequestCommand(Array array) {
+    static String getRequestCommand(ArrayList array) {
         String s = "GET";
         if (array != null) {
             Enumeration enumeration = (Enumeration) array.iterator();
@@ -1163,12 +1163,12 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    static String getContentType(Array array) {
+    static String getContentType(ArrayList array) {
         String s = CONTENT_TYPE_DEFAULT;
         if (array != null) {
             Enumeration enumeration = (Enumeration) array.iterator();
@@ -1185,12 +1185,12 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    static String getUserAgent(Array array) {
+    static String getUserAgent(ArrayList array) {
         String s = "";
         if (array != null) {
             Enumeration enumeration = (Enumeration) array.iterator();
@@ -1207,12 +1207,12 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    static String getSslgetOptions(Array array) {
+    static String getSslgetOptions(ArrayList array) {
         String s;
         s = "";
         if (array != null) {
@@ -1230,9 +1230,9 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
-    static String getHostHeader(Array array, String s, int i, String s1) {
+    static String getHostHeader(ArrayList array, String s, int i, String s1) {
         String s2;
 
         s2 = "";
@@ -1262,12 +1262,12 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      * @return
      */
-    static String getRequestProtocol(Array array) {
+    static String getRequestProtocol(ArrayList array) {
         String s = REQUEST_PROTOCOL_DEFAULT;
         if (array != null) {
             Enumeration enumeration = (Enumeration) array.iterator();
@@ -1348,7 +1348,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     static long sendSSLRequest(String s, SocketSession socketsession,  ArrayList array, CounterLock counterlock,  ArrayList array1) {
         long l;
@@ -1531,7 +1531,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     private static long[] checkInternalURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, String s7,  ArrayList array, String s8, String s9, String s10, StringBuffer stringbuffer, long l, String s11,
             int i, long l1, StringBuffer stringbuffer1, StringBuffer stringbuffer2) {
@@ -1838,7 +1838,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                             array1.add(Platform.getRoot() + "/tools/sslget");
                             if (s19.length() > 0) {
                                  ArrayList array3 = Platform.split(' ', s19);
-                                Enumeration enumeration = array3.elements();
+                                Enumeration enumeration = (Enumeration) array3.iterator();
                                 while (enumeration.hasMoreElements()) {
                                     array1.add(enumeration.nextElement());
                                 }
@@ -1898,7 +1898,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                                 System.out.println("Status4 sendSSLRequest: " + l2);
                             }
                             SSLCounter --;
-                            Enumeration enumeration2 = array4.elements();
+                            Enumeration enumeration2 = (Enumeration) array4.iterator();
                             int k2 = 0;
                             boolean flag7 = false;
                             l12 = -1L;

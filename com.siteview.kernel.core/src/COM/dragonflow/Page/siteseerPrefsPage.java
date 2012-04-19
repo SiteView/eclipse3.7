@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Page;
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 
 // Referenced classes of package COM.dragonflow.Page:

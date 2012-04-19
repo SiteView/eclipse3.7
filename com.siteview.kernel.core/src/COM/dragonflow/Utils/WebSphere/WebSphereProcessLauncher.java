@@ -10,7 +10,9 @@
 package COM.dragonflow.Utils.WebSphere;
 
 import java.io.File;
-import java.util.HashMap;
+//import java.util.HashMap;
+
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.Utils.WebSphere:
 // WebSphereProcessProperties
@@ -62,7 +64,7 @@ public class WebSphereProcessLauncher {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param i
      * @return

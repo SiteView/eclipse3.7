@@ -209,11 +209,11 @@ public class Portal extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param array
      */
-    public static void addTemplateConfigFiles(Array array) {
+    public static void addTemplateConfigFiles(ArrayList array) {
         Enumeration enumeration = getPortal().getElements();
         while (enumeration.hasMoreElements()) {
             PortalSiteView portalsiteview = (PortalSiteView) enumeration

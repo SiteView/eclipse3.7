@@ -453,7 +453,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
                                                     hashmap10.put("_name", request.getValue("escalate_name"));
                                                     hashmap10.put("_subtype", request.getValue("escalate_type"));
                                                     hashmap10.put("_value", request.getValue("escalate_details"));
-                                                    array1.put(l, hashmap10);
+                                                    array1.set(l, hashmap10);
                                                     break;
                                                 }
                                                 l++;
@@ -559,7 +559,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
                                                     {
                                                         outputStream.println(exception + "\n");
                                                     }
-                                                    Enumeration enumeration2 = array3.elements();
+                                                    Enumeration enumeration2 = (Enumeration) array3.iterator();
                                                     outputStream.println("<h2>MAIL SENT TO " + s21 + "</H2><BR><B>DETAILS:</B><BR><PRE>");
                                                     for(; enumeration2.hasMoreElements(); outputStream.println(COM.dragonflow.Utils.TextUtils.escapeHTML(COM.dragonflow.Utils.TextUtils.replaceString((String)enumeration2.nextElement(), "<CRLF>", "<CRLF>\n")))) { }
                                                     outputStream.println("</pre>");
@@ -670,7 +670,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
     }
     
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -894,7 +894,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
         ArrayList array2 = getGroupNameList(hashmapordered, null, null, true);
         outputStream.println("<H2>GSR Runbook and Escalation Configuration</H2><P>Select one or more groups and monitors and then choose the action you wish to perform.<p><FORM METHOD=POST ACTION=/SiteView/cgi/go.exe/SiteView><INPUT TYPE=HIDDEN NAME=operation value=choose><INPUT TYPE=HIDDEN NAME=id_selection value=" + s1 + ">" + "<INPUT TYPE=HIDDEN NAME=action value=\"" + s + "\">" + "<INPUT TYPE=HIDDEN NAME=page VALUE=GSR>" + "<INPUT TYPE=HIDDEN NAME=account VALUE=" + s10 + ">");
         outputStream.println("<HR>(Click the <img src=/SiteView/htdocs/artwork/Plus.gif alt=\"open\"> to expand a group, and the <img src=/SiteView/htdocs/artwork/Minus.gif alt=\"close\"> to collapse a group).<P><TABLE BORDER=0>");
-        for(Enumeration enumeration4 = array2.elements(); enumeration4.hasMoreElements();)
+        for(Enumeration enumeration4 = (Enumeration) array2.iterator(); enumeration4.hasMoreElements();)
         {
             String s14 = (String)enumeration4.nextElement();
             Enumeration enumeration3 = hashmapordered.values(s14);
@@ -1264,8 +1264,8 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
     public void saveRunbookEntry(HashMap hashmap, String s, boolean flag)
     {
         ArrayList array = getMonitorGroupLists();
-        ArrayList array1 = (jgl.Array)array.get(0);
-        ArrayList array2 = (jgl.Array)array.get(2);
+        ArrayList array1 = (ArrayList)array.get(0);
+        ArrayList array2 = (ArrayList)array.get(2);
         ArrayList array3 = null;
         HashMap hashmap1 = new HashMap();
         boolean flag1 = false;
@@ -1284,7 +1284,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
                 HashMap hashmap3 = (HashMap)array3.get(k);
                 if(((String)hashmap3.get("_id")).equals((String)hashmap.get("_id")))
                 {
-                    array3.put(k, hashmap);
+                    array3.set(k, hashmap);
                     j = COM.dragonflow.Utils.TextUtils.toInt((String)hashmap.get("_id"));
                     break;
                 }
@@ -1298,7 +1298,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
             } else
             {
                 hashmap1.add("_nextid", "0");
-                array3.put(0, hashmap1);
+                array3.set(0, hashmap1);
             }
             int i = COM.dragonflow.Utils.TextUtils.toInt((String)hashmap1.get("_nextid"));
             j = i;
@@ -1314,7 +1314,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
             s1 = (String)enumeration.nextElement();
         }
         
-        Enumeration enumeration1 = array2.elements();
+        Enumeration enumeration1 = (Enumeration) array2.iterator();
         do
         {
             if(!enumeration1.hasMoreElements())
@@ -1336,7 +1336,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
                     if(s5 != null && s5.equals(s2))
                     {
                         hashmap5.put(s, "" + j);
-                        array4.put(i1, hashmap5);
+                        array4.set(i1, hashmap5);
                     }
                 }
                 
@@ -1365,7 +1365,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
         {
             HashMap hashmap2 = (HashMap)COM.dragonflow.SiteView.MasterConfig.getMasterConfig().clone();
             hashmap2.allowsDuplicates();
-            Enumeration enumeration = hashmap2.values("_monitorEditCustom");
+            Enumeration enumeration = (Enumeration) hashmap2.values("_monitorEditCustom");
             hashmap2.remove("_monitorEditCustom");
             do
             {
@@ -1486,7 +1486,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
         }
         String s2 = "";
         ArrayList array1 = getMonitorGroupLists();
-        ArrayList array2 = (jgl.Array)array1.get(0);
+        ArrayList array2 = (ArrayList)array1.get(0);
         if(array2.size() == 0)
         {
             array2 = getTopLevelGroups();
@@ -1548,7 +1548,7 @@ public class GSRPage extends COM.dragonflow.Page.CGI {
         String s = "";
         HashMap hashmap1 = runbookToHashMap();
         ArrayList array = getMonitorGroupLists();
-        ArrayList array1 = (jgl.Array)array.get(0);
+        ArrayList array1 = (ArrayList)array.get(0);
         if(array1.size() == 0)
         {
             array1 = getTopLevelGroups();

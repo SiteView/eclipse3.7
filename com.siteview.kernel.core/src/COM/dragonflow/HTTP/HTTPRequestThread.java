@@ -21,6 +21,9 @@ import java.util.Date;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Page.loginPage;
 import COM.dragonflow.Utils.ThreadPool;
 
@@ -205,7 +208,7 @@ public class HTTPRequestThread implements java.lang.Runnable {
         if (j != -1 && k != -1) {
             stringbuffer3.delete(stringbuffer3.length() - 1, stringbuffer3.length());
             array1.remove(j, k);
-            array1.insert(j, stringbuffer3.toString());
+            array1.add(j, stringbuffer3.toString());
         }
         for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); array1.add("Set-" + enumeration.nextElement())) {
         }
@@ -332,7 +335,7 @@ public class HTTPRequestThread implements java.lang.Runnable {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void run() {
         COM.dragonflow.HTTP.HTTPRequest httprequest;

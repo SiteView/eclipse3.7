@@ -260,7 +260,7 @@ public class XmlApiSiteView {
             java.util.HashMap hashmap1 = new HashMap();
             String s;
             String s1;
-            for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); hashmap1.put(s, s1)) {
+            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); hashmap1.put(s, s1)) {
                 s = (String) enumeration.nextElement();
                 s1 = (String) hashmap.get(s);
             }
@@ -365,7 +365,7 @@ public class XmlApiSiteView {
 //            java.util.HashMap hashmap1 = new HashMap();
 //            String s2;
 //            String s3;
-//            for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); hashmap1.put(s2, s3)) {
+//            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); hashmap1.put(s2, s3)) {
 //                s2 = (String) enumeration.nextElement();
 //                s3 = (String) hashmap.get(s2);
 //            }
@@ -384,7 +384,7 @@ public class XmlApiSiteView {
 //            java.util.HashMap hashmap1 = new HashMap();
 //            String s;
 //            String s1;
-//            for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); hashmap1.put(s, s1)) {
+//            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); hashmap1.put(s, s1)) {
 //                s = (String) enumeration.nextElement();
 //                s1 = (String) hashmap.get(s);
 //            }
@@ -459,7 +459,7 @@ public class XmlApiSiteView {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1

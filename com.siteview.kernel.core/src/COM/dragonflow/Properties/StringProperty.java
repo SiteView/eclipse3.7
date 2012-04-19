@@ -22,8 +22,9 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
 
-import jgl.Sorting;
+//import Sorting;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.SiteView.AtomicMonitor;
@@ -113,7 +114,7 @@ public class StringProperty {
     boolean platforms[];
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -127,7 +128,7 @@ public class StringProperty {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -145,7 +146,7 @@ public class StringProperty {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -265,7 +266,7 @@ public class StringProperty {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param cgi
      * @param printwriter
@@ -666,7 +667,7 @@ public class StringProperty {
         return l;
     }
 
-    public static  ArrayList sortByOrder(Array array) {
+    public static  ArrayList sortByOrder(ArrayList array) {
         Sorting.sort(array, new GreaterEqualOrder(true));
         return array;
     }

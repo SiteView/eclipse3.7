@@ -21,14 +21,18 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.BinaryPredicate;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.Properties.HashMapOrdered;
 
 // Referenced classes of package COM.dragonflow.Utils:
 // TextUtils
 
 public class HTMLTagParser
-    implements jgl.BinaryPredicate
+    implements BinaryPredicate
 {
 
     static HashMap closeMap;
@@ -56,7 +60,7 @@ public class HTMLTagParser
 
     public ArrayList getVariables(HashMap hashmap, String s, String s1)
     {
-        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (ArrayList)hashmap.get("contentObjects");
         if(array != null)
         {
             return getVariables(array, s, s1);
@@ -68,7 +72,7 @@ public class HTMLTagParser
 
     public ArrayList getFormInputs(HashMap hashmap)
     {
-        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (ArrayList)hashmap.get("contentObjects");
         if(array != null)
         {
             return getFormInputs(array, null, null);
@@ -204,7 +208,7 @@ public class HTMLTagParser
                 }
             }
         } 
-        Enumeration enumeration1 = hashmap.keys();
+        Enumeration enumeration1 = (Enumeration) hashmap.keys();
         while (enumeration1.hasMoreElements()) {
             String s3 = (String)enumeration1.nextElement();
             HashMap hashmap3 = (HashMap)hashmap.get(s3);
@@ -267,7 +271,7 @@ public class HTMLTagParser
                 AddValue(array1, hashmap6, s5, COM.dragonflow.Utils.TextUtils.getValue(hashmap6, s6));
             }
         } 
-        jgl.Sorting.sort(array1, this);
+        Sorting.sort(array1, this);
         return array1;
     }
 
@@ -280,25 +284,25 @@ public class HTMLTagParser
 
     public Enumeration findTags(HashMap hashmap, String s)
     {
-        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (ArrayList)hashmap.get("contentObjects");
         if(array != null)
         {
             return findTags(array, s);
         } else
         {
-            return (new ArrayList()).elements();
+            return (Enumeration) (new ArrayList()).iterator();
         }
     }
 
     public Enumeration findTags(HashMap hashmap, String as[])
     {
-        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (ArrayList)hashmap.get("contentObjects");
         if(array != null)
         {
             return findTags(array, as);
         } else
         {
-            return (new ArrayList()).elements();
+            return (Enumeration) (new ArrayList()).iterator();
         }
     }
 
@@ -487,7 +491,7 @@ public class HTMLTagParser
 
         do
         {
-            Enumeration enumeration = openTagFrames.keys();
+            Enumeration enumeration = (Enumeration) openTagFrames.keys();
             if(enumeration.hasMoreElements())
             {
                 String s1 = (String)enumeration.nextElement();
@@ -503,10 +507,10 @@ public class HTMLTagParser
     {
         String s;
         ArrayList array;
-        for(Enumeration enumeration = openTagFrames.keys(); enumeration.hasMoreElements(); openTagObjectLists.put(s, array))
+        for(Enumeration enumeration = (Enumeration) openTagFrames.keys(); enumeration.hasMoreElements(); openTagObjectLists.put(s, array))
         {
             s = (String)enumeration.nextElement();
-            array = (jgl.Array)openTagObjectLists.get(s);
+            array = (ArrayList)openTagObjectLists.get(s);
             if(array == null)
             {
                 array = new ArrayList();
@@ -519,7 +523,7 @@ public class HTMLTagParser
     void autoCloseTags(String s)
     {
         closeTag(s);
-        for(Enumeration enumeration = closeMap.values(s); enumeration.hasMoreElements(); closeTag((String)enumeration.nextElement())) { }
+        for(Enumeration enumeration = (Enumeration) closeMap.values(s); enumeration.hasMoreElements(); closeTag((String)enumeration.nextElement())) { }
     }
 
     void closeTag(String s)
@@ -547,7 +551,7 @@ public class HTMLTagParser
                 hashmap.put("_endContentIndex", "" + j);
                 hashmap.put("_endTagIndex", "" + readIndex);
             }
-            ArrayList array = (jgl.Array)openTagObjectLists.get(s1);
+            ArrayList array = (ArrayList)openTagObjectLists.get(s1);
             if(array != null)
             {
                 hashmap.put("contentObjects", array);

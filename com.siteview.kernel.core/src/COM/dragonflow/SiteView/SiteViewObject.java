@@ -98,7 +98,7 @@ public abstract class SiteViewObject extends PropertiedObject {
 
     protected static void addClassElement(String s,
             SiteViewObject siteviewobject) {
-         ArrayList array = (Array) getClassPropertyByObject(s, "elements");
+         ArrayList array = (ArrayList) getClassPropertyByObject(s, "elements");
         if (array == null) {
             array = new ArrayList();
             setClassPropertyByObject(s, "elements", array);
@@ -194,16 +194,16 @@ public abstract class SiteViewObject extends PropertiedObject {
 
     Enumeration getElements() {
         if (elements == null)
-            return cEmptyArray.elements();
+            return (Enumeration) cEmptyArray.iterator();
         else
-            return elements.elements();
+            return (Enumeration) elements.iterator();
     }
 
     public  ArrayList getRawElements() {
         return elements;
     }
 
-    private void copyElementsOfClass(Array array,  ArrayList array1, String s) {
+    private void copyElementsOfClass(ArrayList array,  ArrayList array1, String s) {
         try {
             Class class1 = Class.forName(s);
             Enumeration enumeration = (Enumeration) array.iterator();
@@ -222,7 +222,7 @@ public abstract class SiteViewObject extends PropertiedObject {
         }
     }
 
-    protected void getElementsOfClass(Array array, String s, boolean flag) {
+    protected void getElementsOfClass(ArrayList array, String s, boolean flag) {
         if (elements != null)
             copyElementsOfClass(elements, array, s);
         if (flag && owner != null)
@@ -237,7 +237,7 @@ public abstract class SiteViewObject extends PropertiedObject {
          ArrayList array = new ArrayList();
         getElementsOfClass(array, s, flag);
         if (flag && flag1) {
-             ArrayList array1 = (Array) getClassProperty("elements");
+             ArrayList array1 = (ArrayList) getClassProperty("elements");
             if (array1 != null)
                 copyElementsOfClass(array1, array, s);
         }
@@ -334,12 +334,12 @@ public abstract class SiteViewObject extends PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public int acceptVisitor(Visitor visitor) {
         int i = super.acceptVisitor(visitor);
         if (elements != null && i == 0) {
-            Enumeration enumeration = elements.elements();
+            Enumeration enumeration = (Enumeration) elements.iterator();
             /*while (enumeration.hasMoreElements()) {
                 SiteViewObject siteviewobject = (SiteViewObject) enumeration
                         .nextElement();
@@ -683,7 +683,7 @@ public abstract class SiteViewObject extends PropertiedObject {
                 } 
             }
             if (s2.equalsIgnoreCase("secondaryStateProperties")) {
-                Enumeration enumeration1 = getProperties().elements();
+                Enumeration enumeration1 = (Enumeration) getProperties().iterator();
                 do {
                     StringProperty stringproperty2;
                     do {
@@ -697,7 +697,7 @@ public abstract class SiteViewObject extends PropertiedObject {
                 } while (true);
             }
             if (s2.equalsIgnoreCase("errorOnly")) {
-                Enumeration enumeration2 = getProperties().elements();
+                Enumeration enumeration2 = (Enumeration) getProperties().iterator();
                 do {
                     StringProperty stringproperty3;
                     String s16;
@@ -731,7 +731,7 @@ public abstract class SiteViewObject extends PropertiedObject {
                 } while (true);
             }
             if (s2.equalsIgnoreCase("secondaryParameters")) {
-                Enumeration enumeration3 = getProperties().elements();
+                Enumeration enumeration3 = (Enumeration) getProperties().iterator();
                 do {
                     StringProperty stringproperty4;
                     do {
@@ -890,14 +890,14 @@ public abstract class SiteViewObject extends PropertiedObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
     public String matchExpects() {
         StringBuffer stringbuffer = new StringBuffer();
         boolean flag = false;
-        Enumeration enumeration = valuesTable.keys();
+        Enumeration enumeration = (Enumeration) valuesTable.keys();
         while (!enumeration.hasMoreElements()) {
             String s = enumeration.nextElement().toString();
             if (!s.startsWith("_expect-"))

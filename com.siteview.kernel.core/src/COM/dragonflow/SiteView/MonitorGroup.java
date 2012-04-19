@@ -27,10 +27,13 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import java.util.ArrayList;
-import jgl.Filtering;
+//import jgl.Filtering;
 import com.recursionsw.jgl.HashMap;
-import jgl.Reversing;
-import jgl.Sorting;
+import com.recursionsw.jgl.algorithms.Filtering;
+import com.recursionsw.jgl.algorithms.Reversing;
+import com.recursionsw.jgl.algorithms.Sorting;
+//import Reversing;
+//import Sorting;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Log.DailyFileLogger;
@@ -365,7 +368,7 @@ public class MonitorGroup extends Monitor {
             MonitorGroup monitorgroup = (MonitorGroup) siteviewgroup.getElement(I18N.toDefaultEncoding(getProperty(pParent)));
             if (monitorgroup != null) {
                  ArrayList array = monitorgroup.getElementsOfClass("COM.dragonflow.SiteView.Rule", false, false);
-                 ArrayList array1 = (Array) Filtering.select(array, new RuleGroupIs(2));
+                 ArrayList array1 = (ArrayList) Filtering.select(array, new RuleGroupIs(2));
                 Rule rule;
                 for (Enumeration enumeration = monitorgroup.getParentActionRules(); enumeration.hasMoreElements(); array1.add(rule)) {
                     rule = (Rule) enumeration.nextElement();
@@ -374,11 +377,11 @@ public class MonitorGroup extends Monitor {
                 return (Enumeration) array1.iterator();
             }
         }
-        return cEmptyArray.elements();
+        return (Enumeration) cEmptyArray.iterator();
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public String getProperty(StringProperty stringproperty) throws NullPointerException {
         String s = "";
@@ -764,7 +767,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param httprequest
@@ -1017,7 +1020,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param httprequest
@@ -1283,7 +1286,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param httprequest
      * @param printwriter
@@ -1337,7 +1340,7 @@ public class MonitorGroup extends Monitor {
             s4 = s.substring(k + 7);
             printwriter.print("<TD>" + s.substring(0, k));
             HashMap hashmap = CGI.loadMasterConfig(httprequest);
-            Enumeration enumeration = hashmap.values("_monitorEditCustom");
+            Enumeration enumeration = (Enumeration) hashmap.values("_monitorEditCustom");
             while (enumeration.hasMoreElements()) {
                 String s7 = (String) enumeration.nextElement();
                 String as[] = TextUtils.split(s7, "|");
@@ -1364,7 +1367,7 @@ public class MonitorGroup extends Monitor {
         }
     }
 
-    static boolean isParentPresent(Array array, String s) {
+    static boolean isParentPresent(ArrayList array, String s) {
         for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             if (CGI.isRelated(s, s1)) {
@@ -1376,7 +1379,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param httprequest
      * @param enumeration
@@ -1396,7 +1399,7 @@ public class MonitorGroup extends Monitor {
                     getSubgroup(monitor, hashmap);
                 }
             }
-            enumeration = hashmap.keys();
+            enumeration = (Enumeration) hashmap.keys();
         }
 
         while (enumeration.hasMoreElements()) {
@@ -1413,7 +1416,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param monitor
      * @param hashmap
@@ -1444,7 +1447,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param monitorgroup
      * @param array
@@ -1463,7 +1466,7 @@ public class MonitorGroup extends Monitor {
         }
     }
 
-    public void getGroupDepends(Array array,  ArrayList array1, boolean flag) {
+    public void getGroupDepends(ArrayList array,  ArrayList array1, boolean flag) {
         String s = getProperty(AtomicMonitor.DEPENDS_ON);
         if (s != null && s.length() > 0) {
             array.add(s);
@@ -1494,7 +1497,7 @@ public class MonitorGroup extends Monitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param args
      * @throws IOException
@@ -1550,7 +1553,7 @@ public class MonitorGroup extends Monitor {
                     HashMap hashmap1 = (HashMap) array1.get(0);
                     hashmap = (HashMap) MasterConfig.getMasterConfig().clone();
                     String s4;
-                    for (Enumeration enumeration1 = hashmap1.keys(); enumeration1.hasMoreElements(); hashmap.put(s4, hashmap1.get(s4))) {
+                    for (Enumeration enumeration1 = (Enumeration) hashmap1.keys(); enumeration1.hasMoreElements(); hashmap.put(s4, hashmap1.get(s4))) {
                         s4 = (String) enumeration1.nextElement();
                     }
 
@@ -1558,8 +1561,8 @@ public class MonitorGroup extends Monitor {
                 }
             }
             hashmap = (HashMap) MasterConfig.getMasterConfig().clone();
-            Machine.registerMachines(hashmap.values("_remoteMachine"));
-            Enumeration enumeration = hashmap.values("_urlLocation");
+            Machine.registerMachines((Enumeration) hashmap.values("_remoteMachine"));
+            Enumeration enumeration = (Enumeration) hashmap.values("_urlLocation");
             HTTPUtils.locations = new ArrayList();
             if (enumeration.hasMoreElements()) {
                 String s2;
@@ -1624,7 +1627,7 @@ public class MonitorGroup extends Monitor {
                             l11 ++;
                             HashMap hashmap2 = monitor.getValuesTable();
                             Object obj;
-                            for (Enumeration enumeration3 = hashmap2.keys(); enumeration3.hasMoreElements(); printwriter.println(obj + "=" + hashmap2.get(obj))) {
+                            for (Enumeration enumeration3 = (Enumeration) hashmap2.keys(); enumeration3.hasMoreElements(); printwriter.println(obj + "=" + hashmap2.get(obj))) {
                                 obj = enumeration3.nextElement();
                             }
 

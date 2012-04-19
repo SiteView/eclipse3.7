@@ -17,6 +17,7 @@ package COM.dragonflow.HTTP;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import COM.dragonflow.Utils.CommandLine;
@@ -33,7 +34,7 @@ public class CGIRequestHandler extends COM.dragonflow.HTTP.HTTPRequestHandler {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void handleRequest(COM.dragonflow.HTTP.HTTPRequest httprequest) throws java.lang.Exception {
         String s1;
@@ -84,7 +85,7 @@ public class CGIRequestHandler extends COM.dragonflow.HTTP.HTTPRequestHandler {
             printDebugHeader(httprequest, s1);
             outputStream.println("<PRE>");
             ArrayList array2 = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/dialup " + httprequest.getValue("option"));
-            for (Enumeration enumeration2 = array2.elements(); enumeration2.hasMoreElements(); outputStream.println((String) enumeration2.nextElement())) {
+            for (Enumeration enumeration2 = (Enumeration) array2.iterator(); enumeration2.hasMoreElements(); outputStream.println((String) enumeration2.nextElement())) {
             }
             outputStream.println("</PRE>");
             printDebugFooter();

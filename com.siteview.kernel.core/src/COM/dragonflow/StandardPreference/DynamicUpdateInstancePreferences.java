@@ -21,7 +21,9 @@ import java.util.Vector;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import jgl.LessString;
+import com.recursionsw.jgl.algorithms.Sorting;
+
+//import jgl.LessString;
 import COM.dragonflow.Properties.BooleanProperty;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.ScalarProperty;
@@ -118,7 +120,7 @@ public class DynamicUpdateInstancePreferences extends COM.dragonflow.SiteView.Pr
                 }
             }
 
-            jgl.Sorting.sort(array1, new LessString());
+            Sorting.sort(array1, new com.recursionsw.jgl.predicates.LessString());
             for (int k = 0; k < array1.size(); k ++) {
                 String s1 = (String) array1.get(k);
                 String s2 = (String) hashmap.get(s1);

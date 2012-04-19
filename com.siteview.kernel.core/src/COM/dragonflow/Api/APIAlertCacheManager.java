@@ -8,6 +8,10 @@
  */
 package COM.dragonflow.Api;
 
+import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 /**
  * Comment for <code></code>
  * 

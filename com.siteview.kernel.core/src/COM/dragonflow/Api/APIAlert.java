@@ -226,7 +226,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -320,7 +320,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param alert
      * @return
@@ -390,7 +390,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param action
      * @param hashmap
@@ -518,7 +518,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             HashMap hashmap = getClassAttribs(s);
             int i = 0;
             assinstanceproperty = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
-            for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
+            for(Enumeration enumeration = (Enumeration) (Enumeration) hashmap.keys(); enumeration.hasMoreElements();)
             {
                 String s1 = (String)enumeration.nextElement();
                 String s2 = "";
@@ -664,7 +664,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                                 boolean flag = false;
                                 ArrayList array3 = action.getProperties();
                                 array3 = COM.dragonflow.Properties.StringProperty.sortByOrder(array3);
-                                enumeration = array3.elements();
+                                enumeration = (Enumeration) array3.iterator();
                                 while (enumeration.hasMoreElements())
                                     {
                                     COM.dragonflow.Properties.StringProperty stringproperty = (COM.dragonflow.Properties.StringProperty)enumeration.nextElement();
@@ -918,7 +918,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         try
         {
             int i = findType("Alert");
-            ArrayList array = (jgl.Array)ssChildObjects.elementAt(i);
+            ArrayList array = (ArrayList)ssChildObjects.elementAt(i);
             assstringreturnvalue = new COM.dragonflow.Api.SSStringReturnValue[array.size()];
             for(int j = 0; j < array.size(); j++)
             {
@@ -1115,7 +1115,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         addConditions(array, hashmap, "_master", "_config");
         ArrayList array1 = new ArrayList();
         ArrayList array2 = getAllowedGroupIDs();
-        for(Enumeration enumeration = array2.elements(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) array2.iterator(); enumeration.hasMoreElements();)
         {
             String s = (String)enumeration.nextElement();
             ArrayList array3 = ReadGroupFrames(s);
@@ -1156,7 +1156,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     void addConditions(ArrayList array, HashMap hashmap, String s, String s1)
     {
         COM.dragonflow.Utils.I18N.test(s, 1);
-        for(Enumeration enumeration = hashmap.values("_alertCondition"); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition"); enumeration.hasMoreElements();)
         {
             String s2 = (String)enumeration.nextElement();
             try
@@ -1278,7 +1278,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     {
         ArrayList array = ReadGroupFrames(s);
         HashMap hashmap = findMonitor(array, s1);
-        for(Enumeration enumeration = hashmap.values("_alertCondition"); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition"); enumeration.hasMoreElements();)
         {
             String s3 = (String)enumeration.nextElement();
             ArrayList array1 = COM.dragonflow.SiteView.Platform.split('\t', s3);
@@ -1443,7 +1443,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                     }
 
                     assinstanceproperty[j] = new SSInstanceProperty(stringproperty1.getName(), s3, "");
-                    array2.put(0, new SSInstanceProperty("toOther", s7));
+                    array2.add(0, new SSInstanceProperty("toOther", s7));
                     continue;
                 }
                 String as[] = new String[vector.size()];
@@ -2233,7 +2233,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             }
             ArrayList array1 = new ArrayList();
             boolean flag = false;
-            Enumeration enumeration = hashmap.values("_alertCondition");
+            Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition");
             while (enumeration.hasMoreElements()) {
                 String s3 = (String)enumeration.nextElement();
                 ArrayList array2 = COM.dragonflow.SiteView.Platform.split('\t', s3);

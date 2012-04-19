@@ -20,13 +20,15 @@ package COM.dragonflow.SiteView;
 import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Iterator;
 
 import java.util.ArrayList;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.datachannel.xml.om.Document;
 import COM.dragonflow.HTTP.HTTPRequest;
@@ -164,7 +166,7 @@ public class XMLMonitor extends BrowsableBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param xslFileName
@@ -319,7 +321,7 @@ public class XMLMonitor extends BrowsableBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     protected boolean update() {
         this.networkTime = 0L;
@@ -481,7 +483,7 @@ public class XMLMonitor extends BrowsableBase {
         return s;
     }
 
-    public String setBrowseName(Array array) {
+    public String setBrowseName(ArrayList array) {
         String s = "";
         for (int i = array.size(); i > 0; i--) {
             if (i < array.size()) {
@@ -533,7 +535,7 @@ public class XMLMonitor extends BrowsableBase {
         return parseString(s);
     }
 
-    public String setBrowseID(Array array) {
+    public String setBrowseID(ArrayList array) {
         String s = "";
         for (int i = array.size(); i > 0; i--) {
             if (i < array.size()) {

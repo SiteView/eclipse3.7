@@ -24,8 +24,10 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import java.util.ArrayList;
-import jgl.Filtering;
+//import jgl.Filtering;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Filtering;
+
 import COM.dragonflow.Api.Alert;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
@@ -219,7 +221,7 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -499,11 +501,11 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void initialize(HashMap hashmap) {
         super.initialize(hashmap);
-        Enumeration enumeration = hashmap.values("_alertCondition");
+        Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition");
         computeGroupCount = false;
         while (enumeration.hasMoreElements()) {
             String s = (String) enumeration.nextElement();
@@ -514,11 +516,11 @@ public abstract class Monitor extends SiteViewObject {
             }
         } 
         
-        Enumeration enumeration1 = hashmap.values("_classifier");
+        Enumeration enumeration1 = (Enumeration) hashmap.values("_classifier");
         while (enumeration1.hasMoreElements()) {
             Object obj = enumeration1.nextElement();
-            if (obj instanceof Array) {
-                 ArrayList array = (Array) obj;
+            if (obj instanceof ArrayList) {
+                 ArrayList array = (ArrayList) obj;
                 int i = 0;
                 while (i < array.size()) {
                     String s2 = (String) array.get(i);
@@ -614,7 +616,7 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -639,7 +641,7 @@ public abstract class Monitor extends SiteViewObject {
                         array1.add(monitor1);
                 }
 
-                for (Enumeration enumeration2 = hashmap.keys(); enumeration2
+                for (Enumeration enumeration2 = (Enumeration) hashmap.keys(); enumeration2
                         .hasMoreElements();) {
                     String s2 = I18N.toDefaultEncoding(((Monitor) enumeration2
                             .nextElement()).getProperty("_group"));
@@ -704,11 +706,11 @@ public abstract class Monitor extends SiteViewObject {
         if (owner instanceof MonitorGroup)
             return ((MonitorGroup) siteviewobject).getParentActionRules();
         else
-            return cEmptyArray.elements();
+            return (Enumeration) cEmptyArray.iterator();
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param i
      * @param flag
@@ -718,7 +720,7 @@ public abstract class Monitor extends SiteViewObject {
         boolean flag1 = i != 1 || flag;
          ArrayList array = getElementsOfClass("COM.dragonflow.SiteView.Rule", true,
                 flag1);
-         ArrayList array1 = (Array) Filtering.select(array, new RuleGroupIs(i));
+         ArrayList array1 = (ArrayList) Filtering.select(array, new RuleGroupIs(i));
         if (i == 1 && !flag) {
             Enumeration enumeration = (Enumeration) array1.iterator();
             Hashtable hashtable = new Hashtable();
@@ -727,9 +729,9 @@ public abstract class Monitor extends SiteViewObject {
                     .getProperty(Rule.pAction), "seen"))
                 rule = (Rule) enumeration.nextElement();
 
-             ArrayList array2 = (Array) getClassProperty("elements");
+             ArrayList array2 = (ArrayList) getClassProperty("elements");
             if (array2 != null) {
-                Enumeration enumeration1 = array2.elements();
+                Enumeration enumeration1 = (Enumeration) array2.iterator();
                 while (enumeration1.hasMoreElements()) {
                     Object obj = enumeration1.nextElement();
                     if (obj instanceof Rule) {
@@ -766,7 +768,7 @@ public abstract class Monitor extends SiteViewObject {
                     j = array1.size();
                 for (int l = 0; enumeration2.hasMoreElements(); l++) {
                     Rule rule3 = (Rule) enumeration2.nextElement();
-                    array1.insert(j + l, rule3);
+                    array1.add(j + l, rule3);
                 }
 
             }
@@ -788,7 +790,7 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param i
      * @param monitor
@@ -1202,7 +1204,7 @@ public abstract class Monitor extends SiteViewObject {
              ArrayList array1 = CGI.ReadGroupFrames(s, httprequest);
             HashMap hashmap = CGI.findMonitor(array1, s1);
              ArrayList array2;
-            for (Enumeration enumeration = hashmap.values("_alertCondition"); enumeration
+            for (Enumeration enumeration = (Enumeration) hashmap.values("_alertCondition"); enumeration
                     .hasMoreElements(); array.add(array2)) {
                 array2 = Platform.split('\t', (String) enumeration
                         .nextElement());
@@ -1386,7 +1388,7 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param flag
      * @param httprequest
@@ -1409,7 +1411,7 @@ public abstract class Monitor extends SiteViewObject {
         Object obj1 = null;
         for (int j = 0; j < array.size(); j++) {
             HashMap hashmap = (HashMap) array.get(j);
-            Enumeration enumeration = hashmap.values("monitors");
+            Enumeration enumeration = (Enumeration) hashmap.values("monitors");
             while (enumeration.hasMoreElements()) {
                 String as[] = TextUtils.split((String) enumeration
                         .nextElement(), " ");

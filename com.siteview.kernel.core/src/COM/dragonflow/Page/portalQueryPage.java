@@ -9,6 +9,7 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -75,7 +76,7 @@ public class portalQueryPage extends COM.dragonflow.Page.portalPreferencePage {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     void printAdvancedProperties(HashMap hashmap, HashMap hashmap1) {
         HashMap hashmap2 = COM.dragonflow.SiteView.PortalFilter

@@ -100,7 +100,7 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
                     hashmap2.put("_class", "SubGroup");
                     hashmap2.put("_group", s2);
                     hashmap2.put("_name", s);
-                    array1.insert(array1.size(), hashmap2);
+                    array1.add(array1.size(), hashmap2);
                     String s4 = COM.dragonflow.Utils.TextUtils.increment(s3);
                     hashmap1.put("_nextID", s4);
                     WriteGroupFrames(s1, array1);
@@ -882,7 +882,7 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
                     String s6 = COM.dragonflow.Utils.TextUtils.increment(s5);
                     hashmap1.put("_nextID", s6);
                     hashmap2.put("_name", s4);
-                    array2.insert(array2.size(), hashmap2);
+                    array2.add(array2.size(), hashmap2);
                     WriteGroupFrames(s1, array2);
                 }
                 catch(COM.dragonflow.SiteViewException.SiteViewException siteviewexception1)
@@ -950,7 +950,7 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
                 if(hashmap1.get("_UIContext") != null)
                 {
                     hashmap1.put("_UIContext", "");
-                    array1.put(j, COM.dragonflow.Api.Alert.getInstance().createCondStr(hashmap1));
+                    array1.set(j, COM.dragonflow.Api.Alert.getInstance().createCondStr(hashmap1));
                     flag = true;
                 }
             }
@@ -1171,7 +1171,7 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
                 {
                     HashMap hashmap1 = copyHashMap(hashmap);
                     hashmap1.remove("monitors");
-                    Enumeration enumeration1 = hashmap.values("monitors");
+                    Enumeration enumeration1 = (Enumeration) hashmap.values("monitors");
                     while (enumeration1.hasMoreElements()) {
                         String s = (String)enumeration1.nextElement();
                         String as[] = COM.dragonflow.Utils.TextUtils.split(s);
@@ -1180,7 +1180,7 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
                             hashmap1.add("monitors", s);
                         }
                     }
-                    enumeration1 = hashmap1.values("monitors");
+                    enumeration1 = (Enumeration) hashmap1.values("monitors");
                     if(enumeration1.hasMoreElements())
                     {
                         array.add(hashmap1);
@@ -1213,7 +1213,7 @@ public class APIGroup extends COM.dragonflow.Api.APISiteView
             obj = new HashMap();
         }
         java.lang.Object obj1;
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); ((HashMap) (obj)).put(obj1, hashmap.get(obj1)))
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); ((HashMap) (obj)).put(obj1, hashmap.get(obj1)))
         {
             obj1 = enumeration.nextElement();
         }

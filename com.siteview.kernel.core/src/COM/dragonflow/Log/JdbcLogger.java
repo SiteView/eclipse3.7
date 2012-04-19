@@ -289,7 +289,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public synchronized void log(String s, java.util.Date date, COM.dragonflow.Properties.PropertiedObject propertiedobject)
     {
@@ -469,7 +469,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param date
      * @param propertiedobject
@@ -597,7 +597,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public synchronized void log(String s, java.util.Date date, String s1)
     {
@@ -671,7 +671,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         java.sql.SQLException sqlexception = null;
         while(array.size() > 0) 
         {
-            ArrayList array1 = (jgl.Array)array.popFront();
+            ArrayList array1 = (ArrayList)array.popFront();
             int j = array1.size();
             try
             {
@@ -737,11 +737,11 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     {
         flushsafe(logStatementCache, logCache);
         flushsafe(linkStatementCache, linkCache);
-        for(Enumeration enumeration = customStatements.keys(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) customStatements.keys(); enumeration.hasMoreElements();)
         {
             String s = (String)enumeration.nextElement();
             java.sql.PreparedStatement preparedstatement = (java.sql.PreparedStatement)customStatements.get(s);
-            ArrayList array = (jgl.Array)customCaches.get(s);
+            ArrayList array = (ArrayList)customCaches.get(s);
             try
             {
                 flushsafe(preparedstatement, array);
@@ -785,7 +785,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
                 COM.dragonflow.Log.LogManager.log("Error", "jdbc logger error: closing link statement, " + exception1);
             }
         }
-        for(Enumeration enumeration = customStatements.keys(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) customStatements.keys(); enumeration.hasMoreElements();)
         {
             String s = (String)enumeration.nextElement();
             java.sql.PreparedStatement preparedstatement = (java.sql.PreparedStatement)customStatements.get(s);
@@ -884,7 +884,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param date
      * @param propertiedobject
@@ -977,7 +977,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
 
     ArrayList getCustomCache(String s)
     {
-        ArrayList array = (jgl.Array)customCaches.get(s);
+        ArrayList array = (ArrayList)customCaches.get(s);
         if(array == null)
         {
             array = new ArrayList();
@@ -1158,7 +1158,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param propertiedobject
      * @param array

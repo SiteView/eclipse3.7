@@ -56,7 +56,7 @@ public class BrowsableProperty extends StringProperty {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param node
      * @return
@@ -86,7 +86,7 @@ public class BrowsableProperty extends StringProperty {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param node
      * @return
@@ -110,7 +110,7 @@ public class BrowsableProperty extends StringProperty {
         return array;
     }
 
-    public void buildNodeList(Array array, Node node) {
+    public void buildNodeList(ArrayList array, Node node) {
         if (node == null || !node.hasChildNodes()) {
             return;
         }
@@ -199,7 +199,7 @@ public class BrowsableProperty extends StringProperty {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param atomicmonitor
      * @param s

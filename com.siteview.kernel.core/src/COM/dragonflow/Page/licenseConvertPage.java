@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Utils.MgParser;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -175,7 +177,7 @@ public class licenseConvertPage extends COM.dragonflow.Page.CGI
         s = s + "\n<p>\n<li>monitor types used: \n";
         s = s + "<ul>";
         HashMap hashmap = (HashMap)aobj[2];
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();)
         {
             String s1 = (String)enumeration.nextElement();
             s = s + "\n<li>" + s1 + ": " + hashmap.get(s1) + " monitor";
@@ -216,7 +218,7 @@ public class licenseConvertPage extends COM.dragonflow.Page.CGI
         if(aobj[2] != null)
         {
             HashMap hashmap = (HashMap)aobj[2];
-            for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
+            for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();)
             {
                 String s3 = (String)enumeration.nextElement();
                 String s4 = (String)hashmap.get(s3);

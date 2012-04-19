@@ -539,7 +539,7 @@ class LogPullerReadThread extends Thread {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param portalsiteview
      * @param s
@@ -661,7 +661,7 @@ class LogPullerReadThread extends Thread {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param portalsiteview
      * @param s
@@ -744,7 +744,7 @@ class LogPullerReadThread extends Thread {
             }
         } 
         
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         while (enumeration.hasMoreElements()) {
             String s4 = (String) enumeration.nextElement();
             MonitorGroup monitorgroup = (MonitorGroup) portalsiteview

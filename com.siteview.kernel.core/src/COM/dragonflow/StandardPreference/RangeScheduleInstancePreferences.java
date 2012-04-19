@@ -17,10 +17,13 @@ package COM.dragonflow.StandardPreference;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.ScalarProperty;
@@ -79,7 +82,7 @@ public class RangeScheduleInstancePreferences extends COM.dragonflow.StandardPre
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public java.util.Vector getPreferenceProperties(String s, String s1, String s2, String s3, int i) throws COM.dragonflow.SiteViewException.SiteViewException {
         java.util.Vector vector = new Vector();
@@ -97,9 +100,9 @@ public class RangeScheduleInstancePreferences extends COM.dragonflow.StandardPre
             Object obj1 = null;
             Object obj2 = null;
             if (s1 != null && s1.length() > 0) {
-                Enumeration enumeration = hashmap.values(s1);
+                Enumeration enumeration = (Enumeration) hashmap.values(s1);
                 while (enumeration.hasMoreElements()) {
-                    java.util.HashMap hashmap1 = new HashMap();
+                    HashMap hashmap1 = new HashMap();
                     String s5 = "";
                     boolean flag = false;
                     s5 = (String) enumeration.nextElement();
@@ -150,7 +153,7 @@ public class RangeScheduleInstancePreferences extends COM.dragonflow.StandardPre
                     vector.add(hashmap1);
                 }
             } else {
-                java.util.HashMap hashmap2 = new HashMap();
+                HashMap hashmap2 = new HashMap();
                 ArrayList array = preferences.getProperties();
                 for (int k = 0; k < array.size(); k ++) {
                     String s6 = (String) hashmap.get(((COM.dragonflow.Properties.StringProperty) array.get(k)).getName());
@@ -167,7 +170,7 @@ public class RangeScheduleInstancePreferences extends COM.dragonflow.StandardPre
             }
             if (vector != null) {
                 for (int j = 0; j < vector.size(); j ++) {
-                    java.util.HashMap hashmap3 = new HashMap();
+                    HashMap hashmap3 = new HashMap();
                     COM.dragonflow.HTTP.HTTPRequest httprequest = new HTTPRequest();
                     java.util.HashMap hashmap4 = (java.util.HashMap) vector.get(j);
                     java.util.Set set = hashmap4.keySet();
@@ -217,13 +220,13 @@ public class RangeScheduleInstancePreferences extends COM.dragonflow.StandardPre
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hashmap
      * @param s
      * @return
      */
-    public java.util.HashMap synthesizePropertiesForSchedule(java.util.HashMap hashmap, String s) {
+    public java.util.HashMap synthesizePropertiesForSchedule(HashMap hashmap, String s) {
         String as[] = COM.dragonflow.Utils.TextUtils.split(s, COM.dragonflow.Properties.ScheduleProperty.schedule_day_separator);
         for (int i = 0; i < as.length; i ++) {
             for (int j = 0; j < days.length; j ++) {
@@ -335,7 +338,7 @@ public class RangeScheduleInstancePreferences extends COM.dragonflow.StandardPre
         hashmap.put("_schedule", s11);
         java.util.Set set1 = hashmap.keySet();
         java.util.Iterator iterator2 = set1.iterator();
-        java.util.HashMap hashmap2 = new HashMap();
+        HashMap hashmap2 = new HashMap();
         while (iterator2.hasNext()) {
             String s9 = (String) iterator2.next();
             int l = s9.indexOf("enabled");

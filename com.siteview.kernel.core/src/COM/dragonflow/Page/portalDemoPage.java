@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Page;
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.CommandLine;
 

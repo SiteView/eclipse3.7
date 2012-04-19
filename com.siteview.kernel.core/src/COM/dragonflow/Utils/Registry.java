@@ -8,6 +8,7 @@
  */
 package COM.dragonflow.Utils;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 /**
@@ -47,7 +48,7 @@ public class Registry {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1

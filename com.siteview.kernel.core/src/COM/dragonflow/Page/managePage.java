@@ -1019,7 +1019,7 @@ label1:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param array
@@ -1052,7 +1052,7 @@ label1:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param atomicmonitor
      * @return
@@ -1075,7 +1075,7 @@ label1:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      */
@@ -1226,7 +1226,7 @@ _L1:
 
             if(s.startsWith("Delete"))
             {
-                ArrayList array4 = new Array(COM.dragonflow.Utils.I18N.toDefaultArray(array));
+                ArrayList array4 = new ArrayList(COM.dragonflow.Utils.I18N.toDefaultArray(array));
                 COM.dragonflow.SiteView.ConfigurationChanger.delete(array4, array2, request, outputStream);
             } else
             if(s.startsWith("Baseline"))
@@ -1496,7 +1496,7 @@ _L1:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -1530,7 +1530,7 @@ _L1:
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -1722,7 +1722,7 @@ _L1:
     private ArrayList getGroupFrames(String s)
         throws java.lang.Exception
     {
-        ArrayList array = (jgl.Array)groups.get(s);
+        ArrayList array = (ArrayList)groups.get(s);
         if(array == null)
         {
             array = COM.dragonflow.Page.CGI.ReadGroupFrames(s, request);
@@ -1734,7 +1734,7 @@ _L1:
     public void saveGroups()
         throws java.lang.Exception
     {
-        Enumeration enumeration = groups.keys();
+        Enumeration enumeration = (Enumeration) groups.keys();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -1742,7 +1742,7 @@ _L1:
                 break;
             }
             String s = (String)enumeration.nextElement();
-            ArrayList array = (jgl.Array)groups.get(s);
+            ArrayList array = (ArrayList)groups.get(s);
             if(array != null)
             {
                 printProgressMessage("Saving group configuration for " + COM.dragonflow.Page.managePage.getGroupName(array, s) + "<BR>");
@@ -1979,7 +1979,7 @@ _L1:
             {
                 HashMap hashmap3 = new HashMap();
                 COM.dragonflow.SiteView.monitorUtils.getGroupMonitors(hashmap3, null, array4, s1);
-                Enumeration enumeration = hashmap3.keys();
+                Enumeration enumeration = (Enumeration) hashmap3.keys();
                 int i1 = 0;
                 ArrayList array8 = new ArrayList();
                 HashMap hashmap5;
@@ -2151,7 +2151,7 @@ _L1:
             ArrayList array = getGroupFrames(s);
             HashMap hashmap = new HashMap(true);
             COM.dragonflow.SiteView.monitorUtils.getGroupMonitors(hashmap, null, array, s);
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             String s1 = "";
             do
             {
@@ -2210,7 +2210,7 @@ _L1:
             {
                 continue;
             }
-            Enumeration enumeration = hashmap.values("_location");
+            Enumeration enumeration = (Enumeration) hashmap.values("_location");
             int k = 0;
             boolean flag = false;
             do
@@ -2501,7 +2501,7 @@ _L1:
             {
                 COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
                 ArrayList array2 = getGroupNameList(hashmapordered, null, null, true);
-                for(Enumeration enumeration6 = array2.elements(); enumeration6.hasMoreElements();)
+                for(Enumeration enumeration6 = (Enumeration) array2.iterator(); enumeration6.hasMoreElements();)
                 {
                     String s9 = (String)enumeration6.nextElement();
                     Enumeration enumeration5 = hashmapordered.values(s9);
@@ -2887,12 +2887,12 @@ label2:
         {
             obj = new HashMap();
         }
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();)
         {
             java.lang.Object obj1 = enumeration.nextElement();
-            if(hashmap.get(obj1) instanceof jgl.Array)
+            if(hashmap.get(obj1) instanceof ArrayList)
             {
-                ArrayList array = (jgl.Array)hashmap.get(obj1);
+                ArrayList array = (ArrayList)hashmap.get(obj1);
                 ArrayList array1 = new ArrayList();
                 for(int i = 0; i < array.size(); i++)
                 {
@@ -3355,7 +3355,7 @@ label2:
                 hashmap1 = getExistingGroupSchedule(s, siteviewgroup);
             }
             catch(java.lang.Exception exception) { }
-            Enumeration enumeration2 = hashmap1.keys();
+            Enumeration enumeration2 = (Enumeration) (Enumeration) hashmap1.keys();
             while(enumeration2.hasMoreElements()) 
             {
                 String s2 = enumeration2.nextElement().toString();
@@ -3400,7 +3400,7 @@ label2:
                         hashmap2 = getExistingGroupSchedule(s9, siteviewgroup);
                     }
                     catch(java.lang.Exception exception1) { }
-                    Enumeration enumeration3 = hashmap2.keys();
+                    Enumeration enumeration3 = (Enumeration) hashmap2.keys();
                     while(enumeration3.hasMoreElements()) 
                     {
                         String s10 = enumeration3.nextElement().toString();
@@ -3479,7 +3479,7 @@ label0:
                     continue;
                 }
                 HashMap hashmap2 = getExistingGroupSchedule(s2, siteviewgroup);
-                Enumeration enumeration = hashmap2.keys();
+                Enumeration enumeration = (Enumeration) hashmap2.keys();
                 do
                 {
                     String s5;

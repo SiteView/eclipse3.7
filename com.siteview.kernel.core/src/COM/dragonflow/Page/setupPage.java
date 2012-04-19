@@ -130,7 +130,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
                     {
                         break;
                     }
-                    Enumeration enumeration2 = array2.elements();
+                    Enumeration enumeration2 = (Enumeration) array2.iterator();
                     do
                     {
                         if(!enumeration2.hasMoreElements())
@@ -243,7 +243,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
                     "IIS Admin", "World Wide Web", "Netscape", "FTP", "HTTP"
                 };
                 ArrayList array3 = COM.dragonflow.SiteView.Platform.processList();
-                for(Enumeration enumeration1 = array3.elements(); enumeration1.hasMoreElements();)
+                for(Enumeration enumeration1 = (Enumeration) array3.iterator(); enumeration1.hasMoreElements();)
                 {
                     String s2 = (String)enumeration1.nextElement();
                     int k1 = 0;
@@ -273,7 +273,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
 label0:
                 for(int l = 0; l < as2.length; l++)
                 {
-                    Enumeration enumeration3 = array4.elements();
+                    Enumeration enumeration3 = (Enumeration) array4.iterator();
                     String s5;
                     do
                     {

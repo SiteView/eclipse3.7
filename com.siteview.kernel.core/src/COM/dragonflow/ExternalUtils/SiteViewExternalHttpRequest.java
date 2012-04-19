@@ -17,6 +17,8 @@ package COM.dragonflow.ExternalUtils;
  * 
  */
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.ApacheHttpClientUtils.HTTPRequestSettings;
 
 public class SiteViewExternalHttpRequest

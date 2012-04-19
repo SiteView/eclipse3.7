@@ -100,7 +100,7 @@ public class VirtualMachine extends SiteViewObject {
 
 	boolean driverLoaded;
 
-	Array singleframes;
+	ArrayList singleframes;
 
 	public VirtualMachine() {
 		action = null;
@@ -123,7 +123,7 @@ public class VirtualMachine extends SiteViewObject {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @param stringBuffer
 	 * @param queryString
@@ -141,7 +141,7 @@ public class VirtualMachine extends SiteViewObject {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		Array array = new ArrayList();
+		ArrayList array = new ArrayList();
 		int columnCount;
 		try {
 			if (!this.driverLoaded) {
@@ -243,7 +243,7 @@ public class VirtualMachine extends SiteViewObject {
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 */
 /*	public synchronized void checkForNodes() {
@@ -382,7 +382,7 @@ public class VirtualMachine extends SiteViewObject {
 			if (pPoolIncluded.length() > 0 && !flag) {
 				array4.add(pHost);
 			}
-			array4.add((String) array2.get(k));
+			array4.add(String) array2.get(k));
 			String s15 = "";
 			if (pPoolIncluded.length() > 0) {
 				String s17 = (String) hashmap1.get((String) array2.get(k));
@@ -854,7 +854,7 @@ label0:
 	}
 
 	/**
-	 * CAUTION: Decompiled by hand.
+	 * 
 	 * 
 	 * @param s
 	 * @param hashmap
@@ -877,7 +877,7 @@ label0:
 		atomicmonitor.setProperty(AtomicMonitor.pFrequency, l);
 		String s3 = atomicmonitor.defaultTitle();
 		HashMap hashmap1 = new HashMap();
-		Array array = atomicmonitor.getProperties();
+		ArrayList array = atomicmonitor.getProperties();
 		array = StringProperty.sortByOrder(array);
 		for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
 				.hasMoreElements();) {
@@ -885,7 +885,7 @@ label0:
 					.nextElement();
 			String s4 = stringproperty.getName();
 			if (stringproperty.isMultiLine) {
-				Array array1 = TextUtils.getMultipleValues(hashmap,
+				ArrayList array1 = TextUtils.getMultipleValues(hashmap,
 						stringproperty.getName());
 				atomicmonitor.unsetProperty(stringproperty);
 				int i = 0;
@@ -900,7 +900,7 @@ label0:
 				String s6 = TextUtils.getValue(hashmap, s4);
 				if ((stringproperty instanceof ScalarProperty)
 						&& ((ScalarProperty) stringproperty).multiple) {
-					Array array2 = TextUtils.getMultipleValues(hashmap,
+					ArrayList array2 = TextUtils.getMultipleValues(hashmap,
 							stringproperty.getName());
 					atomicmonitor.unsetProperty(stringproperty);
 					int k = 0;
@@ -926,7 +926,7 @@ label0:
 		}
 
 		HashMap hashmap2 = MasterConfig.getMasterConfig();
-		Enumeration enumeration1 = hashmap2.values("_monitorEditCustom");
+		Enumeration enumeration1 = (Enumeration) hashmap2.values("_monitorEditCustom");
 		while (enumeration1.hasMoreElements()) {
 			String s5 = (String) enumeration1.nextElement();
 			String as[] = TextUtils.split(s5, "|");
@@ -963,7 +963,7 @@ label0:
 		hashmap3.remove(Monitor.pID);
 		hashmap3.remove("_id");
 		hashmap3.put("_id", s7);
-		singleframes.insert(j++, hashmap3);
+		singleframes.add(j++, hashmap3);
 		String s12 = TextUtils.increment(s7);
 		hashmap4.put("_nextID", s12);
 		Platform.sleep(2000L);
@@ -985,7 +985,7 @@ label0:
 		atomicmonitor.setProperty(AtomicMonitor.pFrequency, l);
 		String s3 = atomicmonitor.defaultTitle();
 		HashMap hashmap1 = new HashMap();
-		Array array = atomicmonitor.getProperties();
+		ArrayList array = atomicmonitor.getProperties();
 		array = StringProperty.sortByOrder(array);
 		for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
 				.hasMoreElements();) {
@@ -993,7 +993,7 @@ label0:
 					.nextElement();
 			String s4 = stringproperty.getName();
 			if (stringproperty.isMultiLine) {
-				Array array1 = TextUtils.getMultipleValues(hashmap,
+				ArrayList array1 = TextUtils.getMultipleValues(hashmap,
 						stringproperty.getName());
 				atomicmonitor.unsetProperty(stringproperty);
 				int i = 0;
@@ -1008,7 +1008,7 @@ label0:
 				String s6 = TextUtils.getValue(hashmap, s4);
 				if ((stringproperty instanceof ScalarProperty)
 						&& ((ScalarProperty) stringproperty).multiple) {
-					Array array3 = TextUtils.getMultipleValues(hashmap,
+					ArrayList array3 = TextUtils.getMultipleValues(hashmap,
 							stringproperty.getName());
 					atomicmonitor.unsetProperty(stringproperty);
 					int j = 0;
@@ -1034,7 +1034,7 @@ label0:
 		}
 
 		HashMap hashmap2 = MasterConfig.getMasterConfig();
-		Enumeration enumeration1 = hashmap2.values("_monitorEditCustom");
+		Enumeration enumeration1 = (Enumeration) hashmap2.values("_monitorEditCustom");
 		while (enumeration1.hasMoreElements()) {
 			String s5 = (String) enumeration1.nextElement();
 			String as[] = TextUtils.split(s5, "|");
@@ -1061,7 +1061,7 @@ label0:
 					.defaultTitle());
 		}
 		HashMap hashmap3 = atomicmonitor.getValuesTable();
-		Array array2 = CGI.ReadGroupFrames(s, request);
+		ArrayList array2 = CGI.ReadGroupFrames(s, request);
 		String s8 = "";
 		int k = array2.size();
 		HashMap hashmap4 = (HashMap) array2.get(0);
@@ -1072,7 +1072,7 @@ label0:
 		hashmap3.remove(Monitor.pID);
 		hashmap3.remove("_id");
 		hashmap3.put("_id", s8);
-		array2.insert(k++, hashmap3);
+		array2.add(k++, hashmap3);
 		String s12 = TextUtils.increment(s8);
 		hashmap4.put("_nextID", s12);
 		CGI.WriteGroupFrames(s, array2, request);

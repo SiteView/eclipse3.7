@@ -9,6 +9,7 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import com.recursionsw.jgl.HashMap;
@@ -321,7 +322,7 @@ label1:
         COM.dragonflow.StandardAction.Page page = new Page();
         if(hashmap != null)
         {
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             do
             {
                 if(!enumeration.hasMoreElements())

@@ -17,8 +17,11 @@ package COM.dragonflow.XmlApi;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.Api.APIReport;
 

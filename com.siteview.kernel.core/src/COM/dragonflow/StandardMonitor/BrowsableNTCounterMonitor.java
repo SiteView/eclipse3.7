@@ -26,7 +26,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -52,6 +52,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.JdbcLogger;
@@ -464,7 +466,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param date
      * @return
@@ -530,7 +532,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public String getBrowseData(StringBuffer stringbuffer) {
         try {

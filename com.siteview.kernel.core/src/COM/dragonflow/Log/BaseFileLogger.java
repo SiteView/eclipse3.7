@@ -8,6 +8,8 @@
  */
 package COM.dragonflow.Log;
 
+import com.recursionsw.jgl.HashMap;
+
 /**
  * Comment for <code></code>
  * 

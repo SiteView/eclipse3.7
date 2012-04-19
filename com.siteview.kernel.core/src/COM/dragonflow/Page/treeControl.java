@@ -176,7 +176,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param httprequest
      * @return
@@ -220,7 +220,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
 
         hiddenSelection = true;
         if (single) {
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             if (enumeration.hasMoreElements()) {
                 String s3 = (String) enumeration
                         .nextElement();
@@ -295,7 +295,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
         if (selectList == null) {
             selectList = new ArrayList();
         }
-        for (Enumeration enumeration1 = hashmap.keys(); enumeration1
+        for (Enumeration enumeration1 = (Enumeration) hashmap.keys(); enumeration1
                 .hasMoreElements();) {
             String s4 = (String) enumeration1.nextElement();
             String as1[] = COM.dragonflow.Utils.TextUtils.split(s4,
@@ -315,7 +315,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
                 true);
         ArrayList array3 = cgi.getGroupNameList(hashmapordered, hashmap1,
                 hashmap2, true);
-        for (Enumeration enumeration2 = array3.elements(); enumeration2
+        for (Enumeration enumeration2 = (Enumeration) array3.iterator(); enumeration2
                 .hasMoreElements();) {
             int i1 = 0;
             parentSelected = false;
@@ -349,7 +349,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
         }
 
         if (hashmap.get("_master") == null) {
-            Enumeration enumeration3 = hashmap.keys();
+            Enumeration enumeration3 = (Enumeration) hashmap.keys();
             while (enumeration3.hasMoreElements()) {
                 String s7 = (String) enumeration3
                         .nextElement();
@@ -518,7 +518,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
             selected.put(s, "selected");
             flag4 = true;
             if (s2.length() > 0 && isOpen) {
-                Enumeration enumeration = hashmap.keys();
+                Enumeration enumeration = (Enumeration) hashmap.keys();
                 while (enumeration.hasMoreElements()) {
                     String s3 = (String) enumeration
                             .nextElement();
@@ -844,7 +844,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
                     .equals("state")
                     && !forgetState) {
                 String s2;
-                for (Enumeration enumeration = hashmap.keys(); enumeration
+                for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                         .hasMoreElements(); state.add(s2, hashmap.get(s2))) {
                     s2 = (String) enumeration.nextElement();
                 }
@@ -859,7 +859,7 @@ public class treeControl extends COM.dragonflow.Page.CGI {
                 continue;
             }
             String s3;
-            for (Enumeration enumeration1 = hashmap.keys(); enumeration1
+            for (Enumeration enumeration1 = (Enumeration) hashmap.keys(); enumeration1
                     .hasMoreElements(); selected.add(s3, hashmap.get(s3))) {
                 s3 = (String) enumeration1.nextElement();
             }

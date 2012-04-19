@@ -77,7 +77,7 @@ public class HTTPUtils {
 
     public static String getLocationNameByID(String s) {
         String s1 = "";
-        Enumeration enumeration = locations.elements();
+        Enumeration enumeration = (Enumeration) locations.iterator();
         while (enumeration.hasMoreElements()) {
             String s2 = (String) enumeration.nextElement();
             if (s.equals(COM.dragonflow.Utils.HTTPUtils.getLocationID(s2))) {
@@ -92,7 +92,7 @@ public class HTTPUtils {
         StringBuffer stringbuffer = new StringBuffer();
         if (locations.size() > 1) {
             stringbuffer.append("Location: <SELECT name=location size=6>\n");
-            Enumeration enumeration = locations.elements();
+            Enumeration enumeration = (Enumeration) locations.iterator();
             COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
             int i;
             int j;
@@ -138,7 +138,7 @@ public class HTTPUtils {
 
     public static String getTraceURLByID(String s) {
         String s1 = "";
-        Enumeration enumeration = locations.elements();
+        Enumeration enumeration = (Enumeration) locations.iterator();
         while (enumeration.hasMoreElements()) {
             String s2 = (String) enumeration.nextElement();
             if (s.equals(COM.dragonflow.Utils.HTTPUtils.getLocationID(s2))) {
@@ -151,7 +151,7 @@ public class HTTPUtils {
 
     public static String getPingURLByID(String s) {
         String s1 = "";
-        Enumeration enumeration = locations.elements();
+        Enumeration enumeration = (Enumeration) locations.iterator();
         while (enumeration.hasMoreElements()) {
             String s2 = (String) enumeration.nextElement();
             if (s.equals(COM.dragonflow.Utils.HTTPUtils.getLocationID(s2))) {
@@ -164,7 +164,7 @@ public class HTTPUtils {
 
     public static String getLocationIDByURL(String s) {
         String s1 = "";
-        Enumeration enumeration = locations.elements();
+        Enumeration enumeration = (Enumeration) locations.iterator();
         while (enumeration.hasMoreElements()) {
             String s2 = (String) enumeration.nextElement();
             if (s.equals(COM.dragonflow.Utils.HTTPUtils.getLocationURL(s2))) {
@@ -177,7 +177,7 @@ public class HTTPUtils {
 
     public static String getLocationURLByID(String s) {
         String s1 = "";
-        Enumeration enumeration = locations.elements();
+        Enumeration enumeration = (Enumeration) locations.iterator();
         while (enumeration.hasMoreElements()) {
             String s2 = (String) enumeration.nextElement();
             if (s.equals(COM.dragonflow.Utils.HTTPUtils.getLocationID(s2))) {

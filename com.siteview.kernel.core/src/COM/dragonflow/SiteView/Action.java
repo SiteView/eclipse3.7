@@ -99,7 +99,7 @@ public abstract class Action extends SiteViewObject {
 
     public abstract boolean execute();
 
-    public void initializeFromArguments(Array array, HashMap hashmap) {
+    public void initializeFromArguments(ArrayList array, HashMap hashmap) {
     }
 
     public String getActionString() {
@@ -156,7 +156,7 @@ public abstract class Action extends SiteViewObject {
         stringbuffer.append(getProperty(stringproperty));
     }
 
-    public void setArgs(Array array) {
+    public void setArgs(ArrayList array) {
         int i = array.size();
         do {
             if (--i < 0)

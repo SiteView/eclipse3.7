@@ -14,6 +14,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Reversing;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.Braf;
 
@@ -123,7 +125,7 @@ public class snmpTrapLogPage extends COM.dragonflow.Page.CGI
     void printTraps(ArrayList array, int i, java.io.PrintWriter printwriter)
     {
         printwriter.println("<table border=1 cellspacing=0><tr><th>Date<th>From<th>Message<th>Trap<th>Specific<th>OID<th>Agent<th>Community<th>Trap Time");
-        jgl.Reversing.reverse(array);
+        Reversing.reverse(array);
         Enumeration enumeration = (Enumeration) array.iterator();
         int j = 0;
         do

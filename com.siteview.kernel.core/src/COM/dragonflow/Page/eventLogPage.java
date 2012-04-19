@@ -9,9 +9,12 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Reversing;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.CommandLine;
 
@@ -140,7 +143,7 @@ public class eventLogPage extends COM.dragonflow.Page.CGI
     void printEvents(ArrayList array, java.io.PrintWriter printwriter)
     {
         printwriter.println("<FONT SIZE=-1><TABLE><TH><TH>Date<TH>Time<TH>Source<TH>Event<TH>Cat<TH>Message");
-        jgl.Reversing.reverse(array);
+        Reversing.reverse(array);
         Enumeration enumeration = (Enumeration) array.iterator();
         HashMap hashmap = new HashMap();
         do

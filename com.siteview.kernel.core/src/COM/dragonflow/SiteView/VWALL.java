@@ -110,7 +110,7 @@ public class VWALL {
         hashmap.put("starttime" + i, "");
         messages.clear();
         String s;
-        for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); messages.put(s, (String) hashmap.get(s))) {
+        for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements(); messages.put(s, (String) hashmap.get(s))) {
             s = (String) enumeration.nextElement();
         }
 

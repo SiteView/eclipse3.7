@@ -214,7 +214,7 @@ public class ComPlusMonitor extends BrowsableURLContentBase
  {
  }
 
- public String setBrowseName(Array array)
+ public String setBrowseName(ArrayList array)
  {
      String s = "";
      if(array.size() <= 0)
@@ -236,10 +236,10 @@ public class ComPlusMonitor extends BrowsableURLContentBase
  public  ArrayList getConnectionProperties()
  {
       ArrayList array = super.getConnectionProperties();
-     array.insert(0, pHostName);
-     array.insert(1, pPortNumber);
-     array.insert(2, pUserName);
-     array.insert(3, pPassword);
+     array.add(0, pHostName);
+     array.add(1, pPortNumber);
+     array.add(2, pUserName);
+     array.add(3, pPassword);
      return array;
  }
 

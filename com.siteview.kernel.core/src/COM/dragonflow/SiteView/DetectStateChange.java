@@ -36,7 +36,7 @@ public class DetectStateChange extends Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public boolean execute() {
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
@@ -56,7 +56,7 @@ public class DetectStateChange extends Action {
             } 
             
             MonitorGroup monitorgroup1;
-            for (Enumeration enumeration1 = hashmap.keys(); enumeration1
+            for (Enumeration enumeration1 = (Enumeration) hashmap.keys(); enumeration1
                     .hasMoreElements(); monitorgroup1.writeAllHTML()) {
                 String s = (String) enumeration1.nextElement();
                 monitorgroup1 = (MonitorGroup) hashmap.get(s);

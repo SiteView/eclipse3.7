@@ -67,7 +67,7 @@ public class SiteViewConfigurationRequest {
             ArrayList array2 = new ArrayList();
             String s3 = xmlapiobject.getProperty("type");
             java.lang.Object aobj[] = new java.lang.Object[4];
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s4 = xmlapiobject1.getProperty("name");
@@ -89,7 +89,7 @@ public class SiteViewConfigurationRequest {
                     array1.add(s5);
                 }
                 hashmap1 = new HashMap();
-                for (Enumeration enumeration2 = xmlapiobject1.elements(); enumeration2.hasMoreElements();) {
+                for (Enumeration enumeration2 = (Enumeration) xmlapiobject1.iterator(); enumeration2.hasMoreElements();) {
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject3 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration2.nextElement();
                     HashMap hashmap3 = xmlapiobject3.getProperties();
                     if (s != null && s.length() > 0) {
@@ -101,7 +101,7 @@ public class SiteViewConfigurationRequest {
                     if (s2 != null && s2.length() > 0) {
                         hashmap3.put("testPreference", s2);
                     }
-                    Enumeration enumeration3 = hashmap3.keys();
+                    Enumeration enumeration3 = (Enumeration) hashmap3.keys();
                     while (enumeration3.hasMoreElements()) {
                         String s9 = (String) enumeration3.nextElement();
                         if (!s9.equals("_verify")) {
@@ -120,7 +120,7 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s3, "add", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
@@ -129,7 +129,7 @@ public class SiteViewConfigurationRequest {
                         xmlapiobject1.setProperty("name", s7, false);
                     }
                     HashMap hashmap2 = (HashMap) vector.get(i);
-                    Enumeration enumeration1 = xmlapiobject1.elements();
+                    Enumeration enumeration1 = (Enumeration) xmlapiobject1.iterator();
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject2 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
                     xmlapiobject2.setProperties(hashmap2, false);
                     if (hashmap2.get("_id") != null) {
@@ -156,7 +156,7 @@ public class SiteViewConfigurationRequest {
             ArrayList array4 = new ArrayList();
             Object obj1 = null;
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s1 = xmlapiobject1.getProperty("id");
@@ -184,11 +184,11 @@ public class SiteViewConfigurationRequest {
                     array4.add("");
                 }
                 HashMap hashmap1 = new HashMap();
-                for (Enumeration enumeration1 = xmlapiobject1.elements(); enumeration1.hasMoreElements();) {
+                for (Enumeration enumeration1 = (Enumeration) xmlapiobject1.iterator(); enumeration1.hasMoreElements();) {
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject2 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
                     HashMap hashmap3 = xmlapiobject2.getProperties();
                     xmlapiobject2.setProperties(hashmap3, false);
-                    Enumeration enumeration3 = hashmap3.keys();
+                    Enumeration enumeration3 = (Enumeration) hashmap3.keys();
                     while (enumeration3.hasMoreElements()) {
                         String s5 = (String) enumeration3.nextElement();
                         if (!s5.equals("_verify")) {
@@ -209,12 +209,12 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "update", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
                     HashMap hashmap2 = (HashMap) vector.get(i);
-                    Enumeration enumeration2 = xmlapiobject1.elements();
+                    Enumeration enumeration2 = (Enumeration) xmlapiobject1.iterator();
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject3 = null;
                     if (enumeration2.hasMoreElements()) {
                         xmlapiobject3 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration2.nextElement();
@@ -241,7 +241,7 @@ public class SiteViewConfigurationRequest {
             ArrayList array2 = new ArrayList();
             ArrayList array3 = new ArrayList();
             String s = xmlapiobject.getProperty("type");
-            for (Enumeration enumeration = xmlapiobject.elements(); enumeration.hasMoreElements(); array1.add(xmlapiobject1.getProperty("ownerid"))) {
+            for (Enumeration enumeration = (Enumeration) xmlapiobject.iterator(); enumeration.hasMoreElements(); array1.add(xmlapiobject1.getProperty("ownerid"))) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 array.add(xmlapiobject1.getProperty("id"));
             }
@@ -266,7 +266,7 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "delete", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            Enumeration enumeration1 = xmlapiobject.elements();
+            Enumeration enumeration1 = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration1.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
@@ -294,7 +294,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             String s1 = xmlapiobject1.getProperty("id");
             String s2 = xmlapiobject1.getProperty("ownerid");
@@ -306,7 +306,7 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "copy", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             if (!xmlapiresponse.hasErrors() && vector != null) {
                 HashMap hashmap1 = (HashMap) vector.get(0);
@@ -327,7 +327,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getProperties();
             String s1 = (String) hashmap1.get("subtype");
@@ -362,7 +362,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getProperties();
             String s1 = (String) hashmap1.get("name");
@@ -399,7 +399,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getProperties();
             String s1 = (String) hashmap1.get("name");
@@ -443,7 +443,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getProperties();
             String s1 = (String) hashmap1.get("name");
@@ -485,7 +485,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getProperties();
             String s1 = (String) hashmap1.get("name");
@@ -534,7 +534,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             boolean flag = false;
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             if (!enumeration.hasMoreElements()) {
                 COM.dragonflow.XmlApi.XmlApiObject xmlapiobject1 = xmlapiobject;
                 flag = true;
@@ -659,7 +659,7 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             boolean flag = false;
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             if (!enumeration.hasMoreElements()) {
                 xmlapiobject1 = xmlapiobject;
                 flag = true;
@@ -800,7 +800,7 @@ public class SiteViewConfigurationRequest {
         try {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s = xmlapiobject.getProperty("type");
@@ -845,7 +845,7 @@ public class SiteViewConfigurationRequest {
             ArrayList array4 = new ArrayList();
             String s = xmlapiobject.getProperty("type");
             java.lang.Object aobj[] = new java.lang.Object[5];
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s1 = xmlapiobject1.getProperty("subtype");
@@ -878,10 +878,10 @@ public class SiteViewConfigurationRequest {
                     array1.add("");
                 }
                 hashmap2 = new HashMap();
-                for (Enumeration enumeration2 = xmlapiobject1.elements(); enumeration2.hasMoreElements();) {
+                for (Enumeration enumeration2 = (Enumeration) xmlapiobject1.iterator(); enumeration2.hasMoreElements();) {
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject3 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration2.nextElement();
                     HashMap hashmap3 = xmlapiobject3.getProperties();
-                    Enumeration enumeration3 = hashmap3.keys();
+                    Enumeration enumeration3 = (Enumeration) hashmap3.keys();
                     while (enumeration3.hasMoreElements()) {
                         String s7 = (String) enumeration3.nextElement();
                         if (!s7.equals("_verify")) {
@@ -900,7 +900,7 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "runTemporary", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
@@ -909,7 +909,7 @@ public class SiteViewConfigurationRequest {
                         xmlapiobject1.setProperty("name", s4, false);
                     }
                     HashMap hashmap1 = (HashMap) vector.get(i);
-                    Enumeration enumeration1 = xmlapiobject1.elements();
+                    Enumeration enumeration1 = (Enumeration) xmlapiobject1.iterator();
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject2 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
                     xmlapiobject2.setProperties(hashmap1, false);
                     if (hashmap1.get("_id") != null) {
@@ -950,7 +950,7 @@ public class SiteViewConfigurationRequest {
             ArrayList array3 = new ArrayList();
             String s = xmlapiobject.getProperty("type");
             java.lang.Object aobj[] = new java.lang.Object[4];
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s1 = xmlapiobject1.getProperty("name");
@@ -977,10 +977,10 @@ public class SiteViewConfigurationRequest {
                     array1.add(s2);
                 }
                 java.util.HashMap hashmap2 = new java.util.HashMap();
-                for (Enumeration enumeration2 = xmlapiobject1.elements(); enumeration2.hasMoreElements();) {
+                for (Enumeration enumeration2 = (Enumeration) xmlapiobject1.iterator(); enumeration2.hasMoreElements();) {
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject3 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration2.nextElement();
                     HashMap hashmap3 = xmlapiobject3.getProperties();
-                    Enumeration enumeration3 = hashmap3.keys();
+                    Enumeration enumeration3 = (Enumeration) hashmap3.keys();
                     while (enumeration3.hasMoreElements()) {
                         String s7 = (String) enumeration3.nextElement();
                         if (!s7.equals("_verify")) {
@@ -999,7 +999,7 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "getURLStepProperties", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
@@ -1008,7 +1008,7 @@ public class SiteViewConfigurationRequest {
                         xmlapiobject1.setProperty("name", s4, false);
                     }
                     HashMap hashmap1 = (HashMap) vector.get(i);
-                    Enumeration enumeration1 = xmlapiobject1.elements();
+                    Enumeration enumeration1 = (Enumeration) xmlapiobject1.iterator();
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject2 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
                     xmlapiobject2.setProperties(hashmap1, false);
                     if (hashmap1.get("_id") != null) {
@@ -1029,11 +1029,11 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             String s1 = xmlapiobject1.getProperty("id");
             String s2 = xmlapiobject1.getProperty("ownerid");
-            Enumeration enumeration1 = xmlapiobject1.elements();
+            Enumeration enumeration1 = (Enumeration) xmlapiobject1.iterator();
             COM.dragonflow.XmlApi.XmlApiObject xmlapiobject2 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
             HashMap hashmap1 = xmlapiobject2.getProperties();
             java.lang.Object aobj[] = new java.lang.Object[3];
@@ -1043,12 +1043,12 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "addBrowsableCounters", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
                     HashMap hashmap2 = (HashMap) vector.get(i);
-                    Enumeration enumeration2 = xmlapiobject1.elements();
+                    Enumeration enumeration2 = (Enumeration) xmlapiobject1.iterator();
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject3 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration2.nextElement();
                     xmlapiobject3.setProperties(hashmap2, false);
                 }
@@ -1066,11 +1066,11 @@ public class SiteViewConfigurationRequest {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("type");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             String s1 = xmlapiobject1.getProperty("id");
             String s2 = xmlapiobject1.getProperty("ownerid");
-            Enumeration enumeration1 = xmlapiobject1.elements();
+            Enumeration enumeration1 = (Enumeration) xmlapiobject1.iterator();
             COM.dragonflow.XmlApi.XmlApiObject xmlapiobject2 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration1.nextElement();
             HashMap hashmap1 = xmlapiobject2.getProperties();
             java.lang.Object aobj[] = new java.lang.Object[3];
@@ -1080,12 +1080,12 @@ public class SiteViewConfigurationRequest {
             COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = (COM.dragonflow.XmlApi.XmlApiResponse) COM.dragonflow.XmlApi.XmlApiRequest.invokeMethod("COM.dragonflow.XmlApi.XmlApi" + s, "removeBrowsableCounters", aobj);
             java.util.Vector vector = xmlapiresponse.getReturnVector();
             handleResponse(xmlapiresponse, xmlapiobject, vector);
-            enumeration = xmlapiobject.elements();
+            enumeration = (Enumeration) xmlapiobject.iterator();
             for (int i = 0; enumeration.hasMoreElements(); i ++) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 if (!xmlapiresponse.hasErrors() && vector != null) {
                     HashMap hashmap2 = (HashMap) vector.get(i);
-                    Enumeration enumeration2 = xmlapiobject1.elements();
+                    Enumeration enumeration2 = (Enumeration) xmlapiobject1.iterator();
                     COM.dragonflow.XmlApi.XmlApiObject xmlapiobject3 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration2.nextElement();
                     xmlapiobject3.setProperties(hashmap2, false);
                 }
@@ -1102,7 +1102,7 @@ public class SiteViewConfigurationRequest {
         try {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s = xmlapiobject.getProperty("type");
@@ -1191,7 +1191,7 @@ public class SiteViewConfigurationRequest {
         try {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             COM.dragonflow.XmlApi.XmlApiObject xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             java.lang.Object aobj[] = new java.lang.Object[1];
             aobj[0] = xmlapiobject1.getProperty("_machine");
@@ -1634,7 +1634,7 @@ public class SiteViewConfigurationRequest {
             xmlapiobject.setProperties(hashmap, false);
             String s = xmlapiobject.getProperty("profileId");
             String s1 = xmlapiobject.getProperty("profileName");
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             COM.dragonflow.XmlApi.XmlApiObject xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getTreeProperties();
             java.lang.Object aobj[] = new java.lang.Object[3];
@@ -1672,7 +1672,7 @@ public class SiteViewConfigurationRequest {
         try {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             COM.dragonflow.XmlApi.XmlApiObject xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
             HashMap hashmap1 = xmlapiobject1.getTreeProperties();
             java.lang.Object aobj[] = new java.lang.Object[1];
@@ -1921,7 +1921,7 @@ public class SiteViewConfigurationRequest {
         try {
             HashMap hashmap = xmlapiobject.getProperties();
             xmlapiobject.setProperties(hashmap, false);
-            Enumeration enumeration = xmlapiobject.elements();
+            Enumeration enumeration = (Enumeration) xmlapiobject.iterator();
             while (enumeration.hasMoreElements()) {
                 xmlapiobject1 = (COM.dragonflow.XmlApi.XmlApiObject) enumeration.nextElement();
                 String s = xmlapiobject.getProperty("type");

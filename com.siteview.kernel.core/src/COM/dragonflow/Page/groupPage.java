@@ -98,7 +98,7 @@ public class groupPage extends COM.dragonflow.Page.CGI {
                 s6 = TextUtils.getValue(hashmap, "_dependsCondition");
                 ArrayList array2 = TextUtils.getMultipleValues(hashmap,
                         "_description");
-                for (Enumeration enumeration1 = array2.elements(); enumeration1
+                for (Enumeration enumeration1 = (Enumeration) array2.iterator(); enumeration1
                         .hasMoreElements();) {
                     s7 = s7 + enumeration1.nextElement() + "\n";
                 }
@@ -269,7 +269,7 @@ public class groupPage extends COM.dragonflow.Page.CGI {
                                         .getGroupIDRelative(s1)));
                         hashmap1.put("_name", s3);
                         hashmap1.put("_encoding", I18N.nullEncoding());
-                        array2.insert(array2.size(), hashmap1);
+                        array2.add(array2.size(), hashmap1);
                         String s10 = TextUtils.increment(s8);
                         hashmap.put("_nextID", s10);
                         WriteGroupFrames(s5, array2);
@@ -385,8 +385,7 @@ public class groupPage extends COM.dragonflow.Page.CGI {
         HashMap hashmap = getMasterConfig();
         java.util.Vector vector = new Vector();
         String s2;
-        for (Enumeration enumeration = hashmap
-                .values("_httpCharSetOption"); enumeration.hasMoreElements(); vector
+        for (Enumeration enumeration = (Enumeration) hashmap.values("_httpCharSetOption"); enumeration.hasMoreElements(); vector
                 .addElement(s2)) {
             String s1 = (String) enumeration.nextElement();
             String as[] = COM.dragonflow.Utils.TextUtils.split(s1, ",");

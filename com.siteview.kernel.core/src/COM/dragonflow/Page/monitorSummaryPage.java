@@ -12,13 +12,18 @@ package COM.dragonflow.Page;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.BinaryPredicate;
+import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 
 // Referenced classes of package COM.dragonflow.Page:
 // CGI, treeControl
 
 public class monitorSummaryPage extends COM.dragonflow.Page.CGI
-    implements jgl.BinaryPredicate
+    implements BinaryPredicate
 {
 
     static final int daySeconds = 0x15180;
@@ -174,7 +179,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void printBody()
         throws java.lang.Exception
@@ -271,7 +276,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
                     }
                 }
 
-            jgl.Sorting.sort(array2, this);
+            Sorting.sort(array2, this);
             String s6 = request.getValue("tableWidth");
             if(s6.length() > 0)
             {
@@ -292,7 +297,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
             {
                 stringbuffer1.append("\r\n");
             }
-            Enumeration enumeration1 = array2.elements();
+            Enumeration enumeration1 = (Enumeration) array2.iterator();
             COM.dragonflow.SiteView.AtomicMonitor atomicmonitor = null;
             if(enumeration1.hasMoreElements())
             {
@@ -346,7 +351,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
             array.add(stringbuffer1.toString());
             StringBuffer stringbuffer2;
             
-            Enumeration enumeration2 = array2.elements(); 
+            Enumeration enumeration2 = (Enumeration) array2.iterator(); 
             while(enumeration2.hasMoreElements()) {
                 stringbuffer2 = new StringBuffer();
                 if(s3.indexOf("html") != -1 || !flag1)
@@ -528,7 +533,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
                     String s15 = atomicmonitor1.createFromTemplate("<mainParameters>", false);
                     ArrayList array3 = COM.dragonflow.SiteView.Platform.split('\n', s15);
                     StringBuffer stringbuffer4 = new StringBuffer();
-                    Enumeration enumeration7 = array3.elements();
+                    Enumeration enumeration7 = (Enumeration) array3.iterator();
                     while(enumeration7.hasMoreElements())
                         {
                         String s19 = (String)enumeration7.nextElement();

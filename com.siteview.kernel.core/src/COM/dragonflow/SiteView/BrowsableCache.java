@@ -108,7 +108,7 @@ public class BrowsableCache {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -129,7 +129,7 @@ public class BrowsableCache {
                 hashmap2 = (HashMap) hashmap.get("selectIDs");
             }
             if (flag) {
-                Enumeration enumeration = hashmap1.keys();
+                Enumeration enumeration = (Enumeration) hashmap1.keys();
                 while (enumeration.hasMoreElements()) {
                     hashmap1.put(enumeration.nextElement(), "");
                 }
@@ -143,7 +143,7 @@ public class BrowsableCache {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param browsablemonitor
      * @param s
@@ -176,8 +176,8 @@ public class BrowsableCache {
                     s3 = s3.substring(0, s3.indexOf(":objec"));
                 Object obj = httprequest.variables.get("SELECTED" + s3 + "ID");
                 s7 = "";
-                if (obj instanceof Array)
-                    s7 = (String) ((Array) obj).get(0);
+                if (obj instanceof ArrayList)
+                    s7 = (String) ((ArrayList) obj).get(0);
                 else
                     s7 = (String) obj;
                 if (s7 == null)
@@ -192,7 +192,7 @@ public class BrowsableCache {
                 hashmap1.put(s3, s1);
             }
 
-            Enumeration enumeration1 = hashmap1.keys();
+            Enumeration enumeration1 = (Enumeration) hashmap1.keys();
             while (enumeration1.hasMoreElements()) {
                 String s4 = (String) enumeration1.nextElement();
                 String s6 = (String) hashmap1.get(s4);
@@ -208,7 +208,7 @@ public class BrowsableCache {
                 HashMap hashmap5 = (HashMap) hashmap.get("permanentSelectIDs");
                 String s9;
                 String s10;
-                for (Enumeration enumeration2 = hashmap1.keys(); enumeration2
+                for (Enumeration enumeration2 = (Enumeration) hashmap1.keys(); enumeration2
                         .hasMoreElements(); hashmap4.put(s9, s10)) {
                     s9 = (String) enumeration2.nextElement();
                     s10 = (String) hashmap1.get(s9);
@@ -216,7 +216,7 @@ public class BrowsableCache {
 
                 String s11;
                 String s12;
-                for (Enumeration enumeration3 = hashmap2.keys(); enumeration3
+                for (Enumeration enumeration3 = (Enumeration) hashmap2.keys(); enumeration3
                         .hasMoreElements(); hashmap5.put(s11, s12)) {
                     s11 = (String) enumeration3.nextElement();
                     s12 = (String) hashmap2.get(s11);
@@ -229,7 +229,7 @@ public class BrowsableCache {
     private static String findNameFromID(HashMap hashmap, String s,
             BrowsableMonitor browsablemonitor) {
         s = URLDecoder.decode(s);
-        for (Enumeration enumeration = hashmap.keys(); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                 .hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             String s2 = URLDecoder.decode((String) hashmap.get(s1));
@@ -250,7 +250,7 @@ public class BrowsableCache {
             hashmap3.clear();
             String s1;
             String s2;
-            for (Enumeration enumeration = hashmap1.keys(); enumeration
+            for (Enumeration enumeration = (Enumeration) hashmap1.keys(); enumeration
                     .hasMoreElements(); hashmap3.put(s1, s2)) {
                 s1 = (String) enumeration.nextElement();
                 s2 = (String) hashmap1.get(s1);

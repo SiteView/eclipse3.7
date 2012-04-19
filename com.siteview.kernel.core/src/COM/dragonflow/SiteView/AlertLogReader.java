@@ -40,7 +40,7 @@ public class AlertLogReader extends LogReader {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hashmap
      * @param array
@@ -48,7 +48,7 @@ public class AlertLogReader extends LogReader {
      */
     public void addAlertEntry(HashMap hashmap,  ArrayList array, HashMap hashmap1) {
         if (hashmap1 != null) {
-            Enumeration enumeration = hashmap1.keys();
+            Enumeration enumeration = (Enumeration) hashmap1.keys();
             Object obj = null;
             String s1 = null;
             while (enumeration.hasMoreElements()) {

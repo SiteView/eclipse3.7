@@ -8,6 +8,8 @@
  */
 package COM.dragonflow.Utils;
 
+import com.recursionsw.jgl.BinaryPredicate;
+
 /**
  * Comment for <code></code>
  * 
@@ -19,7 +21,7 @@ package COM.dragonflow.Utils;
 
 // Referenced classes of package COM.dragonflow.Utils:
 // TextUtils
-public class URLInfo implements jgl.BinaryPredicate {
+public class URLInfo implements BinaryPredicate {
 
     public String url;
 

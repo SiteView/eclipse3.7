@@ -111,7 +111,7 @@ public class monitorSetTemplate {
     private void parseTemplate() {
         m_varTbl = new HashMap();
         HashMap hashmap = (HashMap) m_frames.get(0);
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         while (enumeration.hasMoreElements()) {
             String s = (String) enumeration.nextElement();
             String s1 = (String) hashmap.get(s);
@@ -125,7 +125,7 @@ public class monitorSetTemplate {
         m_whereVarUsed = new HashMap();
         for (int i = 1; i < m_frames.size(); i ++) {
             HashMap hashmap1 = (HashMap) m_frames.get(i);
-            Enumeration enumeration1 = hashmap1.keys();
+            Enumeration enumeration1 = (Enumeration) hashmap1.keys();
             String s2 = (String) hashmap1.get("_class");
             while (enumeration1.hasMoreElements()) {
                 String s3 = (String) enumeration1
@@ -133,7 +133,7 @@ public class monitorSetTemplate {
                 java.lang.Object obj = hashmap1.get(s3);
                 if (obj instanceof String) {
                     String s4 = (String) obj;
-                    Enumeration enumeration2 = m_varTbl.keys();
+                    Enumeration enumeration2 = (Enumeration) m_varTbl.keys();
                     while (enumeration2.hasMoreElements()) {
                         String s5 = (String) enumeration2
                                 .nextElement();
@@ -193,7 +193,7 @@ public class monitorSetTemplate {
             parseTemplate();
         }
         String as[] = new String[m_varTbl.size()];
-        Enumeration enumeration = m_varTbl.keys();
+        Enumeration enumeration = (Enumeration) m_varTbl.keys();
         for (int i = 0; enumeration.hasMoreElements(); i++) {
             as[i] = (String) enumeration.nextElement();
         }
@@ -217,7 +217,7 @@ public class monitorSetTemplate {
         HashMap hashmap = (HashMap) m_whereVarUsed.get(s);
         if (hashmap != null) {
             as = new String[hashmap.size()];
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             for (int i = 0; enumeration.hasMoreElements(); i++) {
                 as[i] = (String) enumeration.nextElement();
             }
@@ -229,7 +229,7 @@ public class monitorSetTemplate {
     public void replaceVariable(String s, String s1) {
         label0: for (int i = 0; i < m_frames.size(); i++) {
             HashMap hashmap = (HashMap) m_frames.get(i);
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             do {
                 if (!enumeration.hasMoreElements()) {
                     continue label0;
@@ -258,10 +258,10 @@ public class monitorSetTemplate {
                         s4 = reCalculateCounterIdLengthPrefixIfNecessary(s2, s4);
                     }
                     hashmap.put(s2, s4);
-                } else if (obj instanceof jgl.Array) {
-                    int j = ((jgl.Array) obj).size();
+                } else if (obj instanceof ArrayList) {
+                    int j = ((ArrayList) obj).size();
                     for (int k = 0; k < j; k++) {
-                        String s6 = (String) ((jgl.Array) obj)
+                        String s6 = (String) ((ArrayList) obj)
                                 .get(k);
                         String s7 = COM.dragonflow.Utils.TextUtils
                                 .replaceString(s6, s, s1);
@@ -276,7 +276,7 @@ public class monitorSetTemplate {
                                         .replaceString(s7, "$serverName$", s1);
                             }
                         }
-                        ((jgl.Array) obj).put(k, s7);
+                        ((ArrayList) obj).add(k, s7);
                         if (!s7.equals(s6)) {
                             flag = true;
                         }
@@ -284,7 +284,7 @@ public class monitorSetTemplate {
 
                 } else {
                     java.lang.System.out.println("key = " + s2
-                            + " is not a String or jgl.Array");
+                            + " is not a String or ArrayList");
                 }
                 if (flag) {
                     addReplacementList(i, s2);
@@ -345,8 +345,7 @@ public class monitorSetTemplate {
             if (hashmap.get("FOREACH") != null) {
                 String s = (String) hashmap.get("FOREACH");
                 HashMap hashmap1;
-                for (Enumeration enumeration = m_foreachVarTbl
-                        .values(s); enumeration.hasMoreElements(); array
+                for (Enumeration enumeration = (Enumeration) m_foreachVarTbl.values(s); enumeration.hasMoreElements(); array
                         .add(replaceAllForeachVariablesInFrame(s, hashmap1,
                                 hashmap, i++))) {
                     hashmap1 = (HashMap) enumeration.nextElement();
@@ -363,14 +362,14 @@ public class monitorSetTemplate {
     private HashMap replaceAllForeachVariablesInFrame(String s,
             HashMap hashmap, HashMap hashmap1, int i) {
         HashMap hashmap2 = new HashMap();
-        Enumeration enumeration = hashmap1.keys();
+        Enumeration enumeration = (Enumeration) hashmap1.keys();
         label0: do {
             if (enumeration.hasMoreElements()) {
                 String s1 = (String) enumeration
                         .nextElement();
                 String s2 = new String((String) hashmap1
                         .get(s1));
-                Enumeration enumeration1 = hashmap.keys();
+                Enumeration enumeration1 = (Enumeration) hashmap.keys();
                 do {
                     if (!enumeration1.hasMoreElements()) {
                         continue label0;
@@ -440,7 +439,7 @@ public class monitorSetTemplate {
         }
         String s;
         String s1;
-        for (Enumeration enumeration = hashmap.keys(); enumeration
+        for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                 .hasMoreElements(); replaceVariable(s, s1)) {
             s = (String) enumeration.nextElement();
             s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, s);

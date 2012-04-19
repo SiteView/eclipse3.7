@@ -59,7 +59,7 @@ public class browsablePage extends COM.dragonflow.Page.CGI
 
     private int getCounterSize(HashMap hashmap, HashMap hashmap1, String s, COM.dragonflow.SiteView.AtomicMonitor atomicmonitor)
     {
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         int i = hashmap1.size();
         if(enumeration.hasMoreElements())
         {
@@ -274,7 +274,7 @@ public class browsablePage extends COM.dragonflow.Page.CGI
                     {
                         HashMap hashmap8 = COM.dragonflow.SiteView.BrowsableCache.getCache(request.getValue("uniqueID"), false, false);
                         HashMap hashmap10 = (HashMap)hashmap8.get("cParms");
-                        Enumeration enumeration = hashmap10.keys();
+                        Enumeration enumeration = (Enumeration) hashmap10.keys();
                         if(enumeration.hasMoreElements())
                         {
                             String s9;
@@ -656,7 +656,7 @@ public class browsablePage extends COM.dragonflow.Page.CGI
 
     private boolean isIDSelected(COM.dragonflow.SiteView.BrowsableMonitor browsablemonitor, String s, HashMap hashmap)
     {
-        for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration.hasMoreElements();)
         {
             String s1 = (String)enumeration.nextElement();
             String s2 = java.net.URLDecoder.decode((String)hashmap.get(s1));

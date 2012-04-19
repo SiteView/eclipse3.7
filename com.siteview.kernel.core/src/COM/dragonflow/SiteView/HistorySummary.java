@@ -70,7 +70,7 @@ class HistorySummary {
                 for (int j = 0; j < array.size(); j++) {
                     if (as1[i].equals(array.get(j))) {
                         flag = true;
-                        array1.put(j, as1[i + 1]);
+                        array1.set(j, as1[i + 1]);
                     }
                 }
 

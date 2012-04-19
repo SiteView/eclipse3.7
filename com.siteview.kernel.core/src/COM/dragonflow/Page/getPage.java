@@ -237,7 +237,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                     al = COM.dragonflow.StandardMonitor.URLMonitor.checkURL(socketsession, s3, s13, COM.dragonflow.Utils.I18N.UnicodeToString(s5, COM.dragonflow.Utils.I18N.nullEncoding()), COM.dragonflow.Utils.I18N.UnicodeToString(s6, COM.dragonflow.Utils.I18N.nullEncoding()), s10, s11, s12, array1, s7, s8, s14, stringbuffer4, l1, s23, 0, 0x1d4c0, stringbuffer6, stringbuffer5);
                 } else
                 {
-                    Enumeration enumeration3 = array2.elements();
+                    Enumeration enumeration3 = (Enumeration) array2.iterator();
                     do
                     {
                         if(!enumeration3.hasMoreElements())

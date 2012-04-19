@@ -320,7 +320,7 @@ public class schedulePrefsPage extends COM.dragonflow.Page.settingsPrefsPage
         COM.dragonflow.StandardAction.Page page = new Page();
         if(hashmap != null)
         {
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             do
             {
                 if(!enumeration.hasMoreElements())

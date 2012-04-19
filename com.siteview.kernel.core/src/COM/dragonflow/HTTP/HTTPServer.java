@@ -266,7 +266,7 @@ public class HTTPServer
 
     COM.dragonflow.HTTP.VirtualDirectory getVirtualDirectory(String s)
     {
-        for(Enumeration enumeration = virtualDirectories.elements(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) virtualDirectories.iterator(); enumeration.hasMoreElements();)
         {
             COM.dragonflow.HTTP.VirtualDirectory virtualdirectory = (COM.dragonflow.HTTP.VirtualDirectory)enumeration.nextElement();
             String s1 = virtualdirectory.getFullDocumentPath(s);

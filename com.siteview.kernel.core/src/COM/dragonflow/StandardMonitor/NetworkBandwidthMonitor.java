@@ -553,7 +553,7 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public RealTimeReportingData[] getRealTimeData(StringProperty stringproperty) {
         RealTimeReportingData arealtimereportingdata[] = null;
@@ -622,12 +622,12 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
         return s.startsWith("deviceSpecificMetricVal") || s.startsWith("deviceSpecificRTMetric");
     }
 
-    private void getLogOrStateProperties(Array array) {
+    private void getLogOrStateProperties(ArrayList array) {
         getValidIFTableProperties(array);
         getDeviceSpecificProperties(array);
     }
 
-    private void getDeviceSpecificProperties(Array array) {
+    private void getDeviceSpecificProperties(ArrayList array) {
         for (int i = 0; i < pDeviceSpecificIDs.length; i ++) {
             if (getProperty(pDeviceSpecificIDs[i]).length() > 0) {
                 array.add(getPropertyObject("deviceSpecificMetricVal" + i));
@@ -636,7 +636,7 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
 
     }
 
-    private void getValidIFTableProperties(Array array) {
+    private void getValidIFTableProperties(ArrayList array) {
         if (findNumInterfaces() > 0 && getProperty(pLogOrStateProperties).length() == 0) {
             StringBuffer stringbuffer = new StringBuffer();
             storeValidIFTableProperties(stringbuffer);
@@ -955,7 +955,7 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
             if (hashmap2 != null) {
                 HashMap hashmap4 = (HashMap) hashmap2.get("mProp");
                 String s8;
-                for (Enumeration enumeration = hashmap4.keys(); enumeration.hasMoreElements(); setProperty(s8, (String) hashmap4.get(s8))) {
+                for (Enumeration enumeration = (Enumeration) hashmap4.keys(); enumeration.hasMoreElements(); setProperty(s8, (String) hashmap4.get(s8))) {
                     s8 = (String) enumeration.nextElement();
                 }
 

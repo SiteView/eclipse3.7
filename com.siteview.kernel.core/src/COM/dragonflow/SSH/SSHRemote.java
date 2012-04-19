@@ -17,6 +17,7 @@ package COM.dragonflow.SSH;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import COM.dragonflow.Utils.CounterLock;
@@ -175,7 +176,7 @@ public class SSHRemote implements COM.dragonflow.SSH.ISSHCloseable {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public void close() {
         java.lang.Thread athread[];

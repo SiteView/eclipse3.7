@@ -28,7 +28,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import jgl.Sorting;
+import com.recursionsw.jgl.algorithms.Sorting;
+//import Sorting;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.SiteView.DetectConfigurationChange;
 import COM.dragonflow.SiteView.Monitor;
@@ -244,7 +245,7 @@ public class FrameFile {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param array
@@ -288,7 +289,7 @@ public class FrameFile {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param file
      * @param array
@@ -354,7 +355,7 @@ public class FrameFile {
         if (hashmap.get("noSlotFilter") != null) {
             flag2 = false;
         }
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         if (flag1) {
              ArrayList array = new ArrayList();
             for (; enumeration.hasMoreElements(); array.add(enumeration.nextElement())) {
@@ -385,8 +386,8 @@ public class FrameFile {
                         stringbuffer.append(s1 + "={" + Platform.FILE_NEWLINE);
                         printFrame(stringbuffer, (HashMap) obj1, s, flag, flag1);
                         stringbuffer.append("}" + Platform.FILE_NEWLINE);
-                    } else if (obj1 instanceof Array) {
-                        Enumeration enumeration2 = ((Array) obj1).elements();
+                    } else if (obj1 instanceof ArrayList) {
+                        Enumeration enumeration2 = ((ArrayList) obj1).elements();
                         while (enumeration2.hasMoreElements()) {
                             stringbuffer.append(s1 + "=" + enumeration2.nextElement() + Platform.FILE_NEWLINE);
                         }
@@ -526,7 +527,7 @@ public class FrameFile {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param flag
@@ -619,7 +620,7 @@ public class FrameFile {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param enumeration
      * @return
@@ -638,7 +639,7 @@ public class FrameFile {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param enumeration
      * @param s
@@ -737,7 +738,7 @@ public class FrameFile {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param args
      * @throws Exception
@@ -787,7 +788,7 @@ public class FrameFile {
                 }
                  ArrayList array2 = readFromFile(s4 + "/" + args1[i1]);
                  ArrayList array3 = new ArrayList();
-                Enumeration enumeration = array2.elements();
+                Enumeration enumeration = (Enumeration) array2.iterator();
                 while (enumeration.hasMoreElements()) {
                     HashMap hashmap = (HashMap) enumeration.nextElement();
                     String s9 = TextUtils.getValue(hashmap, "_class");
@@ -831,7 +832,7 @@ public class FrameFile {
                 }
                  ArrayList array4 = readFromFile(s7 + "/" + args2[l1]);
                  ArrayList array5 = new ArrayList();
-                Enumeration enumeration1 = array4.elements();
+                Enumeration enumeration1 = (Enumeration) array4.iterator();
                 HashMap hashmap1 = new HashMap();
                 if (enumeration1.hasMoreElements()) {
                     hashmap1 = (HashMap) enumeration1.nextElement();

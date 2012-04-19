@@ -118,7 +118,7 @@ public class ScriptMonitor extends ServerMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -229,7 +229,7 @@ public class ScriptMonitor extends ServerMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -270,7 +270,7 @@ public class ScriptMonitor extends ServerMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     protected boolean update() {
         long l = Platform.timeMillis();
@@ -725,7 +725,7 @@ public class ScriptMonitor extends ServerMonitor {
         return j;
     }
 
-    private void addValuesPropertiesToArray(Array array) {
+    private void addValuesPropertiesToArray(ArrayList array) {
         String s = getProperty(pExpression);
         if (s.length() > 0) {
             int i = 0;

@@ -77,7 +77,7 @@ public class HealthUnixServerMonitor extends MultiContentBase {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     protected boolean update() {
         try {
@@ -146,7 +146,7 @@ public class HealthUnixServerMonitor extends MultiContentBase {
         return array;
     }
 
-    private static String getLabels(Array array) {
+    private static String getLabels(ArrayList array) {
         if (array == null) {
             return null;
         }

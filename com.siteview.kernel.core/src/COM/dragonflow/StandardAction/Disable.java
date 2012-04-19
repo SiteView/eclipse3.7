@@ -17,6 +17,7 @@ package COM.dragonflow.StandardAction;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -164,7 +165,7 @@ public class Disable extends COM.dragonflow.SiteView.Action {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public boolean execute() {
         String s = "true";
@@ -193,7 +194,7 @@ public class Disable extends COM.dragonflow.SiteView.Action {
                 }
             }
             try {
-                ArrayList array = (jgl.Array) hashmap.get(s7);
+                ArrayList array = (ArrayList) hashmap.get(s7);
                 if (array == null) {
                     array = COM.dragonflow.Page.CGI.ReadGroupFrames(s7, null);
                 }
@@ -241,13 +242,13 @@ public class Disable extends COM.dragonflow.SiteView.Action {
             }
         }
 
-        Enumeration enumeration = hashmap.keys();
+        Enumeration enumeration = (Enumeration) hashmap.keys();
         String s5 = "";
         String s6;
         for (; enumeration.hasMoreElements(); COM.dragonflow.SiteView.SiteViewGroup.updateStaticPages(s6)) {
             s6 = (String) enumeration.nextElement();
             try {
-                COM.dragonflow.Page.CGI.WriteGroupFrames(s6, (jgl.Array) hashmap.get(s6), null);
+                COM.dragonflow.Page.CGI.WriteGroupFrames(s6, (ArrayList) hashmap.get(s6), null);
             } catch (java.lang.Exception exception) {
                 addToBuffer(stringbuffer1, "error writing group file " + s6 + "  " + exception.getMessage());
             }

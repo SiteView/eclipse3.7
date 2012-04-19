@@ -22,6 +22,11 @@ import java.util.Date;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Reversing;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.SiteView.GreaterDate;
 
 // Referenced classes of package COM.dragonflow.Log:
@@ -91,8 +96,8 @@ public class DailyFileLogger extends COM.dragonflow.Log.BaseFileLogger
             array.add(date2);
         }
 
-        jgl.Sorting.sort(array, new GreaterDate());
-        jgl.Reversing.reverse(array);
+        Sorting.sort(array, new GreaterDate());
+        Reversing.reverse(array);
         if(i > 0)
         {
             do

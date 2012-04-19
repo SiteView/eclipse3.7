@@ -64,7 +64,7 @@ public class BrowsableSNMPMonitor extends BrowsableSNMPBase
              {
                  new File(as[i]);
                  vector.add(as[i]);
-                 vector.add((new File(as[i])).getName());
+                 vector.add(new File(as[i])).getName());
              }
 
          }

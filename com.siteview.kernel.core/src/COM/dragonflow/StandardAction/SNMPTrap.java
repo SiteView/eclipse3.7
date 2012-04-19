@@ -40,6 +40,7 @@ import com.netaphor.snmp.TimeTicks;
 import com.netaphor.snmp.TrapPDU;
 import com.netaphor.snmp.UsmUser;
 import com.netaphor.snmp.VariableBinding;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardAction:
 // SNMPVariableBinding
@@ -104,8 +105,8 @@ public class SNMPTrap extends COM.dragonflow.SiteView.Action
             setProperty(pTemplate, "Default");
         }
         unsetProperty(pSNMPSetting);
-        for(Enumeration enumeration = hashmap.values("_id"); enumeration.hasMoreElements(); addProperty(pSNMPSetting, (String)enumeration.nextElement())) { }
-        Enumeration enumeration1 = hashmap.keys();
+        for(Enumeration enumeration = (Enumeration) hashmap.values("_id"); enumeration.hasMoreElements(); addProperty(pSNMPSetting, (String)enumeration.nextElement())) { }
+        Enumeration enumeration1 = (Enumeration) hashmap.keys();
         while (enumeration1.hasMoreElements()) {
             String s = (String)enumeration1.nextElement();
             if(s.startsWith("_snmp"))
@@ -260,7 +261,7 @@ public class SNMPTrap extends COM.dragonflow.SiteView.Action
             if(httprequest.isStandardAccount())
             {
                 HashMap hashmap = cgi.getMasterConfig();
-                enumeration = hashmap.values("_additionalSNMP");
+                enumeration = (Enumeration) hashmap.values("_additionalSNMP");
             } else
             {
                 COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
@@ -354,7 +355,7 @@ public class SNMPTrap extends COM.dragonflow.SiteView.Action
                     {
                         HashMap hashmap = COM.dragonflow.Utils.TextUtils.stringToHashMap(s2);
                         s1 = (String)hashmap.get("_name");
-                        Enumeration enumeration1 = hashmap.keys();
+                        Enumeration enumeration1 = (Enumeration) hashmap.keys();
                         while (enumeration1.hasMoreElements()) {
                             String s5 = (String)enumeration1.nextElement();
                             if(s5.startsWith("_snmp"))
@@ -605,7 +606,7 @@ public class SNMPTrap extends COM.dragonflow.SiteView.Action
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1

@@ -17,6 +17,8 @@ package COM.dragonflow.StandardPreference;
  * 
  */
 
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.BooleanProperty;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteViewException.SiteViewOperationalException;

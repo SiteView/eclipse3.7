@@ -14,6 +14,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.URLInfo;
 
@@ -110,7 +113,7 @@ public class linkPage extends COM.dragonflow.Page.CGI
             }
             if(s2.length() == 0)
             {
-                jgl.Sorting.sort(array, new URLInfo(i));
+                Sorting.sort(array, new URLInfo(i));
                 String s5 = "/SiteView/cgi/go.exe/SiteView?page=link&file=" + s1 + "&account=" + request.getAccount();
                 boolean flag1 = request.getValue("show").length() > 0;
                 String s6 = "";

@@ -131,7 +131,7 @@ public class Machine extends SiteViewObject {
             synchronized (registerMachinesLock) {
                 if (machineObjectTable == null) {
                     HashMap hashmap = MasterConfig.getMasterConfig();
-                    registerMachines(hashmap.values("_remoteMachine"));
+                    registerMachines((Enumeration) hashmap.values("_remoteMachine"));
                 }
             }
         }
@@ -182,7 +182,7 @@ public class Machine extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      */
@@ -197,7 +197,7 @@ public class Machine extends SiteViewObject {
             }
             HashMap hashmap2 = (HashMap) hashmap1.clone();
             String s2;
-            for (Enumeration enumeration = hashmap.values("_remoteNTMachine"); enumeration
+            for (Enumeration enumeration = (Enumeration) hashmap.values("_remoteNTMachine"); enumeration
                     .hasMoreElements(); hashmap2.remove(s2)) {
                 String s1 = (String) enumeration.nextElement();
                 HashMap hashmap3 = TextUtils.stringToHashMap(s1);
@@ -211,7 +211,7 @@ public class Machine extends SiteViewObject {
                 hashmap1.put(s2, machine);
             }
 
-            Enumeration enumeration1 = hashmap2.keys();
+            Enumeration enumeration1 = (Enumeration) hashmap2.keys();
             while (enumeration1.hasMoreElements()) {
                 Object obj1 = enumeration1.nextElement();
                 if (((Machine) hashmap1.get(obj1)).owner == s) {
@@ -226,7 +226,7 @@ public class Machine extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param enumeration
      * @param s
@@ -249,7 +249,7 @@ public class Machine extends SiteViewObject {
                 hashmap.put(s1, machine);
             }
 
-            Enumeration enumeration1 = hashmap1.keys();
+            Enumeration enumeration1 = (Enumeration) hashmap1.keys();
             while (enumeration1.hasMoreElements()) {
                 Object obj1 = enumeration1.nextElement();
                 if (((Machine) hashmap.get(obj1)).owner == s) {
@@ -265,7 +265,7 @@ public class Machine extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param enumeration
      * @return
@@ -435,12 +435,13 @@ public class Machine extends SiteViewObject {
     public static  ArrayList getAllowedSshConnectionMethods() {
         String as[] = { "java", "Internal Java Libraries", "plink",
                 Platform.isWindows() ? "Plink" : "External SSH Client" };
-        return new Array(as);
+        
+//        return new ArrayList(as);
     }
 
     public static  ArrayList getAllowedSshAuthMethods() {
         String as[] = { "password", "Password", "keyfile", "Key File" };
-        return new Array(as);
+//        return new ArrayList(as);
     }
 
     public static  ArrayList getAllowedOSs() {
@@ -585,7 +586,7 @@ public class Machine extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param machine
      * @return
@@ -684,7 +685,7 @@ public class Machine extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hostName
      * @return

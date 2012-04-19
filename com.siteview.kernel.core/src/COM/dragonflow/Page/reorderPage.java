@@ -12,6 +12,11 @@ package COM.dragonflow.Page;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.BinaryPredicate;
+import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.algorithms.Sorting;
+
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.SiteView.CompareSlot;
 
@@ -19,7 +24,7 @@ import COM.dragonflow.SiteView.CompareSlot;
 // CGI
 
 public class reorderPage extends COM.dragonflow.Page.CGI
-    implements jgl.BinaryPredicate
+    implements BinaryPredicate
 {
 
     static String POSITION_VARIABLE = "pos";
@@ -110,11 +115,11 @@ public class reorderPage extends COM.dragonflow.Page.CGI
             String s3 = request.getValue("operation");
             if(s3.indexOf("Alpha") >= 0)
             {
-                jgl.Sorting.sort(array2, new CompareSlot("_name", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS, COM.dragonflow.SiteView.CompareSlot.STRING_COMPARE));
+                Sorting.sort(array2, new CompareSlot("_name", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS, COM.dragonflow.SiteView.CompareSlot.STRING_COMPARE));
             } else
             if(s3.indexOf("Position") >= 0)
             {
-                for(Enumeration enumeration = request.getVariables(); enumeration.hasMoreElements(); jgl.Sorting.sort(array2, new CompareSlot("sortKey", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS, COM.dragonflow.SiteView.CompareSlot.NUMERIC_COMPARE)))
+                for(Enumeration enumeration = request.getVariables(); enumeration.hasMoreElements(); Sorting.sort(array2, new CompareSlot("sortKey", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS, COM.dragonflow.SiteView.CompareSlot.NUMERIC_COMPARE)))
                 {
                     String s5 = (String)enumeration.nextElement();
                     if(!s5.startsWith(POSITION_VARIABLE))
@@ -131,7 +136,7 @@ public class reorderPage extends COM.dragonflow.Page.CGI
                 }
 
             }
-            for(Enumeration enumeration1 = array2.elements(); enumeration1.hasMoreElements(); array1.add(enumeration1.nextElement())) { }
+            for(Enumeration enumeration1 = (Enumeration) array2.iterator(); enumeration1.hasMoreElements(); array1.add(enumeration1.nextElement())) { }
             WriteGroupFrames(s1, array1);
             COM.dragonflow.SiteView.SiteViewGroup.updateStaticPages(s1);
             printRefreshHeader("", COM.dragonflow.SiteView.Monitor.getGroupDetailLink(request, monitorgroup), 0);

@@ -18,12 +18,15 @@ package COM.dragonflow.SiteView;
  * 
  */
 import java.util.Enumeration;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Api.APISiteView;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
@@ -111,7 +114,7 @@ public class Preferences extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @return
@@ -123,7 +126,7 @@ public class Preferences extends SiteViewObject {
             Object obj = null;
             Object obj1 = null;
             if (s != null && s.length() > 0) {
-                Enumeration enumeration = hashmap.values(s);
+                Enumeration enumeration = (Enumeration) hashmap.values(s);
                 while (enumeration.hasMoreElements()) {
                     HashMap hashmap1 = new HashMap();
                     String s1 = "";
@@ -250,7 +253,7 @@ public class Preferences extends SiteViewObject {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1

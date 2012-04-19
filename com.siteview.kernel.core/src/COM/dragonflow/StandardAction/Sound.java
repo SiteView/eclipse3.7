@@ -19,7 +19,10 @@ package COM.dragonflow.StandardAction;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
 
 import sun.audio.AudioStream;
 import COM.dragonflow.Properties.ScalarProperty;

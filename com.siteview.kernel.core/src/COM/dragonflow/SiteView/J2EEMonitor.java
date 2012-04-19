@@ -20,13 +20,16 @@ package COM.dragonflow.SiteView;
 import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.BrowsableProperty;
@@ -256,7 +259,7 @@ public abstract class J2EEMonitor extends AtomicMonitor implements
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */
@@ -368,11 +371,11 @@ public abstract class J2EEMonitor extends AtomicMonitor implements
         return "_browseID";
     }
 
-    public String setBrowseName(Array array) {
+    public String setBrowseName(ArrayList array) {
         return J2EEConnection.getNameFromArray(array);
     }
 
-    public String setBrowseID(Array array) {
+    public String setBrowseID(ArrayList array) {
         return "*";
     }
 

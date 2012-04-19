@@ -21,6 +21,9 @@ import java.io.File;
 import java.util.Enumeration;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.Utils.CommandLine;
 

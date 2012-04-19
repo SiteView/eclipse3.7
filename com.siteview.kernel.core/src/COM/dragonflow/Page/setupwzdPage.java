@@ -10,6 +10,9 @@
 package COM.dragonflow.Page;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.SiteView.MirrorConfiguration;
 

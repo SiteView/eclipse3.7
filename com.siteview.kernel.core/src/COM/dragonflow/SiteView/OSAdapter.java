@@ -51,10 +51,10 @@ public class OSAdapter {
     HashMap osProperties;
 
     public static  ArrayList getOSIDs() {
-        return TextUtils.enumToArray(adapters.keys());
+        return TextUtils.enumToArray((Enumeration) adapters.keys());
     }
 
-    public static  ArrayList getOSs(Array array) {
+    public static  ArrayList getOSs(ArrayList array) {
          ArrayList array1 = getOSIDs();
         array1 = TextUtils.sortStrings(array1, true);
         for (int i = 0; i < array1.size(); i ++) {
@@ -162,7 +162,7 @@ public class OSAdapter {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param s1
@@ -172,7 +172,7 @@ public class OSAdapter {
          ArrayList array = new ArrayList();
         HashMap hashmap = getCommand(s);
         if (hashmap != null) {
-            Enumeration enumeration = hashmap.keys();
+            Enumeration enumeration = (Enumeration) hashmap.keys();
             while (enumeration.hasMoreElements()) {
                 String s2 = (String) enumeration.nextElement();
                 if (TextUtils.match(s2, s1)) {
@@ -205,7 +205,7 @@ public class OSAdapter {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param args
      * @throws IOException
@@ -272,7 +272,7 @@ public class OSAdapter {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param machine
      * @param hashmap
@@ -411,7 +411,7 @@ public class OSAdapter {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param printwriter
      * @param atomicmonitor

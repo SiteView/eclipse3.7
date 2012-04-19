@@ -137,7 +137,7 @@ public class portalViewPage extends COM.dragonflow.Page.portalPreferencePage
     private String getSelectHTML(HashMap hashmap)
     {
         ArrayList array = COM.dragonflow.SiteView.Portal.getEditableViewArray();
-        ArrayList array1 = new Array(array);
+        ArrayList array1 = new ArrayList(array);
         array1.pushFront("Top-Level");
         array1.pushFront("");
         return "<select size=\"1\" name=\"parentViewID\"\n>" + COM.dragonflow.Page.portalViewPage.getOptionsHTML(array1, COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_parentID")) + "</SELECT>";

@@ -132,7 +132,7 @@ public class TecEventHistoryPage extends COM.dragonflow.Page.CGI {
 //
 //        outputStream.println("</table>");
 //        outputStream
-//                .println("<SCRIPT LANGUAGE=javascript>   \n<!--                           \nvar evDetails = new Array(     \n"
+//                .println("<SCRIPT LANGUAGE=javascript>   \n<!--                           \nvar evDetails = new ArrayList(     \n"
 //                        + details
 //                        + ");                             \n"
 //                        + "                               \n"

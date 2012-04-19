@@ -18,6 +18,9 @@
      */
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import SiteViewMain.ServicePrinter;
 
 // Referenced classes of package COM.dragonflow.Utils:
@@ -389,7 +392,7 @@ public class CommandLine
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param as
      * @param counterlock
@@ -588,7 +591,7 @@ public class CommandLine
         ArrayList array;
         if(recorded.size() >= 1)
         {
-            array = (jgl.Array)recorded.popFront();
+            array = (ArrayList)recorded.popFront();
         } else
         {
             array = new ArrayList();
@@ -629,7 +632,7 @@ public class CommandLine
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param as
      * @param s
@@ -878,7 +881,7 @@ public class CommandLine
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param i

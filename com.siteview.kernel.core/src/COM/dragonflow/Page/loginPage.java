@@ -9,6 +9,8 @@
  */
 package COM.dragonflow.Page;
 
+import java.util.ArrayList;
+
 import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.Page:

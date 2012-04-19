@@ -528,7 +528,7 @@ public class IPMIMonitor extends BrowsableBase {
 //        return new String(stringbuffer1);
 //    }
 
-    public String setBrowseID(Array array) {
+    public String setBrowseID(ArrayList array) {
         String s = "";
         if (array.size() <= 0) {
             return s;
@@ -601,7 +601,7 @@ public class IPMIMonitor extends BrowsableBase {
 //    }
 //
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */

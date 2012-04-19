@@ -63,7 +63,7 @@ public class PortalSync {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      */
@@ -200,7 +200,7 @@ public class PortalSync {
                     }
                 }
 
-                for (Enumeration enumeration = hashmap.keys(); enumeration
+                for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                         .hasMoreElements();) {
                     String s4 = (String) enumeration.nextElement();
                     l = deleteFile(portalsiteview, s4);

@@ -20,6 +20,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import com.recursionsw.jgl.HashMap;
@@ -270,7 +271,7 @@ public class TelnetCommandLine extends COM.dragonflow.Utils.RemoteCommandLine
     public static void closeAll()
     {
         COM.dragonflow.Utils.TelnetConnection telnetconnection;
-        for(Enumeration enumeration = openConnections.keys(); enumeration.hasMoreElements(); COM.dragonflow.Utils.TelnetCommandLine.closeConnection(telnetconnection))
+        for(Enumeration enumeration = (Enumeration) openConnections.keys(); enumeration.hasMoreElements(); COM.dragonflow.Utils.TelnetCommandLine.closeConnection(telnetconnection))
         {
             java.lang.Object obj = enumeration.nextElement();
             telnetconnection = (COM.dragonflow.Utils.TelnetConnection)openConnections.get(obj);

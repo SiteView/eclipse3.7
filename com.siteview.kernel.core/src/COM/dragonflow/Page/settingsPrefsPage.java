@@ -13,6 +13,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 
+import com.recursionsw.jgl.HashMap;
+
 // Referenced classes of package COM.dragonflow.Page:
 // prefsPage
 
@@ -69,7 +71,7 @@ public class settingsPrefsPage extends COM.dragonflow.Page.prefsPage {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param s
      * @param hashmap
@@ -84,7 +86,7 @@ public class settingsPrefsPage extends COM.dragonflow.Page.prefsPage {
         boolean flag;
         while (enumeration.hasMoreElements()) {
             hashmap2 = COM.dragonflow.Utils.TextUtils.stringToHashMap((String) enumeration.nextElement());
-            Enumeration enumeration1 = hashmap.keys();
+            Enumeration enumeration1 = (Enumeration) hashmap.keys();
             flag = true;
             String s2;
             while (enumeration1.hasMoreElements()) {

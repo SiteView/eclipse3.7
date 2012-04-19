@@ -10,7 +10,10 @@
 package COM.dragonflow.Page;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.CommandLine;

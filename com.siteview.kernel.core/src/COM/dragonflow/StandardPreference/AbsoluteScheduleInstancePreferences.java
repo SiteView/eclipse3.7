@@ -17,10 +17,13 @@ package COM.dragonflow.StandardPreference;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Vector;
+
+import com.recursionsw.jgl.HashMap;
 
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.StringProperty;
@@ -64,7 +67,7 @@ public class AbsoluteScheduleInstancePreferences extends COM.dragonflow.Standard
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public java.util.Vector getPreferenceProperties(String s, String s1, String s2, String s3, int i) throws COM.dragonflow.SiteViewException.SiteViewException {
         java.util.Vector vector = new Vector();

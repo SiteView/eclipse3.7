@@ -37,7 +37,7 @@ import java.util.zip.ZipOutputStream;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
-import jgl.Pair;
+//import jgl.Pair;
 
 // Referenced classes of package COM.dragonflow.Utils:
 // Braf, I18N, TextUtils
@@ -914,7 +914,7 @@ public class FileUtils
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param args
      */

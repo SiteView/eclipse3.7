@@ -696,7 +696,7 @@ public class URLSequenceMonitor extends AtomicMonitor
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      */
     public String getHostname()
     {
@@ -1219,7 +1219,7 @@ public class URLSequenceMonitor extends AtomicMonitor
         return s;
     }
 
-    static  ArrayList mergeVariable(Array array, String s)
+    static  ArrayList mergeVariable(ArrayList array, String s)
     {
          ArrayList array1 = new ArrayList();
         Enumeration enumeration = (Enumeration) array.iterator();
@@ -1453,7 +1453,7 @@ label4:
                                         }
                                     }
 
-                                    enumeration = array3.elements();
+                                    enumeration = (Enumeration) array3.iterator();
                                 }
                                 if(urlsequencemonitor != null)
                                 {
@@ -1467,7 +1467,7 @@ label4:
                                 boolean flag7 = true;
                                 if(array4 != null)
                                 {
-                                    Enumeration enumeration1 = array4.elements();
+                                    Enumeration enumeration1 = (Enumeration) array4.iterator();
                                     int i2 = 0;
                                     do
                                     {
@@ -1603,7 +1603,7 @@ label4:
                                     }
                                 }
                                 Enumeration enumeration2 = (Enumeration) array.iterator();
-                                 ArrayList array6 = (Array)array1.get(k - 1);
+                                 ArrayList array6 = (ArrayList)array1.get(k - 1);
                                 String s19;
                                 for(; enumeration2.hasMoreElements(); array6.add(s19))
                                 {
@@ -2227,7 +2227,7 @@ label9:
             int i1 = 1;
             for(int j1 = 0; j1 < array1.size(); j1++)
             {
-                 ArrayList array2 = (Array)array1.get(j1);
+                 ArrayList array2 = (ArrayList)array1.get(j1);
                 for(int k1 = 0; k1 < array2.size(); k1++)
                 {
                     s10 = array2.get(k1).toString();

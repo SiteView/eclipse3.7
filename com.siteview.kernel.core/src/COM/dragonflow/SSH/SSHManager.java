@@ -17,7 +17,10 @@ package COM.dragonflow.SSH;
  * 
  */
 
-import java.util.HashMap;
+import java.util.ArrayList;
+//import java.util.HashMap;
+
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.SSH:
 // SSHRemote, SSHCloser, SSHPlinkClient, SSHJavaClient
@@ -94,7 +97,7 @@ public class SSHManager {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      */
     public void closeAll() {

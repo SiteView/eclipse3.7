@@ -17,7 +17,8 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.BinaryPredicate;
+//import BinaryPredicate;
+import com.recursionsw.jgl.BinaryPredicate;
 import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Utils.TextUtils;
 

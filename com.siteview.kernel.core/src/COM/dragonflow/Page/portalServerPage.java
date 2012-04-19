@@ -12,6 +12,9 @@ package COM.dragonflow.Page;
 import java.io.File;
 
 import java.util.ArrayList;
+
+import com.recursionsw.jgl.HashMap;
+
 import COM.dragonflow.SiteView.PortalSync;
 
 // Referenced classes of package COM.dragonflow.Page:

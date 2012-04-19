@@ -13,6 +13,8 @@ import java.util.Enumeration;
 
 import java.util.ArrayList;
 import com.recursionsw.jgl.HashMap;
+import com.recursionsw.jgl.IHashMap;
+
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.SiteView.AtomicMonitor;
 import COM.dragonflow.SiteView.Monitor;
@@ -50,7 +52,7 @@ public class Filter {
         ArrayList array = new ArrayList();
         SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup
                 .currentSiteView();
-        Enumeration enumeration = siteviewgroup.getGroupIDs().elements();
+        Enumeration enumeration = ((IHashMap) siteviewgroup.getGroupIDs()).elements();
         HashMap hashmap = new HashMap();
         while (enumeration.hasMoreElements()) {
             MonitorGroup monitorgroup = COM.dragonflow.SiteView.SiteViewGroup
@@ -67,12 +69,12 @@ public class Filter {
                 hashmap.put(s, "");
             }
         }
-        array = TextUtils.enumToArray(hashmap.keys());
+        array = TextUtils.enumToArray((Enumeration) hashmap.keys());
         return array;
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @return
      */

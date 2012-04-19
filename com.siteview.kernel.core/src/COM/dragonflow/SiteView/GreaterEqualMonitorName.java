@@ -9,6 +9,10 @@
  */
 package COM.dragonflow.SiteView;
 
+import com.recursionsw.jgl.BinaryPredicate;
+
+//import com.recursionsw.BinaryPredicate;
+
 /**
  * Comment for <code>GreaterEqualMonitorName</code>
  * 
@@ -17,7 +21,7 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.BinaryPredicate;
+//import BinaryPredicate;
 
 // Referenced classes of package COM.dragonflow.SiteView:
 // Monitor

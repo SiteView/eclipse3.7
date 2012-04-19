@@ -152,7 +152,7 @@ public class DispatcherMonitor extends AtomicMonitor {
         Object obj = null;
         String s = "";
         if (hashmap != null) {
-            for (Enumeration enumeration = hashmap.keys(); enumeration
+            for (Enumeration enumeration = (Enumeration) hashmap.keys(); enumeration
                     .hasMoreElements();) {
                 String s1 = (String) enumeration.nextElement();
                 String s2 = (String) hashmap.get(s1);
@@ -165,7 +165,7 @@ public class DispatcherMonitor extends AtomicMonitor {
     }
 
     /**
-     * CAUTION: Decompiled by hand.
+     * 
      * 
      * @param hashmap
      * @return
@@ -475,7 +475,7 @@ public class DispatcherMonitor extends AtomicMonitor {
         return ID_PROPERTY;
     }
 
-    public String setBrowseName(Array array) {
+    public String setBrowseName(ArrayList array) {
         String s = "";
         if (array.size() <= 0) {
             return s;
@@ -490,7 +490,7 @@ public class DispatcherMonitor extends AtomicMonitor {
         return s;
     }
 
-    public String setBrowseID(Array array) {
+    public String setBrowseID(ArrayList array) {
         String s = "";
         if (array.size() <= 0) {
             return s;

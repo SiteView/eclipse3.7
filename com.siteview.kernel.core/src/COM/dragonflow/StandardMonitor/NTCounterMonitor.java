@@ -127,7 +127,7 @@ public class NTCounterMonitor extends ServerMonitor
                 synchronized(allSettings)
                 {
                     String s1 = Platform.getRoot() + File.separator + "templates.perfmon" + File.separator + getProperty(pPMCFile);
-                    countersCache = (Array)allSettings.get(s1);
+                    countersCache = (ArrayList)allSettings.get(s1);
                     Long long1 = (Long)modifiedDates.get(s1);
                     File file = new File(s1);
                     long l = 0L;
