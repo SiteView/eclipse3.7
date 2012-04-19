@@ -19,7 +19,7 @@ package COM.dragonflow.StandardPreference;
 
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Properties.BooleanProperty;
 import COM.dragonflow.Properties.ScalarProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -64,7 +64,7 @@ public class SNMPInstancePreferences extends COM.dragonflow.SiteView.Preferences
             snmptrap.setProperty("_snmpSpecific", getProperty("_snmpSpecific"));
             snmptrap.setProperty("_snmpObjectID", getProperty("_snmpObjectID"));
         }
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         array.add(s);
         snmptrap.setArgs(array);
         String s1 = snmptrap.sendTrap(s);

@@ -22,8 +22,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -239,10 +239,10 @@ public class Machine extends SiteViewObject {
             } else {
                 hashmap = machineObjectTable;
             }
-            Array array = createMachines(enumeration);
+             ArrayList array = createMachines(enumeration);
             HashMap hashmap1 = (HashMap) hashmap.clone();
             for (int i = 0; i < array.size(); i++) {
-                Machine machine = (Machine) array.at(i);
+                Machine machine = (Machine) array.get(i);
                 machine.owner = s;
                 String s1 = machine.getProperty(pID);
                 hashmap1.remove(s1);
@@ -270,8 +270,8 @@ public class Machine extends SiteViewObject {
      * @param enumeration
      * @return
      */
-    private static Array createMachines(Enumeration enumeration) {
-        Array array = new Array();
+    private static  ArrayList createMachines(Enumeration enumeration) {
+         ArrayList array = new ArrayList();
         while (enumeration.hasMoreElements()) {
             String s = (String) enumeration.nextElement();
             HashMap hashmap = TextUtils.stringToHashMap(s);
@@ -296,8 +296,8 @@ public class Machine extends SiteViewObject {
         return machine;
     }
 
-    public static Array getNTAllowedMethods() {
-        Array array = new Array();
+    public static  ArrayList getNTAllowedMethods() {
+         ArrayList array = new ArrayList();
         if (Platform.isWindows()) {
             array.add("NetBIOS");
             array.add("NetBIOS");
@@ -411,11 +411,11 @@ public class Machine extends SiteViewObject {
         return super.getProperty(stringproperty);
     }
 
-    public static Array getAllowedMethods() {
-        Array array = new Array();
-        Array array1 = getRemoteCommandLineClasses();
+    public static  ArrayList getAllowedMethods() {
+         ArrayList array = new ArrayList();
+         ArrayList array1 = getRemoteCommandLineClasses();
         for (int i = 0; i < array1.size(); i++) {
-            Class class1 = (Class) array1.at(i);
+            Class class1 = (Class) array1.get(i);
             RemoteCommandLine remotecommandline = null;
             try {
                 remotecommandline = (RemoteCommandLine) class1.newInstance();
@@ -432,19 +432,19 @@ public class Machine extends SiteViewObject {
         return array;
     }
 
-    public static Array getAllowedSshConnectionMethods() {
+    public static  ArrayList getAllowedSshConnectionMethods() {
         String as[] = { "java", "Internal Java Libraries", "plink",
                 Platform.isWindows() ? "Plink" : "External SSH Client" };
         return new Array(as);
     }
 
-    public static Array getAllowedSshAuthMethods() {
+    public static  ArrayList getAllowedSshAuthMethods() {
         String as[] = { "password", "Password", "keyfile", "Key File" };
         return new Array(as);
     }
 
-    public static Array getAllowedOSs() {
-        Array array = new Array();
+    public static  ArrayList getAllowedOSs() {
+         ArrayList array = new ArrayList();
         array = OSAdapter.getOSs(array);
         return array;
     }
@@ -595,9 +595,9 @@ public class Machine extends SiteViewObject {
             synchronized (Machine.remoteCommandLineClassesLock) {
                 if (Machine.remoteCommandLineClasses == null) {
                     HashMap hashmap = new HashMap();
-                    Array array = getRemoteCommandLineClasses();
+                     ArrayList array = getRemoteCommandLineClasses();
                     for (int i = 0; i < array.size(); i++) {
-                        Class cls = (Class) array.at(i);
+                        Class cls = (Class) array.get(i);
                         RemoteCommandLine remoteCommandLine = null;
                         try {
                             remoteCommandLine = (RemoteCommandLine) cls
@@ -627,8 +627,8 @@ public class Machine extends SiteViewObject {
         return null;
     }
 
-    public static Array getRemoteCommandLineClasses() {
-        Array array = new Array();
+    public static  ArrayList getRemoteCommandLineClasses() {
+         ArrayList array = new ArrayList();
         File file = new File(Platform.getRoot()
                 + "/classes/COM/dragonflow/Utils");
         String as[] = file.list();

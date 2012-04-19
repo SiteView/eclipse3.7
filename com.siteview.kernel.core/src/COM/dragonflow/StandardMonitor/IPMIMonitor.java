@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.StringProperty;
@@ -330,7 +330,7 @@ public class IPMIMonitor extends BrowsableBase {
             String s3 = (String) enumeration.nextElement();
             String s4 = (String) chassisMericsMap.get(s3);
             setProperty(s2 + i, s3);
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.pushFront("Chassis Status");
             array.pushFront(s4);
             String s5 = setBrowseName(array);
@@ -446,7 +446,7 @@ public class IPMIMonitor extends BrowsableBase {
         return super.getStatePropertyObjects(flag);
     }
 
-    public Array getLogProperties() {
+    public  ArrayList getLogProperties() {
         return super.getLogProperties();
     }
 
@@ -454,7 +454,7 @@ public class IPMIMonitor extends BrowsableBase {
         return true;
     }
 
-    public String verify(StringProperty stringproperty, String s, HTTPRequest httprequest, jgl.HashMap hashmap) {
+    public String verify(StringProperty stringproperty, String s, HTTPRequest httprequest, HashMap hashmap) {
         return super.verify(stringproperty, s, httprequest, hashmap);
     }
 
@@ -462,8 +462,8 @@ public class IPMIMonitor extends BrowsableBase {
         return getProperty(pHostName);
     }
 
-    public Array getConnectionProperties() {
-        Array array = new Array();
+    public  ArrayList getConnectionProperties() {
+         ArrayList array = new ArrayList();
         array.add(pHostName);
         array.add(pPortNumber);
         array.add(pUserName);
@@ -477,7 +477,7 @@ public class IPMIMonitor extends BrowsableBase {
 
     public void setMaxCounters(int i) {
         nMaxCounters = i;
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         hashmap.put("_browsableContentMaxCounters", (new Integer(i)).toString());
         MasterConfig.saveMasterConfig(hashmap);
     }
@@ -534,7 +534,7 @@ public class IPMIMonitor extends BrowsableBase {
             return s;
         }
         for (int i = array.size() - 1; i >= 0; i --) {
-            String s1 = (String) array.at(i);
+            String s1 = (String) array.get(i);
             s = s + s1;
         }
 

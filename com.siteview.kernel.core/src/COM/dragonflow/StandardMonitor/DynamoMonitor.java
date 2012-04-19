@@ -20,8 +20,8 @@ package COM.dragonflow.StandardMonitor;
 import java.net.URLEncoder;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
@@ -66,7 +66,7 @@ public class DynamoMonitor extends SNMPBase {
     }
 
     protected boolean update() {
-        Array array = getCounters(getCountersContent());
+         ArrayList array = getCounters(getCountersContent());
         String s = getProperty(pHost);
         if (s.indexOf(":") == -1) {
             s = s + getDefaultPort();
@@ -78,7 +78,7 @@ public class DynamoMonitor extends SNMPBase {
     /**
      * CAUTION: Decompiled by hand.
      */
-    protected void getSNMPData(String s, Array array) {
+    protected void getSNMPData(String s,  ArrayList array) {
         StringBuffer stringbuffer;
         int i;
         int j;
@@ -99,7 +99,7 @@ public class DynamoMonitor extends SNMPBase {
             k = Integer.valueOf(s3).intValue();
         }
         if (k >= 0) {
-            enumeration = array.elements();
+            enumeration = (Enumeration) array.iterator();
             as = new String[array.size()];
             as1 = new String[array.size()];
             i1 = 0;

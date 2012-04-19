@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -44,8 +44,8 @@ public class SubGroup extends Monitor {
         return "SubGroupHost";
     }
 
-    protected Array calculateIPAddresses() {
-        return new Array();
+    protected  ArrayList calculateIPAddresses() {
+        return new ArrayList();
     }
 
     public MonitorGroup lookupGroup() {
@@ -163,7 +163,7 @@ public class SubGroup extends Monitor {
         if (siteviewobject instanceof MonitorGroup) {
             String s1;
             try {
-                Array array = CGI.ReadGroupFrames(s, null);
+                 ArrayList array = CGI.ReadGroupFrames(s, null);
                 int i = array.size() - 1;
                 s1 = String.valueOf(i);
             } catch (Exception exception) {

@@ -20,8 +20,8 @@ package COM.dragonflow.StandardMonitor;
 
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class SybaseMonitor extends BrowsableMdrvBase
 {
@@ -36,9 +36,9 @@ public class SybaseMonitor extends BrowsableMdrvBase
     {
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pSybServer);
         array.add(pUsername);
         array.add(pPasswordEx);
@@ -78,7 +78,7 @@ public class SybaseMonitor extends BrowsableMdrvBase
 
     static 
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pSybServer = new StringProperty("_server", "");
         pSybServer.setDisplayText("Server", "Sybase server name.");
         pSybServer.setParameterOptions(false, true, BrowsableBase.COUNTER_PROPERTY_INDEX + 1, false);
@@ -100,7 +100,7 @@ public class SybaseMonitor extends BrowsableMdrvBase
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for(int i = 0; i < array.size(); i++)
         {
-            astringproperty[i] = (StringProperty)array.at(i);
+            astringproperty[i] = (StringProperty)array.get(i);
         }
 
         String s = (COM.dragonflow.StandardMonitor.SybaseMonitor.class).getName();

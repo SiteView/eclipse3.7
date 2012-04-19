@@ -22,8 +22,8 @@ import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.Rule;
 import COM.dragonflow.SiteView.XMLMonitor;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class WebSphereServletMonitor extends XMLMonitor
 {
@@ -36,9 +36,9 @@ public class WebSphereServletMonitor extends XMLMonitor
     {
     }
 
-    public Array getConnectionStandardProperties()
+    public  ArrayList getConnectionStandardProperties()
     {
-        Array array = super.getConnectionStandardProperties();
+         ArrayList array = super.getConnectionStandardProperties();
         array.add(pServletURL);
         array.add(pPort);
         return array;

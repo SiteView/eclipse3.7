@@ -27,8 +27,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.ScheduleProperty;
@@ -136,15 +136,15 @@ public class SiteViewLogReader extends LogReader {
     }
 
     public void processPortal(Array array, Date date, Date date1, int i,
-            Array array1, Array array2, Array array3, long l, long l1, long l2,
+             ArrayList array1,  ArrayList array2,  ArrayList array3, long l, long l1, long l2,
             String s, HashMap hashmap, boolean flag) {
         HashMap hashmap1 = new HashMap();
         for (int j = 0; j < array.size(); j++) {
-            SampleCollector samplecollector = (SampleCollector) array.at(j);
+            SampleCollector samplecollector = (SampleCollector) array.get(j);
             if (hashmap1.get(samplecollector.getIDString()) != null) {
                 continue;
             }
-            Array array4 = new Array();
+             ArrayList array4 = new ArrayList();
             String s1 = samplecollector.getIDString();
             PortalSiteView portalsiteview = (PortalSiteView) Portal
                     .getSiteViewForID(s1);
@@ -160,7 +160,7 @@ public class SiteViewLogReader extends LogReader {
             hashmap1.put(samplecollector.getIDString(), samplecollector);
             for (int k = j + 1; k < array.size(); k++) {
                 SampleCollector samplecollector1 = (SampleCollector) array
-                        .at(k);
+                        .get(k);
                 if (s2.equals(Portal
                         .getServerID(samplecollector1.getIDString()))
                         && (!flag1 || s3.equals(Portal
@@ -213,26 +213,26 @@ public class SiteViewLogReader extends LogReader {
     }
 
     public void process(Array array, Date date, Date date1, int i,
-            Array array1, Array array2, Array array3, long l, long l1, long l2,
+             ArrayList array1,  ArrayList array2,  ArrayList array3, long l, long l1, long l2,
             HashMap hashmap, boolean flag) {
         process(array, date, date1, 0L, i, array1, array2, array3, l, l1, l2,
                 hashmap, flag);
     }
 
     public void process(Array array, Date date, Date date1, long l, int i,
-            Array array1, Array array2, Array array3, long l1, long l2,
+             ArrayList array1,  ArrayList array2,  ArrayList array3, long l1, long l2,
             long l3, HashMap hashmap) {
         process(array, date, date1, l, i, array1, array2, array3, l1, l2, l3,
                 hashmap, false);
     }
 
     public void process(Array array, Date date, Date date1, long l, int i,
-            Array array1, Array array2, Array array3, long l1, long l2,
+             ArrayList array1,  ArrayList array2,  ArrayList array3, long l1, long l2,
             long l3, HashMap hashmap, boolean flag) {
         HashMap hashmap1 = new HashMap(true);
         SampleCollector samplecollector;
         String s;
-        for (Enumeration enumeration = array.elements(); enumeration
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements(); hashmap1.add(s, samplecollector)) {
             samplecollector = (SampleCollector) enumeration.nextElement();
             samplecollector.createBuckets(date.getTime() / 1000L, date1
@@ -509,11 +509,11 @@ public class SiteViewLogReader extends LogReader {
                     String s3 = as[2] + SiteViewObject.ID_SEPARATOR + s2;
                     Monitor monitor = (Monitor) siteviewgroup.getElement(s3);
                     if (monitor != null) {
-                        Array array = monitor.getLogProperties();
+                         ArrayList array = monitor.getLogProperties();
                         if (array != null) {
                             printwriter.println("<sample>");
                             int k = 1;
-                            for (Enumeration enumeration = array.elements(); enumeration
+                            for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                                     .hasMoreElements();) {
                                 StringProperty stringproperty = (StringProperty) enumeration
                                         .nextElement();

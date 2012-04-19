@@ -254,7 +254,7 @@ public class XmlApiSiteView {
         return xmlapiresponse;
     }
 
-    public java.lang.Object getFreeProfiles(jgl.HashMap hashmap) {
+    public java.lang.Object getFreeProfiles(HashMap hashmap) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
         try {
             java.util.HashMap hashmap1 = new HashMap();
@@ -319,7 +319,7 @@ public class XmlApiSiteView {
 //            java.util.Vector vector = new Vector();
 //            java.util.HashMap hashmap = api.getServerSettingsByEntity(s);
 //            if (hashmap != null) {
-//                jgl.HashMap hashmap1 = new jgl.HashMap();
+//                HashMap hashmap1 = new HashMap();
 //                java.util.Set set = hashmap.keySet();
 //                String s1;
 //                for (java.util.Iterator iterator = set.iterator(); iterator.hasNext(); hashmap1.put(s1, hashmap.get(s1))) {
@@ -342,7 +342,7 @@ public class XmlApiSiteView {
 //            java.util.Vector vector = new Vector();
 //            java.util.HashMap hashmap = api.getTopazServerSettings(s);
 //            if (hashmap != null) {
-//                jgl.HashMap hashmap1 = new jgl.HashMap();
+//                HashMap hashmap1 = new HashMap();
 //                java.util.Set set = hashmap.keySet();
 //                String s2;
 //                for (java.util.Iterator iterator = set.iterator(); iterator.hasNext(); hashmap1.put(s2, hashmap.get(s2))) {
@@ -359,7 +359,7 @@ public class XmlApiSiteView {
       return null;
     }
 
-    public java.lang.Object registerTopazProfile(String s, String s1, jgl.HashMap hashmap) {
+    public java.lang.Object registerTopazProfile(String s, String s1, HashMap hashmap) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
 //        try {
 //            java.util.HashMap hashmap1 = new HashMap();
@@ -378,7 +378,7 @@ public class XmlApiSiteView {
 		return null;
     }
 
-    public java.lang.Object reRegisterTopazProfile(jgl.HashMap hashmap) {
+    public java.lang.Object reRegisterTopazProfile(HashMap hashmap) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
 //        try {
 //            java.util.HashMap hashmap1 = new HashMap();

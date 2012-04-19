@@ -22,8 +22,8 @@ import java.text.DecimalFormat;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Properties.BrowsableProperty;
@@ -61,7 +61,7 @@ public class TivoliDmPassiveMonitor extends AtomicMonitor
     private int selectedCounters_;
 //    private DoubledVector availServers_;
     private Vector events_;
-    private final Array connProperties_ = new Array();
+    private final  ArrayList connProperties_ = new ArrayList();
     private static String VALUE_PREFIX;
     private static final String NAME_PROPERTY = "_browseName";
     private static final String ID_PROPERTY = "_browseNameid";
@@ -222,7 +222,7 @@ public class TivoliDmPassiveMonitor extends AtomicMonitor
         }
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
         return connProperties_;
     }
@@ -363,10 +363,10 @@ public class TivoliDmPassiveMonitor extends AtomicMonitor
         return rc;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
 //        logger_.debug("==> TivoliDmPassiveMonitor::getLogProperties******************");
-        Array logProperties = super.getLogProperties();
+         ArrayList logProperties = super.getLogProperties();
         for(int i = 0; i < selectedCounters_; i++)
         {
             logProperties.add(property_[LOW_COUNTER_VALUES_BOUND + i]);
@@ -380,7 +380,7 @@ public class TivoliDmPassiveMonitor extends AtomicMonitor
     {
         start();
 //        logger_.debug("==> TivoliDmPassiveMonitor::getStatePropertyObjects");
-        Array result = new Array();
+         ArrayList result = new ArrayList();
         result.add(countersInError_);
 //        logger_.debug("sending " + selectedCounters_ + " counters");
         for(int i = 0; i < selectedCounters_; i++)

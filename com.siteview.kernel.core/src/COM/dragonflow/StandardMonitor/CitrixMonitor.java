@@ -24,8 +24,8 @@ import COM.dragonflow.SiteView.*;
 import COM.dragonflow.Utils.Pair;
 
 import java.util.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class CitrixMonitor extends BrowsablePdhBase
  implements IServerPropMonitor
@@ -37,9 +37,9 @@ public class CitrixMonitor extends BrowsablePdhBase
  {
  }
 
- public Array getConnectionProperties()
+ public  ArrayList getConnectionProperties()
  {
-     return new Array();
+     return new ArrayList();
  }
 
  public boolean isServerBased()
@@ -71,9 +71,9 @@ public class CitrixMonitor extends BrowsablePdhBase
      return false;
  }
 
- public Array getPropertiesToPassBetweenPages(HTTPRequest httprequest)
+ public  ArrayList getPropertiesToPassBetweenPages(HTTPRequest httprequest)
  {
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      array.add(pCitrixServer);
      return array;
  }

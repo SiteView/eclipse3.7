@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.StandardMonitor.URLMonitor;
@@ -67,12 +67,12 @@ class LogPullerReadThread extends Thread {
     private static String fields[] = new String[100];
 
     static synchronized PortalSiteView nextServer() {
-        Array array = LogPuller.getPortals();
+         ArrayList array = LogPuller.getPortals();
         PortalSiteView portalsiteview = null;
         if (array.size() > 0) {
             int i = nextServer;
             do {
-                portalsiteview = (PortalSiteView) array.at(nextServer);
+                portalsiteview = (PortalSiteView) array.get(nextServer);
                 nextServer++;
                 if (nextServer >= array.size()) {
                     nextServer = 0;
@@ -227,9 +227,9 @@ class LogPullerReadThread extends Thread {
             StringBuffer stringbuffer1 = new StringBuffer();
             PortalSync.listFiles(portalsiteview, "/accounts", stringbuffer1);
             String s3 = stringbuffer1.toString();
-            Array array = Platform.split('\n', s3);
+             ArrayList array = Platform.split('\n', s3);
             for (int i = 0; i < array.size(); i++) {
-                String s5 = ((String) array.at(i)).trim();
+                String s5 = ((String) array.get(i)).trim();
                 fetchLogDirectory(portalsiteview, s5, socketsession, al,
                         stringbuffer);
             }
@@ -259,7 +259,7 @@ class LogPullerReadThread extends Thread {
 
     void fetchLogDirectory(PortalSiteView portalsiteview, String s,
             SocketSession socketsession, long al[], StringBuffer stringbuffer) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         long l = fetchLogList(portalsiteview, s, array, socketsession);
         if (l != 200L) {
             al[1]++;
@@ -273,7 +273,7 @@ class LogPullerReadThread extends Thread {
             }
         }
         long al1[];
-        for (Enumeration enumeration = array.elements(); enumeration
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements(); al[0] += al1[1]) {
             String s1 = (String) enumeration.nextElement();
             al1 = checkLog(portalsiteview, s, s1, socketsession);
@@ -323,7 +323,7 @@ class LogPullerReadThread extends Thread {
             s11 = s10 + s2 + "/SiteView/logs/" + s1;
         }
         String s12 = "";
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add("Method: HEAD");
         int i = 60000;
         if (s9.length() != 0) {
@@ -507,7 +507,7 @@ class LogPullerReadThread extends Thread {
         if (l + l2 < l1) {
             l1 = l + l2;
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add("Custom-Header: Range: bytes=" + l + "-" + l1);
         long al[] = URLMonitor.checkURL(socketsession, s11, s12, "", s3, s4,
                 s5, array, s6, s7, "", stringbuffer, l2, "", 0, i, null);
@@ -547,7 +547,7 @@ class LogPullerReadThread extends Thread {
      * @param socketsession
      * @return
      */
-    long fetchLogList(PortalSiteView portalsiteview, String s, Array array,
+    long fetchLogList(PortalSiteView portalsiteview, String s,  ArrayList array,
             SocketSession socketsession) {
         String s1 = portalsiteview.getProperty("_server");
         String s2 = portalsiteview.getProperty("_proxy");
@@ -600,8 +600,8 @@ class LogPullerReadThread extends Thread {
         long l1 = al[0];
         if (l1 == 200L) {
             String s13 = HTTPUtils.getHTTPPart(stringbuffer.toString(), false);
-            Array array1 = Platform.split('\n', s13);
-            Enumeration enumeration = array1.elements();
+             ArrayList array1 = Platform.split('\n', s13);
+            Enumeration enumeration = (Enumeration) array1.iterator();
             while (enumeration.hasMoreElements()) {
                 String s14 = (String) enumeration.nextElement();
                 s14 = s14.trim();
@@ -698,7 +698,7 @@ class LogPullerReadThread extends Thread {
                         if (monitor != null
                                 && (monitor instanceof AtomicMonitor)) {
                             AtomicMonitor atomicmonitor = (AtomicMonitor) monitor;
-                            Array array = atomicmonitor.getLogProperties();
+                             ArrayList array = atomicmonitor.getLogProperties();
                             Date date = LogReader.getDate(ai);
                             date = new Date(
                                     date.getTime()
@@ -725,7 +725,7 @@ class LogPullerReadThread extends Thread {
                                 int j1 = 0;
                                 while (j1 < i1) {
                                     StringProperty stringproperty = (StringProperty) array
-                                            .at(j1);
+                                            .get(j1);
                                     if (stringproperty != Monitor.pOwnerID
                                             && stringproperty != Monitor.pName
                                             && stringproperty != Monitor.pID) {

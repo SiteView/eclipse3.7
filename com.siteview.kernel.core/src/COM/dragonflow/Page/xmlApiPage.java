@@ -25,7 +25,7 @@ public class xmlApiPage extends COM.dragonflow.Page.CGI {
         String s = request.getValue("_login");
         String s1 = request.getValue("_password");
         String s2 = request.getValue("account");
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig
                 .getMasterConfig();
         String s3 = "";
         String s6 = null;

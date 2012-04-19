@@ -19,8 +19,8 @@ package COM.dragonflow.SiteView;
  */
 import java.io.File;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.FrameFile;
 import COM.dragonflow.Utils.FileUtils;
@@ -49,7 +49,7 @@ public class MasterConfig {
             return null;
         }
         HashMap hashmap = new HashMap();
-        Array array = null;
+         ArrayList array = null;
         try {
             array = FrameFile.readFromFile(Platform.getRoot() + File.separator
                     + "groups" + File.separator + "master.config");
@@ -110,7 +110,7 @@ public class MasterConfig {
         masterConfig = hashmap;
         try {
             String s = Platform.getRoot() + "/groups/master.config";
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(hashmap);
             FrameFile.writeToFile(s, array, "_", true, true);
             Platform.chmod(s, "rw");

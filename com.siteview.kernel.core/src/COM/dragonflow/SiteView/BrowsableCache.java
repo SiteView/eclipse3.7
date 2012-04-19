@@ -21,8 +21,8 @@ import java.io.File;
 import java.net.URLDecoder;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.datachannel.xml.om.Document;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
@@ -54,7 +54,7 @@ public class BrowsableCache {
             boolean flag1) {
         HashMap hashmap = null;
         for (int i = 0; i < browseCache.size(); i++) {
-            HashMap hashmap1 = (HashMap) browseCache.at(i);
+            HashMap hashmap1 = (HashMap) browseCache.get(i);
             String s1 = (String) hashmap1.get("id");
             if (!s1.equals(s)) {
                 try {
@@ -115,8 +115,8 @@ public class BrowsableCache {
      * @param flag1
      * @return
      */
-    public static Array getSelections(String s, boolean flag, boolean flag1) {
-        Array array = new Array();
+    public static  ArrayList getSelections(String s, boolean flag, boolean flag1) {
+         ArrayList array = new ArrayList();
         HashMap hashmap = getCache(s, false, false);
         if (hashmap != null) {
             HashMap hashmap1;
@@ -138,7 +138,7 @@ public class BrowsableCache {
             array.add(hashmap2);
             return array;
         } else {
-            return new Array();
+            return new ArrayList();
         }
     }
 
@@ -177,7 +177,7 @@ public class BrowsableCache {
                 Object obj = httprequest.variables.get("SELECTED" + s3 + "ID");
                 s7 = "";
                 if (obj instanceof Array)
-                    s7 = (String) ((Array) obj).at(0);
+                    s7 = (String) ((Array) obj).get(0);
                 else
                     s7 = (String) obj;
                 if (s7 == null)
@@ -288,17 +288,17 @@ public class BrowsableCache {
         String s1 = Platform.getRoot() + File.separator
                 + "templates.applications" + File.separator + s + ".cache";
         try {
-            Array array = FrameFile.readFromFile(s1);
+             ArrayList array = FrameFile.readFromFile(s1);
             hashmap = new HashMap();
             hashmap.add("id", s);
             hashmap.add("xml", new Document());
-            hashmap.add("tree", array.at(0));
-            hashmap.add("selectNames", array.at(1));
-            hashmap.add("selectIDs", array.at(2));
-            hashmap.add("permanentSelectNames", array.at(1));
-            hashmap.add("permanentSelectIDs", array.at(2));
-            hashmap.add("cParms", array.at(3));
-            hashmap.add("mProp", array.at(4));
+            hashmap.add("tree", array.get(0));
+            hashmap.add("selectNames", array.get(1));
+            hashmap.add("selectIDs", array.get(2));
+            hashmap.add("permanentSelectNames", array.get(1));
+            hashmap.add("permanentSelectIDs", array.get(2));
+            hashmap.add("cParms", array.get(3));
+            hashmap.add("mProp", array.get(4));
         } catch (Exception exception) {
         }
         return hashmap;
@@ -306,14 +306,14 @@ public class BrowsableCache {
 
     public static void saveCache(String s) {
         for (int i = 0; i < browseCache.size(); i++) {
-            HashMap hashmap = (HashMap) browseCache.at(i);
+            HashMap hashmap = (HashMap) browseCache.get(i);
             String s1 = (String) hashmap.get("id");
             if (!s1.equals(s))
                 continue;
             String s2 = Platform.getRoot() + File.separator
                     + "templates.applications" + File.separator + s + ".cache";
             try {
-                Array array = new Array();
+                 ArrayList array = new ArrayList();
                 array.add(hashmap.get("tree"));
                 array.add(hashmap.get("selectNames"));
                 array.add(hashmap.get("selectIDs"));
@@ -417,12 +417,12 @@ public class BrowsableCache {
         String s = (String) atomicmonitor.getClassProperty("class");
         if (s.endsWith("Monitor"))
             s = s.substring(0, s.length() - 7);
-        Array array = ((BrowsableMonitor) atomicmonitor)
+         ArrayList array = ((BrowsableMonitor) atomicmonitor)
                 .getConnectionProperties();
         for (int i = 0; i < array.size(); i++) {
             String s1 = atomicmonitor
-                    .getProperty(((StringProperty) array.at(i)).getName());
-            if (!((StringProperty) array.at(i)).isPassword
+                    .getProperty(((StringProperty) array.get(i)).getName());
+            if (!((StringProperty) array.get(i)).isPassword
                     && TextUtils
                             .keepChars(s1,
                                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._$")
@@ -463,7 +463,7 @@ public class BrowsableCache {
 
     static final int MAX_FILENAME_LENGTH = 210;
 
-    private static Array browseCache = new Array();
+    private static  ArrayList browseCache = new ArrayList();
 
     static {
         deleteOldCacheFiles();

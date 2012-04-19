@@ -28,8 +28,8 @@ import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -110,9 +110,9 @@ public class TelnetMonitor extends AtomicMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         return array;
@@ -169,7 +169,7 @@ public class TelnetMonitor extends AtomicMonitor
     public static int[] checkTelnet(String s, String s1, String s2, String s3, String s4, String s5, String s6, StringBuffer stringbuffer, 
             long l, PrintWriter printwriter)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if(s1.length() > 0)
         {
             array.add(s4);
@@ -187,7 +187,7 @@ public class TelnetMonitor extends AtomicMonitor
         return checkTelnet(s, array, stringbuffer, l, printwriter);
     }
 
-    public static int[] checkTelnet(String s, Array array, StringBuffer stringbuffer, long l, PrintWriter printwriter)
+    public static int[] checkTelnet(String s,  ArrayList array, StringBuffer stringbuffer, long l, PrintWriter printwriter)
     {
         int i = kURLUnknownError;
         Socket socket = null;
@@ -207,7 +207,7 @@ public class TelnetMonitor extends AtomicMonitor
             socket = new Socket(s, j);
             printwriter1 = FileUtils.MakeOutputWriter(socket.getOutputStream(), "");
             bufferedreader = FileUtils.MakeInputReader(socket.getInputStream(), "");
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             do
             {
                 if(!enumeration.hasMoreElements())
@@ -385,7 +385,7 @@ label1:
         throws IOException
     {
         String s = args[0];
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         for(int i = 1; i < args.length; i++)
         {
             array.add(args[i]);

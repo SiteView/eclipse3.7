@@ -48,7 +48,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
-import jgl.Array;
+import java.util.ArrayList;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.w3c.dom.Document;
@@ -90,9 +90,9 @@ public class DatabaseCounterMonitor extends BrowsableBase
      driverLoaded = false;
  }
 
- public Array getConnectionProperties()
+ public  ArrayList getConnectionProperties()
  {
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      array.add(pServerName);
      array.add(pQuery);
      array.add(pUser);
@@ -602,7 +602,7 @@ while(resultset.next())
      element1.setAttribute("desc", s2);
  }
 
- public String verify(StringProperty stringproperty, String s, HTTPRequest httprequest, jgl.HashMap hashmap)
+ public String verify(StringProperty stringproperty, String s, HTTPRequest httprequest, HashMap hashmap)
  {
      if(stringproperty == pQuery)
      {
@@ -674,7 +674,7 @@ while(resultset.next())
  public void setMaxCounters(int i)
  {
      nMaxCounters = i;
-     jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+     HashMap hashmap = MasterConfig.getMasterConfig();
      hashmap.put("_browsableContentMaxCounters", (new Integer(i)).toString());
      MasterConfig.saveMasterConfig(hashmap);
  }
@@ -717,7 +717,7 @@ while(resultset.next())
      }
  }
 
- protected void printTableAlertEntry(PrintWriter printwriter, HTTPRequest httprequest, Array array)
+ protected void printTableAlertEntry(PrintWriter printwriter, HTTPRequest httprequest,  ArrayList array)
  {
      if(getPropertyAsBoolean(pTool))
      {
@@ -753,8 +753,8 @@ while(resultset.next())
  static 
  {
      nMaxCounters = 30;
-     Array array = new Array();
-     jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+      ArrayList array = new ArrayList();
+     HashMap hashmap = MasterConfig.getMasterConfig();
      nMaxCounters = TextUtils.toInt(TextUtils.getValue(hashmap, "_browsableContentMaxCounters"));
      if(nMaxCounters == 0)
      {
@@ -817,7 +817,7 @@ while(resultset.next())
      StringProperty astringproperty1[] = new StringProperty[array.size()];
      for(int i = 0; i < array.size(); i++)
      {
-         astringproperty1[i] = (StringProperty)array.at(i);
+         astringproperty1[i] = (StringProperty)array.get(i);
      }
 
      String s = (COM.dragonflow.StandardMonitor.DatabaseCounterMonitor.class).getName();

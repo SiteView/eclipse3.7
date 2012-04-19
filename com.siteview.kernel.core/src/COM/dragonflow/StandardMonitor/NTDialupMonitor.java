@@ -23,8 +23,8 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -98,10 +98,10 @@ public class NTDialupMonitor extends AtomicMonitor
             s1 = s1 + " -hangup";
             LogManager.log("RunMonitor", getProperty(pName) + " dialing " + getProperty(pPhone));
             CommandLine commandline = new CommandLine();
-            Array array = commandline.exec(s1, dialupLock);
+             ArrayList array = commandline.exec(s1, dialupLock);
             if(flag)
             {
-                for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", "HANGUP: " + enumeration.nextElement())) { }
+                for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", "HANGUP: " + enumeration.nextElement())) { }
             }
             progressString += "Dialing " + getProperty(pPhone) + "\n";
             setProperty(pStateString, "dialing...");
@@ -113,7 +113,7 @@ public class NTDialupMonitor extends AtomicMonitor
             long l2 = 0L;
             String s6 = "authorization: ";
             long l3 = 0L;
-            Enumeration enumeration1 = array.elements();
+            Enumeration enumeration1 = (Enumeration) array.iterator();
             do
             {
                 if(!enumeration1.hasMoreElements())
@@ -158,7 +158,7 @@ public class NTDialupMonitor extends AtomicMonitor
                         hashmap.put("_webserverAddress", inetaddress.getHostAddress());
                     } else
                     {
-                        hashmap.put("_webserverAddress", Platform.getLocalIPAddress().at(0));
+                        hashmap.put("_webserverAddress", Platform.getLocalIPAddress().get(0));
                     }
                     MasterConfig.saveMasterConfig(hashmap);
                     SiteViewGroup.updateStaticPages();
@@ -169,7 +169,7 @@ public class NTDialupMonitor extends AtomicMonitor
                     System.out.println("can't get local host");
                     LogManager.log("Error", "can't get local host" + unknownhostexception.toString());
                 }
-                Array array2 = getMonitorsToRun();
+                 ArrayList array2 = getMonitorsToRun();
                 long l6 = getSettingAsLong("_NTDialupMonitorStartupTime", 500);
                 long l7 = getSettingAsLong("_NTDialupMonitorDelay", 500);
                 Enumeration enumeration2 = array2.elements();
@@ -234,10 +234,10 @@ public class NTDialupMonitor extends AtomicMonitor
                     setProperty(pStateString, "hanging up...");
                     long l8 = Platform.timeMillis();
                     CommandLine commandline1 = new CommandLine();
-                    Array array1 = commandline1.exec(s1, dialupLock);
+                     ArrayList array1 = commandline1.exec(s1, dialupLock);
                     if(flag)
                     {
-                        for(Enumeration enumeration3 = array1.elements(); enumeration3.hasMoreElements(); LogManager.log("RunMonitor", "HANGUP: " + enumeration3.nextElement())) { }
+                        for(Enumeration enumeration3 = (Enumeration) array1.iterator(); enumeration3.hasMoreElements(); LogManager.log("RunMonitor", "HANGUP: " + enumeration3.nextElement())) { }
                     }
                     l4 = Platform.timeMillis() - l8;
                 }
@@ -298,9 +298,9 @@ public class NTDialupMonitor extends AtomicMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pTime);
         array.add(pPercentGood);
         array.add(pMonitorCount);
@@ -348,8 +348,8 @@ public class NTDialupMonitor extends AtomicMonitor
         if(scalarproperty == pMonitors)
         {
             SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
-            Array array = CGI.getAllowedGroupIDsForAccount(httprequest);
-            Enumeration enumeration = array.elements();
+             ArrayList array = CGI.getAllowedGroupIDsForAccount(httprequest);
+            Enumeration enumeration = (Enumeration) array.iterator();
             Vector vector = new Vector();
             Vector vector1 = new Vector();
             do
@@ -380,7 +380,7 @@ public class NTDialupMonitor extends AtomicMonitor
         }
     }
 
-    void addToMonitorList(Monitor monitor, Array array, HashMap hashmap)
+    void addToMonitorList(Monitor monitor,  ArrayList array, HashMap hashmap)
     {
         if(monitor instanceof NTDialupMonitor)
         {
@@ -394,10 +394,10 @@ public class NTDialupMonitor extends AtomicMonitor
         }
     }
 
-    Array getMonitorsToRun()
+     ArrayList getMonitorsToRun()
     {
         HashMap hashmap = new HashMap();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         Enumeration enumeration = getMultipleValues(pMonitors);
 label0:

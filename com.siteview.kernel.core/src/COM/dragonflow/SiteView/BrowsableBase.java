@@ -22,8 +22,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.BrowsableProperty;
 import COM.dragonflow.Properties.NumericProperty;
@@ -124,8 +124,8 @@ public abstract class BrowsableBase extends AtomicMonitor implements
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         StringProperty stringproperty = getPropertyObject(PROPERTY_NAME_COUNTERS_IN_ERROR);
         if (stringproperty != null)
             array.add(stringproperty);
@@ -137,7 +137,7 @@ public abstract class BrowsableBase extends AtomicMonitor implements
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         StringProperty stringproperty = getPropertyObject(PROPERTY_NAME_COUNTERS_IN_ERROR);
         if (stringproperty != null)
             array.add(stringproperty);
@@ -145,7 +145,7 @@ public abstract class BrowsableBase extends AtomicMonitor implements
                 && getProperty(PROPERTY_NAME_COUNTER_NAME + (i + 1)).length() > 0; i++)
             array.add(getPropertyObject(PROPERTY_NAME_COUNTER_VALUE + (i + 1)));
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public String getBrowseName() {
@@ -163,7 +163,7 @@ public abstract class BrowsableBase extends AtomicMonitor implements
         for (int i = array.size() - 1; i >= 0; i--) {
             if (s.length() > 0)
                 s = s + "/";
-            s = s + (String) array.at(i);
+            s = s + (String) array.get(i);
         }
 
         return s;
@@ -174,7 +174,7 @@ public abstract class BrowsableBase extends AtomicMonitor implements
         if (array.size() <= 0)
             return s;
         for (int i = array.size() - 1; i >= 0; i--) {
-            String s1 = (String) array.at(i);
+            String s1 = (String) array.get(i);
             s = s + s1.length() + " " + s1;
         }
 
@@ -222,24 +222,24 @@ public abstract class BrowsableBase extends AtomicMonitor implements
             boolean flag, int i) {
         Enumeration enumeration = super.getConfigurationAddProperties(vector,
                 flag, i);
-        Array array = getConnectionProperties();
+         ArrayList array = getConnectionProperties();
         StringProperty stringproperty;
         for (; enumeration.hasMoreElements(); array.add(stringproperty))
             stringproperty = (StringProperty) enumeration.nextElement();
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public Enumeration getConfigurationEditProperties(Vector vector,
             boolean flag, int i) {
         Enumeration enumeration = super.getConfigurationEditProperties(vector,
                 flag, i);
-        Array array = getConnectionProperties();
+         ArrayList array = getConnectionProperties();
         StringProperty stringproperty;
         for (; enumeration.hasMoreElements(); array.add(stringproperty))
             stringproperty = (StringProperty) enumeration.nextElement();
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public boolean manageBrowsableSelectionsByID() {

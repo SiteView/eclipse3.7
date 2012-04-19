@@ -45,7 +45,7 @@ public class FileLogger extends COM.dragonflow.Log.BaseFileLogger {
 
     public FileLogger(String s, int i, int j) throws java.io.IOException {
         this(s, i, j, 0L, 0);
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         bufferDuration = COM.dragonflow.Log.FileLogger.getLongSetting(hashmap, "_logFileBufferDuration", 0L);
         initBuffer((int) COM.dragonflow.Log.FileLogger.getLongSetting(hashmap, "_logFileMaxBufferSize", 0L));
     }

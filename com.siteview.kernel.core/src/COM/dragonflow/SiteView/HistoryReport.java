@@ -32,9 +32,9 @@ import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
 
-import jgl.Array;
+import java.util.ArrayList;
 import jgl.ArrayIterator;
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 import jgl.Reversing;
 import jgl.Sorting;
 import COM.dragonflow.Chart.BarChart;
@@ -254,7 +254,7 @@ public class HistoryReport extends SiteViewObject {
 
     static boolean debug = false;
 
-    Array collectors;
+     ArrayList collectors;
 
     Date reportDate;
 
@@ -272,11 +272,11 @@ public class HistoryReport extends SiteViewObject {
 
     HTTPRequest request;
 
-    Array errorList;
+     ArrayList errorList;
 
-    Array warningList;
+     ArrayList warningList;
 
-    Array goodList;
+     ArrayList goodList;
 
     static boolean logoLoaded = false;
 
@@ -611,10 +611,10 @@ public class HistoryReport extends SiteViewObject {
         if (getProperty(pAccount).length() == 0) {
             setProperty(pAccount, "administrator");
         }
-        collectors = new Array();
+        collectors = new ArrayList();
         reportDate = Platform.makeDate();
-        Array array = getProperties();
-        Enumeration enumeration = array.elements();
+         ArrayList array = getProperties();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration.nextElement();
             if (!stringproperty.isParameter) {
@@ -846,13 +846,13 @@ public class HistoryReport extends SiteViewObject {
             TextUtils.debugPrint("*** HistoryReport.createReport(): now: " + TextUtils.prettyDate(Platform.makeDate()) + " start: " + date + " end: " + date1, null);
         }
         if (errorList == null) {
-            errorList = new Array();
+            errorList = new ArrayList();
         }
         if (warningList == null) {
-            warningList = new Array();
+            warningList = new ArrayList();
         }
         if (goodList == null) {
-            goodList = new Array();
+            goodList = new ArrayList();
         }
         HashMap hashmap = new HashMap();
         String s1 = "";
@@ -945,7 +945,7 @@ public class HistoryReport extends SiteViewObject {
             warningColor = goodColor;
             warningRGB = goodRGB;
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(getProperty(pFilePath) + ".html");
         FileUtils.copyFile(Platform.getRoot() + File.separator + "htdocs" + File.separator + "artwork" + File.separator + logoFile, getProperty(pReportDirectory) + File.separator + logoFile);
         String s8 = Platform.getDirectoryPath("templates.historyGraphics", s7);
@@ -967,7 +967,7 @@ public class HistoryReport extends SiteViewObject {
             boolean flag14 = getProperty(pStatusFilter).indexOf("good") != -1;
             boolean flag15 = getProperty(pStatusFilter).indexOf("warning") != -1;
             boolean flag16 = getProperty(pStatusFilter).indexOf("error") != -1;
-            Array array2 = new Array();
+             ArrayList array2 = new ArrayList();
             Enumeration enumeration2 = collectors.elements();
             while (enumeration2.hasMoreElements()) {
                 SampleCollector samplecollector3 = (SampleCollector) enumeration2.nextElement();
@@ -986,13 +986,13 @@ public class HistoryReport extends SiteViewObject {
             }
             s10 = "<BR><FONT=-1>Show only " + getProperty(pStatusFilter) + " monitors</FONT>";
         }
-        Array array1 = null;
+         ArrayList array1 = null;
         if (flag10) {
             HashMap hashmap3 = new HashMap(true);
             Monitor monitor = null;
             String s16 = "";
             for (int j1 = 0; j1 < collectors.size(); j1 ++) {
-                SampleCollector samplecollector4 = (SampleCollector) collectors.at(j1);
+                SampleCollector samplecollector4 = (SampleCollector) collectors.get(j1);
                 if (samplecollector4.monitor != monitor) {
                     s16 = samplecollector4.monitor.getFullID();
                 }
@@ -1127,7 +1127,7 @@ public class HistoryReport extends SiteViewObject {
                         AlertReport.generateReport(array1, printwriter, s13, true, date, date1, getPropertyAsInteger(pTimeOffset), reportTableHTML, reportTableHeaderHTML, reportTableDataHTML);
                     } catch (OutOfMemoryError outofmemoryerror) {
                         LogManager.log("Error", "Error generating alert report section - out of memory: " + getProperty(pAccount) + "-" + getProperty(pQueryID));
-                        array1 = new Array();
+                        array1 = new ArrayList();
                     }
                 }
             }
@@ -1239,7 +1239,7 @@ public class HistoryReport extends SiteViewObject {
      * @param printwriter
      * @param array
      */
-    public void HTMLChart(PrintWriter printwriter, Array array) {
+    public void HTMLChart(PrintWriter printwriter,  ArrayList array) {
         HashMap hashmap = new HashMap();
         boolean flag = getProperty(pReportType).indexOf("similarProperties") >= 0;
         boolean flag1 = getProperty(pReportType).indexOf("multipleMonitors") >= 0;
@@ -1248,7 +1248,7 @@ public class HistoryReport extends SiteViewObject {
         while (enumeration.hasMoreElements()) {
             SampleCollector samplecollector = (SampleCollector) enumeration.nextElement();
             if (samplecollector.isNumeric() && hashmap.get(samplecollector.getIDString()) == null) {
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 boolean flag2 = true;
                 boolean flag3 = true;
                 StringProperty stringproperty = null;
@@ -1277,7 +1277,7 @@ public class HistoryReport extends SiteViewObject {
         }
     }
 
-    public void RealTimeHTMLChart(PrintWriter printwriter, Array array) {
+    public void RealTimeHTMLChart(PrintWriter printwriter,  ArrayList array) {
         RealTimeReportingMonitor realtimereportingmonitor = getRealTimeReportingMonitor();
         if (realtimereportingmonitor == null) {
             LogManager.log("Error", "RealTimeHTMLChart called in a HistoryReport with no RealTimeReportingMonitor");
@@ -1285,7 +1285,7 @@ public class HistoryReport extends SiteViewObject {
         }
         java.util.HashMap hashmap = new java.util.HashMap();
         for (int i = 0; i < collectors.size(); i ++) {
-            SampleCollector samplecollector = (SampleCollector) collectors.at(i);
+            SampleCollector samplecollector = (SampleCollector) collectors.get(i);
             StringProperty stringproperty = samplecollector.getProperty();
             if (stringproperty != null) {
                 hashmap.put(stringproperty.getName(), samplecollector);
@@ -1294,10 +1294,10 @@ public class HistoryReport extends SiteViewObject {
 
         int j = 1;
         java.util.HashMap hashmap1 = new java.util.HashMap();
-        Array array1 = new Array();
+         ArrayList array1 = new ArrayList();
         boolean flag = getProperty(pReportType).indexOf("similarProperties") >= 0;
         for (int k = 0; k < collectors.size(); k ++) {
-            SampleCollector samplecollector1 = (SampleCollector) collectors.at(k);
+            SampleCollector samplecollector1 = (SampleCollector) collectors.get(k);
             boolean flag1 = hashmap1.get(samplecollector1.getIDString()) == null;
             if (!samplecollector1.isNumeric() || !flag1) {
                 continue;
@@ -1327,7 +1327,7 @@ public class HistoryReport extends SiteViewObject {
 
     }
 
-    public void imageLineGraph(PrintWriter printwriter, Array array, Array array1, boolean flag, boolean flag1, int i) {
+    public void imageLineGraph(PrintWriter printwriter,  ArrayList array,  ArrayList array1, boolean flag, boolean flag1, int i) {
         if (array1.size() == 0) {
             return;
         }
@@ -1339,11 +1339,11 @@ public class HistoryReport extends SiteViewObject {
         int j1 = getSettingAsLong("_chartHeight", 300) + j * k;
         SampleCollector samplecollector = null;
         for (int k1 = 0; k1 < array1.size(); k1 ++) {
-            SampleCollector samplecollector1 = (SampleCollector) array1.at(k1);
+            SampleCollector samplecollector1 = (SampleCollector) array1.get(k1);
             printwriter.println("<A NAME=Graph" + samplecollector1.getMonitorFullID() + "/" + samplecollector1.getProperty().getName() + "> </A>");
         }
 
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         Hashtable hashtable = new Hashtable();
         for (int l1 = 1; enumeration.hasMoreElements(); l1 ++) {
             SampleCollector samplecollector2 = (SampleCollector) enumeration.nextElement();
@@ -1393,7 +1393,7 @@ public class HistoryReport extends SiteViewObject {
             hashtable.put("errorPercentage" + l1, TextUtils.floatToString(f2, NumericProperty.percentPrecision));
         }
 
-        samplecollector = (SampleCollector) array1.at(0);
+        samplecollector = (SampleCollector) array1.get(0);
         StringProperty stringproperty = samplecollector.getProperty();
         f = getGraphMaximum(stringproperty, samplecollector.getMonitor(), f);
         float f1 = StringProperty.toFloat(stringproperty.valueOnlyString(f));
@@ -1518,7 +1518,7 @@ public class HistoryReport extends SiteViewObject {
         }
     }
 
-    public void imageBarGraph(PrintWriter printwriter, Array array, SampleCollector samplecollector, int i) {
+    public void imageBarGraph(PrintWriter printwriter,  ArrayList array, SampleCollector samplecollector, int i) {
         int j = getSettingAsLong("_chartPadPerLine", 18);
         long l = getPropertyAsLong(pTimeOffset);
         float f = 0.0F;
@@ -2040,11 +2040,11 @@ public class HistoryReport extends SiteViewObject {
                 s = samplecollector.getMonitor().getFullID();
                 Monitor monitor = samplecollector.getMonitor();
                 String s1 = monitor.getProperty(Monitor.pName);
-                Array array = new Array();
+                 ArrayList array = new ArrayList();
                 getThresholdList(monitor, array);
                 int i = 0;
                 while (i < array.size()) {
-                    HashMap hashmap = (HashMap) array.at(i);
+                    HashMap hashmap = (HashMap) array.get(i);
                     if (hashmap != null) {
                         String s2 = hashmap.get("error") == null ? "&nbsp;" : (String) hashmap.get("error");
                         String s3 = hashmap.get("warning") == null ? "&nbsp;" : (String) hashmap.get("warning");
@@ -2388,7 +2388,7 @@ public class HistoryReport extends SiteViewObject {
         int l = 0;
         String s2 = "";
         Enumeration enumeration = collectors.elements();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         while (enumeration.hasMoreElements()) {
             SampleCollector samplecollector = (SampleCollector) enumeration.nextElement();
             if (!s2.equals(samplecollector.getMonitorName())) {
@@ -2396,7 +2396,7 @@ public class HistoryReport extends SiteViewObject {
                 s2 = samplecollector.getMonitorName();
                 Monitor monitor = samplecollector.getMonitor();
                 String s3 = monitor.getProperty(Monitor.pName);
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 getThresholdList(monitor, array1);
                 hashmap.put(s3, array1);
                 array.add(hashmap);
@@ -2405,14 +2405,14 @@ public class HistoryReport extends SiteViewObject {
 
         if (flag) {
             for (int i1 = 0; i1 < array.size(); i1 ++) {
-                HashMap hashmap1 = (HashMap) array.at(i1);
+                HashMap hashmap1 = (HashMap) array.get(i1);
                 for (Enumeration enumeration1 = hashmap1.keys(); enumeration1.hasMoreElements();) {
                     String s4 = (String) enumeration1.nextElement();
                     i = s4.length() <= i ? i : s4.length();
-                    Array array2 = (Array) hashmap1.get(s4);
+                     ArrayList array2 = (Array) hashmap1.get(s4);
                     int k1 = 0;
                     while (k1 < array2.size()) {
-                        HashMap hashmap3 = (HashMap) array2.at(k1);
+                        HashMap hashmap3 = (HashMap) array2.get(k1);
                         if (hashmap3 != null) {
                             String s6 = hashmap3.get("error") == null ? "" : (String) hashmap3.get("error");
                             String s7 = hashmap3.get("warning") == null ? "" : (String) hashmap3.get("warning");
@@ -2442,13 +2442,13 @@ public class HistoryReport extends SiteViewObject {
         TextUtils.appendStringRightJustify(stringbuffer, "Good if", l);
         stringbuffer.append(s1);
         for (int j1 = 0; j1 < array.size(); j1 ++) {
-            HashMap hashmap2 = (HashMap) array.at(j1);
+            HashMap hashmap2 = (HashMap) array.get(j1);
             for (Enumeration enumeration2 = hashmap2.keys(); enumeration2.hasMoreElements();) {
                 String s5 = (String) enumeration2.nextElement();
-                Array array3 = (Array) hashmap2.get(s5);
+                 ArrayList array3 = (Array) hashmap2.get(s5);
                 int l1 = 0;
                 while (l1 < array3.size()) {
-                    HashMap hashmap4 = (HashMap) array3.at(l1);
+                    HashMap hashmap4 = (HashMap) array3.get(l1);
                     if (hashmap4 != null) {
                         TextUtils.appendStringLeftJustify(stringbuffer, s5, i);
                         stringbuffer.append(s);
@@ -2624,10 +2624,10 @@ public class HistoryReport extends SiteViewObject {
                 s = samplecollector.getMonitorName();
                 Monitor monitor = samplecollector.getMonitor();
                 String s1 = monitor.getProperty(Monitor.pName);
-                Array array = new Array();
+                 ArrayList array = new ArrayList();
                 getThresholdList(monitor, array);
                 for (int i = 0; i < array.size(); i ++) {
-                    HashMap hashmap = (HashMap) array.at(i);
+                    HashMap hashmap = (HashMap) array.get(i);
                     if (hashmap != null) {
                         String s2 = hashmap.get("error") == null ? "" : (String) hashmap.get("error");
                         String s3 = hashmap.get("warning") == null ? "" : (String) hashmap.get("warning");
@@ -3022,7 +3022,7 @@ public class HistoryReport extends SiteViewObject {
      * @param date1
      * @param i
      */
-    private void xmlHistoryTable(PrintWriter printwriter, Array array, Date date, Date date1, int i) {
+    private void xmlHistoryTable(PrintWriter printwriter,  ArrayList array, Date date, Date date1, int i) {
         boolean flag = getSetting("_showReportThresholdSummary").length() > 0;
         boolean flag1 = getSetting("_hideReportSummary").length() == 0;
         boolean flag2 = getSetting("_showReportErrorTimeSummary").length() > 0;
@@ -3348,7 +3348,7 @@ public class HistoryReport extends SiteViewObject {
         MonitorGroup monitorgroup = null;
         Monitor monitor = null;
         HashMap hashmap = new HashMap();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         boolean flag2 = !getPropertyAsBoolean(pBasicPropertiesOnly);
         Enumeration enumeration = getMultipleValues(pTargets);
         boolean flag3 = false;
@@ -3361,8 +3361,8 @@ public class HistoryReport extends SiteViewObject {
         }
 
         if (flag3) {
-            Array array2 = new Array();
-            Array array3 = siteviewgroup.getElementsOfClass("COM.dragonflow.SiteView.MonitorGroup", false);
+             ArrayList array2 = new ArrayList();
+             ArrayList array3 = siteviewgroup.getElementsOfClass("COM.dragonflow.SiteView.MonitorGroup", false);
             String s2;
             for (Enumeration enumeration1 = array3.elements(); enumeration1.hasMoreElements(); array2.add(s2)) {
                 MonitorGroup monitorgroup1 = (MonitorGroup) enumeration1.nextElement();
@@ -3377,9 +3377,9 @@ public class HistoryReport extends SiteViewObject {
         boolean flag4 = getProperty(pReportType).indexOf("lineGraph") >= 0;
         while (array.size() > 0) {
             if (array.size() > 0) {
-                Array array1 = array;
-                enumeration = array1.elements();
-                array = new Array();
+                 ArrayList array1 = array;
+                enumeration = (Enumeration) array1.iterator();
+                array = new ArrayList();
             }
             while (enumeration.hasMoreElements()) {
                 String s1 = (String) enumeration.nextElement();
@@ -3616,7 +3616,7 @@ public class HistoryReport extends SiteViewObject {
             }
         }
         String as2[] = file2.list();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         for (int i = 0; i < as2.length; i ++) {
             if (as2[i].startsWith(s5) && as2[i].endsWith(".html")) {
                 Date date = TextUtils.fileNameToDate(as2[i].substring(s5.length()));
@@ -3705,7 +3705,7 @@ public class HistoryReport extends SiteViewObject {
                     }
                 }
                 fileOut(printwriter, printwriter1, "<P><CENTER>\n<A NAME=uptimeSummary> </A>\n<TABLE WIDTH=\"100%\" " + s8 + "><CAPTION><B>Report Summary</B></CAPTION>\n");
-                Enumeration enumeration1 = array.elements();
+                Enumeration enumeration1 = (Enumeration) array.iterator();
                 String s16 = "";
                 boolean flag7 = false;
                 HistorySummaryCollector historysummarycollector = new HistorySummaryCollector(s, s1);
@@ -3919,9 +3919,9 @@ public class HistoryReport extends SiteViewObject {
     }
 
     private static boolean isFlipperQuickReport(String s) {
-        Array array = reportPage.getReportFrames(null);
+         ArrayList array = reportPage.getReportFrames(null);
         for (int i = 0; i < array.size(); i ++) {
-            HashMap hashmap = (HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             if (hashmap.get("isQuick") == null || ((String) hashmap.get("isQuick")).length() <= 0) {
                 continue;
             }
@@ -3961,7 +3961,7 @@ public class HistoryReport extends SiteViewObject {
      * @return
      * @throws IOException
      */
-    String addAttachments(StringBuffer stringbuffer, String s, Array array, String s1) throws IOException {
+    String addAttachments(StringBuffer stringbuffer, String s,  ArrayList array, String s1) throws IOException {
         String s2 = "----SiteViewRelated" + Platform.timeMillis();
         s = s + "[attachments]" + s2;
         RandomAccessFile randomaccessfile = null;
@@ -3970,7 +3970,7 @@ public class HistoryReport extends SiteViewObject {
             randomaccessfile.seek(randomaccessfile.length());
             stringbuffer.setLength(0);
             randomaccessfile.writeBytes("This is a multi-part message in MIME format.\n\n");
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 String s3 = (String) enumeration.nextElement();
                 if ((new File(s3)).exists()) {
@@ -4028,10 +4028,10 @@ public class HistoryReport extends SiteViewObject {
      * @param monitor
      * @param array
      */
-    private void getThresholdList(Monitor monitor, Array array) {
-        Array array1 = new Array();
-        Array array2 = new Array();
-        Array array3 = new Array();
+    private void getThresholdList(Monitor monitor,  ArrayList array) {
+         ArrayList array1 = new ArrayList();
+         ArrayList array2 = new ArrayList();
+         ArrayList array3 = new ArrayList();
         Enumeration enumeration = monitor.getClassifiers();
         String s = "SetProperty category error";
         String s1 = "SetProperty category warning";
@@ -4092,7 +4092,7 @@ public class HistoryReport extends SiteViewObject {
         int k = array3.size();
         int l = i <= j ? j : i;
         l = l <= k ? k : l;
-        Enumeration enumeration1 = array1.elements();
+        Enumeration enumeration1 = (Enumeration) array1.iterator();
         Enumeration enumeration2 = array2.elements();
         Enumeration enumeration3 = array3.elements();
         for (int i1 = 0; i1 < l; i1 ++) {

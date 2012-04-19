@@ -24,8 +24,8 @@ import COM.dragonflow.SiteView.*;
 import COM.dragonflow.Utils.PerfCounter;
 
 import java.net.URLEncoder;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class RealMonitor extends NTCounterBase
 {
@@ -91,11 +91,11 @@ public class RealMonitor extends NTCounterBase
         boolean flag = true;
         String s = "";
         String s1 = getDefaultInstance();
-        Array array = getAvailableCounters();
+         ArrayList array = getAvailableCounters();
         int i = 0;
         for(int j = 0; j < array.size(); j++)
         {
-            if(!((PerfCounter)array.at(j)).instance.equals(s1))
+            if(!((PerfCounter)array.get(j)).instance.equals(s1))
             {
                 continue;
             }
@@ -110,11 +110,11 @@ public class RealMonitor extends NTCounterBase
             {
                 flag = false;
             }
-            s = s + ((PerfCounter)array.at(j)).object + " -- ";
-            s = s + ((PerfCounter)array.at(j)).counterName;
-            if(((PerfCounter)array.at(j)).instance.length() > 0)
+            s = s + ((PerfCounter)array.get(j)).object + " -- ";
+            s = s + ((PerfCounter)array.get(j)).counterName;
+            if(((PerfCounter)array.get(j)).instance.length() > 0)
             {
-                s = s + " -- " + ((PerfCounter)array.at(j)).instance;
+                s = s + " -- " + ((PerfCounter)array.get(j)).instance;
             }
             i++;
         }

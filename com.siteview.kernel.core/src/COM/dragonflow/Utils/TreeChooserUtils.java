@@ -18,8 +18,8 @@ package COM.dragonflow.Utils;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import jgl.LessString;
 import COM.dragonflow.Properties.HashMapOrdered;
 
@@ -32,13 +32,13 @@ public class TreeChooserUtils {
 
     private java.io.PrintWriter outputStream;
 
-    private jgl.HashMap groupHashMap;
+    private HashMap groupHashMap;
 
-    private jgl.Array conditions;
+    private ArrayList conditions;
 
     COM.dragonflow.SiteView.SiteViewObject siteview;
 
-    public TreeChooserUtils(COM.dragonflow.HTTP.HTTPRequest httprequest, java.io.PrintWriter printwriter, jgl.Array array) {
+    public TreeChooserUtils(COM.dragonflow.HTTP.HTTPRequest httprequest, java.io.PrintWriter printwriter, ArrayList array) {
         request = null;
         outputStream = null;
         groupHashMap = null;
@@ -49,7 +49,7 @@ public class TreeChooserUtils {
         conditions = array;
     }
 
-    public TreeChooserUtils(COM.dragonflow.HTTP.HTTPRequest httprequest, java.io.PrintWriter printwriter, jgl.HashMap hashmap) {
+    public TreeChooserUtils(COM.dragonflow.HTTP.HTTPRequest httprequest, java.io.PrintWriter printwriter, HashMap hashmap) {
         request = null;
         outputStream = null;
         groupHashMap = null;
@@ -63,10 +63,10 @@ public class TreeChooserUtils {
     public void createTree() {
         String s = request.getValue("page");
         String s1 = request.getValue("view");
-        jgl.Array array = new Array();
-        jgl.HashMap hashmap = new HashMap();
+        ArrayList array = new ArrayList();
+        HashMap hashmap = new HashMap();
         String s2 = prepareTree(s, s1, array, hashmap);
-        jgl.HashMap hashmap1 = new HashMap();
+        HashMap hashmap1 = new HashMap();
         String s3;
         for (Enumeration enumeration = request.getValues("monitorID"); enumeration.hasMoreElements(); hashmap1.put(s3, "checked")) {
             s3 = (String) enumeration.nextElement();
@@ -112,7 +112,7 @@ public class TreeChooserUtils {
         }
     }
 
-    private String prepareTree(String s, String s1, jgl.Array array, jgl.HashMap hashmap) {
+    private String prepareTree(String s, String s1, ArrayList array, HashMap hashmap) {
         String s2;
         if (COM.dragonflow.SiteView.Platform.isStandardAccount(request.getAccount())) {
             s2 = COM.dragonflow.SiteView.Platform.getDirectoryPath("groups", request.getAccount());
@@ -121,9 +121,9 @@ public class TreeChooserUtils {
         }
         String s3 = s2 + java.io.File.separator + s + s1 + "Tree.dyn";
         try {
-            jgl.Array array1 = COM.dragonflow.Properties.FrameFile.readFromFile(s3);
+            ArrayList array1 = COM.dragonflow.Properties.FrameFile.readFromFile(s3);
             for (int i = 0; i < array1.size(); i ++) {
-                array.add(array1.at(i));
+                array.add(array1.get(i));
             }
 
         } catch (java.lang.Exception exception) {
@@ -132,11 +132,11 @@ public class TreeChooserUtils {
         return s3;
     }
 
-    private void updateCurrentStateFrames(jgl.Array array, jgl.HashMap hashmap) {
+    private void updateCurrentStateFrames(ArrayList array, HashMap hashmap) {
         String s = request.getAccount();
-        jgl.HashMap hashmap1 = new HashMap();
+        HashMap hashmap1 = new HashMap();
         for (int i = 0; i < array.size(); i ++) {
-            jgl.HashMap hashmap2 = (jgl.HashMap) array.at(i);
+            HashMap hashmap2 = (HashMap) array.get(i);
             if (COM.dragonflow.Utils.TextUtils.getValue(hashmap2, "_user").equals(s)) {
                 hashmap1 = hashmap2;
             }
@@ -169,10 +169,10 @@ public class TreeChooserUtils {
 
     }
 
-    private void processGroupView(jgl.HashMap hashmap, jgl.HashMap hashmap1) {
+    private void processGroupView(HashMap hashmap, HashMap hashmap1) {
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
-        jgl.Array array = getGroupNameList(hashmapordered);
-        for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements();) {
+        ArrayList array = getGroupNameList(hashmapordered);
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             String s = (String) enumeration.nextElement();
             Enumeration enumeration1 = hashmapordered.values(s);
             while (enumeration1.hasMoreElements()) {
@@ -185,40 +185,40 @@ public class TreeChooserUtils {
 
     }
 
-    private void processAlertView(jgl.HashMap hashmap, jgl.HashMap hashmap1) {
+    private void processAlertView(HashMap hashmap, HashMap hashmap1) {
         Enumeration enumeration = conditions.elements();
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap2 = (jgl.HashMap) enumeration.nextElement();
-            jgl.Array array = (jgl.Array) hashmap2.get("printable");
+            HashMap hashmap2 = (HashMap) enumeration.nextElement();
+            ArrayList array = (jgl.Array) hashmap2.get("printable");
             String s = (String) hashmap2.get("fullID");
             boolean flag = hashmap.get(s) != null;
             int i = 0;
             String s1 = getIndentHTML(i);
             outputStream.print("<tr><td><table><tr><td>" + s1 + "</td><td>");
             printOpenClose(flag, s);
-            outputStream.print("</td><td><input type=checkbox name=alert value=\"" + s + "\"></td><td>" + array.at(0) + "</td></tr></table></td>");
+            outputStream.print("</td><td><input type=checkbox name=alert value=\"" + s + "\"></td><td>" + array.get(0) + "</td></tr></table></td>");
             for (int j = 1; j < array.size(); j ++) {
-                outputStream.print(array.at(j));
+                outputStream.print(array.get(j));
             }
 
             outputStream.println("</tr>");
             if (flag) {
                 String s2 = (String) hashmap2.get("group");
-                jgl.Array array1 = new Array();
+                ArrayList array1 = new ArrayList();
                 if (s2.equals("_master")) {
                     String s3 = (String) hashmap2.get("contents");
                     if (s3 != null) {
-                        jgl.Array array2 = COM.dragonflow.SiteView.Platform.split(',', s3);
+                        ArrayList array2 = COM.dragonflow.SiteView.Platform.split(',', s3);
                         for (int l = 0; l < array2.size(); l ++) {
-                            jgl.Array array3 = COM.dragonflow.SiteView.Platform.split(' ', (String) array2.at(l));
-                            if (!array1.contains(array3.at(0))) {
-                                array1.add(array3.at(0));
+                            ArrayList array3 = COM.dragonflow.SiteView.Platform.split(' ', (String) array2.get(l));
+                            if (!array1.contains(array3.get(0))) {
+                                array1.add(array3.get(0));
                             }
                         }
 
                     } else {
                         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
-                        jgl.Array array4 = getGroupNameList(hashmapordered);
+                        ArrayList array4 = getGroupNameList(hashmapordered);
                         for (Enumeration enumeration1 = array4.elements(); enumeration1.hasMoreElements();) {
                             String s5 = (String) enumeration1.nextElement();
                             Enumeration enumeration2 = hashmapordered.values(s5);
@@ -234,7 +234,7 @@ public class TreeChooserUtils {
                 }
                 outputStream.println("<tr><td colspan=\"8\"><table width=\"100%\">");
                 for (int k = 0; k < array1.size(); k ++) {
-                    String s4 = (String) array1.at(k);
+                    String s4 = (String) array1.get(k);
                     printGroupAlertView(s + "/" + s4, hashmap2, hashmap, hashmap1, i + 4, "Alert");
                 }
 
@@ -243,51 +243,51 @@ public class TreeChooserUtils {
         } 
     }
 
-    private void processReportView(jgl.HashMap hashmap, jgl.HashMap hashmap1) {
+    private void processReportView(HashMap hashmap, HashMap hashmap1) {
         Enumeration enumeration = conditions.elements();
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap2 = (jgl.HashMap) enumeration.nextElement();
-            jgl.Array array = (jgl.Array) hashmap2.get("printable");
+            HashMap hashmap2 = (HashMap) enumeration.nextElement();
+            ArrayList array = (jgl.Array) hashmap2.get("printable");
             String s = (String) hashmap2.get("id");
             boolean flag = hashmap.get(s) != null;
             int i = 0;
             String s1 = getIndentHTML(i);
             outputStream.print("<tr><td><table><tr><td>" + s1 + "</td><td>");
             printOpenClose(flag, s);
-            outputStream.print("</td><td>" + array.at(0) + "</td></tr></table></td>");
+            outputStream.print("</td><td>" + array.get(0) + "</td></tr></table></td>");
             for (int j = 1; j < array.size(); j ++) {
-                outputStream.print(array.at(j));
+                outputStream.print(array.get(j));
             }
 
             outputStream.println("</tr>");
             if (flag) {
-                jgl.Array array1 = new Array();
+                ArrayList array1 = new ArrayList();
                 try {
                     String s2 = (String) hashmap2.get("monitors");
-                    jgl.Array array2 = COM.dragonflow.SiteView.Platform.split(' ', s2);
+                    ArrayList array2 = COM.dragonflow.SiteView.Platform.split(' ', s2);
                     if (array2.size() == 1) {
                         array1.add(s2);
                     } else {
-                        array1.add(array2.at(1));
+                        array1.add(array2.get(1));
                     }
                 } catch (java.lang.ClassCastException classcastexception) {
-                    jgl.Array array3 = (jgl.Array) hashmap2.get("monitors");
+                    ArrayList array3 = (jgl.Array) hashmap2.get("monitors");
                     Enumeration enumeration1 = array3.elements();
                     while (enumeration1.hasMoreElements()) {
                         String s4 = (String) enumeration1.nextElement();
-                        jgl.Array array4 = COM.dragonflow.SiteView.Platform.split(' ', s4);
+                        ArrayList array4 = COM.dragonflow.SiteView.Platform.split(' ', s4);
                         if (array4.size() == 1) {
                             if (!array1.contains(s4)) {
                                 array1.add(s4);
                             }
-                        } else if (!array1.contains(array4.at(1))) {
-                            array1.add(array4.at(1));
+                        } else if (!array1.contains(array4.get(1))) {
+                            array1.add(array4.get(1));
                         }
                     }
                 }
                 outputStream.println("<tr><td colspan=\"8\"><table width=\"100%\">");
                 for (int k = 0; k < array1.size(); k ++) {
-                    String s3 = (String) array1.at(k);
+                    String s3 = (String) array1.get(k);
                     printGroupReportView(s + "/" + s3, hashmap2, hashmap, hashmap1, i + 4, "Report");
                 }
 
@@ -296,12 +296,12 @@ public class TreeChooserUtils {
         } 
     }
 
-    private jgl.Array getGroupNameList(jgl.HashMap hashmap) {
+    private ArrayList getGroupNameList(HashMap hashmap) {
         boolean flag = true;
-        jgl.Array array = null;
+        ArrayList array = null;
         array = COM.dragonflow.Page.CGI.getAllowedGroupIDsForAccount(request);
-        Enumeration enumeration = array.elements();
-        jgl.Array array1 = new Array();
+        Enumeration enumeration = (Enumeration) array.iterator();
+        ArrayList array1 = new ArrayList();
         String s = "";
         while (enumeration.hasMoreElements()) {
             String s1 = (String) enumeration.nextElement();
@@ -319,15 +319,15 @@ public class TreeChooserUtils {
         return array1;
     }
 
-    private void printGroupGroupView(String s, String s1, jgl.HashMap hashmap, jgl.HashMap hashmap1, int i, String s2) {
+    private void printGroupGroupView(String s, String s1, HashMap hashmap, HashMap hashmap1, int i, String s2) {
         String s3 = printGroup(s, s1, hashmap, hashmap1, i, s2);
         boolean flag = hashmap.get(s) != null;
         if (flag) {
-            jgl.Array array = (jgl.Array) groupHashMap.get(s);
+            ArrayList array = (jgl.Array) groupHashMap.get(s);
             if (array != null) {
                 outputStream.println("<tr><td><table cellpadding=\"0\">");
                 for (int j = 0; j < array.size(); j ++) {
-                    printAlertOrReport((jgl.Array) array.at(j), s3);
+                    printAlertOrReport((jgl.Array) array.get(j), s3);
                 }
 
                 outputStream.println("</table></td></tr>");
@@ -346,11 +346,11 @@ public class TreeChooserUtils {
                 } else {
                     printMonitor(monitor, hashmap1, s, s2, s3);
                     String s5 = s + " " + monitor.getProperty(COM.dragonflow.SiteView.Monitor.pID);
-                    jgl.Array array1 = (jgl.Array) groupHashMap.get(s5);
+                    ArrayList array1 = (jgl.Array) groupHashMap.get(s5);
                     if (array1 != null) {
                         outputStream.println("<tr><td><table cellpadding=\"0\">");
                         for (int k = 0; k < array1.size(); k ++) {
-                            printAlertOrReport((jgl.Array) array1.at(k), getIndentHTML(i + 6));
+                            printAlertOrReport((jgl.Array) array1.get(k), getIndentHTML(i + 6));
                         }
 
                         outputStream.println("</table></td></tr>");
@@ -360,7 +360,7 @@ public class TreeChooserUtils {
         }
     }
 
-    private void printGroupAlertView(String s, jgl.HashMap hashmap, jgl.HashMap hashmap1, jgl.HashMap hashmap2, int i, String s1) {
+    private void printGroupAlertView(String s, HashMap hashmap, HashMap hashmap1, HashMap hashmap2, int i, String s1) {
         String s2 = s.substring(0, s.lastIndexOf('/'));
         String s3 = s.substring(s.lastIndexOf('/') + 1);
         String s4 = COM.dragonflow.Page.CGI.getGroupFullName(COM.dragonflow.Utils.I18N.toDefaultEncoding(COM.dragonflow.Page.CGI.getGroupIDFull(s3, siteview)));
@@ -369,7 +369,7 @@ public class TreeChooserUtils {
         if (flag) {
             String s5 = (String) hashmap.get("monitor");
             COM.dragonflow.SiteView.MonitorGroup monitorgroup = (COM.dragonflow.SiteView.MonitorGroup) siteview.getElement(s3);
-            jgl.Array array = new Array();
+            ArrayList array = new ArrayList();
             if (s5.equals("_config")) {
                 String s6 = (String) hashmap.get("contents");
                 if (s6 == null || s6.length() == 0) {
@@ -379,12 +379,12 @@ public class TreeChooserUtils {
                     }
 
                 } else {
-                    jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(',', s6);
+                    ArrayList array1 = COM.dragonflow.SiteView.Platform.split(',', s6);
                     for (int k = 0; k < array1.size(); k ++) {
-                        if (((String) array1.at(k)).indexOf(s3) >= 0) {
-                            jgl.Array array2 = COM.dragonflow.SiteView.Platform.split(' ', (String) array1.at(k));
+                        if (((String) array1.get(k)).indexOf(s3) >= 0) {
+                            ArrayList array2 = COM.dragonflow.SiteView.Platform.split(' ', (String) array1.get(k));
                             if (array2.size() > 1) {
-                                COM.dragonflow.SiteView.Monitor monitor3 = (COM.dragonflow.SiteView.Monitor) monitorgroup.getElementByID((String) array2.at(1));
+                                COM.dragonflow.SiteView.Monitor monitor3 = (COM.dragonflow.SiteView.Monitor) monitorgroup.getElementByID((String) array2.get(1));
                                 array.add(monitor3);
                             } else {
                                 COM.dragonflow.SiteView.Monitor monitor4;
@@ -403,7 +403,7 @@ public class TreeChooserUtils {
             }
             String s7 = getIndentHTML(i + 2);
             for (int j = 0; j < array.size(); j ++) {
-                COM.dragonflow.SiteView.Monitor monitor2 = (COM.dragonflow.SiteView.Monitor) array.at(j);
+                COM.dragonflow.SiteView.Monitor monitor2 = (COM.dragonflow.SiteView.Monitor) array.get(j);
                 if (monitor2 instanceof COM.dragonflow.SiteView.SubGroup) {
                     String s8 = COM.dragonflow.Utils.I18N.toDefaultEncoding(monitor2.getProperty(COM.dragonflow.SiteView.SubGroup.pGroup));
                     COM.dragonflow.SiteView.MonitorGroup monitorgroup1 = (COM.dragonflow.SiteView.MonitorGroup) siteview.getElement(s8);
@@ -419,29 +419,29 @@ public class TreeChooserUtils {
         }
     }
 
-    private void printGroupReportView(String s, jgl.HashMap hashmap, jgl.HashMap hashmap1, jgl.HashMap hashmap2, int i, String s1) {
+    private void printGroupReportView(String s, HashMap hashmap, HashMap hashmap1, HashMap hashmap2, int i, String s1) {
         String s2 = s.substring(0, s.lastIndexOf('/'));
         String s3 = s.substring(s.lastIndexOf('/') + 1);
         String s4 = COM.dragonflow.Page.CGI.getGroupFullName(COM.dragonflow.Utils.I18N.toDefaultEncoding(COM.dragonflow.Page.CGI.getGroupIDFull(s3, siteview)));
         printGroup(s, s4, hashmap1, hashmap2, i, s1);
         boolean flag = hashmap1.get(s) != null;
         if (flag) {
-            jgl.Array array = new Array();
+            ArrayList array = new ArrayList();
             COM.dragonflow.SiteView.MonitorGroup monitorgroup = (COM.dragonflow.SiteView.MonitorGroup) siteview.getElementByID(s3);
             try {
                 String s5 = (String) hashmap.get("monitors");
                 getReportMonitors(s5, monitorgroup, array);
             } catch (java.lang.ClassCastException classcastexception) {
-                jgl.Array array1 = (jgl.Array) hashmap.get("monitors");
+                ArrayList array1 = (jgl.Array) hashmap.get("monitors");
                 String s7;
-                for (Enumeration enumeration = array1.elements(); enumeration.hasMoreElements(); getReportMonitors(s7, monitorgroup, array)) {
+                for (Enumeration enumeration = (Enumeration) array1.iterator(); enumeration.hasMoreElements(); getReportMonitors(s7, monitorgroup, array)) {
                     s7 = (String) enumeration.nextElement();
                 }
 
             }
             String s6 = getIndentHTML(i + 2);
             for (int j = 0; j < array.size(); j ++) {
-                COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor) array.at(j);
+                COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor) array.get(j);
                 if (monitor instanceof COM.dragonflow.SiteView.SubGroup) {
                     String s8 = COM.dragonflow.Utils.I18N.toDefaultEncoding(monitor.getProperty(COM.dragonflow.SiteView.SubGroup.pGroup));
                     COM.dragonflow.SiteView.MonitorGroup monitorgroup1 = (COM.dragonflow.SiteView.MonitorGroup) siteview.getElement(s8);
@@ -457,9 +457,9 @@ public class TreeChooserUtils {
         }
     }
 
-    private void getReportMonitors(String s, COM.dragonflow.SiteView.MonitorGroup monitorgroup, jgl.Array array) {
+    private void getReportMonitors(String s, COM.dragonflow.SiteView.MonitorGroup monitorgroup, ArrayList array) {
         if (s != null) {
-            jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(' ', s);
+            ArrayList array1 = COM.dragonflow.SiteView.Platform.split(' ', s);
             if (array1.size() == 1) {
                 if (s.equals(monitorgroup.getProperty(COM.dragonflow.SiteView.Monitor.pID))) {
                     COM.dragonflow.SiteView.Monitor monitor2;
@@ -468,8 +468,8 @@ public class TreeChooserUtils {
                     }
 
                 }
-            } else if (array1.at(1).equals(monitorgroup.getProperty(COM.dragonflow.SiteView.Monitor.pID))) {
-                COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor) monitorgroup.getElementByID((String) array1.at(0));
+            } else if (array1.get(1).equals(monitorgroup.getProperty(COM.dragonflow.SiteView.Monitor.pID))) {
+                COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor) monitorgroup.getElementByID((String) array1.get(0));
                 array.add(monitor);
             }
         } else {
@@ -497,7 +497,7 @@ public class TreeChooserUtils {
         }
     }
 
-    private String printGroup(String s, String s1, jgl.HashMap hashmap, jgl.HashMap hashmap1, int i, String s2) {
+    private String printGroup(String s, String s1, HashMap hashmap, HashMap hashmap1, int i, String s2) {
         boolean flag = hashmap.get(s) != null;
         String s3 = getIndentHTML(i);
         String s4 = COM.dragonflow.SiteView.Platform.getURLPath("htdocs", request.getAccount()) + "/Detail";
@@ -516,7 +516,7 @@ public class TreeChooserUtils {
         return s3;
     }
 
-    private void printMonitor(COM.dragonflow.SiteView.Monitor monitor, jgl.HashMap hashmap, String s, String s1, String s2) {
+    private void printMonitor(COM.dragonflow.SiteView.Monitor monitor, HashMap hashmap, String s, String s1, String s2) {
         outputStream.print("<TR><TD>");
         outputStream.print(s2);
         String s3 = s + " " + monitor.getProperty(COM.dragonflow.SiteView.Monitor.pID);
@@ -533,11 +533,11 @@ public class TreeChooserUtils {
         outputStream.println("</TD></TR>");
     }
 
-    private void printAlertOrReport(jgl.Array array, String s) {
+    private void printAlertOrReport(ArrayList array, String s) {
         outputStream.println("<tr>");
         outputStream.println("<td>" + s + "</td>");
         for (int i = 0; i < array.size(); i ++) {
-            outputStream.println((String) array.at(i));
+            outputStream.println((String) array.get(i));
             outputStream.println("<td>&nbsp;&nbsp;</td>");
         }
 

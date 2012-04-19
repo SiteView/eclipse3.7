@@ -11,8 +11,8 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.Utils.FileUtils;
 import COM.dragonflow.Utils.TextUtils;
@@ -24,9 +24,9 @@ public class SupportNoteUtils
     {
     }
 
-    public static Array readNotes(String s)
+    public static  ArrayList readNotes(String s)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         File file = new File(s);
         if(!file.exists())
         {
@@ -203,11 +203,11 @@ public class SupportNoteUtils
     public static void main(String args[])
         throws Exception
     {
-        Array array = readNotes("C:/supportsite/notes/");
+         ArrayList array = readNotes("C:/supportsite/notes/");
         String s = FileUtils.readFile("C:/supportsite/notes/noteInternalTemplate.txt").toString();
         for(int i = 0; i < array.size(); i++)
         {
-            HashMap hashmap = (HashMap)array.at(i);
+            HashMap hashmap = (HashMap)array.get(i);
             writeNoteFile("C:/supportsite/", hashmap, s);
         }
 

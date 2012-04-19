@@ -17,6 +17,7 @@ package COM.dragonflow.Api;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
@@ -514,12 +515,12 @@ public class Alert
         return alert;
     }
 
-    public void replaceAlertCondProp(COM.dragonflow.SiteView.Monitor monitor, jgl.Array array)
+    public void replaceAlertCondProp(COM.dragonflow.SiteView.Monitor monitor, ArrayList array)
     {
         monitor.unsetProperty("_alertCondition");
         for(int i = 0; i < array.size(); i++)
         {
-            monitor.addProperty("_alertCondition", (String)array.at(i));
+            monitor.addProperty("_alertCondition", (String)array.get(i));
         }
 
     }
@@ -658,7 +659,7 @@ public class Alert
 
     public void setUniqueInternalId(int i)
     {
-        jgl.Array array = _monitor.getProperties("_alertCondition");
+        ArrayList array = _monitor.getProperties("_alertCondition");
         int j = findIdxOfMatchingAlert(array, getCondStr());
         if(!$assertionsDisabled && j == -1)
         {
@@ -666,16 +667,17 @@ public class Alert
         } else
         {
             java.util.HashMap hashmap = new HashMap();
-            parseCondition((String)array.at(j), hashmap);
+            parseCondition((String)array.get(j), hashmap);
             String s = assignUniqueID(hashmap, i);
-            array.put(j, s);
+            array.set(j, s);
+            
             setCondStr(s, array);
             setID(i);
             return;
         }
     }
 
-    private int findIdxOfMatchingAlert(jgl.Array array, String s)
+    private int findIdxOfMatchingAlert(ArrayList array, String s)
     {
         int i = -1;
         int j = 0;
@@ -685,7 +687,7 @@ public class Alert
             {
                 break;
             }
-            String s1 = (String)array.at(j);
+            String s1 = (String)array.get(j);
             if(s1.equals(s))
             {
                 i = j;
@@ -706,7 +708,7 @@ public class Alert
         {
             monitor = monitorgroup;
         }
-        jgl.Array array = monitor.getProperties("_alertCondition");
+        ArrayList array = monitor.getProperties("_alertCondition");
         String s = monitor.getProperty("_id");
         String s1 = "";
         if(s.equals("SiteView"))
@@ -724,7 +726,7 @@ public class Alert
         monitor.unsetProperty("_alertCondition");
         for(int i = 0; i < array.size(); i++)
         {
-            String s2 = (String)array.at(i);
+            String s2 = (String)array.get(i);
             java.util.HashMap hashmap = new HashMap();
             parseCondition(s2, hashmap);
             COM.dragonflow.Api.Alert alert = createAlertFromPropertyMap(s1, s, hashmap);
@@ -734,7 +736,7 @@ public class Alert
             if(set != null && hasOldConditionFormat(hashmap))
             {
                 s3 = createNewFormatCondStrFromPropMap(hashmap, alert);
-                array.put(i, s3);
+                array.set(i, s3);
                 set.add(monitorgroup);
             }
             alert.setCondStr(s3);
@@ -822,13 +824,13 @@ public class Alert
         _monitor.addProperty("_alertCondition", s);
     }
 
-    public void setCondStr(String s, jgl.Array array)
+    public void setCondStr(String s, ArrayList array)
     {
         _condStr = s;
         _monitor.unsetProperty("_alertCondition");
         for(int i = 0; i < array.size(); i++)
         {
-            _monitor.addProperty("_alertCondition", (String)array.at(i));
+            _monitor.addProperty("_alertCondition", (String)array.get(i));
         }
 
     }

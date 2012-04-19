@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Properties.NumericProperty;
@@ -247,7 +247,7 @@ public abstract class CompositeBase extends AtomicMonitor {
 
     protected void checkSequentially(int ai[], String as[], boolean flag,
             long l, String s) {
-        Array array = getMonitorsToRun();
+         ArrayList array = getMonitorsToRun();
         long l1 = getSettingAsLong("_CompositeStartupTime", 500);
         long l2 = getSettingAsLong("_CompositeCheckDelay", 500);
         SocketSession socketsession = null;
@@ -256,7 +256,7 @@ public abstract class CompositeBase extends AtomicMonitor {
             socketsession.allowClose = false;
         }
         int i = 0;
-        AtomicMonitor atomicmonitor = (AtomicMonitor) array.at(i);
+        AtomicMonitor atomicmonitor = (AtomicMonitor) array.get(i);
         do {
             if (atomicmonitor == null) {
                 break;
@@ -307,7 +307,7 @@ public abstract class CompositeBase extends AtomicMonitor {
                 }
             }
             if (i < array.size()) {
-                atomicmonitor = (AtomicMonitor) array.at(i);
+                atomicmonitor = (AtomicMonitor) array.get(i);
             } else {
                 atomicmonitor = null;
             }
@@ -329,16 +329,16 @@ public abstract class CompositeBase extends AtomicMonitor {
         if (s.startsWith(STEP_REFERENCE)) {
             int i = TextUtils.readInteger(s, STEP_REFERENCE.length());
             if (i >= 1) {
-                Array array = getMonitorsToRun();
+                 ArrayList array = getMonitorsToRun();
                 if (i <= array.size()) {
-                    siteviewobject = (SiteViewObject) array.at(i - 1);
+                    siteviewobject = (SiteViewObject) array.get(i - 1);
                 }
             }
         }
         return siteviewobject;
     }
 
-    protected void addToMonitorList(Monitor monitor, Array array,
+    protected void addToMonitorList(Monitor monitor,  ArrayList array,
             HashMap hashmap) {
         if (monitor == this) {
             return;
@@ -356,9 +356,9 @@ public abstract class CompositeBase extends AtomicMonitor {
      * 
      * @return
      */
-    protected Array getMonitorsToRun() {
+    protected  ArrayList getMonitorsToRun() {
         HashMap hashmap = new HashMap();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         Enumeration enumeration = getMultipleValues(pItems);
         while (enumeration.hasMoreElements()) {
@@ -406,8 +406,8 @@ public abstract class CompositeBase extends AtomicMonitor {
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pPercentGood);
         array.add(pPercentError);
         array.add(pPercentWarning);
@@ -466,8 +466,8 @@ public abstract class CompositeBase extends AtomicMonitor {
             HTTPRequest httprequest, CGI cgi) throws SiteViewException {
         if (scalarproperty == pItems) {
             SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
-            Array array = CGI.getAllowedGroupIDsForAccount(httprequest);
-            Enumeration enumeration = array.elements();
+             ArrayList array = CGI.getAllowedGroupIDsForAccount(httprequest);
+            Enumeration enumeration = (Enumeration) array.iterator();
             Vector vector = new Vector();
             Vector vector1 = new Vector();
             String s = getFullID();

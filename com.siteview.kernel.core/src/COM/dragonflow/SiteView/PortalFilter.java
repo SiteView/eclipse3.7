@@ -19,8 +19,8 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.HashMapOrdered;
@@ -41,7 +41,7 @@ public class PortalFilter {
 
     HashMap monitorFilter;
 
-    Array additionalFilters;
+     ArrayList additionalFilters;
 
     boolean anyDataFilters;
 
@@ -53,9 +53,9 @@ public class PortalFilter {
 
     String statusFilter;
 
-    Array expressionFilter;
+     ArrayList expressionFilter;
 
-    Array expressionStringFilter;
+     ArrayList expressionStringFilter;
 
     HashMap propertyFilter;
 
@@ -91,8 +91,8 @@ public class PortalFilter {
         nameFilter = TextUtils.getValue(hashmap, "name");
         statusFilter = TextUtils.getValue(hashmap, "status");
         if (TextUtils.getValue(hashmap, "exp").length() > 0) {
-            expressionFilter = new Array();
-            expressionStringFilter = new Array();
+            expressionFilter = new ArrayList();
+            expressionStringFilter = new ArrayList();
             for (Enumeration enumeration = hashmap.values("exp"); enumeration
                     .hasMoreElements();) {
                 String s = (String) enumeration.nextElement();
@@ -125,7 +125,7 @@ public class PortalFilter {
 
     public void addFilter(PortalFilter portalfilter) {
         if (additionalFilters == null) {
-            additionalFilters = new Array();
+            additionalFilters = new ArrayList();
         }
         additionalFilters.add(portalfilter);
     }
@@ -253,7 +253,7 @@ public class PortalFilter {
                     break;
                 }
                 PortalFilter portalfilter = (PortalFilter) additionalFilters
-                        .at(i);
+                        .get(i);
                 flag = portalfilter.itemAllowed(s, s1, s2);
                 if (!flag) {
                     break;
@@ -276,7 +276,7 @@ public class PortalFilter {
                     break;
                 }
                 PortalFilter portalfilter = (PortalFilter) additionalFilters
-                        .at(i);
+                        .get(i);
                 flag = portalfilter.allowMonitor(monitor);
                 if (!flag) {
                     break;
@@ -295,7 +295,7 @@ public class PortalFilter {
         if (flag && additionalFilters != null) {
             for (int i = 0; i < additionalFilters.size(); i++) {
                 PortalFilter portalfilter = (PortalFilter) additionalFilters
-                        .at(i);
+                        .get(i);
                 if (portalfilter.filteringOnData()) {
                     return true;
                 }
@@ -425,7 +425,7 @@ public class PortalFilter {
         if (expressionFilter != null) {
             boolean flag = false;
             for (int i = 0; i < expressionFilter.size(); i++) {
-                Expression expression = (Expression) expressionFilter.at(i);
+                Expression expression = (Expression) expressionFilter.get(i);
                 try {
                     Boolean boolean1 = (Boolean) expression
                             .interpretExpression(monitor, null);
@@ -617,7 +617,7 @@ public class PortalFilter {
             System.out.println("additional filters:");
             for (int i = 0; i < additionalFilters.size(); i++) {
                 PortalFilter portalfilter = (PortalFilter) additionalFilters
-                        .at(i);
+                        .get(i);
                 System.out
                         .println("---------------- additional filter -------------------");
                 portalfilter.print();

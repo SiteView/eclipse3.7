@@ -20,8 +20,8 @@ package COM.dragonflow.Properties;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Page.treeControl;
@@ -80,7 +80,7 @@ public class treeProperty extends ScalarProperty
      {
          s = (String)obj;
      }
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      if(httprequest.getValue(getName()).length() > 0)
      {
          array.add(HTTPRequest.decodeString(httprequest.getValue(getName())));
@@ -98,7 +98,7 @@ public class treeProperty extends ScalarProperty
      }
      StringBuffer stringbuffer = new StringBuffer();
      byte byte0 = 5;
-     Array array1 = new Array();
+      ArrayList array1 = new ArrayList();
      SiteViewObject siteviewobject1 = ((Monitor)siteviewobject).getParent();
      String s1 = "";
      if(siteviewobject1 instanceof SubGroup)

@@ -22,8 +22,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Properties.PropertiedObject;
@@ -259,8 +259,8 @@ public class EMSDatabaseMonitor extends AtomicMonitor
 //        return new JdbcMonitorImpl();
 //    }
 
-    public Array getLogProperties() {
-        Array a = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList a = super.getLogProperties();
         a.add(getPropertyObject("pCollected"));
         return a;
     }

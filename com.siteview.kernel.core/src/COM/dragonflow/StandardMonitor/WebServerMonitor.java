@@ -25,8 +25,8 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -282,8 +282,8 @@ public class WebServerMonitor extends ServerMonitor {
             s11 = s + "perfex.exe?" + URLEncoder.encode("-cgi " + s5);
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s11, Platform.getLock(s));
-        Enumeration enumeration = array.elements();
+         ArrayList array = commandline.exec(s11, Platform.getLock(s));
+        Enumeration enumeration = (Enumeration) array.iterator();
         long l = -1L;
         long l1 = -1L;
         long l2 = -1L;
@@ -415,8 +415,8 @@ public class WebServerMonitor extends ServerMonitor {
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pLastHits);
         array.add(pLastBytes);
         array.add(pLastHitsPerMinute);

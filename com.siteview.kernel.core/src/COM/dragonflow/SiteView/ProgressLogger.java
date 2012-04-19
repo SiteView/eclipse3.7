@@ -19,7 +19,7 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Date;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Log.Logger;
 import COM.dragonflow.Properties.PropertiedObject;
 import COM.dragonflow.Utils.TextUtils;
@@ -33,12 +33,12 @@ public class ProgressLogger extends Logger {
 
     public static ProgressLogger cProgressLogger = null;
 
-    public Array history;
+    public  ArrayList history;
 
     public long lastProgressTime;
 
     public ProgressLogger() {
-        history = new Array();
+        history = new ArrayList();
         lastProgressTime = Platform.timeMillis();
         if (cProgressLogger == null) {
             cProgressLogger = this;

@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Utils.URLInfo;
 
@@ -60,7 +60,7 @@ public class linkPage extends COM.dragonflow.Page.CGI
             String s3 = "";
             java.io.FileInputStream fileinputstream = null;
             java.io.BufferedReader bufferedreader = null;
-            jgl.Array array = new Array();
+            ArrayList array = new ArrayList();
             boolean flag = true;
             int j = 0;
             try
@@ -135,7 +135,7 @@ public class linkPage extends COM.dragonflow.Page.CGI
                     outputStream.println("<TR><TD COLSPAN=9 align=center>no link errors</TD></TR>\n");
                 } else
                 {
-                    Enumeration enumeration = array.elements();
+                    Enumeration enumeration = (Enumeration) array.iterator();
                     do
                     {
                         if(!enumeration.hasMoreElements())

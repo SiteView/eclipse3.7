@@ -14,5 +14,5 @@ public interface treeInterface {
     public abstract boolean process(boolean flag, boolean flag1,
             StringBuffer stringbuffer);
 
-    public abstract jgl.Array selected();
+    public abstract ArrayList selected();
 }

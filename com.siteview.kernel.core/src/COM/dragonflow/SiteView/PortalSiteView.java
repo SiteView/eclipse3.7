@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -118,9 +118,9 @@ public class PortalSiteView extends MonitorGroup {
 
     void loadAllGroups() {
         removeAllElements();
-        Array array = getGroupFileIDs();
+         ArrayList array = getGroupFileIDs();
         for (int i = 0; i < array.size(); i++) {
-            String s = (String) array.at(i);
+            String s = (String) array.get(i);
             loadGroup(s);
         }
 
@@ -154,11 +154,11 @@ public class PortalSiteView extends MonitorGroup {
         return TextUtils.match(getProperty(pServer), s);
     }
 
-    public Array getTopLevelGroups() {
+    public  ArrayList getTopLevelGroups() {
         return getGroups(false);
     }
 
-    public Array getGroups() {
+    public  ArrayList getGroups() {
         return getGroups(true);
     }
 
@@ -188,7 +188,7 @@ public class PortalSiteView extends MonitorGroup {
             File file = new File(s);
             if (file.exists()) {
                 masterConfigLastModified = file.lastModified();
-                Array array = FrameFile.readFromFile(s);
+                 ArrayList array = FrameFile.readFromFile(s);
                 hashmap = (HashMap) array.front();
             }
             LogManager.log("RunMonitor", "loading portal master.config: "
@@ -206,7 +206,7 @@ public class PortalSiteView extends MonitorGroup {
         String s = rootPath + File.separator + "groups" + File.separator
                 + "master.config";
         try {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(getMasterConfig());
             FrameFile.writeToFile(s, array, "_", true, true);
             Platform.chmod(s, "rw");
@@ -284,8 +284,8 @@ public class PortalSiteView extends MonitorGroup {
      * @param flag
      * @return
      */
-    public Array getGroups(boolean flag) {
-        Array array = new Array();
+    public  ArrayList getGroups(boolean flag) {
+         ArrayList array = new ArrayList();
         Enumeration enumeration = getElements();
         while (enumeration.hasMoreElements()) {
             MonitorGroup monitorgroup = (MonitorGroup) enumeration
@@ -298,9 +298,9 @@ public class PortalSiteView extends MonitorGroup {
         return array;
     }
 
-    public Array getGroupFileIDs() {
+    public  ArrayList getGroupFileIDs() {
         File file = new File(rootPath + File.separator + "groups");
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (file.exists()) {
             String as[] = file.list();
             for (int i = 0; i < as.length; i++) {
@@ -336,10 +336,10 @@ public class PortalSiteView extends MonitorGroup {
     private HashMap getClassFilter(String s) {
         String s1 = "/SiteView/cgi/go.exe/SiteView?page=remoteOp&account=administrator&operation="
                 + s;
-        Array array = sendURLToRemoteSiteView(s1, null);
+         ArrayList array = sendURLToRemoteSiteView(s1, null);
         HashMap hashmap = null;
         for (int i = 0; i < array.size(); i++) {
-            String s2 = ((String) array.at(i)).trim();
+            String s2 = ((String) array.get(i)).trim();
             if (s2.indexOf("error:") >= 0) {
                 hashmap = null;
                 break;
@@ -371,9 +371,9 @@ public class PortalSiteView extends MonitorGroup {
         return s4;
     }
 
-    public Array sendURLToRemoteSiteView(String s, CommandLine commandline) {
+    public  ArrayList sendURLToRemoteSiteView(String s, CommandLine commandline) {
         s = expandPartialURL(s);
-        Array array = CommandLine.runHTTPCommand(s, getProperty(pUserName),
+         ArrayList array = CommandLine.runHTTPCommand(s, getProperty(pUserName),
                 getProperty(pPassword), getProperty(pProxy),
                 getProperty(pProxyUserName), getProperty(pProxyPassword),
                 getProperty(pTimeout), commandline);
@@ -389,7 +389,7 @@ public class PortalSiteView extends MonitorGroup {
             LogManager.log("RunMonitor", "Remote SiteView Result: \n");
             for (int i = 0; i < array.size(); i++) {
                 LogManager
-                        .log("RunMonitor", "Remote SiteView: " + array.at(i));
+                        .log("RunMonitor", "Remote SiteView: " + array.get(i));
             }
 
         }
@@ -400,7 +400,7 @@ public class PortalSiteView extends MonitorGroup {
             String s) {
         String s1 = httprequest.rawURL;
         String s2 = "account=" + httprequest.getAccount();
-        Array array = null;
+         ArrayList array = null;
         if (httprequest.isPost()) {
             String s3 = httprequest.queryString;
             String s5 = "&portalserver="
@@ -413,7 +413,7 @@ public class PortalSiteView extends MonitorGroup {
             s3 = TextUtils.replaceString(s3, s2, "account=administrator");
             s3 = TextUtils.replaceString(s3, s5, "");
             String as[] = TextUtils.split(s3, "&");
-            array = new Array();
+            array = new ArrayList();
             for (int i = 0; i < as.length; i++) {
                 array.add(httprequest.decodeString(as[i]));
             }
@@ -437,7 +437,7 @@ public class PortalSiteView extends MonitorGroup {
         return getURLContentsFromRemoteSiteView(s, null, s1);
     }
 
-    public String getURLContentsFromRemoteSiteView(String s, Array array,
+    public String getURLContentsFromRemoteSiteView(String s,  ArrayList array,
             String s1) {
         s = expandPartialURL(s);
         StringBuffer stringbuffer = new StringBuffer();
@@ -461,7 +461,7 @@ public class PortalSiteView extends MonitorGroup {
         socketsession.close();
         if (l1 == (long) URLMonitor.kURLok) {
             String s3 = URLMonitor.getHTTPContent(stringbuffer.toString());
-            Array array1 = new Array();
+             ArrayList array1 = new ArrayList();
             String s4 = CGI.CONTENT_REGEX;
             int j = TextUtils.matchExpression(s3, s4, array1,
                     new StringBuffer(), "");
@@ -478,7 +478,7 @@ public class PortalSiteView extends MonitorGroup {
             }
             if (j == URLMonitor.kURLok) {
                 if (array1.size() > 0) {
-                    s2 = (String) array1.at(0);
+                    s2 = (String) array1.get(0);
                 } else {
                     s2 = s3;
                 }

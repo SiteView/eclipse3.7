@@ -20,7 +20,7 @@ package COM.dragonflow.StandardMonitor;
 import java.net.URLEncoder;
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.servicePage;
 import COM.dragonflow.Properties.NumericProperty;
@@ -79,10 +79,10 @@ public class CPUMonitor extends ServerMonitor
          al[j] = (new Long(getProperty(pLastMeasurements[j]))).longValue();
      }
 
-     Array array = null;
+      ArrayList array = null;
      if(monitorDebugLevel == 3)
      {
-         array = new Array();
+         array = new ArrayList();
      }
      SiteViewException siteviewexception = null;
      long al1[] = null;
@@ -126,7 +126,7 @@ public class CPUMonitor extends ServerMonitor
                      StringBuffer stringbuffer = new StringBuffer();
                      for(int k = 0; k < array.size(); k++)
                      {
-                         stringbuffer.append(array.at(k) + "\n");
+                         stringbuffer.append(array.get(k) + "\n");
                      }
 
                      LogManager.log("Error", "CPUMonitor: " + getFullID() + " failed, output:\n" + stringbuffer);
@@ -196,9 +196,9 @@ public class CPUMonitor extends ServerMonitor
      }
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pUtilization);
      for(int i = 0; i < getPropertyAsInteger(pCpusNum); i++)
      {
@@ -210,7 +210,7 @@ public class CPUMonitor extends ServerMonitor
 
  public Enumeration getStatePropertyObjects(boolean flag)
  {
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      array.add(pUtilization);
      if(flag && getPropertyAsInteger(pCpusNum) > 1)
      {
@@ -220,17 +220,17 @@ public class CPUMonitor extends ServerMonitor
          }
 
      }
-     return array.elements();
+     return (Enumeration) array.iterator();
  }
 
  public static void main(String args[])
  {
      CPUMonitor cpumonitor = new CPUMonitor();
-     Array array = cpumonitor.getProperties();
+      ArrayList array = cpumonitor.getProperties();
      StringProperty astringproperty[] = new StringProperty[array.size()];
      for(int i = 0; i < array.size(); i++)
      {
-         astringproperty[i] = (StringProperty)array.at(i);
+         astringproperty[i] = (StringProperty)array.get(i);
      }
 
      int j = 1000;
@@ -299,7 +299,7 @@ public class CPUMonitor extends ServerMonitor
      $assertionsDisabled = !(CPUMonitor.class).desiredAssertionStatus();
      maxCPUs = 8;
      cpuEnableErrorAt100 = true;
-     jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+     HashMap hashmap = MasterConfig.getMasterConfig();
      String s = TextUtils.getValue(hashmap, "_cpuMaxProcessors");
      maxCPUs = TextUtils.toInt(s);
      if(maxCPUs == 0)
@@ -317,7 +317,7 @@ public class CPUMonitor extends ServerMonitor
      pCpusNum = new NumericProperty("cpusNum");
      pLastMeasurement = new NumericProperty("lastMeasurement");
      pLastMeasurementTime = new NumericProperty("lastMeasurementTime");
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      array.add(pUtilization);
      array.add(pCpusNum);
      array.add(pLastMeasurement);
@@ -338,7 +338,7 @@ public class CPUMonitor extends ServerMonitor
      StringProperty astringproperty[] = new StringProperty[array.size()];
      for(int k = 0; k < array.size(); k++)
      {
-         astringproperty[k] = (StringProperty)array.at(k);
+         astringproperty[k] = (StringProperty)array.get(k);
      }
 
      addProperties("CPUMonitor", astringproperty);

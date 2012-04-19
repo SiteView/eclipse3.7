@@ -23,8 +23,8 @@ import java.security.Provider;
 import java.security.Security;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -148,7 +148,7 @@ public class WebServiceMonitor extends AtomicMonitor {
             flag = true;
         }
         if (s5.length() != 0 && aobj != null && flag) {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             i = TextUtils.matchExpressionForWebServiceMonitor(s18, s5, array, new StringBuffer());
             if (i != Monitor.kURLok) {
                 String s20 = URLMonitor.getHTMLEncoding(s18);
@@ -159,7 +159,7 @@ public class WebServiceMonitor extends AtomicMonitor {
             } else {
                 s17 = "matched " + s17;
                 if (array.size() > 0) {
-                    setProperty(pMatchValue, array.at(0));
+                    setProperty(pMatchValue, array.get(0));
                 }
             }
         }
@@ -234,8 +234,8 @@ public class WebServiceMonitor extends AtomicMonitor {
         return TextUtils.split(s, s1);
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         return array;

@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.SiteView:
 // HistorySummary, HistorySummaryEntry
@@ -30,9 +30,9 @@ class HistorySummaryCollector {
 
     HashMap historySummaries;
 
-    Array uniqueMonitorIDs;
+     ArrayList uniqueMonitorIDs;
 
-    Array uniqueMonitorNames;
+     ArrayList uniqueMonitorNames;
 
     String account;
 
@@ -40,8 +40,8 @@ class HistorySummaryCollector {
 
     HistorySummaryCollector(String s, String s1) {
         historySummaries = new HashMap();
-        uniqueMonitorIDs = new Array();
-        uniqueMonitorNames = new Array();
+        uniqueMonitorIDs = new ArrayList();
+        uniqueMonitorNames = new ArrayList();
         account = s;
         queryID = s1;
     }

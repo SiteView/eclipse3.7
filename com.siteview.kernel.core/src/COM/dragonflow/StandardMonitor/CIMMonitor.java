@@ -21,8 +21,8 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.PropertiedObject;
 import COM.dragonflow.Properties.StringProperty;
@@ -221,8 +221,8 @@ public class CIMMonitor extends AtomicMonitor
 //        return new CimMonitor();
 //    }
 
-    public Array getLogProperties() {
-        Array a = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList a = super.getLogProperties();
         a.add(getPropertyObject("pCollected"));
         return a;
     }

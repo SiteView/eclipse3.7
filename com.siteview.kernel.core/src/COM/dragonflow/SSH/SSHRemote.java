@@ -116,7 +116,7 @@ public class SSHRemote implements COM.dragonflow.SSH.ISSHCloseable {
         }
     }
 
-    public int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, boolean flag, java.io.PrintWriter printwriter, jgl.Array array) {
+    public int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, boolean flag, java.io.PrintWriter printwriter, ArrayList array) {
         int i = -1;
         if (closing) {
             return i;

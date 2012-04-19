@@ -25,8 +25,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Api.APIGroup;
 import COM.dragonflow.Api.APISiteView;
 import COM.dragonflow.ConfigurationManager.CfgChangesSink;
@@ -54,7 +54,7 @@ public class Health implements CfgChangesSink {
 
     private static Set groupIDsInHealth = new HashSet();
 
-    public static Array indicators = null;
+    public static  ArrayList indicators = null;
 
     public static boolean debug = false;
 
@@ -85,7 +85,7 @@ public class Health implements CfgChangesSink {
      */
     private static void insureMinHealth() {
         try {
-            Array array = FrameFile.readFromFile(Health.CheckCreateHealth());
+             ArrayList array = FrameFile.readFromFile(Health.CheckCreateHealth());
             if (array.size() > 1) {
                 return;
             } else {
@@ -129,7 +129,7 @@ public class Health implements CfgChangesSink {
         if (s1 != null && s1.length() > 0) {
             File file = new File(s2);
             String as[] = file.list();
-            Array array = null;
+             ArrayList array = null;
             try {
                 array = FrameFile.readFromFile(s3 + "/" + "__Health__.mg");
             } catch (IOException ioexception) {
@@ -138,7 +138,7 @@ public class Health implements CfgChangesSink {
                 array = createHealthGroup();
                 APISiteView.forceConfigurationRefresh();
             }
-            Array array1 = null;
+             ArrayList array1 = null;
             try {
                 array1 = FrameFile.readFromFile(s2 + "/" + s4 + s1);
             } catch (IOException ioexception1) {
@@ -148,10 +148,10 @@ public class Health implements CfgChangesSink {
                         as1);
             }
             if (array != null && array1 != null) {
-                HashMap hashmap1 = (HashMap) array.at(0);
+                HashMap hashmap1 = (HashMap) array.get(0);
                 String s5 = (String) hashmap1.get("_nextID");
                 for (int j = 1; j < array1.size(); j++) {
-                    HashMap hashmap2 = (HashMap) array1.at(j);
+                    HashMap hashmap2 = (HashMap) array1.get(j);
                     HashMap hashmap3 = new HashMap();
                     hashmap3.put("_id", s5);
                     String s6;
@@ -319,9 +319,9 @@ public class Health implements CfgChangesSink {
         groupIDsInHealth.add(s);
         String s1 = Platform.getRoot() + "/groups/";
         try {
-            Array array = FrameFile.readFromFile(s1 + s + ".mg");
+             ArrayList array = FrameFile.readFromFile(s1 + s + ".mg");
             for (int i = 1; i < array.size(); i++) {
-                HashMap hashmap = (HashMap) array.at(i);
+                HashMap hashmap = (HashMap) array.get(i);
                 String s2 = (String) hashmap.get("_class");
                 if (s2 != null && s2.equals("SubGroup")) {
                     createHealthGroupList((String) hashmap.get("_group"));
@@ -355,13 +355,13 @@ public class Health implements CfgChangesSink {
         }
     }
 
-    public static Array createHealthGroup() throws SiteViewParameterException {
+    public static  ArrayList createHealthGroup() throws SiteViewParameterException {
         String s = Platform.getRoot() + File.separator + "groups"
                 + File.separator + "__Health__.mg";
         File file = new File(s);
-        Array array = null;
+         ArrayList array = null;
         if (!file.exists()) {
-            array = new Array();
+            array = new ArrayList();
             HashMap hashmap = new HashMap();
             hashmap.put("_encoding", I18N.getDefaultEncoding());
             hashmap.put("_health", "true");

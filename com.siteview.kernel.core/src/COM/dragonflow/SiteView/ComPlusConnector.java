@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.StandardMonitor.URLMonitor;
 import COM.dragonflow.Utils.SocketSession;
 import COM.dragonflow.Utils.TextUtils;
@@ -162,7 +162,7 @@ public class ComPlusConnector {
         }
         StringBuffer stringbuffer = new StringBuffer();
         StringBuffer stringbuffer1 = new StringBuffer();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         try {
             flag = sendCommandToProbe("/ComPlus?op=reset", array, stringbuffer, stringbuffer1, false, monitor, null, 0);
         } catch (ComPlusProbeResetException complusproberesetexception) {
@@ -172,7 +172,7 @@ public class ComPlusConnector {
 
     public boolean getMetricListFromProbe(StringBuffer stringbuffer, StringBuffer stringbuffer1, Monitor monitor, int i) {
         boolean flag = true;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         try {
             flag = sendCommandToProbe("/ComPlus?op=list", array, stringbuffer, stringbuffer1, false, monitor, null, i);
         } catch (ComPlusProbeResetException complusproberesetexception) {
@@ -182,7 +182,7 @@ public class ComPlusConnector {
 
     private boolean addProbeMetric(ArrayList arraylist, StringBuffer stringbuffer, boolean flag, Monitor monitor) throws ComPlusProbeResetException {
         boolean flag1 = true;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         StringBuffer stringbuffer1 = new StringBuffer();
         if (arraylist.size() <= 0) {
             return flag1;
@@ -207,7 +207,7 @@ public class ComPlusConnector {
     }
 
     public boolean removeProbeMetric(ArrayList arraylist, StringBuffer stringbuffer, Monitor monitor) throws ComPlusProbeResetException {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         StringBuffer stringbuffer1 = new StringBuffer();
         for (int i = 0; i < arraylist.size(); i ++) {
             String s = (String) arraylist.get(i);
@@ -221,7 +221,7 @@ public class ComPlusConnector {
         return sendCommandToProbe("/ComPlus?op=remove", array, stringbuffer1, stringbuffer, true, monitor, null, 0);
     }
 
-    private boolean sendCommandToProbe(String s, Array array, StringBuffer stringbuffer, StringBuffer stringbuffer1, boolean flag, Monitor monitor, String s1, int i) throws ComPlusProbeResetException {
+    private boolean sendCommandToProbe(String s,  ArrayList array, StringBuffer stringbuffer, StringBuffer stringbuffer1, boolean flag, Monitor monitor, String s1, int i) throws ComPlusProbeResetException {
         boolean flag1 = true;
         String s2 = null;
         int j = timeout;
@@ -277,7 +277,7 @@ public class ComPlusConnector {
         boolean flag = true;
         StringBuffer stringbuffer = new StringBuffer();
         StringBuffer stringbuffer1 = new StringBuffer();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         boolean flag1 = sendCommandToProbe("/ComPlus?op=count", array, stringbuffer, stringbuffer1, false, monitor, null, 0);
         if (flag1) {
             String s = stringbuffer.toString();
@@ -429,7 +429,7 @@ public class ComPlusConnector {
     private boolean getNewMetricValuesFromProbe(StringBuffer stringbuffer, StringBuffer stringbuffer1, Monitor monitor) {
         boolean flag = true;
         String s = null;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         try {
             flag = sendCommandToProbe("/ComPlus?op=values", array, stringbuffer, stringbuffer1, true, monitor, s, 0);
         } catch (ComPlusProbeResetException complusproberesetexception) {

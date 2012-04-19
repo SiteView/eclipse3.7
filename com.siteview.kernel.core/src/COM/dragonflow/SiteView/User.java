@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -71,7 +71,7 @@ public class User extends SiteViewObject {
 
     private static boolean doCaching = false;
 
-    static Array usersCache = null;
+    static  ArrayList usersCache = null;
 
     HashMap permissions;
 
@@ -182,7 +182,7 @@ public class User extends SiteViewObject {
     }
 
     public static HashMap findUser(Array array, String s) {
-        for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements();) {
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             HashMap hashmap = (HashMap) enumeration.nextElement();
             if (s.equals(TextUtils.getValue(hashmap, "_id"))) {
                 return hashmap;
@@ -196,9 +196,9 @@ public class User extends SiteViewObject {
         usersCache = null;
     }
 
-    public static Array readUsers() {
+    public static  ArrayList readUsers() {
         if (usersCache == null) {
-            usersCache = new Array();
+            usersCache = new ArrayList();
             try {
                 usersCache = FrameFile.readFromFile(Platform.getRoot() + "/groups/" + "users.config");
             } catch (Exception exception) {
@@ -231,8 +231,8 @@ public class User extends SiteViewObject {
 
     public static void loadUsers() {
         LogManager.log("RunMonitor", "Loading users.config");
-        Array array = readUsers();
-        Enumeration enumeration = array.elements();
+         ArrayList array = readUsers();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if (enumeration.hasMoreElements()) {
             enumeration.nextElement();
         }
@@ -249,8 +249,8 @@ public class User extends SiteViewObject {
 
     public static void unloadUsers() {
         LogManager.log("Debug", "unloading users.config");
-        Array array = readUsers();
-        Enumeration enumeration = array.elements();
+         ArrayList array = readUsers();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if (enumeration.hasMoreElements()) {
             enumeration.nextElement();
         }
@@ -266,8 +266,8 @@ public class User extends SiteViewObject {
         accountTable.remove(s);
     }
 
-    public static Array findUsersForLogin(String s, String s1) {
-        Array array = new Array();
+    public static  ArrayList findUsersForLogin(String s, String s1) {
+         ArrayList array = new ArrayList();
         for (Enumeration enumeration = accountTable.keys(); enumeration.hasMoreElements();) {
             String s2 = (String) enumeration.nextElement();
             Enumeration enumeration1 = accountTable.values(s2);
@@ -414,11 +414,11 @@ public class User extends SiteViewObject {
         }
         User user;
         try {
-            Array array = CGI.ReadGroupFrames(s, null);
+             ArrayList array = CGI.ReadGroupFrames(s, null);
             if (array == null || array.size() <= 0) {
                 return null;
             }
-            jgl.HashMap hashmap = (jgl.HashMap) array.at(0);
+            HashMap hashmap = (HashMap) array.get(0);
             registerUsers(null, s, hashmap.values("_user"), hashmap);
             user = getFirstUserForAccount(s);
         } catch (Exception exception) {

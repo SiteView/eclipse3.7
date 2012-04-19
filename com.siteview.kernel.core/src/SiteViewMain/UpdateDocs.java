@@ -8,7 +8,7 @@ import COM.dragonflow.SiteView.Platform;
 import COM.dragonflow.Utils.FileUtils;
 
 import java.io.*;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class UpdateDocs
 {
@@ -22,7 +22,7 @@ public class UpdateDocs
     {
         String s = "";
         int i = 0;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pdf = false;
         if(args.length > 0 && (args[0].equals("-?") || args[0].equals("/?") || args[0].equals("-help")))
         {
@@ -94,7 +94,7 @@ public class UpdateDocs
             PrintTOC(s);
         for(int i1 = 0; i1 < array.size(); i1++)
         {
-            String s5 = (String)array.at(i1);
+            String s5 = (String)array.get(i1);
             if(!(new File(Platform.getRoot() + "\\docs\\" + s5)).isDirectory() && s5.indexOf("http") < 0 && (s5.endsWith(".htm") || s5.endsWith(".html")))
                 PrintDoc(s5);
         }

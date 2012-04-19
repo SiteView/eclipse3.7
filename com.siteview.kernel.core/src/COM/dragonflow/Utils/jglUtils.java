@@ -20,7 +20,7 @@ package COM.dragonflow.Utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Properties.HashMapOrdered;
 
 public class jglUtils {
@@ -28,23 +28,23 @@ public class jglUtils {
     public jglUtils() {
     }
 
-    public static jgl.Array toJgl(java.util.List list) {
-        jgl.Array array = new Array();
+    public static ArrayList toJgl(java.util.List list) {
+        ArrayList array = new ArrayList();
         for (java.util.Iterator iterator = list.iterator(); iterator.hasNext(); array.add(iterator.next())) {
         }
         return array;
     }
 
-    public static java.util.List fromJgl(jgl.Array array) {
+    public static java.util.List fromJgl(ArrayList array) {
         java.util.ArrayList arraylist = new ArrayList();
         for (int i = 0; i < array.size(); i ++) {
-            arraylist.add(array.at(i));
+            arraylist.add(array.get(i));
         }
 
         return arraylist;
     }
 
-    public static jgl.HashMap toJgl(java.util.Map map) {
+    public static HashMap toJgl(java.util.Map map) {
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
         java.util.Iterator iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -62,9 +62,9 @@ public class jglUtils {
         return hashmapordered;
     }
 
-    public static java.util.HashMap fromJgl(jgl.HashMap hashmap) {
+    public static java.util.HashMap fromJgl(HashMap hashmap) {
         java.util.HashMap hashmap1 = new HashMap();
-        for (jgl.HashMapIterator hashmapiterator = hashmap.begin(); hashmapiterator.hasMoreElements();) {
+        for (HashMapIterator hashmapiterator = hashmap.begin(); hashmapiterator.hasMoreElements();) {
             jgl.Pair pair = (jgl.Pair) hashmapiterator.nextElement();
             if (pair.second instanceof jgl.Array) {
                 hashmap1.put(pair.first, COM.dragonflow.Utils.jglUtils.fromJgl((jgl.Array) pair.second));

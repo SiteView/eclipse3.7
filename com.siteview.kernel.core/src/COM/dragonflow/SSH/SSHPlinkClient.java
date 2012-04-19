@@ -67,7 +67,7 @@ public class SSHPlinkClient extends COM.dragonflow.SSH.SSHClientBase implements 
     /**
      * CAUTION: Decompiled by hand.
      */
-    public int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, int i, java.io.PrintWriter printwriter, jgl.Array array) {
+    public int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, int i, java.io.PrintWriter printwriter, ArrayList array) {
         timeoutTime = java.lang.System.currentTimeMillis() + (long) i;
         commandLineParam = remotecommandline;
         try {

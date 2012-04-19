@@ -21,8 +21,8 @@ import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.*;
 import java.net.URLEncoder;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class ASPMonitor extends NTCounterBase
 {
@@ -93,7 +93,7 @@ public class ASPMonitor extends NTCounterBase
      return "\\\\TESTWIN2K1.qa.Dragonflow.com";
  }
 
- boolean _testGetPerformanceData(String s, Array array)
+ boolean _testGetPerformanceData(String s,  ArrayList array)
  {
      return getPerformanceData(s, array, nMaxCounters, 1.0F, "");
  }

@@ -29,8 +29,8 @@ import COM.dragonflow.Utils.*;
 
 import java.io.*;
 import java.util.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import org.apache.commons.httpclient.*;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
@@ -261,14 +261,14 @@ public class URLMonitor extends AtomicMonitor
         String s = getProperty(pProxy);
         String s1 = getProperty(pProxyPassword);
         String s2 = getProperty(pProxyUserName);
-        Array array = Platform.split(',', s);
+         ArrayList array = Platform.split(',', s);
         long l;
         if(array.size() <= 1)
         {
             l = getResults_URLAndImagesAndFrames(s, s1, s2);
         } else
         {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             long l1;
             do
             {
@@ -304,7 +304,7 @@ public class URLMonitor extends AtomicMonitor
         String s7 = getProperty(pPassword);
         String s8 = getProperty(pDomain);
         String s9 = getProperty(pWhenToAuthenticate);
-        Array array = TextUtils.enumToArray(getMultipleValues(pPostData));
+         ArrayList array = TextUtils.enumToArray(getMultipleValues(pPostData));
         int i = getPropertyAsInteger(pTimeout) * 1000;
         if(i == 0)
         {
@@ -392,7 +392,7 @@ public class URLMonitor extends AtomicMonitor
             String s22 = "";
             if(array != null)
             {
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 do
                 {
                     if(!enumeration.hasMoreElements())
@@ -667,11 +667,11 @@ public class URLMonitor extends AtomicMonitor
 
     protected String updateMatchValuesAndProperty(String s, String s1, String s2)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String s3 = updateMatchValues(s, s1, s2, false, array, getSettingAsLong("_urlContentMatchDisplayMax", 150));
         if(array.size() > 0)
         {
-            setProperty(pMatchValue, array.at(0));
+            setProperty(pMatchValue, array.get(0));
         }
         return s3;
     }
@@ -679,7 +679,7 @@ public class URLMonitor extends AtomicMonitor
     void setRollingBaseProperties(long l, StringProperty stringproperty, StringProperty stringproperty1, int i)
     {
         String s = getProperty(stringproperty);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if(s != null && s.length() > 0)
         {
             array = TextUtils.splitArray(s, "\t");
@@ -688,7 +688,7 @@ public class URLMonitor extends AtomicMonitor
         int j = 0;
         for(int k = 0; k < array.size(); k++)
         {
-            float f2 = TextUtils.toFloat((String)array.at(k));
+            float f2 = TextUtils.toFloat((String)array.get(k));
             if(f2 != 0.0F)
             {
                 f += f2;
@@ -709,7 +709,7 @@ public class URLMonitor extends AtomicMonitor
         s = "";
         for(int i1 = 0; i1 < array.size(); i1++)
         {
-            s = s + (String)array.at(i1);
+            s = s + (String)array.get(i1);
             s = s + "\t";
         }
 
@@ -769,7 +769,7 @@ public class URLMonitor extends AtomicMonitor
         return s1;
     }
 
-    public static String updateMatchValues(String s, String s1, String s2, boolean flag, Array array, int i)
+    public static String updateMatchValues(String s, String s1, String s2, boolean flag,  ArrayList array, int i)
     {
         StringBuffer stringbuffer = new StringBuffer();
         String s3 = s1;
@@ -815,7 +815,7 @@ public class URLMonitor extends AtomicMonitor
     public Enumeration getStatePropertyObjects(boolean flag)
     {
         Enumeration enumeration = super.getStatePropertyObjects(flag);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -834,12 +834,12 @@ public class URLMonitor extends AtomicMonitor
                 array.add(stringproperty);
             }
         } while(true);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pStatusText);
@@ -950,7 +950,7 @@ public class URLMonitor extends AtomicMonitor
         return urlresults.getResultsAsArray();
     }
 
-    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, Array array, 
+    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, 
             String s6, String s7, String s8, StringBuffer stringbuffer, long l, String s9, 
             int i, int j, StringBuffer stringbuffer1)
     {
@@ -970,7 +970,7 @@ public class URLMonitor extends AtomicMonitor
         return urlresults.getResultsAsArray();
     }
 
-    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, Array array, 
+    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, 
             String s6, String s7, String s8, StringBuffer stringbuffer, long l, String s9, 
             int i, int j, StringBuffer stringbuffer1, StringBuffer stringbuffer2)
     {
@@ -991,7 +991,7 @@ public class URLMonitor extends AtomicMonitor
     }
 
     public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, 
-            Array array, String s7, String s8, String s9, StringBuffer stringbuffer, long l, 
+             ArrayList array, String s7, String s8, String s9, StringBuffer stringbuffer, long l, 
             String s10, int i, int j, StringBuffer stringbuffer1, StringBuffer stringbuffer2)
     {
         URLResults urlresults = checkURLSeq(socketsession, s, s1, s2, s3, s4, s5, s6, array, s7, s8, s9, stringbuffer, l, s10, i, j, stringbuffer1, stringbuffer2);
@@ -999,7 +999,7 @@ public class URLMonitor extends AtomicMonitor
     }
 
     public static URLResults checkURLSeq(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, 
-            Array array, String s7, String s8, String s9, StringBuffer stringbuffer, long l, 
+             ArrayList array, String s7, String s8, String s9, StringBuffer stringbuffer, long l, 
             String s10, int i, int j, StringBuffer stringbuffer1, StringBuffer stringbuffer2)
     {
         s9.length();
@@ -1020,7 +1020,7 @@ public class URLMonitor extends AtomicMonitor
         return urlresults;
     }
 
-    public static URLResults checkURL(HTTPRequestSettings httprequestsettings, URLContext urlcontext, String s, String s1, Array array, StringBuffer stringbuffer, long l, 
+    public static URLResults checkURL(HTTPRequestSettings httprequestsettings, URLContext urlcontext, String s, String s1,  ArrayList array, StringBuffer stringbuffer, long l, 
             String s2, int i, StringBuffer stringbuffer1, StringBuffer stringbuffer2)
     {
         if(s == null)
@@ -1041,7 +1041,7 @@ public class URLMonitor extends AtomicMonitor
         }
         if(array == null)
         {
-            array = new Array();
+            array = new ArrayList();
         }
         add_urlOtherHeadersTo_postData(s2, array);
         if(urlcontext.getStreamEncoding().equals(""))
@@ -1058,7 +1058,7 @@ public class URLMonitor extends AtomicMonitor
         return urlresults;
     }
 
-    private static void add_urlOtherHeadersTo_postData(String s, Array array)
+    private static void add_urlOtherHeadersTo_postData(String s,  ArrayList array)
     {
         if(s.length() > 0)
         {
@@ -1091,7 +1091,7 @@ public class URLMonitor extends AtomicMonitor
         Vector vector = new Vector();
         if(array != null)
         {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             byte byte0 = -1;
             do
             {
@@ -1140,7 +1140,7 @@ label0:
             {
                 break label0;
             }
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             int i = -1;
             do
             {
@@ -1170,7 +1170,7 @@ label0:
             {
                 break label0;
             }
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             do
             {
@@ -1195,7 +1195,7 @@ label0:
             {
                 break label0;
             }
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             do
             {
@@ -1220,7 +1220,7 @@ label0:
             {
                 break label0;
             }
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s3;
             do
             {
@@ -1260,7 +1260,7 @@ label0:
             {
                 break label0;
             }
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             do
             {
@@ -1278,7 +1278,7 @@ label0:
         return s;
     }
 
-    private static URLResults checkURLRetrieveDoneHere(HTTPRequestSettings httprequestsettings, URLContext urlcontext, String s, String s1, Array array, StringBuffer stringbuffer, long l, 
+    private static URLResults checkURLRetrieveDoneHere(HTTPRequestSettings httprequestsettings, URLContext urlcontext, String s, String s1,  ArrayList array, StringBuffer stringbuffer, long l, 
             int i, long l1, StringBuffer stringbuffer1, StringBuffer stringbuffer2)
     {
         if((debugURL & kDebugRequest) != 0)
@@ -1608,7 +1608,7 @@ label0:
         return l1;
     }
 
-    private static Vector finalHTTPClientlRequestPreparation(URLContext urlcontext, HTTPRequestSettings httprequestsettings, Array array, long l)
+    private static Vector finalHTTPClientlRequestPreparation(URLContext urlcontext, HTTPRequestSettings httprequestsettings,  ArrayList array, long l)
         throws Exception
     {
         if(httprequestsettings.getAuthUserName() == null || httprequestsettings.getAuthUserName().length() == 0)
@@ -1671,7 +1671,7 @@ label0:
         vector.add(new Header("User-Agent", s4));
         if(array != null)
         {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             do
             {
                 if(!enumeration.hasMoreElements())
@@ -2238,7 +2238,7 @@ label0:
         return HTTPUtils.getHTTPPart(s, false);
     }
 
-    public static long[] sendHTTPRequest(String s, String s1, String s2, String s3, String s4, String s5, Array array, StringBuffer stringbuffer, 
+    public static long[] sendHTTPRequest(String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, StringBuffer stringbuffer, 
             long l, String s6, int i)
     {
         String s7 = "";
@@ -2264,7 +2264,7 @@ label0:
                 String s3 = "";
                 String s5 = "";
                 String s8 = "";
-                Array array = new Array();
+                 ArrayList array = new ArrayList();
                 array.add("KEYWORDS=john");
                 array.add("SUBSTRING=substring");
                 String s11 = "";
@@ -2305,7 +2305,7 @@ label0:
                 String s9 = "";
                 String s10 = "";
                 String s12 = "";
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 String s15 = "";
                 int i = 0;
                 do
@@ -2381,7 +2381,7 @@ label0:
     }
 
     private static void toString(URLContext urlcontext, String s, String s1, String s2, String s3, String s4, String s5, String s6, 
-            Array array, String s7, String s8, StringBuffer stringbuffer, long l, int i, 
+             ArrayList array, String s7, String s8, StringBuffer stringbuffer, long l, int i, 
             long l1, StringBuffer stringbuffer1, StringBuffer stringbuffer2)
     {
         LogManager.log("RunMonitor", "        URLMonitor.toString() ENTERING ENTERING ENTERING ENTERING ENTERING ENTERING ");
@@ -2400,10 +2400,10 @@ label0:
         {
             for(int j = 0; j < array.size(); j++)
             {
-                Object obj = array.at(j);
+                Object obj = array.get(j);
                 if(obj instanceof String)
                 {
-                    LogManager.log("RunMonitor", "        URLMonitor.toString() jgl.Array postData(" + j + ")=" + (String)obj);
+                    LogManager.log("RunMonitor", "        URLMonitor.toString() ArrayList postData(" + j + ")=" + (String)obj);
                 }
             }
 

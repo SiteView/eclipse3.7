@@ -20,8 +20,8 @@ package COM.dragonflow.StandardMonitor;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -63,9 +63,9 @@ public class BandwidthMonitor extends AtomicMonitor
      return "BandwidthHost";
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pResult);
      array.add(pStatus);
      return array;
@@ -118,7 +118,7 @@ public class BandwidthMonitor extends AtomicMonitor
      } while(true);
  }
 
- protected void addToMonitorList(Monitor monitor, Array array, HashMap hashmap)
+ protected void addToMonitorList(Monitor monitor,  ArrayList array, HashMap hashmap)
  {
      if(monitor == this)
      {
@@ -132,10 +132,10 @@ public class BandwidthMonitor extends AtomicMonitor
      }
  }
 
- protected Array getMonitorsToRun()
+ protected  ArrayList getMonitorsToRun()
  {
      HashMap hashmap = new HashMap();
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
      Enumeration enumeration = getMultipleValues(pItems);
 label0:
@@ -190,11 +190,11 @@ label0:
 
  protected void checkSequentially(double ad[], String as[], long l, String s)
  {
-     Array array = getMonitorsToRun();
+      ArrayList array = getMonitorsToRun();
      long l1 = getSettingAsLong("_CompositeStartupTime", 500);
      long l2 = getSettingAsLong("_CompositeCheckDelay", 500);
      int i = 0;
-     AtomicMonitor atomicmonitor = (AtomicMonitor)array.at(i);
+     AtomicMonitor atomicmonitor = (AtomicMonitor)array.get(i);
      do
      {
          if(atomicmonitor == null)
@@ -245,7 +245,7 @@ label0:
          }
          if(i < array.size())
          {
-             atomicmonitor = (AtomicMonitor)array.at(i);
+             atomicmonitor = (AtomicMonitor)array.get(i);
          } else
          {
              atomicmonitor = null;
@@ -485,8 +485,8 @@ label0:
      if(scalarproperty == pItems)
      {
          SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
-         Array array = CGI.getAllowedGroupIDsForAccount(httprequest);
-         Enumeration enumeration = array.elements();
+          ArrayList array = CGI.getAllowedGroupIDsForAccount(httprequest);
+         Enumeration enumeration = (Enumeration) array.iterator();
          Vector vector1 = new Vector();
          Vector vector2 = new Vector();
          String s = getFullID();

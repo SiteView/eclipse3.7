@@ -25,7 +25,7 @@ public class BaseFileLogger extends COM.dragonflow.Log.Logger {
 
     long maxBufferSize;
 
-    protected static long getLongSetting(jgl.HashMap hashmap, String s, long l) {
+    protected static long getLongSetting(HashMap hashmap, String s, long l) {
         long l1 = l;
         String s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, s);
         if (s1 != null) {

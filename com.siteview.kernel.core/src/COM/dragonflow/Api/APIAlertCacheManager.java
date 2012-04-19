@@ -21,9 +21,9 @@ public class APIAlertCacheManager implements COM.dragonflow.ConfigurationManager
 
     private static COM.dragonflow.Api.APIAlertCacheManager instance = null;
 
-    private jgl.HashMap instanceInfoCache;
+    private HashMap instanceInfoCache;
 
-    private jgl.Array conditionsCache;
+    private ArrayList conditionsCache;
 
     static java.lang.Object instanceLock = new Object();
 
@@ -49,19 +49,19 @@ public class APIAlertCacheManager implements COM.dragonflow.ConfigurationManager
         conditionsCache = null;
     }
 
-    jgl.HashMap getInstanceInfoCache() {
+    HashMap getInstanceInfoCache() {
         return instanceInfoCache;
     }
 
-    void setInstanceInfoCache(jgl.HashMap hashmap) {
+    void setInstanceInfoCache(HashMap hashmap) {
         instanceInfoCache = hashmap;
     }
 
-    jgl.Array getConditionsCache() {
+    ArrayList getConditionsCache() {
         return conditionsCache;
     }
 
-    void setConditionsCache(jgl.Array array) {
+    void setConditionsCache(ArrayList array) {
         conditionsCache = array;
     }
 

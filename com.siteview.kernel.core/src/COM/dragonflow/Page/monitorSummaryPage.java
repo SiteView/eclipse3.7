@@ -11,7 +11,7 @@ package COM.dragonflow.Page;
 
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.HTTP.HTTPRequestException;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -219,7 +219,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
         COM.dragonflow.Page.CGI.menus menus1 = getNavItems(request);
         printButtonBar("MonitorDescription.htm", "", menus1);
         outputStream.println("<h2>" + s5 + "</h2>");
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         if(s3.indexOf("html") != -1)
         {
             array.add("<h2>" + s5 + "</h2>\n\n");
@@ -229,13 +229,13 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
         }
         if(request.isPost() && COM.dragonflow.Page.treeControl.notHandled(request))
         {
-            jgl.Array array1 = getAllowedGroupIDs();
+            ArrayList array1 = getAllowedGroupIDs();
             COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
-            jgl.Array array2 = new Array();
+            ArrayList array2 = new ArrayList();
             int i = 0;
             for(int j = 0; j < array1.size(); j++)
             {
-                String s10 = (String)array1.at(j);
+                String s10 = (String)array1.get(j);
                 boolean flag2 = true;
                 Enumeration enumeration3 = request.getValues("_group");
                 while(enumeration3.hasMoreElements())
@@ -440,7 +440,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
                             {
                                 String s18 = s16.substring(k1 + 4);
                                 s16 = atomicmonitor1.getScheduleSettings(s18);
-                                jgl.HashMap hashmap = COM.dragonflow.Utils.TextUtils.stringToHashMap(s16);
+                                HashMap hashmap = COM.dragonflow.Utils.TextUtils.stringToHashMap(s16);
                                 s16 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_name");
                             }
                         }
@@ -464,14 +464,14 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
                     } else
                     if(s14.equals("_dependsOn"))
                     {
-                        jgl.Array array4 = new Array();
-                        jgl.Array array5 = new Array();
+                        ArrayList array4 = new ArrayList();
+                        ArrayList array5 = new ArrayList();
                         atomicmonitor1.getDependencies(array4, array5);
                         boolean flag3 = true;
                         StringBuffer stringbuffer5 = new StringBuffer();
                         for(int i2 = 0; i2 < array4.size(); i2++)
                         {
-                            String s20 = (String)array4.at(i2);
+                            String s20 = (String)array4.get(i2);
                             String s21 = COM.dragonflow.Page.monitorSummaryPage.getLogicalDependencyName(s20);
                             if(s21 == null)
                             {
@@ -526,7 +526,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
                 if(flag)
                 {
                     String s15 = atomicmonitor1.createFromTemplate("<mainParameters>", false);
-                    jgl.Array array3 = COM.dragonflow.SiteView.Platform.split('\n', s15);
+                    ArrayList array3 = COM.dragonflow.SiteView.Platform.split('\n', s15);
                     StringBuffer stringbuffer4 = new StringBuffer();
                     Enumeration enumeration7 = array3.elements();
                     while(enumeration7.hasMoreElements())
@@ -582,7 +582,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
                     StringBuffer stringbuffer3 = new StringBuffer();
                     for(int i1 = 0; i1 < array.size(); i1++)
                     {
-                        stringbuffer3.append(array.at(i1).toString());
+                        stringbuffer3.append(array.get(i1).toString());
                     }
 
                     COM.dragonflow.Utils.FileUtils.writeFile(s13, stringbuffer3.toString());
@@ -602,7 +602,7 @@ public class monitorSummaryPage extends COM.dragonflow.Page.CGI
             {
                 for(int k = 0; k < array.size(); k++)
                 {
-                    outputStream.println(array.at(k));
+                    outputStream.println(array.get(k));
                 }
 
             }

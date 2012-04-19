@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.io.File;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
@@ -83,12 +83,12 @@ public abstract class MultiContentBase extends ApplicationBase {
         return null;
     }
 
-    public Array getAvailableCounters() {
+    public  ArrayList getAvailableCounters() {
         return getMultiContentBaseCounters("", true);
     }
 
-    private Array getMultiContentBaseCounters(String s, boolean flag) {
-        Array array = null;
+    private  ArrayList getMultiContentBaseCounters(String s, boolean flag) {
+         ArrayList array = null;
         System.out.println("getMultiContentBaseCounters()");
         try {
             String s1 = "";
@@ -98,7 +98,7 @@ public abstract class MultiContentBase extends ApplicationBase {
                 s1 = getTemplateContent(getTemplatePath(), getTemplateFile(),
                         flag);
             }
-            array = new Array();
+            array = new ArrayList();
             String as[];
             if (s1.indexOf(",") == -1) {
                 as = TextUtils.split(s1, URLMonitor.CRLF);
@@ -121,10 +121,10 @@ public abstract class MultiContentBase extends ApplicationBase {
     public synchronized HashMap getLabels() {
         if (labelsCache == null) {
             labelsCache = new HashMap();
-            Array array = getMultiContentBaseCounters(
+             ArrayList array = getMultiContentBaseCounters(
                     getProperty(getCountersProperty()), false);
             for (int i = 0; i < array.size(); i++) {
-                String s = (String) array.at(i);
+                String s = (String) array.get(i);
                 String s1 = s;
                 int j = s.indexOf(":");
                 if (j >= 0) {
@@ -156,21 +156,21 @@ public abstract class MultiContentBase extends ApplicationBase {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String as[] = buildThresholdsArray();
         if (as != null && as.length > 0) {
             for (int i = 0; i < as.length; i++) {
                 array.add(getStateValue(i));
             }
 
-            return array.elements();
+            return (Enumeration) array.iterator();
         } else {
             return null;
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         for (int i = 0; i < nMaxCounters; i++) {
             array.add(getStateValue(i));
         }
@@ -202,11 +202,11 @@ public abstract class MultiContentBase extends ApplicationBase {
         if (nMaxCounters <= 0) {
             nMaxCounters = 20;
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pStateString);
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for (int i = 0; i < array.size(); i++) {
-            astringproperty[i] = (StringProperty) array.at(i);
+            astringproperty[i] = (StringProperty) array.get(i);
         }
 
         addProperties("COM.dragonflow.SiteView.MultiContentBase",

@@ -20,7 +20,7 @@ package COM.dragonflow.StandardMonitor;
 
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.*;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class SAPMonitor extends BrowsableExeBase
 {
@@ -41,9 +41,9 @@ public class SAPMonitor extends BrowsableExeBase
         return getProperty(pSAPServer);
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pSAPServer);
         array.add(pSystem);
         array.add(pClient);
@@ -68,7 +68,7 @@ public class SAPMonitor extends BrowsableExeBase
 
     static 
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pSAPServer = new StringProperty("_server", "");
         pSAPServer.setDisplayText("Server", "SAP server name.");
         pSAPServer.setParameterOptions(false, true, BrowsableBase.COUNTER_PROPERTY_INDEX + 1, false);
@@ -93,7 +93,7 @@ public class SAPMonitor extends BrowsableExeBase
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for(int i = 0; i < array.size(); i++)
         {
-            astringproperty[i] = (StringProperty)array.at(i);
+            astringproperty[i] = (StringProperty)array.get(i);
         }
 
         String s = (COM.dragonflow.StandardMonitor.SAPMonitor.class).getName();

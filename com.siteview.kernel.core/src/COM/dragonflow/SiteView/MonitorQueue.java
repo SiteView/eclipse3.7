@@ -17,7 +17,7 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Utils.CounterLock;
 
 // Referenced classes of package COM.dragonflow.SiteView:
@@ -25,7 +25,7 @@ import COM.dragonflow.Utils.CounterLock;
 
 public class MonitorQueue extends Thread {
 
-    public static Array readyMonitors = new Array();
+    public static  ArrayList readyMonitors = new ArrayList();
 
     public static int maxReadyMonitors = 0;
 

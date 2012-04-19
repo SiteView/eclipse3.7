@@ -7,8 +7,8 @@ import java.util.Enumeration;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Page.servicePage;
@@ -98,9 +98,9 @@ public abstract class SiteViewObject extends PropertiedObject {
 
     protected static void addClassElement(String s,
             SiteViewObject siteviewobject) {
-        Array array = (Array) getClassPropertyByObject(s, "elements");
+         ArrayList array = (Array) getClassPropertyByObject(s, "elements");
         if (array == null) {
-            array = new Array();
+            array = new ArrayList();
             setClassPropertyByObject(s, "elements", array);
         }
         array.add(siteviewobject);
@@ -199,14 +199,14 @@ public abstract class SiteViewObject extends PropertiedObject {
             return elements.elements();
     }
 
-    public Array getRawElements() {
+    public  ArrayList getRawElements() {
         return elements;
     }
 
-    private void copyElementsOfClass(Array array, Array array1, String s) {
+    private void copyElementsOfClass(Array array,  ArrayList array1, String s) {
         try {
             Class class1 = Class.forName(s);
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 Object object = enumeration.nextElement();
                 for (Class class2 = object.getClass(); class2 != null; class2 = class2
@@ -229,15 +229,15 @@ public abstract class SiteViewObject extends PropertiedObject {
             owner.getElementsOfClass(array, s, flag);
     }
 
-    protected Array getElementsOfClass(String s, boolean flag) {
+    protected  ArrayList getElementsOfClass(String s, boolean flag) {
         return getElementsOfClass(s, flag, true);
     }
 
-    public Array getElementsOfClass(String s, boolean flag, boolean flag1) {
-        Array array = new Array();
+    public  ArrayList getElementsOfClass(String s, boolean flag, boolean flag1) {
+         ArrayList array = new ArrayList();
         getElementsOfClass(array, s, flag);
         if (flag && flag1) {
-            Array array1 = (Array) getClassProperty("elements");
+             ArrayList array1 = (Array) getClassProperty("elements");
             if (array1 != null)
                 copyElementsOfClass(array1, array, s);
         }
@@ -323,7 +323,7 @@ public abstract class SiteViewObject extends PropertiedObject {
 
     public void addElement(SiteViewObject siteviewobject) {
         if (elements == null)
-            elements = new Array();
+            elements = new ArrayList();
         elements.add(siteviewobject);
         siteviewobject.setOwner(this);
     }
@@ -386,7 +386,7 @@ public abstract class SiteViewObject extends PropertiedObject {
     public Enumeration getMultipleValues(StringProperty stringproperty) {
         Enumeration enumeration = super.getMultipleValues(stringproperty);
         if (doAutomaticSubstitutionResolve()) {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             String s;
             for (; enumeration.hasMoreElements(); array.add(s)) {
                 s = (String) enumeration.nextElement();
@@ -394,7 +394,7 @@ public abstract class SiteViewObject extends PropertiedObject {
                     s = TextUtils.substitute(s, this);
             }
 
-            enumeration = array.elements();
+            enumeration = (Enumeration) array.iterator();
         }
         return enumeration;
     }
@@ -745,8 +745,8 @@ public abstract class SiteViewObject extends PropertiedObject {
                 } while (true);
             }
             if (s2.equalsIgnoreCase("all")) {
-                Array array = getProperties();
-                Enumeration enumeration4 = array.elements();
+                 ArrayList array = getProperties();
+                Enumeration enumeration4 = (Enumeration) array.iterator();
                 while (enumeration4.hasMoreElements()) {
                     StringProperty stringproperty5 = (StringProperty) enumeration4
                             .nextElement();
@@ -941,12 +941,12 @@ public abstract class SiteViewObject extends PropertiedObject {
                 }
             }
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (TextUtils.matchExpression(s1, s, array, new StringBuffer()) == Monitor.kURLok) {
             if (!Float.isNaN(f1) && !Float.isNaN(f)) {
                 float f2;
                 if (array.size() >= 1)
-                    f2 = TextUtils.toFloat((String) array.at(0));
+                    f2 = TextUtils.toFloat((String) array.get(0));
                 else
                     f2 = TextUtils.toFloat(s1);
                 if (f2 < f1 || f2 > f)
@@ -972,7 +972,7 @@ public abstract class SiteViewObject extends PropertiedObject {
 
     public static String ID_SEPARATOR = "/";
 
-    static Array cEmptyArray = new Array();
+    static  ArrayList cEmptyArray = new ArrayList();
 
     static String cDefaultPackages[] = { "COM.dragonflow.StandardMonitor.",
             "COM.dragonflow.StandardAction.", "COM.dragonflow.SiteView.",
@@ -980,7 +980,7 @@ public abstract class SiteViewObject extends PropertiedObject {
 
     SiteViewObject owner;
 
-    Array elements;
+     ArrayList elements;
 
     SiteViewObject temporaryOwner;
 

@@ -23,8 +23,8 @@ import java.util.Enumeration;
 import java.util.Observable;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.FileLogger;
 import COM.dragonflow.Log.LogManager;
@@ -241,8 +241,8 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
                 labelsCache.add("value3", "value3");
                 labelsCache.add("value4", "value4");
             }
-            Array array = getProperties();
-            Enumeration enumeration = array.elements();
+             ArrayList array = getProperties();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 StringProperty stringproperty = (StringProperty) enumeration
                         .nextElement();
@@ -425,8 +425,8 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
         return al;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(getLastAlertsPerMinuteProperty());
         array.add(getLastLinesPerMinuteProperty());
         array.add(getValueProperty());
@@ -437,7 +437,7 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (getProperty(getValueProperty()).length() > 0) {
             array.add(getValueProperty());
         }
@@ -452,7 +452,7 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
         }
         array.add(getLastAlertsPerMinuteProperty());
         array.add(getLastLinesPerMinuteProperty());
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     boolean checkExpression(String s, String s1, int i) {
@@ -483,7 +483,7 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
         String s4 = "";
         String s5 = "";
         String s6 = getProperty(getMatchProperty());
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         StringBuffer stringbuffer1 = new StringBuffer();
         int j = TextUtils.matchExpression(s, s6, array, stringbuffer1);
         if (j == Monitor.kURLok) {
@@ -494,33 +494,33 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
             }
             StringBuffer stringbuffer2 = new StringBuffer();
             if (array.size() == 1) {
-                s2 = (String) array.at(0);
+                s2 = (String) array.get(0);
                 if (flag) {
-                    stringbuffer2.append("match1: " + array.at(0));
+                    stringbuffer2.append("match1: " + array.get(0));
                 }
             } else {
                 if (array.size() >= 1) {
-                    s2 = (String) array.at(0);
+                    s2 = (String) array.get(0);
                     if (flag) {
-                        stringbuffer2.append("match1: " + array.at(0));
+                        stringbuffer2.append("match1: " + array.get(0));
                     }
                 }
                 if (array.size() >= 2) {
-                    s3 = (String) array.at(1);
+                    s3 = (String) array.get(1);
                     if (flag) {
-                        stringbuffer2.append(" match2: " + array.at(1));
+                        stringbuffer2.append(" match2: " + array.get(1));
                     }
                 }
                 if (array.size() >= 3) {
-                    s4 = (String) array.at(2);
+                    s4 = (String) array.get(2);
                     if (flag) {
-                        stringbuffer2.append(" match3: " + array.at(2));
+                        stringbuffer2.append(" match3: " + array.get(2));
                     }
                 }
                 if (array.size() >= 4) {
-                    s5 = (String) array.at(3);
+                    s5 = (String) array.get(3);
                     if (flag) {
-                        stringbuffer2.append(" match4: " + array.at(3));
+                        stringbuffer2.append(" match4: " + array.get(3));
                     }
                 }
             }
@@ -584,10 +584,10 @@ public abstract class SNMPTrapBase extends AtomicMonitor {
         if (s.startsWith(s1)) {
             String s2 = "";
             int i = TextUtils.readInteger(s, s1.length());
-            Array array = Platform
+             ArrayList array = Platform
                     .split(',', getProperty(getMessageProperty()));
             if (i >= 0 && i < array.size()) {
-                s2 = (String) array.at(i);
+                s2 = (String) array.get(i);
             }
             return s2;
         } else {

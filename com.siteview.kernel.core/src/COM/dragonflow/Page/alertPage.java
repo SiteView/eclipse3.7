@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.Properties.HashMapOrdered;
 
@@ -26,7 +26,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 
 	public static String DISABLED_EXPRESSION = "disabled and ";
 
-	jgl.HashMap alertStats;
+	HashMap alertStats;
 
 	static int alertArtID;
 
@@ -129,7 +129,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			COM.dragonflow.Properties.StringProperty stringproperty,
 			java.io.PrintWriter printwriter,
 			COM.dragonflow.SiteView.SiteViewObject siteviewobject,
-			COM.dragonflow.HTTP.HTTPRequest httprequest, jgl.HashMap hashmap,
+			COM.dragonflow.HTTP.HTTPRequest httprequest, HashMap hashmap,
 			boolean flag) {
 		if (!httprequest.getPermission("_alertProperty",
 				stringproperty.getName()).equals("hidden")) {
@@ -149,19 +149,19 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	void printForm(String s, String s1,
-			String s2, String s3, jgl.HashMap hashmap)
+			String s2, String s3, HashMap hashmap)
 			throws java.lang.Exception {
 		printForm(s, s1, s2, s3, hashmap, null);
 	}
 
 	void printTargets(String s, String s1,
-			String s2, jgl.HashMap hashmap)
+			String s2, HashMap hashmap)
 			throws java.lang.Exception {
-		jgl.Array array = new Array();
+		ArrayList array = new ArrayList();
 		if (s2 != null) {
-			jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(',', s2);
+			ArrayList array1 = COM.dragonflow.SiteView.Platform.split(',', s2);
 			String s8;
-			for (Enumeration enumeration1 = array1.elements(); enumeration1
+			for (Enumeration enumeration1 = (Enumeration) array1.iterator(); enumeration1
 					.hasMoreElements(); array.add(s8.trim())) {
 				s8 = (String) enumeration1.nextElement();
 			}
@@ -241,7 +241,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	 * @throws java.lang.Exception
 	 */
 	void printForm(String s, String s1,
-			String s2, String s3, jgl.HashMap hashmap,
+			String s2, String s3, HashMap hashmap,
 			String s4) throws java.lang.Exception {
 		String s12;
 		Enumeration enumeration1;
@@ -307,7 +307,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 						.println("AlertPage: EDIT: previousCondition: " + s4
 								+ " id: " + s3);
 			}
-			jgl.Array array;
+			ArrayList array;
 			if (s4 == null) {
 				array = findCondition(s3);
 				if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
@@ -323,16 +323,16 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 									+ array.toString() + " id: " + s3);
 				}
 			}
-			String s18 = (String) array.at(0);
-			String s20 = (String) array.at(1);
+			String s18 = (String) array.get(0);
+			String s20 = (String) array.get(1);
 			if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
 				java.lang.System.out
-						.println("AlertPage: actionString from  pieces.at(1): "
+						.println("AlertPage: actionString from  pieces.get(1): "
 								+ s20 + " id: " + s3);
 			}
-			String s22 = (String) array.at(3);
+			String s22 = (String) array.get(3);
 			if (array.size() > 3 && !s22.startsWith("_UIContext")) {
-				s15 = (String) array.at(3);
+				s15 = (String) array.get(3);
 			}
 			action = COM.dragonflow.SiteView.Action
 					.createAction(getActionClass(s20));
@@ -342,7 +342,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 								+ " group.monitorsInError = "
 								+ s18.indexOf("group.monitorsInError"));
 			}
-			jgl.Array array1 = new Array();
+			ArrayList array1 = new ArrayList();
 			COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(
 					true);
 			getActionArguments(s20, array1, hashmapordered);
@@ -467,7 +467,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				action.addProperty(
 						COM.dragonflow.SiteView.ServerAction.pMachineName, s27);
 			} else if (s.equals("Add")) {
-				jgl.HashMap hashmap1 = getMasterConfig();
+				HashMap hashmap1 = getMasterConfig();
 				String s28 = COM.dragonflow.Utils.TextUtils.getValue(
 						hashmap1, "_defaultMachine");
 				action.addProperty(
@@ -476,7 +476,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		}
 		boolean flag = !COM.dragonflow.SiteView.SiteViewGroup.currentSiteView()
 				.internalServerActive();
-		jgl.Array array2 = action.getProperties();
+		ArrayList array2 = action.getProperties();
 		array2 = COM.dragonflow.Properties.StringProperty.sortByOrder(array2);
 		Enumeration enumeration = array2.elements();
 		while (enumeration.hasMoreElements()) {
@@ -683,7 +683,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 						+ "</TABLE></TD></TR>");
 		String s36 = s12.indexOf("Any Monitor") == -1 ? ""
 				: " selected";
-		jgl.Array array3 = COM.dragonflow.Page.monitorPage.getMonitorClasses();
+		ArrayList array3 = COM.dragonflow.Page.monitorPage.getMonitorClasses();
 		enumeration1 = array3.elements();
 		s38 = "<option value=Any Monitor" + s36 + ">" + "Any Monitor "
 				+ "</option>\n";
@@ -789,13 +789,13 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			}
 			COM.dragonflow.SiteView.Action action = COM.dragonflow.SiteView.Action
 					.createAction(request.getValue("class"));
-			jgl.HashMap hashmap = new HashMap();
+			HashMap hashmap = new HashMap();
 			if (s6.length() == 0) {
 				hashmap.put("targets", "no groups and/or monitors selected");
 			}
-			jgl.Array array = action.getProperties();
+			ArrayList array = action.getProperties();
 			array = COM.dragonflow.Properties.StringProperty.sortByOrder(array);
-			Enumeration enumeration1 = array.elements();
+			Enumeration enumeration1 = (Enumeration) array.iterator();
 			label0: do {
 				if (!enumeration1.hasMoreElements()) {
 					break;
@@ -885,7 +885,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			}
 			if (flag1 && COM.dragonflow.Page.treeControl.notHandled(request)) {
 				String s16 = getPageLink("alert", "List");
-				jgl.HashMap hashmap1 = getSettings();
+				HashMap hashmap1 = getSettings();
 				if (!action.defaultsAreSet(hashmap1)) {
 					s16 = getPageLink((String) action
 							.getClassProperty("prefs"), "");
@@ -928,7 +928,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				&& request.actionAllowed("_alertTest");
 		boolean flag4 = request.actionAllowed("_alertEdit");
 		boolean flag5 = false;
-		jgl.HashMap hashmap = getSettings();
+		HashMap hashmap = getSettings();
 		if (hashmap != null) {
 			String s1 = COM.dragonflow.Page.alertPage.getValue(
 					hashmap, "_alertPageColumnOrder");
@@ -987,14 +987,14 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			}
 		}
 		outputStream.println("</TR>");
-		jgl.Array array = getConditions();
+		ArrayList array = getConditions();
 		if (array.size() == 0) {
 			outputStream
 					.println("<TR><TD> </TD><TD align=center>no alerts configured</TD><TD> </TD></TR>\n");
 		} else {
-			for (Enumeration enumeration = array.elements(); enumeration
+			for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
 					.hasMoreElements(); outputStream.print("</TR>")) {
-				jgl.HashMap hashmap1 = (jgl.HashMap) enumeration.nextElement();
+				HashMap hashmap1 = (HashMap) enumeration.nextElement();
 				String s7 = getPageLink("alert", "")
 						+ "&group="
 						+ COM.dragonflow.HTTP.HTTPRequest
@@ -1065,8 +1065,8 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 							+ ">Enable</A> </td><td>Enable all alerts previously disabled</td></tr>");
 		}
 
-		jgl.Array array1 = getActionClasses();
-		enumeration1 = array1.elements();
+		ArrayList array1 = getActionClasses();
+		enumeration1 = (Enumeration) array1.iterator();
 		java.lang.Class class1;
 		while (enumeration1.hasMoreElements()) {
 
@@ -1138,7 +1138,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		return;
 	}
 
-	String buildHistoryLink(jgl.HashMap hashmap) {
+	String buildHistoryLink(HashMap hashmap) {
 		String s = getPageLink("alert", "Report")
 				+ "&alert-id=SiteView";
 		if (!COM.dragonflow.Utils.TextUtils.getValue(hashmap, "group").equals(
@@ -1185,7 +1185,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		return "<TD><A href=" + s + "&operation=Edit>Edit</a></TD>";
 	}
 
-	String buildTestLink(jgl.HashMap hashmap) {
+	String buildTestLink(HashMap hashmap) {
 		return "<TD><A HREF="
 				+ getPageLink("alert", "Test")
 				+ "&alertID="
@@ -1235,10 +1235,10 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	void disableAlerts(boolean flag) throws java.lang.Exception {
-		jgl.Array array = getConditions();
-		jgl.HashMap hashmap = new HashMap();
+		ArrayList array = getConditions();
+		HashMap hashmap = new HashMap();
 		for (int i = 0; i < array.size(); i++) {
-			jgl.HashMap hashmap1 = (jgl.HashMap) array.at(i);
+			HashMap hashmap1 = (HashMap) array.get(i);
 			hashmap.put(COM.dragonflow.Utils.TextUtils.getValue(hashmap1,
 					"group"), "true");
 		}
@@ -1247,20 +1247,20 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				.hasMoreElements(); COM.dragonflow.SiteView.SiteViewGroup
 				.SignalReload()) {
 			String s = (String) enumeration.nextElement();
-			jgl.Array array1;
+			ArrayList array1;
 			try {
 				array1 = ReadGroupFrames(s);
 			} catch (java.io.IOException ioexception) {
 				throw new HTTPRequestException(557);
 			}
 			for (int j = 0; j < array1.size(); j++) {
-				jgl.HashMap hashmap2 = (jgl.HashMap) array1.at(j);
+				HashMap hashmap2 = (HashMap) array1.get(j);
 				Enumeration enumeration1 = hashmap2
 						.values("_alertCondition");
 				if (!enumeration1.hasMoreElements()) {
 					continue;
 				}
-				jgl.Array array2 = new Array();
+				ArrayList array2 = new ArrayList();
 				String s1;
 				for (; enumeration1.hasMoreElements(); array2.add(s1)) {
 					s1 = (String) enumeration1.nextElement();
@@ -1287,9 +1287,9 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		String s1 = request.getValue("group");
 		String s2 = request.getValue("monitor");
 		String s3 = request.getValue("id");
-		jgl.Array array = ReadGroupFrames(COM.dragonflow.Utils.I18N
+		ArrayList array = ReadGroupFrames(COM.dragonflow.Utils.I18N
 				.toDefaultEncoding(s1));
-		jgl.HashMap hashmap = COM.dragonflow.Page.alertPage.findMonitor(array,
+		HashMap hashmap = COM.dragonflow.Page.alertPage.findMonitor(array,
 				s2);
 		if (request.isPost()) {
 			try {
@@ -1301,8 +1301,8 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 						+ request.getAccountDirectory() + "/SiteView.html");
 			}
 		} else {
-			jgl.HashMap hashmap1 = (jgl.HashMap) array.at(0);
-			jgl.Array array1 = findCondition(s3);
+			HashMap hashmap1 = (HashMap) array.get(0);
+			ArrayList array1 = findCondition(s3);
 			String s4 = conditionName(s1, hashmap, array1) + " ("
 					+ displayName(s1, hashmap1, array1) + ")";
 			outputStream
@@ -1409,14 +1409,14 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		alertpage.handleRequest();
 	}
 
-	jgl.Array findCondition(String s) throws java.lang.Exception {
+	ArrayList findCondition(String s) throws java.lang.Exception {
 		COM.dragonflow.Api.Alert alert = COM.dragonflow.Api.Alert.getInstance()
 				.getByID((new Long(s)).longValue());
 		return COM.dragonflow.SiteView.Platform.split('\t', alert.getCondStr());
 	}
 
 	String packCondition(COM.dragonflow.HTTP.HTTPRequest httprequest,
-			String s, jgl.HashMap hashmap) {
+			String s, HashMap hashmap) {
 		String s1 = "";
 		String s2 = "";
 		String s3 = "";
@@ -1626,7 +1626,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				+ "\t" + s;
 	}
 
-	jgl.HashMap replaceCondition(String s, String s1,
+	HashMap replaceCondition(String s, String s1,
 			String s2, String s3, String s4,
 			String s5, String s6) {
 		if (s.equals(s2) && s1.equals(s3)) {
@@ -1642,21 +1642,21 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		mungeCondition(s, s1, s2, null, null);
 	}
 
-	jgl.HashMap addCondition(String s, String s1,
+	HashMap addCondition(String s, String s1,
 			String s2, String s3) {
 		return mungeCondition(s, s1, null, s2, s3);
 	}
 
-	jgl.HashMap mungeCondition(String s, String s1,
+	HashMap mungeCondition(String s, String s1,
 			String s2, String s3, String s4) {
 		if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
 			COM.dragonflow.Utils.TextUtils.debugPrint("group: " + s
 					+ ", monitorID: " + s1 + ", id: " + s2 + ", cond: " + s3
 					+ ", includeFilter: " + s4);
 		}
-		jgl.HashMap hashmap = null;
+		HashMap hashmap = null;
 		try {
-			jgl.Array array = ReadGroupFrames(s);
+			ArrayList array = ReadGroupFrames(s);
 			hashmap = COM.dragonflow.Page.alertPage.findMonitor(array, s1);
 			if (s2 == null) {
 				s2 = java.lang.Long
@@ -1671,7 +1671,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				}
 				s5 = s5 + "\t";
 			}
-			jgl.Array array1 = new Array();
+			ArrayList array1 = new ArrayList();
 			boolean flag = false;
 			Enumeration enumeration = hashmap
 					.values("_alertCondition");
@@ -1682,9 +1682,9 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			while (enumeration.hasMoreElements()) {
 				String s6 = (String) enumeration
 						.nextElement();
-				jgl.Array array2 = COM.dragonflow.SiteView.Platform.split('\t',
+				ArrayList array2 = COM.dragonflow.SiteView.Platform.split('\t',
 						s6);
-				if (array2.at(2).equals(s2)) {
+				if (array2.get(2).equals(s2)) {
 					if (s3 != null) {
 						array1.add(s5);
 						flag = true;
@@ -1751,11 +1751,11 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		}
 	}
 
-	String displayName(String s, jgl.HashMap hashmap,
-			jgl.Array array) {
+	String displayName(String s, HashMap hashmap,
+			ArrayList array) {
 		String s1 = null;
 		if (array.size() > 3) {
-			s1 = (String) array.at(3);
+			s1 = (String) array.get(3);
 		}
 		if (s.equals("_master")) {
 			if (COM.dragonflow.Utils.TextUtils.getValue(
@@ -1770,10 +1770,10 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			if (s1 != null && s1.length() > 0) {
 				COM.dragonflow.SiteView.SiteViewObject siteviewobject = getSiteView();
 				StringBuffer stringbuffer = new StringBuffer();
-				jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(',',
+				ArrayList array1 = COM.dragonflow.SiteView.Platform.split(',',
 						s1);
 				for (int i = 0; i < array1.size(); i++) {
-					String s2 = (String) array1.at(i);
+					String s2 = (String) array1.get(i);
 					String as[] = COM.dragonflow.Utils.TextUtils
 							.split(s2);
 					String s4 = as[0];
@@ -1817,10 +1817,10 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			if (s1 != null && s1.length() > 0) {
 				COM.dragonflow.SiteView.SiteViewObject siteviewobject1 = getSiteView();
 				StringBuffer stringbuffer1 = new StringBuffer();
-				jgl.Array array2 = COM.dragonflow.SiteView.Platform.split(',',
+				ArrayList array2 = COM.dragonflow.SiteView.Platform.split(',',
 						s1);
 				for (int j = 0; j < array2.size(); j++) {
-					String s3 = (String) array2.at(j);
+					String s3 = (String) array2.get(j);
 					String as1[] = COM.dragonflow.Utils.TextUtils
 							.split(s3);
 					String s5 = as1[0];
@@ -1864,7 +1864,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		}
 	}
 
-	public static String getGroupName(jgl.HashMap hashmap,
+	public static String getGroupName(HashMap hashmap,
 			String s) {
 		String s1 = null;
 		if (hashmap != null) {
@@ -1879,11 +1879,11 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		return s1;
 	}
 
-	String conditionName(String s, jgl.HashMap hashmap,
-			jgl.Array array) {
+	String conditionName(String s, HashMap hashmap,
+			ArrayList array) {
 		String s2 = null;
 		if (array.size() > 3) {
-			s2 = (String) array.at(3);
+			s2 = (String) array.get(3);
 		}
 		String s1;
 		if (s.equals("_master")) {
@@ -1905,9 +1905,9 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup
 					.currentSiteView();
 			StringBuffer stringbuffer = new StringBuffer();
-			jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(',', s2);
+			ArrayList array1 = COM.dragonflow.SiteView.Platform.split(',', s2);
 			for (int i = 0; i < array1.size(); i++) {
-				String s3 = (String) array1.at(i);
+				String s3 = (String) array1.get(i);
 				if (s3.indexOf(' ') < 0) {
 					continue;
 				}
@@ -2138,23 +2138,23 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		}
 	}
 
-	jgl.HashMap parseCondition(String s, jgl.HashMap hashmap,
+	HashMap parseCondition(String s, HashMap hashmap,
 			String s1, String s2) {
-		jgl.HashMap hashmap1 = new HashMap();
+		HashMap hashmap1 = new HashMap();
 		hashmap1.put("raw", s);
 		hashmap1.put("group", s1);
 		hashmap1.put("monitor", s2);
-		jgl.Array array = COM.dragonflow.SiteView.Platform.split('\t', s);
-		String s3 = (String) array.at(0);
-		String s4 = (String) array.at(1);
-		String s5 = (String) array.at(2);
+		ArrayList array = COM.dragonflow.SiteView.Platform.split('\t', s);
+		String s3 = (String) array.get(0);
+		String s4 = (String) array.get(1);
+		String s5 = (String) array.get(2);
 		String s6 = null;
 		if (array.size() > 3) {
-			s6 = (String) array.at(3);
+			s6 = (String) array.get(3);
 		}
 		String s7 = null;
 		if (array.size() > 4) {
-			s7 = (String) array.at(4);
+			s7 = (String) array.get(4);
 		}
 		if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
 			java.lang.System.out.println("(" + array.size() + ")");
@@ -2178,7 +2178,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			s8 = s8 + "/" + s2;
 		}
 		hashmap1.put("fullID", s8 + "/" + s5);
-		jgl.Array array1 = new Array();
+		ArrayList array1 = new ArrayList();
 		COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(
 				true);
 		getActionArguments(s4, array1, hashmapordered);
@@ -2229,7 +2229,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		return hashmap1;
 	}
 
-	void addConditions(jgl.Array array, jgl.HashMap hashmap,
+	void addConditions(ArrayList array, HashMap hashmap,
 			String s, String s1) {
 		COM.dragonflow.Utils.I18N.test(s, 1);
 		if (COM.dragonflow.SiteView.AtomicMonitor.alertDebug) {
@@ -2242,7 +2242,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 				java.lang.System.out.println("<br>raw(" + s2 + ")");
 			}
 			try {
-				jgl.HashMap hashmap1 = parseCondition(s2, hashmap, s, s1);
+				HashMap hashmap1 = parseCondition(s2, hashmap, s, s1);
 				array.add(hashmap1);
 			} catch (java.lang.Exception exception) {
 				outputStream
@@ -2265,7 +2265,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	}
 
 	void printAddListForm(String s) {
-		jgl.Array array = null;
+		ArrayList array = null;
 		try {
 			array = getActionClasses();
 		} catch (java.lang.Exception exception) {
@@ -2303,10 +2303,10 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	 * @param s
 	 * @param s1
 	 */
-	void printClasses(jgl.Array array, String s, String s1) {
+	void printClasses(ArrayList array, String s, String s1) {
 		Enumeration enumeration;
 		boolean flag;
-		enumeration = array.elements();
+		enumeration = (Enumeration) array.iterator();
 		flag = false;
 
 		java.lang.Class class1;
@@ -2375,36 +2375,36 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	 * @return
 	 * @throws java.io.IOException
 	 */
-	jgl.Array getConditions() throws java.io.IOException {
-		jgl.Array array = new Array();
-		jgl.HashMap hashmap = getMasterConfig();
+	ArrayList getConditions() throws java.io.IOException {
+		ArrayList array = new ArrayList();
+		HashMap hashmap = getMasterConfig();
 		if (!request.getPermission("_editGlobalAlerts").equals("hidden")) {
 			addConditions(array, hashmap, "_master", "_config");
 		}
-		jgl.Array array1 = new Array();
-		jgl.Array array2 = getAllowedGroupIDs();
+		ArrayList array1 = new ArrayList();
+		ArrayList array2 = getAllowedGroupIDs();
 		for (Enumeration enumeration = array2.elements(); enumeration
 				.hasMoreElements();) {
 			String s = (String) enumeration.nextElement();
-			jgl.Array array3 = ReadGroupFrames(s);
+			ArrayList array3 = ReadGroupFrames(s);
 			Enumeration enumeration2 = COM.dragonflow.Page.alertPage
 					.getMonitors(array3);
-			jgl.HashMap hashmap1 = null;
+			HashMap hashmap1 = null;
 			if (enumeration2.hasMoreElements()) {
-				hashmap1 = (jgl.HashMap) enumeration2.nextElement();
+				hashmap1 = (HashMap) enumeration2.nextElement();
 			} else {
 				hashmap1 = new HashMap();
 			}
 			addConditions(array, hashmap1, COM.dragonflow.Utils.I18N
 					.toNullEncoding(s), "_config");
 			while (enumeration2.hasMoreElements()) {
-				jgl.HashMap hashmap2 = (jgl.HashMap) enumeration2.nextElement();
+				HashMap hashmap2 = (HashMap) enumeration2.nextElement();
 				addConditions(array1, hashmap2, COM.dragonflow.Utils.I18N
 						.toNullEncoding(s), (String) hashmap2
 						.get("_id"));
 			}
 		}
-		Enumeration enumeration1 = array1.elements();
+		Enumeration enumeration1 = (Enumeration) array1.iterator();
 
 		while (enumeration1.hasMoreElements()) {
 			array.add(enumeration1.nextElement());
@@ -2412,9 +2412,9 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		return array;
 	}
 
-	jgl.Array getActionClasses() {
-		jgl.Array array = new Array();
-		jgl.HashMap hashmap = null;
+	ArrayList getActionClasses() {
+		ArrayList array = new ArrayList();
+		HashMap hashmap = null;
 		if (isPortalServerRequest()) {
 			COM.dragonflow.SiteView.PortalSiteView portalsiteview = (COM.dragonflow.SiteView.PortalSiteView) getSiteView();
 			if (portalsiteview != null) {
@@ -2501,24 +2501,24 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		printFooter(outputStream);
 	}
 
-	jgl.HashMap getAlertStats() {
+	HashMap getAlertStats() {
 		if (alertStats == null) {
 			try {
-				jgl.Array array = getAllowedGroupIDs();
+				ArrayList array = getAllowedGroupIDs();
 				alertStats = new HashMap();
-				Enumeration enumeration = array.elements();
+				Enumeration enumeration = (Enumeration) array.iterator();
 				do {
 					if (!enumeration.hasMoreElements()) {
 						break;
 					}
 					String s = (String) enumeration
 							.nextElement();
-					jgl.Array array1 = ReadGroupFrames(s);
+					ArrayList array1 = ReadGroupFrames(s);
 					if (array1.size() >= 1) {
-						updateAlertStats((jgl.HashMap) array1.at(0), alertStats);
+						updateAlertStats((HashMap) array1.get(0), alertStats);
 						int i = 1;
 						while (i < array1.size()) {
-							jgl.HashMap hashmap = (jgl.HashMap) array1.at(i);
+							HashMap hashmap = (HashMap) array1.get(i);
 							if (COM.dragonflow.SiteView.Monitor
 									.isMonitorFrame(hashmap)) {
 								updateAlertStats(hashmap, alertStats);
@@ -2543,13 +2543,13 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		return alertStats;
 	}
 
-	void updateAlertStats(jgl.HashMap hashmap, jgl.HashMap hashmap1) {
+	void updateAlertStats(HashMap hashmap, HashMap hashmap1) {
 		for (Enumeration enumeration = hashmap
 				.values("_alertCondition"); enumeration.hasMoreElements(); COM.dragonflow.Utils.TextUtils
 				.incrementEntry(hashmap1, "TotalAlerts")) {
 			String s = (String) enumeration.nextElement();
-			jgl.Array array = COM.dragonflow.SiteView.Platform.split('\t', s);
-			String s1 = getActionClass((String) array.at(1));
+			ArrayList array = COM.dragonflow.SiteView.Platform.split('\t', s);
+			String s1 = getActionClass((String) array.get(1));
 			COM.dragonflow.Utils.TextUtils.incrementEntry(hashmap1, s1
 					+ "Count");
 		}
@@ -2564,16 +2564,16 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 	void printReportForm(String s) {
 		int i;
 		String s1;
-		jgl.Array array1;
+		ArrayList array1;
 		Enumeration enumeration;
 		COM.dragonflow.Page.CGI.menus menus1 = getNavItems(request);
 		printButtonBar("AlertReport.htm", "Alerts", menus1);
-		jgl.Array array = getActionClasses();
+		ArrayList array = getActionClasses();
 		i = 0;
 		s1 = "";
-		array1 = new Array();
+		array1 = new ArrayList();
 		Object obj = null;
-		enumeration = array.elements();
+		enumeration = (Enumeration) array.iterator();
 
 		java.lang.Class class1;
 		while (enumeration.hasMoreElements()) {
@@ -2644,11 +2644,11 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			}
 			java.util.Date date = new Date(l1);
 			java.util.Date date1 = new Date(l2);
-			jgl.Array array2 = getAllowedGroupIDs();
-			jgl.HashMap hashmap = new HashMap(true);
+			ArrayList array2 = getAllowedGroupIDs();
+			HashMap hashmap = new HashMap(true);
 			if (request.getValue("alert-type").equals("All")) {
 				for (int i1 = 0; i1 < array1.size(); i1++) {
-					hashmap.add("alert-type", array1.at(i1));
+					hashmap.add("alert-type", array1.get(i1));
 				}
 
 			} else {
@@ -2675,9 +2675,9 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			stringbuffer.append("<OPTION SELECTED VALUE=\"All\">All Types");
 			for (int k = 0; k < array1.size(); k++) {
 				stringbuffer.append("<OPTION VALUE=\"");
-				stringbuffer.append(array1.at(k));
+				stringbuffer.append(array1.get(k));
 				stringbuffer.append("\">");
-				stringbuffer.append((String) array1.at(k));
+				stringbuffer.append((String) array1.get(k));
 			}
 
 			switch (i) {
@@ -2785,7 +2785,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 					treecontrol.process("Alert Subject(s)", "", s6, null, null,
 							null, i, this, stringbuffer);
 				} else if (request.getValue("monitor").equals("_config")) {
-					jgl.Array array1 = COM.dragonflow.Page.alertPage
+					ArrayList array1 = COM.dragonflow.Page.alertPage
 							.expandSubgroupIDs(COM.dragonflow.Utils.I18N
 									.toDefaultEncoding(s3), this);
 					COM.dragonflow.Page.treeControl treecontrol1 = new treeControl(
@@ -2811,7 +2811,7 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 			} else if (s3.equals("_master")) {
 				s5 = getMonitorOptionsHTML(null, null, null, i);
 			} else if (request.getValue("monitor").equals("_config")) {
-				jgl.Array array = COM.dragonflow.Page.alertPage
+				ArrayList array = COM.dragonflow.Page.alertPage
 						.expandSubgroupIDs(COM.dragonflow.Utils.I18N
 								.toDefaultEncoding(s3), this);
 				s5 = getMonitorOptionsHTML(null, null, array, i);
@@ -2853,8 +2853,8 @@ public class alertPage extends COM.dragonflow.Page.CGI {
 		printFooter(outputStream);
 	}
 
-	void getActionArguments(String s, jgl.Array array,
-			jgl.HashMap hashmap) {
+	void getActionArguments(String s, ArrayList array,
+			HashMap hashmap) {
 		int i = s.indexOf(" ");
 		String as[];
 		if (i >= 0) {

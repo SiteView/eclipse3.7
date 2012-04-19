@@ -21,7 +21,7 @@ import java.io.StringReader;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 
 import org.xml.sax.InputSource;
 
@@ -94,7 +94,7 @@ public class XmlApiRequestXML extends COM.dragonflow.XmlApi.XmlApiRequest {
         if (node.getNodeType() == 1) {
             String s = node.getNodeName();
             if (s != null && s.length() > 0) {
-                jgl.HashMap hashmap = new HashMap();
+                HashMap hashmap = new HashMap();
                 org.w3c.dom.NamedNodeMap namednodemap = node.getAttributes();
                 for (int i = 0; i < namednodemap.getLength(); i ++) {
                     org.w3c.dom.Attr attr = (org.w3c.dom.Attr) namednodemap.item(i);
@@ -218,7 +218,7 @@ public class XmlApiRequestXML extends COM.dragonflow.XmlApi.XmlApiRequest {
 
     }
 
-    private void startXmlElement(String s, jgl.HashMap hashmap) {
+    private void startXmlElement(String s, HashMap hashmap) {
         boolean flag = false;
         java.util.Vector vector = null;
         xmlResponse.append("<" + s);

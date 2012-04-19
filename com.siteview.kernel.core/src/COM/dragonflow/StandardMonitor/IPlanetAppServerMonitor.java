@@ -29,7 +29,7 @@ import COM.dragonflow.Utils.Snmp.BrowsableMIB;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.util.Vector;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class IPlanetAppServerMonitor extends BrowsableSNMPBase
 {
@@ -41,9 +41,9 @@ public class IPlanetAppServerMonitor extends BrowsableSNMPBase
         IPlanetAppServerMIB = "NO_IPLANET_APPSERVER_MIB_AVAILABLE";
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = super.getConnectionProperties();
+         ArrayList array = super.getConnectionProperties();
         return array;
     }
 
@@ -85,7 +85,7 @@ public class IPlanetAppServerMonitor extends BrowsableSNMPBase
 
     static 
     {
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         StringProperty astringproperty[] = new StringProperty[0];
         addProperties("COM.dragonflow.StandardMonitor.IPlanetAppServerMonitor", astringproperty);
         addClassElement("COM.dragonflow.StandardMonitor.IPlanetAppServerMonitor", Rule.stringToClassifier("countersInError > 0\terror"));

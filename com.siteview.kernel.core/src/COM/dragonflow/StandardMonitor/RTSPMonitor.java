@@ -53,8 +53,8 @@ import javax.media.StopByRequestEvent;
 import javax.media.StopEvent;
 import javax.media.Time;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -551,8 +551,8 @@ public class RTSPMonitor extends AtomicMonitor implements ControllerListener {
         return 0;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pDownloadTime);
         array.add(pDownloadBytes);

@@ -34,17 +34,17 @@ public class XmlApiReport {
         api = new APIReport();
     }
 
-    public java.lang.Object add(jgl.Array array, jgl.Array array1, jgl.Array array2, String s) {
+    public java.lang.Object add(ArrayList array, ArrayList array1, ArrayList array2, String s) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
         try {
             int i = 0;
             Object obj = null;
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             java.util.Vector vector = new Vector();
             while (enumeration.hasMoreElements()) {
                 String s1 = (String) enumeration.nextElement();
-                String s2 = (String) array1.at(i);
-                jgl.HashMap hashmap = (jgl.HashMap) array2.at(i);
+                String s2 = (String) array1.get(i);
+                HashMap hashmap = (HashMap) array2.get(i);
                 api.create(s1, s2, hashmap);
                 vector.add(hashmap);
                 i ++;
@@ -56,17 +56,17 @@ public class XmlApiReport {
         return xmlapiresponse;
     }
 
-    public java.lang.Object update(jgl.Array array, jgl.Array array1, jgl.Array array2, jgl.Array array3, jgl.Array array4) {
+    public java.lang.Object update(ArrayList array, ArrayList array1, ArrayList array2, ArrayList array3, ArrayList array4) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
         try {
             int i = 0;
             Object obj = null;
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             java.util.Vector vector = new Vector();
             while (enumeration.hasMoreElements()) {
                 String s = (String) enumeration.nextElement();
-                String s1 = (String) array1.at(i);
-                jgl.HashMap hashmap = (jgl.HashMap) array2.at(i);
+                String s1 = (String) array1.get(i);
+                HashMap hashmap = (HashMap) array2.get(i);
                 api.update(s, s1, hashmap);
                 vector.add(hashmap);
                 i ++;
@@ -78,15 +78,15 @@ public class XmlApiReport {
         return xmlapiresponse;
     }
 
-    public java.lang.Object delete(jgl.Array array, jgl.Array array1, jgl.Array array2, jgl.Array array3) {
+    public java.lang.Object delete(ArrayList array, ArrayList array1, ArrayList array2, ArrayList array3) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
         try {
             int i = 0;
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             java.util.Vector vector = new Vector();
             while (enumeration.hasMoreElements()) {
                 String s = (String) enumeration.nextElement();
-                String s1 = (String) array1.at(i);
+                String s1 = (String) array1.get(i);
                 api.delete("", s1, COM.dragonflow.Utils.TextUtils.toInt(s));
                 String as[] = new String[2];
                 as[0] = s;
@@ -101,7 +101,7 @@ public class XmlApiReport {
         return xmlapiresponse;
     }
 
-    public java.lang.Object getClassPropertyScalars(String s, String s1, jgl.HashMap hashmap) {
+    public java.lang.Object getClassPropertyScalars(String s, String s1, HashMap hashmap) {
         COM.dragonflow.XmlApi.XmlApiResponse xmlapiresponse = new XmlApiResponse();
         try {
             java.util.Vector vector = api.getTemplateList();

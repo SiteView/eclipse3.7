@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.ScheduleProperty;
 import COM.dragonflow.Utils.Braf;
@@ -46,7 +46,7 @@ public class AlertLogReader extends LogReader {
      * @param array
      * @param hashmap1
      */
-    public void addAlertEntry(HashMap hashmap, Array array, HashMap hashmap1) {
+    public void addAlertEntry(HashMap hashmap,  ArrayList array, HashMap hashmap1) {
         if (hashmap1 != null) {
             Enumeration enumeration = hashmap1.keys();
             Object obj = null;
@@ -83,12 +83,12 @@ public class AlertLogReader extends LogReader {
         }
     }
 
-    public Array process(HashMap hashmap, Date date, Date date1,
+    public  ArrayList process(HashMap hashmap, Date date, Date date1,
             HashMap hashmap1) {
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         long l = siteviewgroup.getSettingAsLong("_alertLogReadChunkSize",
                 0x19000);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (logfile == null || !logfile.exists()) {
             LogManager.log("Error", "Alert log " + logfile.getAbsolutePath()
                     + " does not exist");
@@ -127,7 +127,7 @@ public class AlertLogReader extends LogReader {
                 long l9 = l7;
                 braf = new Braf(s, l7);
                 HashMap hashmap2 = null;
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 String s2 = "";
                 StringBuffer stringbuffer = new StringBuffer();
                 label0: do {
@@ -192,7 +192,7 @@ public class AlertLogReader extends LogReader {
                     addAlertEntry(hashmap2, array1, hashmap);
                 }
                 for (int j = 0; j < array.size(); j++)
-                    array1.add(array.at(j));
+                    array1.add(array.get(j));
 
                 array = array1;
                 if (l7 == 0L)
@@ -220,11 +220,11 @@ public class AlertLogReader extends LogReader {
         AlertLogReader alertlogreader = new AlertLogReader(file);
         HashMap hashmap = new HashMap();
         hashmap.put("alert-type", "Email");
-        Array array = alertlogreader.process(hashmap, null, null, null);
+         ArrayList array = alertlogreader.process(hashmap, null, null, null);
         System.out
                 .println("***************************************************");
         for (int i = 0; i < array.size(); i++) {
-            HashMap hashmap1 = (HashMap) array.at(i);
+            HashMap hashmap1 = (HashMap) array.get(i);
             System.out.println(TextUtils.dateToString((Date) hashmap1
                     .get("date"))
                     + "   " + hashmap1.get("alert-message"));

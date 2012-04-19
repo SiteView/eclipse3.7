@@ -28,7 +28,7 @@ import COM.dragonflow.Utils.Snmp.BrowsableMIB;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.util.Vector;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class VMWareMonitor extends BrowsableSNMPBase
 {
@@ -40,9 +40,9 @@ public class VMWareMonitor extends BrowsableSNMPBase
         VMWareMIB = "NO_VMWARE_MIB_AVAILABLE";
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = super.getConnectionProperties();
+         ArrayList array = super.getConnectionProperties();
         return array;
     }
 
@@ -84,7 +84,7 @@ public class VMWareMonitor extends BrowsableSNMPBase
 
     static 
     {
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         StringProperty astringproperty[] = new StringProperty[0];
         addProperties("COM.dragonflow.StandardMonitor.VMWareMonitor", astringproperty);
         addClassElement("COM.dragonflow.StandardMonitor.VMWareMonitor", Rule.stringToClassifier("countersInError > 0\terror"));

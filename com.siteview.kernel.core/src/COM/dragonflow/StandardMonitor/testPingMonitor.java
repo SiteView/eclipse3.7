@@ -7,8 +7,8 @@ import COM.dragonflow.Properties.*;
 import COM.dragonflow.SiteView.*;
 import COM.dragonflow.Utils.I18N;
 import COM.dragonflow.Utils.TextUtils;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class testPingMonitor extends AtomicMonitor
 {
@@ -101,9 +101,9 @@ public class testPingMonitor extends AtomicMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pPercentGood);

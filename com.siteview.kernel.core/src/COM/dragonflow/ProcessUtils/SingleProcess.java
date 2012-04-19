@@ -87,7 +87,7 @@ public class SingleProcess implements COM.dragonflow.ProcessUtils.WaitForInputEv
         }
     }
 
-    public boolean exec(String s, jgl.Array array, int ai[]) {
+    public boolean exec(String s, ArrayList array, int ai[]) {
         available = false;
         currCmd = s;
         if (exitTime > 0L && java.lang.System.currentTimeMillis() > exitTime) {

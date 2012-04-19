@@ -12,7 +12,7 @@ package COM.dragonflow.Page;
 import java.io.File;
 import java.util.Date;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.SiteView.GreaterDate;
 
@@ -96,7 +96,7 @@ public class logPage extends COM.dragonflow.Page.CGI
 
         java.io.File file2 = new File(s2);
         String as3[] = file2.list();
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         if(as3 != null)
         {
             for(int j = 0; j < as3.length; j++)
@@ -130,7 +130,7 @@ public class logPage extends COM.dragonflow.Page.CGI
             outputStream.println("<DT><TABLE BORDER=\"0\">");
             for(int k = 0; k < array.size(); k++)
             {
-                java.util.Date date1 = (java.util.Date)array.at(k);
+                java.util.Date date1 = (java.util.Date)array.get(k);
                 String s13 = "SiteView.log";
                 String s14 = "Monitor log";
                 if(date1.getTime() != 0L)

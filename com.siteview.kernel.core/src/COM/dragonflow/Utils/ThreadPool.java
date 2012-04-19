@@ -319,7 +319,7 @@ public class ThreadPool {
         if (s != null && s.length() > 0) {
             debug = true;
         }
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         String s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_useThreadPool");
         if (s1.equals("no")) {
             useThreadPool = false;

@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.JdbcLogger;
 import COM.dragonflow.Log.LogManager;
@@ -281,7 +281,7 @@ public class AssetMonitor extends ServerMonitor {
         super.startMonitor();
     }
 
-    Array splitRecord(Object obj) {
+     ArrayList splitRecord(Object obj) {
         if (obj instanceof Array) {
             return (Array) obj;
         } else {
@@ -311,15 +311,15 @@ public class AssetMonitor extends ServerMonitor {
         }
         String s1 = getProperty(pMonitorDescription);
         String s2 = "-1";
-        Array array1 = Platform.split(' ', s1);
+         ArrayList array1 = Platform.split(' ', s1);
         if (array1.size() >= 1) {
-            Array array2 = Platform.split('=', (String) array1.at(0));
+             ArrayList array2 = Platform.split('=', (String) array1.get(0));
             if (array2.size() == 2) {
-                s2 = (String) array2.at(1);
+                s2 = (String) array2.get(1);
             }
         }
-        Array array3 = new Array();
-        Enumeration enumeration = array.elements();
+         ArrayList array3 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         boolean flag = false;
         while (enumeration.hasMoreElements()) {
             Object obj = enumeration.nextElement();
@@ -351,7 +351,7 @@ public class AssetMonitor extends ServerMonitor {
         }
         if (s.equals("server")) {
             Enumeration enumeration1 = array3.elements();
-            Array array4 = new Array();
+             ArrayList array4 = new ArrayList();
             String s5;
             for (; enumeration1.hasMoreElements(); array4.add(s5)) {
                 s5 = (String) enumeration1.nextElement();
@@ -365,7 +365,7 @@ public class AssetMonitor extends ServerMonitor {
             array4.add(JdbcLogger.jdbcDateFormat(Platform.makeDate()));
             JdbcLogger.logger.logCustom(this, array4, "server_asset", server_asset_create, server_asset_define, server_asset_insert);
         } else if (s.equals("service")) {
-            Array array6;
+             ArrayList array6;
             for (Enumeration enumeration2 = array3.elements(); enumeration2.hasMoreElements(); JdbcLogger.logger.logCustom(this, array6, "service_asset", service_asset_create, service_asset_create2, service_asset_define, service_asset_insert)) {
                 Object obj1 = enumeration2.nextElement();
                 array6 = splitRecord(obj1);
@@ -374,7 +374,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("software")) {
-            Array array7;
+             ArrayList array7;
             for (Enumeration enumeration3 = array3.elements(); enumeration3.hasMoreElements(); JdbcLogger.logger.logCustom(this, array7, "software_asset", software_asset_create, software_asset_create2, software_asset_define, software_asset_insert)) {
                 Object obj2 = enumeration3.nextElement();
                 array7 = splitRecord(obj2);
@@ -383,7 +383,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("drive")) {
-            Array array8;
+             ArrayList array8;
             for (Enumeration enumeration4 = array3.elements(); enumeration4.hasMoreElements(); JdbcLogger.logger.logCustom(this, array8, "drive_asset", drive_asset_create, drive_asset_define, drive_asset_insert)) {
                 Object obj3 = enumeration4.nextElement();
                 array8 = splitRecord(obj3);
@@ -392,7 +392,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("nic")) {
-            Array array9;
+             ArrayList array9;
             for (Enumeration enumeration5 = array3.elements(); enumeration5.hasMoreElements(); JdbcLogger.logger.logCustom(this, array9, "nic_asset", nic_asset_create, nic_asset_define, nic_asset_insert)) {
                 Object obj4 = enumeration5.nextElement();
                 array9 = splitRecord(obj4);
@@ -402,7 +402,7 @@ public class AssetMonitor extends ServerMonitor {
 
         } else if (s.equals("unix_server")) {
             Enumeration enumeration6 = array3.elements();
-            Array array5 = new Array();
+             ArrayList array5 = new ArrayList();
             String s6;
             for (; enumeration6.hasMoreElements(); array5.add(s6)) {
                 s6 = (String) enumeration6.nextElement();
@@ -416,7 +416,7 @@ public class AssetMonitor extends ServerMonitor {
             array5.add(JdbcLogger.jdbcDateFormat(Platform.makeDate()));
             JdbcLogger.logger.logCustom(this, array5, "unix_server_asset", unix_server_asset_create, unix_server_asset_define, unix_server_asset_insert);
         } else if (s.equals("unix_procs")) {
-            Array array10;
+             ArrayList array10;
             for (Enumeration enumeration7 = array3.elements(); enumeration7.hasMoreElements(); JdbcLogger.logger.logCustom(this, array10, "unix_procs", unix_procs_create, unix_procs_define, unix_procs_insert)) {
                 Object obj5 = enumeration7.nextElement();
                 array10 = splitRecord(obj5);
@@ -425,7 +425,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("unix_patch")) {
-            Array array11;
+             ArrayList array11;
             for (Enumeration enumeration8 = array3.elements(); enumeration8.hasMoreElements(); JdbcLogger.logger.logCustom(this, array11, "unix_patch", unix_patch_create, unix_patch_define, unix_patch_insert)) {
                 Object obj6 = enumeration8.nextElement();
                 array11 = splitRecord(obj6);
@@ -434,7 +434,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("unix_package")) {
-            Array array12;
+             ArrayList array12;
             for (Enumeration enumeration9 = array3.elements(); enumeration9.hasMoreElements(); JdbcLogger.logger.logCustom(this, array12, "unix_package", unix_package_create, unix_package_create2, unix_package_create3, unix_package_define,
                     unix_package_insert)) {
                 Object obj7 = enumeration9.nextElement();
@@ -444,7 +444,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("unix_drive")) {
-            Array array13;
+             ArrayList array13;
             for (Enumeration enumeration10 = array3.elements(); enumeration10.hasMoreElements(); JdbcLogger.logger.logCustom(this, array13, "unix_drive_asset", unix_drive_asset_create, unix_drive_asset_define, unix_drive_asset_insert)) {
                 Object obj8 = enumeration10.nextElement();
                 array13 = splitRecord(obj8);
@@ -453,7 +453,7 @@ public class AssetMonitor extends ServerMonitor {
             }
 
         } else if (s.equals("unix_nic")) {
-            Array array14;
+             ArrayList array14;
             for (Enumeration enumeration11 = array3.elements(); enumeration11.hasMoreElements(); JdbcLogger.logger.logCustom(this, array14, "unix_nic_asset", unix_nic_asset_create, unix_nic_asset_define, unix_nic_asset_insert)) {
                 Object obj9 = enumeration11.nextElement();
                 array14 = splitRecord(obj9);
@@ -477,12 +477,12 @@ public class AssetMonitor extends ServerMonitor {
         return s;
     }
 
-    void appendOutput(String s, String s1, int i, Array array) {
+    void appendOutput(String s, String s1, int i,  ArrayList array) {
         if (showDebug) {
             LogManager.log("RunMonitor", "asset command=" + s1);
             LogManager.log("RunMonitor", " result=" + i);
             LogManager.log("RunMonitor", " machine=" + s);
-            for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", " output=" + enumeration.nextElement())) {
+            for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", " output=" + enumeration.nextElement())) {
             }
         }
     }
@@ -494,7 +494,7 @@ public class AssetMonitor extends ServerMonitor {
         long l = Platform.timeMillis();
         int i = -1;
         long l1 = getPropertyAsLong(pMaxMeasurement);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         StringBuffer stringbuffer = new StringBuffer();
         try {
             String s = getProperty(pMachineName);
@@ -576,7 +576,7 @@ public class AssetMonitor extends ServerMonitor {
      * @param stringbuffer
      * @return
      */
-    public int getDisks(String s, Array array, StringBuffer stringbuffer) {
+    public int getDisks(String s,  ArrayList array, StringBuffer stringbuffer) {
         String s1 = Machine.getCommandString("disks", s);
         if (s1.length() == 0) {
             stringbuffer.append("error, reading disk command for server, " + s);
@@ -590,12 +590,12 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array1 = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array1 = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array1);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
         }
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         int i = osadapter.getCommandSettingAsInteger("disks", "total");
         int j = osadapter.getCommandSettingAsInteger("disks", "name");
         int k = osadapter.getCommandSettingAsInteger("disks", "mount");
@@ -620,7 +620,7 @@ public class AssetMonitor extends ServerMonitor {
                     if (s6.length() > 0) {
                         l = TextUtils.readLong(s6, 0);
                     }
-                    Array array2 = new Array();
+                     ArrayList array2 = new ArrayList();
                     array2.add(s5);
                     array2.add(s4);
                     array2.add("" + l);
@@ -640,7 +640,7 @@ public class AssetMonitor extends ServerMonitor {
      * @param stringbuffer
      * @return
      */
-    public int getPatches(String s, Array array, StringBuffer stringbuffer) {
+    public int getPatches(String s,  ArrayList array, StringBuffer stringbuffer) {
         String s1 = Machine.getCommandString("patch", s);
         if (s1.length() == 0) {
             stringbuffer.append("error, reading patch command for server, " + s);
@@ -654,7 +654,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array1 = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array1 = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array1);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -676,7 +676,7 @@ public class AssetMonitor extends ServerMonitor {
                             if (k != -1) {
                                 String s8 = s6.substring(0, k);
                                 String s9 = s6.substring(k + 1);
-                                Array array3 = new Array();
+                                 ArrayList array3 = new ArrayList();
                                 array3.add(s8);
                                 array3.add(s9);
                                 debugAsset("patch", array3);
@@ -691,7 +691,7 @@ public class AssetMonitor extends ServerMonitor {
                         String s5 = linereader.readColumn(1, "id").trim();
                         String s7 = linereader.readColumn(2, "rev").trim();
                         if (s5.length() > 0 && s7.length() > 0) {
-                            Array array2 = new Array();
+                             ArrayList array2 = new ArrayList();
                             array2.add(s5);
                             array2.add(s7);
                             debugAsset("patch", array2);
@@ -712,7 +712,7 @@ public class AssetMonitor extends ServerMonitor {
      * @param stringbuffer
      * @return
      */
-    public int getNics(String s, Array array, StringBuffer stringbuffer) {
+    public int getNics(String s,  ArrayList array, StringBuffer stringbuffer) {
         String s1 = Machine.getCommandString("nicHost", s);
         if (s1.length() == 0) {
             stringbuffer.append("error, reading nic host command for server, " + s);
@@ -726,12 +726,12 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array1 = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array1 = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array1);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
         }
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         int i = osadapter.getCommandSettingAsInteger("nicHost", "name");
         int j = osadapter.getCommandSettingAsInteger("nicHost", "host");
         HashMap hashmap = new HashMap();
@@ -764,7 +764,7 @@ public class AssetMonitor extends ServerMonitor {
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
         }
-        enumeration = array1.elements();
+        enumeration = (Enumeration) array1.iterator();
         i = osadapter.getCommandSettingAsInteger("nic", "name");
         int k = osadapter.getCommandSettingAsInteger("nic", "address");
         linereader = new LineReader(array1, osadapter, "nic");
@@ -774,7 +774,7 @@ public class AssetMonitor extends ServerMonitor {
                 if (s4.length() != 0 && s4.indexOf("Name") == -1) {
                     String s5 = linereader.readColumn(k, "address");
                     String s6 = TextUtils.getValue(hashmap, s4);
-                    Array array2 = new Array();
+                     ArrayList array2 = new ArrayList();
                     array2.add(s4);
                     array2.add("0");
                     array2.add(s5);
@@ -800,7 +800,7 @@ public class AssetMonitor extends ServerMonitor {
      * @param stringbuffer
      * @return
      */
-    public int getProcs(String s, Array array, StringBuffer stringbuffer) {
+    public int getProcs(String s,  ArrayList array, StringBuffer stringbuffer) {
         String s1 = Machine.getCommandString("proc", s);
         if (s1.length() == 0) {
             stringbuffer.append("error, reading proc command for server, " + s);
@@ -814,7 +814,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array1 = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array1 = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array1);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -831,7 +831,7 @@ public class AssetMonitor extends ServerMonitor {
             }
         } 
         
-        Array array2;
+         ArrayList array2;
         for (Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements(); array.add(array2)) {
             String s5 = (String) enumeration.nextElement();
             int i = s5.indexOf(s2);
@@ -844,7 +844,7 @@ public class AssetMonitor extends ServerMonitor {
                 s8 = s8.substring(0, 19);
             }
             String s9 = TextUtils.getValue(hashmap, s5);
-            array2 = new Array();
+            array2 = new ArrayList();
             array2.add(s7);
             array2.add(s8);
             array2.add(s9);
@@ -879,9 +879,9 @@ public class AssetMonitor extends ServerMonitor {
             LogManager.log("Error", stringbuffer.toString());
             return -1;
         }
-        Array array = Platform.split('\n', s2);
+         ArrayList array = Platform.split('\n', s2);
 
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             String s3 = (String) enumeration.nextElement();
             s3 = s3.trim();
@@ -889,20 +889,20 @@ public class AssetMonitor extends ServerMonitor {
                 if (showDebug) {
                     LogManager.log("RunMonitor", "rule=" + s3);
                 }
-                Array array1 = Platform.split(',', s3);
+                 ArrayList array1 = Platform.split(',', s3);
                 if (array1.size() < 3) {
                     LogManager.log("Error", "bad rule, " + s3);
                 }
-                String s4 = (String) array1.at(0);
-                String s5 = (String) array1.at(1);
-                String s6 = (String) array1.at(2);
+                String s4 = (String) array1.get(0);
+                String s5 = (String) array1.get(1);
+                String s6 = (String) array1.get(2);
                 String s7 = "";
                 if (array1.size() >= 4) {
-                    s7 = (String) array1.at(3);
+                    s7 = (String) array1.get(3);
                 }
                 String s8 = "";
                 if (array1.size() >= 5) {
-                    s8 = (String) array1.at(4);
+                    s8 = (String) array1.get(4);
                 }
                 if (s5.equals("path")) {
                     CommandLine commandline = new CommandLine();
@@ -912,7 +912,7 @@ public class AssetMonitor extends ServerMonitor {
                     }
                     s9 = TextUtils.replaceVariable(s9, "$path$", s6);
                     s9 = TextUtils.replaceVariable(s9, "$app$", s4);
-                    Array array2 = commandline.exec(s9, s, Platform.getLock(s));
+                     ArrayList array2 = commandline.exec(s9, s, Platform.getLock(s));
                     appendOutput(s, s9, commandline.getExitValue(), array2);
                     if (commandline.getExitValue() != 0) {
                         return commandline.getExitValue();
@@ -947,7 +947,7 @@ public class AssetMonitor extends ServerMonitor {
      * @param stringbuffer
      * @return
      */
-    int getPackages(String s, Array array, StringBuffer stringbuffer) {
+    int getPackages(String s,  ArrayList array, StringBuffer stringbuffer) {
         HashMap hashmap = new HashMap();
         String s1 = Machine.getCommandString("package", s);
         if (s1.length() == 0) {
@@ -962,7 +962,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array1 = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array1 = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array1);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1035,7 +1035,7 @@ public class AssetMonitor extends ServerMonitor {
     }
 
     void addPackage(HashMap hashmap, String s, String s1, String s2) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (s.length() >= 50) {
             s = s.substring(0, 49);
         }
@@ -1052,14 +1052,14 @@ public class AssetMonitor extends ServerMonitor {
         hashmap.put(s, array);
     }
 
-    void debugAsset(String s, Array array) {
+    void debugAsset(String s,  ArrayList array) {
         if (showDebug) {
             StringBuffer stringbuffer = new StringBuffer();
             for (int i = 0; i < array.size(); i ++) {
                 if (i != 0) {
                     stringbuffer.append(",");
                 }
-                stringbuffer.append(array.at(i));
+                stringbuffer.append(array.get(i));
             }
 
             LogManager.log("RunMonitor", "asset, adding " + s + " record, " + stringbuffer);
@@ -1088,7 +1088,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1147,7 +1147,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1155,13 +1155,13 @@ public class AssetMonitor extends ServerMonitor {
             LineReader linereader = new LineReader(array, osadapter, "network");
             linereader.processLine();
             String s2 = linereader.getCurrentLine();
-            Array array1 = Platform.split(' ', s2);
-            hashmap.put("host_name", array1.at(1));
-            hashmap.put("machine_name", array1.at(5));
-            hashmap.put("os", array1.at(0));
-            hashmap.put("os_release", array1.at(2));
-            hashmap.put("os_name", array1.at(0));
-            hashmap.put("class", array1.at(4));
+             ArrayList array1 = Platform.split(' ', s2);
+            hashmap.put("host_name", array1.get(1));
+            hashmap.put("machine_name", array1.get(5));
+            hashmap.put("os", array1.get(0));
+            hashmap.put("os_release", array1.get(2));
+            hashmap.put("os_name", array1.get(0));
+            hashmap.put("class", array1.get(4));
             return 0;
         }
     }
@@ -1189,7 +1189,7 @@ public class AssetMonitor extends ServerMonitor {
         }
         String s2 = osadapter.getCommandSetting("processor", "speedMatch");
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1233,7 +1233,7 @@ public class AssetMonitor extends ServerMonitor {
         }
         String s2 = osadapter.getCommandSetting("physicalmemory", "memoryMatch");
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1279,7 +1279,7 @@ public class AssetMonitor extends ServerMonitor {
         }
         String s2 = osadapter.getCommandSetting("processors", "match");
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1322,7 +1322,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1416,7 +1416,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1459,7 +1459,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1502,7 +1502,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1549,7 +1549,7 @@ public class AssetMonitor extends ServerMonitor {
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if (commandline.getExitValue() != 0) {
             return commandline.getExitValue();
@@ -1573,7 +1573,7 @@ public class AssetMonitor extends ServerMonitor {
         return 0;
     }
 
-    public int getServer(String s, Array array, StringBuffer stringbuffer) {
+    public int getServer(String s,  ArrayList array, StringBuffer stringbuffer) {
         HashMap hashmap = new HashMap();
         int i = 0;
         OSAdapter osadapter = Machine.getAdapter(s);
@@ -1651,8 +1651,8 @@ public class AssetMonitor extends ServerMonitor {
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pRecords);

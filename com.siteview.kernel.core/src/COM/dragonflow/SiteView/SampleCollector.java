@@ -19,7 +19,7 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Date;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.PercentProperty;
@@ -155,7 +155,7 @@ public class SampleCollector extends SampleStatistics {
         buckets = null;
         monitor = monitor1;
         property = stringproperty;
-        Array array = monitor1.getLogProperties();
+         ArrayList array = monitor1.getLogProperties();
         propertyIndex = array.indexOf(stringproperty) + 1;
         idString = monitor1.getFullID() + SiteViewObject.ID_SEPARATOR
                 + TextUtils.numberToString(stringproperty.getOrder())

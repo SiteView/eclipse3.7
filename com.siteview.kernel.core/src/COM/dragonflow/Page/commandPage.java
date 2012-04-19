@@ -12,8 +12,8 @@ package COM.dragonflow.Page;
 import java.io.File;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequestException;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -75,10 +75,10 @@ public class commandPage extends COM.dragonflow.Page.CGI
             {
                 if(s2.equals("list"))
                 {
-                    jgl.Array array = COM.dragonflow.SiteView.User.readUsers();
-                    for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); outputStream.println("</user>"))
+                    ArrayList array = COM.dragonflow.SiteView.User.readUsers();
+                    for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); outputStream.println("</user>"))
                     {
-                        jgl.HashMap hashmap3 = (jgl.HashMap)enumeration.nextElement();
+                        HashMap hashmap3 = (HashMap)enumeration.nextElement();
                         Enumeration enumeration4 = hashmap3.keys();
                         String s10 = "";
                         outputStream.println("<user>");
@@ -93,8 +93,8 @@ public class commandPage extends COM.dragonflow.Page.CGI
                 } else
                 if(s2.equals("edit"))
                 {
-                    jgl.Array array1 = COM.dragonflow.SiteView.User.readUsers();
-                    jgl.HashMap hashmap2 = COM.dragonflow.SiteView.User.findUser(array1, s3);
+                    ArrayList array1 = COM.dragonflow.SiteView.User.readUsers();
+                    HashMap hashmap2 = COM.dragonflow.SiteView.User.findUser(array1, s3);
                     if(hashmap2 == null)
                     {
                         throw new Exception("unknown user: " + s3);
@@ -132,14 +132,14 @@ public class commandPage extends COM.dragonflow.Page.CGI
                     throw new Exception("unknown method: " + s2 + ", object=group");
                 }
                 String s4 = request.getValue("group");
-                jgl.Array array2;
-                jgl.HashMap hashmap4;
+                ArrayList array2;
+                HashMap hashmap4;
                 if(s2.equals("edit"))
                 {
                     array2 = ReadGroupFrames(s4);
                     if(array2.size() > 0)
                     {
-                        hashmap4 = (jgl.HashMap)array2.at(0);
+                        hashmap4 = (HashMap)array2.get(0);
                     } else
                     {
                         hashmap4 = new HashMap();
@@ -152,7 +152,7 @@ public class commandPage extends COM.dragonflow.Page.CGI
                     {
                         throw new Exception("group exists: method=" + s2 + ", group=" + s4 + ", object=group");
                     }
-                    array2 = new Array();
+                    array2 = new ArrayList();
                     hashmap4 = new HashMap();
                     hashmap4.put("_nextID", "1");
                     array2.add(hashmap4);
@@ -195,14 +195,14 @@ public class commandPage extends COM.dragonflow.Page.CGI
                 {
                     throw new Exception("missing group parameter, method=" + s2 + ", object=monitor");
                 }
-                jgl.Array array3;
-                jgl.HashMap hashmap5;
+                ArrayList array3;
+                HashMap hashmap5;
                 if((new File(COM.dragonflow.Page.commandPage.getGroupFilePath(s5, request, ".mg"))).exists())
                 {
                     array3 = ReadGroupFrames(s5);
                     if(array3.size() > 0)
                     {
-                        hashmap5 = (jgl.HashMap)array3.at(0);
+                        hashmap5 = (HashMap)array3.get(0);
                     } else
                     {
                         hashmap5 = new HashMap();
@@ -211,7 +211,7 @@ public class commandPage extends COM.dragonflow.Page.CGI
                     }
                 } else
                 {
-                    array3 = new Array();
+                    array3 = new ArrayList();
                     hashmap5 = new HashMap();
                     hashmap5.put("_nextID", "1");
                     array3.add(hashmap5);
@@ -221,7 +221,7 @@ public class commandPage extends COM.dragonflow.Page.CGI
                 {
                     i = 1;
                 }
-                jgl.HashMap hashmap6;
+                HashMap hashmap6;
                 if(s2.equals("add"))
                 {
                     String s18 = COM.dragonflow.Utils.TextUtils.getValue(hashmap5, "_nextID");
@@ -246,7 +246,7 @@ public class commandPage extends COM.dragonflow.Page.CGI
                         throw new Exception("missing id parameter, method=" + s2 + ", object=monitor");
                     }
                     int j = COM.dragonflow.Page.commandPage.findMonitorIndex(array3, s19);
-                    hashmap6 = (jgl.HashMap)array3.at(j);
+                    hashmap6 = (HashMap)array3.get(j);
                     array3.remove(j);
                     array3.insert(i, hashmap6);
                 }
@@ -281,7 +281,7 @@ public class commandPage extends COM.dragonflow.Page.CGI
             {
                 if(s2.equals("list"))
                 {
-                    jgl.HashMap hashmap = getMasterConfig();
+                    HashMap hashmap = getMasterConfig();
                     outputStream.println("<globals>");
                     String s6;
                     for(Enumeration enumeration1 = hashmap.keys(); enumeration1.hasMoreElements(); outputStream.println("<" + s6 + ">" + hashmap.get(s6) + "</" + s6 + ">"))
@@ -293,7 +293,7 @@ public class commandPage extends COM.dragonflow.Page.CGI
                 } else
                 if(s2.equals("edit"))
                 {
-                    jgl.HashMap hashmap1 = getMasterConfig();
+                    HashMap hashmap1 = getMasterConfig();
                     Enumeration enumeration2 = request.getVariables();
                     do
                     {

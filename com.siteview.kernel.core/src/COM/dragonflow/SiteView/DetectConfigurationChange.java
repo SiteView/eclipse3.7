@@ -22,9 +22,9 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import jgl.Array;
-import jgl.HashMap;
-import jgl.HashMapIterator;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
+import HashMapIterator;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Utils.FileUtils;
 
@@ -70,10 +70,10 @@ public class DetectConfigurationChange extends Action {
     public synchronized boolean execute() {
         try {
             SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
-            Array array = new Array();
-            Array array1 = new Array();
-            Array array2 = new Array();
-            Array array3 = siteviewgroup.getGroupFiles();
+             ArrayList array = new ArrayList();
+             ArrayList array1 = new ArrayList();
+             ArrayList array2 = new ArrayList();
+             ArrayList array3 = siteviewgroup.getGroupFiles();
             Enumeration enumeration = array3.elements();
             File file = null;
             File file1 = null;

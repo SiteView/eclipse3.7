@@ -11,7 +11,7 @@ package COM.dragonflow.Page;
 
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.SiteView.CompareSlot;
 
@@ -87,12 +87,12 @@ public class reorderPage extends COM.dragonflow.Page.CGI
         } else
         if(request.isPost())
         {
-            jgl.Array array = ReadGroupFrames(s1);
-            jgl.Array array1 = new Array();
-            jgl.Array array2 = new Array();
+            ArrayList array = ReadGroupFrames(s1);
+            ArrayList array1 = new ArrayList();
+            ArrayList array2 = new ArrayList();
             for(int i = 0; i < array.size(); i++)
             {
-                jgl.HashMap hashmap = (jgl.HashMap)array.at(i);
+                HashMap hashmap = (HashMap)array.get(i);
                 if(i == 0)
                 {
                     array1.add(hashmap);
@@ -125,7 +125,7 @@ public class reorderPage extends COM.dragonflow.Page.CGI
                     int l = COM.dragonflow.Page.reorderPage.findMonitorIndex(array, s6);
                     if(l >= 0)
                     {
-                        jgl.HashMap hashmap1 = (jgl.HashMap)array.at(l);
+                        HashMap hashmap1 = (HashMap)array.get(l);
                         hashmap1.put("sortKey", request.getValue(s5));
                     }
                 }
@@ -141,7 +141,7 @@ public class reorderPage extends COM.dragonflow.Page.CGI
             COM.dragonflow.Page.CGI.menus menus1 = getNavItems(request);
             printButtonBar("EditGroup.htm#reorder", s1, menus1);
             String s2 = monitorgroup.getProperty(COM.dragonflow.SiteView.Monitor.pName);
-            jgl.Array array3 = COM.dragonflow.Utils.TextUtils.enumToArray(monitorgroup.getMonitors());
+            ArrayList array3 = COM.dragonflow.Utils.TextUtils.enumToArray(monitorgroup.getMonitors());
             int j = array3 == null ? 0 : array3.size();
             outputStream.println("<H2>Reorder Monitors in <A HREF=" + COM.dragonflow.Page.CGI.getGroupDetailURL(request, COM.dragonflow.Utils.I18N.UnicodeToString(s1)) + ">" + s2 + "</H2><P>" + "Reorder monitors in the group by <A HREF=#position>changing their position</A>, or <A HREF=#sort>sorting</A> them alphabetically by name." + "<P>");
             if(s2.length() > 0)
@@ -158,7 +158,7 @@ public class reorderPage extends COM.dragonflow.Page.CGI
                 outputStream.println("<TABLE BORDER=1 cellspacing=0>");
                 for(int k = 0; k < j; k++)
                 {
-                    COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor)array3.at(k);
+                    COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor)array3.get(k);
                     outputStream.println("<TR><TD><SELECT SIZE=1 NAME=pos" + monitor.getProperty(COM.dragonflow.SiteView.Monitor.pID) + ">" + getPositionOptions(j, k + 1) + "</SELECT></TD>" + "<TD>" + monitor.getProperty(COM.dragonflow.SiteView.Monitor.pName) + "</TD></TR>");
                 }
 

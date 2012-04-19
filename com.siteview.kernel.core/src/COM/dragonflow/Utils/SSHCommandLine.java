@@ -16,7 +16,7 @@
      * 
      * 
      */
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.SiteView.Machine;
 
 // Referenced classes of package COM.dragonflow.Utils:
@@ -39,7 +39,7 @@ public class SSHCommandLine extends COM.dragonflow.Utils.RemoteCommandLine
         return "SSH";
     }
 
-    public jgl.Array exec(String s, COM.dragonflow.SiteView.Machine machine, boolean flag)
+    public ArrayList exec(String s, COM.dragonflow.SiteView.Machine machine, boolean flag)
     {
         super.exec(s, machine, flag);
         String s1 = "";
@@ -51,7 +51,7 @@ public class SSHCommandLine extends COM.dragonflow.Utils.RemoteCommandLine
         {
             COM.dragonflow.Log.LogManager.log("Error", s1);
             exitValue = COM.dragonflow.SiteView.Monitor.kURLUnknownError;
-            return new Array();
+            return new ArrayList();
         }
         int i = COM.dragonflow.Properties.StringProperty.toInteger(machine.getProperty(COM.dragonflow.SiteView.Machine.pTimeout));
         if(i == 0)
@@ -63,7 +63,7 @@ public class SSHCommandLine extends COM.dragonflow.Utils.RemoteCommandLine
         }
         if(machine.getSetting("_os").equals("NT") && machine.getSetting("_method").equals("ssh"))
         {
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             String s2 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_NTSSHTimeout");
             if(s2.length() > 0)
             {
@@ -74,12 +74,12 @@ public class SSHCommandLine extends COM.dragonflow.Utils.RemoteCommandLine
                 }
             }
         }
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         exitValue = COM.dragonflow.SSH.SSHManager.getInstance().execute(this, machine, s, i, flag, progressStream, array);
         for(int j = 0; j < array.size(); j++)
         {
-            String s3 = new String(toEncoding((String)array.at(j)));
-            array.put(j, s3);
+            String s3 = new String(toEncoding((String)array.get(j)));
+            array.set(j, s3);
         }
 
         return array;
@@ -103,10 +103,10 @@ public class SSHCommandLine extends COM.dragonflow.Utils.RemoteCommandLine
         machine.setProperty("_trace", "true");
         COM.dragonflow.Utils.SSHCommandLine sshcommandline = new SSHCommandLine();
         sshcommandline.debug = true;
-        jgl.Array array = sshcommandline.exec("ps -ef", machine, false);
+        ArrayList array = sshcommandline.exec("ps -ef", machine, false);
         for(int i = 0; i < array.size(); i++)
         {
-            java.lang.System.out.println("RESULT=" + array.at(i));
+            java.lang.System.out.println("RESULT=" + array.get(i));
         }
 
     }

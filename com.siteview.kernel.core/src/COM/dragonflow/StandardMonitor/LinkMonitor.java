@@ -27,8 +27,8 @@ import COM.dragonflow.Utils.*;
 
 import java.io.File;
 import java.util.Vector;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLMonitor
@@ -108,7 +108,7 @@ public class LinkMonitor extends AtomicMonitor
     {
         boolean flag = true;
         String s = Platform.getRoot() + File.separator + "logs" + File.separator + getSummaryFilename();
-        Array array = TextUtils.enumToArray(getMultipleValues(pPostData));
+         ArrayList array = TextUtils.enumToArray(getMultipleValues(pPostData));
         String s1 = getProperty(pUserName);
         if(getProperty(pChallengeResponse).length() > 0)
         {
@@ -159,9 +159,9 @@ public class LinkMonitor extends AtomicMonitor
         }
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pLinkErrors);
         array.add(pTotalPages);
         array.add(pTotalGraphics);

@@ -31,8 +31,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -305,8 +305,8 @@ public class WebSphereMonitor extends BrowsableBase {
         return null;
     }
 
-    public Array getConnectionProperties() {
-        Array array = new Array();
+    public  ArrayList getConnectionProperties() {
+         ArrayList array = new ArrayList();
         array.add(pServerName);
         array.add(pPort);
         array.add(pUsername);
@@ -399,7 +399,7 @@ public class WebSphereMonitor extends BrowsableBase {
             if (i < array.size()) {
                 stringbuffer.append("/");
             }
-            stringbuffer.append(WebSphereCounter.normalize((String) array.at(i - 1)));
+            stringbuffer.append(WebSphereCounter.normalize((String) array.get(i - 1)));
         }
 
         return stringbuffer.toString();
@@ -548,7 +548,7 @@ public class WebSphereMonitor extends BrowsableBase {
             String s12 = getProperty(pRealm);
             String s13 = getProperty(pPort);
             String s14 = getProperty(pServerName);
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(s4);
             array.add(s6);
             array.add(s7);
@@ -674,7 +674,7 @@ public class WebSphereMonitor extends BrowsableBase {
             xmlSourcePort = "2222";
         }
         bWindows = System.getProperties().getProperty("os.name").startsWith("Windows");
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pServerName = new StringProperty("_server");
         pServerName.setDisplayText("Server", "the name of the server <B>without</B> the backslashes");
         pServerName.setParameterOptions(false, true, 4, false);
@@ -722,7 +722,7 @@ public class WebSphereMonitor extends BrowsableBase {
         array.add(pStatus);
         StringProperty astringproperty1[] = new StringProperty[array.size()];
         for (int i = 0; i < array.size(); i ++) {
-            astringproperty1[i] = (StringProperty) array.at(i);
+            astringproperty1[i] = (StringProperty) array.get(i);
         }
 
         String s2 = (COM.dragonflow.StandardMonitor.WebSphereMonitor.class).getName();

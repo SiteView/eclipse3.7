@@ -11,7 +11,7 @@ package COM.dragonflow.Page;
 
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.Page:
 // CGI
@@ -108,14 +108,14 @@ public class counterPage extends COM.dragonflow.Page.CGI
             String s15 = request.getValue("maxcounters");
             String s18 = request.getValue("account");
             String s19 = request.getValue("class");
-            jgl.Array array = null;
+            ArrayList array = null;
             outputStream.println("<H2 align=\"center\">Choose Counters</H2><P>\nSelect a maximum of " + s15 + " counters for this application monitor. Click the <b>Choose</b> " + " button at the bottom of the page to continue with the monitor setup.<br>  <b>Note:</b> Only the first " + s15 + " selected will be chosen." + " A maximum of 10 measurements can be used as Alerting criteria. <p>");
             outputStream.println(getPagePOST("counter", "") + "<input type=hidden name=returnURL value=" + request.getValue("returnURL") + ">\n");
             outputStream.print("<TABLE>\n");
             if(s13.equals("NTCounter"))
             {
                 String s20 = request.getValue("counterobjects");
-                jgl.Array array1 = new Array();
+                ArrayList array1 = new ArrayList();
                 String as5[] = COM.dragonflow.Utils.TextUtils.split(s20, ",");
                 for(int k2 = 0; k2 < as5.length; k2++)
                 {
@@ -129,7 +129,7 @@ public class counterPage extends COM.dragonflow.Page.CGI
             }
             if(s13.equals("SNMP"))
             {
-                array = new Array();
+                array = new ArrayList();
                 String s21 = COM.dragonflow.SiteView.SNMPBase.getTemplateContent(COM.dragonflow.SiteView.SNMPBase.getTemplatePath(), request.getValue("filename"), true);
                 String as1[] = COM.dragonflow.Utils.TextUtils.split(s21, ",");
                 for(int j1 = 0; j1 < as1.length; j1++)
@@ -143,7 +143,7 @@ public class counterPage extends COM.dragonflow.Page.CGI
             }
             if(s13.equals("URLContent"))
             {
-                array = new Array();
+                array = new ArrayList();
                 String s22 = COM.dragonflow.SiteView.URLContentBase.getTemplateContent(COM.dragonflow.SiteView.URLContentBase.getTemplatePath(), request.getValue("filename"), true);
                 String as2[] = COM.dragonflow.Utils.TextUtils.split(s22, ",");
                 for(int k1 = 0; k1 < as2.length; k1++)
@@ -158,7 +158,7 @@ public class counterPage extends COM.dragonflow.Page.CGI
             if(s13.equals("MultiContentBase"))
             {
                 java.lang.System.out.println("counterPage - MultiContentBase");
-                array = new Array();
+                array = new ArrayList();
                 String s23 = COM.dragonflow.SiteView.MultiContentBase.getTemplateContent(COM.dragonflow.SiteView.MultiContentBase.getTemplatePath(), request.getValue("filename"), true);
                 String as3[] = COM.dragonflow.Utils.TextUtils.split(s23, ",");
                 for(int l1 = 0; l1 < as3.length; l1++)
@@ -173,7 +173,7 @@ public class counterPage extends COM.dragonflow.Page.CGI
             if(s13.equals("DynamicHealth"))
             {
                 java.lang.System.out.println("counterPage - DynamicHealth");
-                array = new Array();
+                array = new ArrayList();
                 String s24 = COM.dragonflow.StandardMonitor.HealthUnixServerMonitor.getAllCounterContent();
                 String as4[] = COM.dragonflow.Utils.TextUtils.split(s24, ",");
                 for(int i2 = 0; i2 < as4.length; i2++)
@@ -216,23 +216,23 @@ public class counterPage extends COM.dragonflow.Page.CGI
                 {
                     String s27 = "";
                     String s28 = "";
-                    if(((COM.dragonflow.Utils.PerfCounter)array.at(l)).instance.length() > 0)
+                    if(((COM.dragonflow.Utils.PerfCounter)array.get(l)).instance.length() > 0)
                     {
-                        s28 = " -- " + ((COM.dragonflow.Utils.PerfCounter)array.at(l)).instance;
+                        s28 = " -- " + ((COM.dragonflow.Utils.PerfCounter)array.get(l)).instance;
                     }
-                    s27 = ((COM.dragonflow.Utils.PerfCounter)array.at(l)).object + " -- ";
-                    outputStream.print("<TR><TD><input type=checkbox name=\"counter" + l + "\" value=\"" + l + "\"" + s25 + "> " + s27 + ((COM.dragonflow.Utils.PerfCounter)array.at(l)).counterName + s28 + "</TD></TR>");
+                    s27 = ((COM.dragonflow.Utils.PerfCounter)array.get(l)).object + " -- ";
+                    outputStream.print("<TR><TD><input type=checkbox name=\"counter" + l + "\" value=\"" + l + "\"" + s25 + "> " + s27 + ((COM.dragonflow.Utils.PerfCounter)array.get(l)).counterName + s28 + "</TD></TR>");
                 }
                 if(!s13.equals("SNMP") && !s13.equals("URLContent") && !s13.equals("MultiContentBase") && !s13.equals("DynamicHealth"))
                 {
                     continue;
                 }
-                if(array.at(l).toString().indexOf("//") == -1)
+                if(array.get(l).toString().indexOf("//") == -1)
                 {
-                    outputStream.print("<TR><TD width=\"20\">&nbsp;&nbsp;</TD><TD><input type=checkbox name=\"counter" + l + "\" value=\"" + l + "\"" + s25 + "> " + array.at(l) + "</TD></TR>");
+                    outputStream.print("<TR><TD width=\"20\">&nbsp;&nbsp;</TD><TD><input type=checkbox name=\"counter" + l + "\" value=\"" + l + "\"" + s25 + "> " + array.get(l) + "</TD></TR>");
                 } else
                 {
-                    outputStream.print("<TR><TD colspan=\"2\"><b>" + array.at(l).toString().substring(2) + "</b></TD></TR>");
+                    outputStream.print("<TR><TD colspan=\"2\"><b>" + array.get(l).toString().substring(2) + "</b></TD></TR>");
                 }
             }
 

@@ -27,7 +27,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Timer;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 import org.xml.sax.InputSource;
 
@@ -382,10 +382,10 @@ public class J2EEConnection extends COM.dragonflow.StatefulMonitor.StatefulConne
         COM.dragonflow.Utils.SocketSession socketsession = COM.dragonflow.Utils.SocketSession.getSession(null);
         StringBuffer stringbuffer = new StringBuffer(10000);
         String s2 = "http://" + getConnID() + s;
-        jgl.Array array = null;
+        ArrayList array = null;
         if(s1 != null)
         {
-            array = new Array();
+            array = new ArrayList();
             array.add("Custom-Content: " + s1);
         }
         long al[] = COM.dragonflow.StandardMonitor.URLMonitor.checkURL(socketsession, s2, null, null, null, null, null, array, null, null, null, stringbuffer, 0x989680L, null, 0, 60000, null);
@@ -644,7 +644,7 @@ public class J2EEConnection extends COM.dragonflow.StatefulMonitor.StatefulConne
             org.w3c.dom.Element element1 = (org.w3c.dom.Element)element.getParentNode();
             java.util.Map map = getValuesFromObject(element1);
             java.util.HashMap hashmap1 = new HashMap();
-            jgl.Array array = new Array();
+            ArrayList array = new ArrayList();
             for(org.w3c.dom.Element element2 = element1; element2.getTagName().equals((String)xmlKeys.get("object")); element2 = (org.w3c.dom.Element)element2.getParentNode())
             {
                 String s4 = element2.getAttribute((String)xmlKeys.get("class"));
@@ -841,12 +841,12 @@ public class J2EEConnection extends COM.dragonflow.StatefulMonitor.StatefulConne
         }
     }
 
-    public static String getNameFromArray(jgl.Array array)
+    public static String getNameFromArray(ArrayList array)
     {
         String s = "";
         int i = array.size();
         int j;
-        if(array.at(0).equals("All SQL"))
+        if(array.get(0).equals("All SQL"))
         {
             j = 1;
         } else
@@ -859,7 +859,7 @@ public class J2EEConnection extends COM.dragonflow.StatefulMonitor.StatefulConne
             {
                 s = s + '/';
             }
-            s = s + J2EEConnection.escapeString((String)array.at(k - 1));
+            s = s + J2EEConnection.escapeString((String)array.get(k - 1));
         }
 
         return s;

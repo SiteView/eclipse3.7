@@ -42,8 +42,8 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Resource.SiteViewErrorCodes;
@@ -153,16 +153,16 @@ public class Platform {
         return PlatformNew.noRoute(exception);
     }
 
-    public static Array setupTimeZoneOffset() {
+    public static  ArrayList setupTimeZoneOffset() {
 		//dingbing.xu ??
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (isWindows() && PlatformNew.timeZoneOffset == -1) {
             CommandLine commandline = new CommandLine();
             array = commandline.exec(perfexCommand("", false) + " -t");
             timeZoneOffset = 0;
             if (array.size() >= 1)
                 timeZoneOffset = TextUtils.toInt(TextUtils.readColumn(
-                        (String) array.at(0), 2));
+                        (String) array.get(0), 2));
             PlatformNew.fixTimeZoneDefault(timeZoneOffset * 1000);
             array.add("exit: " + commandline.getExitValue());
         }
@@ -273,15 +273,15 @@ public class Platform {
         timeMillis();
         System.out.println("root: " + getRoot());
         System.out.println("os: " + getOs());
-        Array array = getIPAddresses("");
+         ArrayList array = getIPAddresses("");
         String s8;
-        for (Enumeration enumeration3 = array.elements(); enumeration3
+        for (Enumeration enumeration3 = (Enumeration) array.iterator(); enumeration3
                 .hasMoreElements(); System.out.println("ip: (" + s8 + ")"))
             s8 = (String) enumeration3.nextElement();
 
         array = getDNSAddresses();
         String s9;
-        for (Enumeration enumeration4 = array.elements(); enumeration4
+        for (Enumeration enumeration4 = (Enumeration) array.iterator(); enumeration4
                 .hasMoreElements(); System.out.println("dns: (" + s9 + ")"))
             s9 = (String) enumeration4.nextElement();
 
@@ -578,11 +578,11 @@ public class Platform {
         int l = 0;
         if (k >= 1 && k <= 60000) {
             CommandLine commandline = new CommandLine();
-            Array array = commandline.exec(s1, monitorLock, atomicmonitor);
+             ArrayList array = commandline.exec(s1, monitorLock, atomicmonitor);
             if (commandline.getExitValue() < 0) {
                 f = PING_COMMAND_FAILED;
             } else {
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements()) {
                     String s2 = (String) enumeration.nextElement();
                     float f1 = -1F;
@@ -655,7 +655,7 @@ public class Platform {
         return s1;
     }
 
-    public static Array traceRoute(String s, String s1) {
+    public static  ArrayList traceRoute(String s, String s1) {
         CommandLine commandline = new CommandLine();
         return commandline.exec(traceCommand(s, s1), new CounterLock(1));
     }
@@ -730,9 +730,9 @@ public class Platform {
         String as[] = new String[3];
         String s3 = nslookupCommand() + " " + s1 + " " + s;
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s3, monitorLock, atomicmonitor);
+         ArrayList array = commandline.exec(s3, monitorLock, atomicmonitor);
         as[1] = "" + commandline.duration;
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         String s4 = "";
         boolean flag = false;
         boolean flag1 = false;
@@ -830,7 +830,7 @@ public class Platform {
     }
 
     public static long[] getDiskFull(String s, String s1,
-            AtomicMonitor atomicmonitor, Array array) {
+            AtomicMonitor atomicmonitor,  ArrayList array) {
         //TODO need review
         long al[];
         label0: {
@@ -848,7 +848,7 @@ public class Platform {
             if (s3.startsWith("\\\\"))
                 s3 = s3.substring(2);
             Machine machine = Machine.getNTMachine(s3);
-            Array array1 = null;
+             ArrayList array1 = null;
             if (machine != null && Machine.isNTSSH(s3)) {
                 if (s2.indexOf("\\\\" + s3) > 0)
                     s2 = TextUtils.replaceString(s2, "\\\\" + s3, "");
@@ -859,7 +859,7 @@ public class Platform {
                 CommandLine commandline = new CommandLine();
                 array1 = commandline.exec(s2, s1, getLock(s1), atomicmonitor);
             }
-            Enumeration enumeration = array1.elements();
+            Enumeration enumeration = (Enumeration) array1.iterator();
             if (array != null)
                 array.copy(array1);
             if (i == 1) {
@@ -1097,7 +1097,7 @@ public class Platform {
      * @return
      */
     public static long[] getMemoryFull(String s, long l, long l1,
-            AtomicMonitor atomicmonitor, Array array) {
+            AtomicMonitor atomicmonitor,  ArrayList array) {
         // TODO need review
         long al[];
         label0: {
@@ -1118,7 +1118,7 @@ public class Platform {
             if (s2.startsWith("\\\\"))
                 s2 = s2.substring(2);
             Machine machine = Machine.getNTMachine(s2);
-            Array array1 = null;
+             ArrayList array1 = null;
             if (machine != null && Machine.isNTSSH(s2)) {
                 if (s1.indexOf("\\\\" + s2) > 0)
                     s1 = TextUtils.replaceString(s1, "\\\\" + s2, "");
@@ -1131,7 +1131,7 @@ public class Platform {
             }
             if (array != null)
                 array.copy(array1);
-            Enumeration enumeration = array1.elements();
+            Enumeration enumeration = (Enumeration) array1.iterator();
             if (i == 1) {
                 long l2 = -1L;
                 long l4 = -1L;
@@ -1301,7 +1301,7 @@ public class Platform {
         String s1 = Machine.getCommandString("pageFault", s);
         if (s1.length() == 0)
             s1 = pageFaultCommand(i);
-        Array array = commandline.exec(s1, s, monitorLock);
+         ArrayList array = commandline.exec(s1, s, monitorLock);
         long l = -1L;
         OSAdapter osadapter = Machine.getAdapter(s);
         long l1 = 1L;
@@ -1359,18 +1359,18 @@ public class Platform {
         return l;
     }
 
-    public static Array getProcesses(String s) {
+    public static  ArrayList getProcesses(String s) {
         return getProcesses(s, false);
     }
 
-    public static Array getProcesses(String s, boolean flag) {
-        Array array = new Array();
+    public static  ArrayList getProcesses(String s, boolean flag) {
+         ArrayList array = new ArrayList();
         readProcessList(array, s, new CounterLock(1), false, flag);
         return array;
     }
 
-    public static Array processList() {
-        Array array = new Array();
+    public static  ArrayList processList() {
+         ArrayList array = new ArrayList();
         readProcessList(array, "", monitorLock, false);
         return array;
     }
@@ -1414,7 +1414,7 @@ public class Platform {
         if (s3.startsWith("\\\\"))
             s3 = s3.substring(2);
         Machine machine = Machine.getNTMachine(s3);
-        Array array1 = null;
+         ArrayList array1 = null;
         int k = 0;
         boolean flag2 = false;
         if (machine != null && Machine.isNTSSH(s3)) {
@@ -1432,7 +1432,7 @@ public class Platform {
         }
         if (isWindows(i)) {
             for (int l = 0; l < array1.size(); l++) {
-                String s4 = (String) array1.at(l);
+                String s4 = (String) array1.get(l);
                 if (s4.indexOf("end perfex") < 0 && s4.indexOf("Copyright") < 0
                         && s4.indexOf("Microsoft Windows") < 0
                         && (!flag2 || s4.indexOf("-s") <= 0))
@@ -1489,17 +1489,17 @@ public class Platform {
      * @return
      */
     public static long[] checkProcess(String s, String s1, long l,
-            boolean flag, AtomicMonitor atomicmonitor, Array array) {
+            boolean flag, AtomicMonitor atomicmonitor,  ArrayList array) {
         boolean flag1 = isWindows(Machine.getOS(s1));
         long l1 = 0L;
         long l2 = -1L;
         s = s.toLowerCase();
         boolean flag2 = l != 0L;
         if (array == null)
-            array = new Array();
+            array = new ArrayList();
         int i = readProcessList(array, s1, getLock(s1), flag2, flag,
                 atomicmonitor);
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         boolean flag3 = TextUtils.isRegularExpression(s);
         while (enumeration.hasMoreElements()) {
             String s2 = ((String) enumeration.nextElement()).toLowerCase();
@@ -1516,9 +1516,9 @@ public class Platform {
             if (flag1)
                 break;
             if (flag2) {
-                Array array1 = split(',', s2);
+                 ArrayList array1 = split(',', s2);
                 if (array1.size() > 0) {
-                    String s3 = (String) array1.at(0);
+                    String s3 = (String) array1.get(0);
                     s3 = s3.trim();
                     if (l == -2L) {
                         l = 1L;
@@ -1559,10 +1559,10 @@ public class Platform {
     public static String processOK(String s, String s1) {
         String s2 = "/bin/ps -ef";
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s2, s1, monitorLock);
+         ArrayList array = commandline.exec(s2, s1, monitorLock);
         String s3 = "not running";
         int i = 0;
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             String s4 = (String) enumeration.nextElement();
             s4 = s4.trim();
@@ -1755,7 +1755,7 @@ public class Platform {
      * @return
      */
     public static long[] processCPU(String s, String s1,
-            AtomicMonitor atomicmonitor, Array array) {
+            AtomicMonitor atomicmonitor,  ArrayList array) {
         long al[] = new long[4];
         al[0] = 0L;
         al[1] = 0L;
@@ -1764,7 +1764,7 @@ public class Platform {
         int i = 1;
         byte byte0 = 2;
         byte byte1 = 3;
-        Array array1 = null;
+         ArrayList array1 = null;
         String s2 = perfexCommand(s) + " -pc =230";
         if (s.startsWith("http://"))
             s2 = s + "perfex.exe?" + URLEncoder.encode("-cgi -pc =230");
@@ -1782,7 +1782,7 @@ public class Platform {
             CommandLine commandline = new CommandLine();
             array1 = commandline.exec(s2, getLock(s), atomicmonitor);
         }
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         if (array != null) {
             array.copy(array1);
         }
@@ -1828,7 +1828,7 @@ public class Platform {
     }
 
     public static long[] processUsed(String s, String s1, long l, long l1,
-            AtomicMonitor atomicmonitor, Array array) {
+            AtomicMonitor atomicmonitor,  ArrayList array) {
         long l2 = 0L;
         long l3 = 0L;
         long l4 = 0L;
@@ -1930,7 +1930,7 @@ public class Platform {
      * @throws SiteViewException
      */
     public static long[] processorCPU(String s, int i, int j,
-            AtomicMonitor atomicmonitor, Array array) throws SiteViewException {
+            AtomicMonitor atomicmonitor,  ArrayList array) throws SiteViewException {
         int k = 3 + i;
         long al[] = new long[k];
         for (int l = 0; l < k; l++)
@@ -1943,14 +1943,14 @@ public class Platform {
         if (s2.startsWith("\\\\"))
             s2 = s2.substring(2);
         Machine machine = Machine.getNTMachine(s2);
-        Array array1 = null;
+         ArrayList array1 = null;
         int i1 = 0;
         CommandLine commandline = new CommandLine();
         array1 = commandline.exec(s1, s, getLock(s), atomicmonitor);
         i1 = commandline.getExitValue();
         if (array != null)
             array.copy(array1);
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         if (i1 != 0) {
             String s3 = "";
             if (atomicmonitor != null)
@@ -2014,7 +2014,7 @@ public class Platform {
     }
 
     static long[] cpuUsedWindows(String s, long l, long l1, long al[],
-            AtomicMonitor atomicmonitor, Array array) throws SiteViewException {
+            AtomicMonitor atomicmonitor,  ArrayList array) throws SiteViewException {
         int i = al.length;
         int j = 4 + i;
         long al1[] = new long[j];
@@ -2089,7 +2089,7 @@ public class Platform {
     }
 
     public static long[] cpuUsed(String s, long l, long l1, long al[],
-            AtomicMonitor atomicmonitor, Array array) throws SiteViewException {
+            AtomicMonitor atomicmonitor,  ArrayList array) throws SiteViewException {
         long al1[] = null;
         int i = al.length;
         int j = Machine.getOS(s);
@@ -2115,7 +2115,7 @@ public class Platform {
             String s1 = Machine.getCommandString("cpu", s);
             if (s1.length() == 0)
                 s1 = cpuCommand(s, j);
-            Array array1 = commandline.exec(s1, s, monitorLock, atomicmonitor);
+             ArrayList array1 = commandline.exec(s1, s, monitorLock, atomicmonitor);
             if (array != null)
                 array.copy(array1);
             int j1 = -1;
@@ -2287,7 +2287,7 @@ public class Platform {
             String s1 = "remote:" + machine.getProperty(Machine.pID);
             HashMap hashmap = new HashMap();
             String s3 = Machine.getCommandString("systemTime", s1, hashmap);
-            Array array1 = null;
+             ArrayList array1 = null;
             RemoteCommandLine remotecommandline = null;
             remotecommandline = Machine.getRemoteCommandLine(machine);
             if (isUnix(Machine.getOS(s1)))
@@ -2302,7 +2302,7 @@ public class Platform {
                 s = "\\\\" + s;
             String s2 = "net time " + s;
             CommandLine commandline = new CommandLine();
-            Array array = commandline.exec(s2, s, getLock(s), null);
+             ArrayList array = commandline.exec(s2, s, getLock(s), null);
             i = commandline.exitValue;
             if (array != null && array.size() >= 1
                     && commandline.exitValue == 0) {
@@ -2348,7 +2348,7 @@ public class Platform {
         do {
             if (i >= array.size())
                 break;
-            String s = ((String) array.at(i)).trim();
+            String s = ((String) array.get(i)).trim();
             if (s.startsWith("ssDateStart"))
                 break;
             i++;
@@ -2357,8 +2357,8 @@ public class Platform {
             i++;
         else
             i = 0;
-        String s1 = ((String) array.at(i)).trim();
-        String s2 = ((String) array.at(i + 1)).trim();
+        String s1 = ((String) array.get(i)).trim();
+        String s2 = ((String) array.get(i + 1)).trim();
         try {
             Date date = simpledateformat.parse(s1);
             date1 = simpledateformat.parse(s2);
@@ -2400,7 +2400,7 @@ public class Platform {
         TimeZone timezone = null;
         Object obj = null;
         for (int i = 0; i < array.size(); i++) {
-            String s1 = (String) array.at(i);
+            String s1 = (String) array.get(i);
             if (s1.startsWith("Current time at")) {
                 try {
                     date = simpledateformat.parse(s1);
@@ -2446,13 +2446,13 @@ public class Platform {
         int i = 0;
         String s1 = perfexCommand(s) + " -date";
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, getLock(s), null);
+         ArrayList array = commandline.exec(s1, s, getLock(s), null);
         if (array != null && commandline.exitValue == 0) {
             int j = 0;
             do {
                 if (j >= array.size())
                     break;
-                String s2 = (String) array.at(j);
+                String s2 = (String) array.get(j);
                 Pattern pattern = Pattern
                         .compile("Date:\\s\\d+\\-\\d+\\-\\d+\\s\\d+:\\d+:(\\d+)\\s.*");
                 Matcher matcher = pattern.matcher(s2);
@@ -2487,7 +2487,7 @@ public class Platform {
             HashMap hashmap = new HashMap();
             hashmap.put("directory", s1);
             String s4 = Machine.getCommandString("fileList", s3, hashmap);
-            Array array = null;
+             ArrayList array = null;
             RemoteCommandLine remotecommandline = null;
             remotecommandline = Machine.getRemoteCommandLine(machine);
             if (isUnix(Machine.getOS(s3)))
@@ -2553,7 +2553,7 @@ public class Platform {
             StringBuffer stringbuffer) {
         String as[][] = new String[array.size()][2];
         for (int i = 0; i < array.size(); i++) {
-            String s = ((String) array.at(i)).trim();
+            String s = ((String) array.get(i)).trim();
             String as1[] = s.split("!");
             if (as1.length == 2) {
                 String s1 = as1[1];
@@ -2582,9 +2582,9 @@ public class Platform {
             String s1 = perfexCommand(s)
                     + (flag ? " -connect" : " -disconnect");
             CommandLine commandline = new CommandLine();
-            Array array = commandline.exec(s1, getLock(s));
+             ArrayList array = commandline.exec(s1, getLock(s));
             boolean flag1 = false;
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 String s2 = (String) enumeration.nextElement();
                 int j = s2.indexOf("Connected to");
@@ -2678,15 +2678,15 @@ public class Platform {
         return s;
     }
 
-    static Array RegistryArray(byte abyte0[]) {
-        Array array = split('\0', abyte0);
+    static  ArrayList RegistryArray(byte abyte0[]) {
+         ArrayList array = split('\0', abyte0);
         String s = (String) array.back();
         if (s.length() == 0)
             array.popBack();
         return array;
     }
 
-    static Array split(char c, byte abyte0[]) {
+    static  ArrayList split(char c, byte abyte0[]) {
         char ac[] = new char[abyte0.length];
         for (int i = 0; i < abyte0.length; i++)
             ac[i] = (char) abyte0[i];
@@ -2694,8 +2694,8 @@ public class Platform {
         return split(c, ac);
     }
 
-    static Array split(char c, char ac[]) {
-        Array array = new Array();
+    static  ArrayList split(char c, char ac[]) {
+         ArrayList array = new ArrayList();
         int i = 0;
         for (int j = 0; j < ac.length; j++)
             if (ac[j] == c) {
@@ -2711,8 +2711,8 @@ public class Platform {
         return array;
     }
 
-    public static Array split(char c, String s) {
-        Array array = new Array();
+    public static  ArrayList split(char c, String s) {
+         ArrayList array = new ArrayList();
         int i = 0;
         for (int j = 0; j < s.length(); j++)
             if (s.charAt(j) == c) {
@@ -2761,10 +2761,10 @@ public class Platform {
         return i == 3;
     }
 
-    public static Array getIPAddresses(String s) {
-        Array array = new Array();
+    public static  ArrayList getIPAddresses(String s) {
+         ArrayList array = new ArrayList();
         if (s.length() > 0) {
-            Array array1 = new Array();
+             ArrayList array1 = new ArrayList();
             if (s.startsWith("\\")) {
                 String s1 = perfexCommand(s) + " -ip";
                 String s2 = s;
@@ -2787,7 +2787,7 @@ public class Platform {
                 CommandLine commandline = new CommandLine();
                 array1 = commandline.exec(s3, s);
             }
-            for (Enumeration enumeration = array1.elements(); enumeration
+            for (Enumeration enumeration = (Enumeration) array1.iterator(); enumeration
                     .hasMoreElements();) {
                 String s4 = (String) enumeration.nextElement();
                 String as[] = TextUtils.split(s4, " ");
@@ -2848,9 +2848,9 @@ public class Platform {
 
     public static String getDefaultIPAddress() {
         String s = "localhost";
-        Array array = getIPAddresses("");
+         ArrayList array = getIPAddresses("");
         if (array.size() > 0)
-            s = (String) array.at(0);
+            s = (String) array.get(0);
         return s;
     }
 
@@ -2859,17 +2859,17 @@ public class Platform {
      * 
      * @return
      */
-    public static Array getDNSAddresses() {
+    public static  ArrayList getDNSAddresses() {
         //TODO need review
-        Array array;
+         ArrayList array;
         label0: {
-            array = new Array();
+            array = new ArrayList();
             if (getOs() == 1)
                 try {
                     CommandLine commandline = new CommandLine();
-                    Array array1 = commandline.exec(nslookupCommand()
+                     ArrayList array1 = commandline.exec(nslookupCommand()
                             + " demo.siteview.com");
-                    Enumeration enumeration = array1.elements();
+                    Enumeration enumeration = (Enumeration) array1.iterator();
                     if (array1.size() <= 0)
                         break label0;
                     String s3;
@@ -2897,7 +2897,7 @@ public class Platform {
                             break;
                         if (s.indexOf("nameserver") != -1) {
                             String s1 = TextUtils.readColumn(s, 2);
-                            Array array2 = split('.', s1);
+                             ArrayList array2 = split('.', s1);
                             if (array2.size() == 4 && !s1.equals("0.0.0.0"))
                                 array.add(s1);
                         }
@@ -2915,14 +2915,14 @@ public class Platform {
         if (getOs() == 3)
             try {
                 CommandLine commandline = new CommandLine();
-                Array array = commandline.exec("/sbin/sysinfo -s");
-                Enumeration enumeration = array.elements();
+                 ArrayList array = commandline.exec("/sbin/sysinfo -s");
+                Enumeration enumeration = (Enumeration) array.iterator();
                 if (array.size() > 0)
                     s = Long.toHexString(TextUtils.toLong((String) enumeration
                             .nextElement()));
                 commandline = new CommandLine();
                 array = commandline.exec("/sbin/uname -a");
-                enumeration = array.elements();
+                enumeration = (Enumeration) array.iterator();
                 if (array.size() > 0)
                     s = s + " " + (String) enumeration.nextElement();
             } catch (Exception exception) {
@@ -2947,7 +2947,7 @@ public class Platform {
         if (s2.startsWith("\\\\"))
             s2 = s2.substring(2);
         Machine machine = Machine.getNTMachine(s2);
-        Array array = null;
+         ArrayList array = null;
         if (machine != null && Machine.isNTSSH(s)) {
             if (s1.indexOf("\\\\" + s2) > 0)
                 s1 = TextUtils.replaceString(s1, "\\\\" + s2, "");
@@ -2958,7 +2958,7 @@ public class Platform {
             CommandLine commandline = new CommandLine();
             array = commandline.exec(s1, s);
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if (i == 1) {
             boolean flag = false;
             while (enumeration.hasMoreElements()) {
@@ -3020,12 +3020,12 @@ public class Platform {
         return vector;
     }
 
-    static Array hackRead() {
+    static  ArrayList hackRead() {
         return hackRead(getRoot() + "/test.txt");
     }
 
-    static Array hackRead(String s) {
-        Array array = new Array();
+    static  ArrayList hackRead(String s) {
+         ArrayList array = new ArrayList();
         try {
             BufferedReader bufferedreader = FileUtils
                     .MakeInputReader(new FileInputStream(s));
@@ -3054,7 +3054,7 @@ public class Platform {
         String s1 = perfexCommand(s) + " -w";
         if (s.startsWith("http://"))
             s1 = s + "perfex.exe?-cgi -w";
-        Array array = null;
+         ArrayList array = null;
         String s2 = s;
         if (s2.startsWith("\\\\"))
             s2 = s2.substring(2);
@@ -3069,7 +3069,7 @@ public class Platform {
             CommandLine commandline = new CommandLine();
             array = commandline.exec(s1);
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         boolean flag = false;
         boolean flag1 = false;
         boolean flag2 = false;
@@ -3140,7 +3140,7 @@ public class Platform {
         return s1.equals("0");
     }
 
-    public static int CheckPermissions(String s, HashMap hashmap, Array array) {
+    public static int CheckPermissions(String s, HashMap hashmap,  ArrayList array) {
         if (s.equals("this server") || s.length() == 0)
             return 0;
         int i = 0;
@@ -3149,7 +3149,7 @@ public class Platform {
         if (s1.startsWith("\\\\"))
             s1 = s1.substring(2);
         Machine machine = Machine.getNTMachine(s1);
-        Array array1 = null;
+         ArrayList array1 = null;
         if (Machine.isNTSSH(s)) {
             if (s2.indexOf("\\\\" + s1) > 0)
                 s2 = TextUtils.replaceString(s2, "\\\\" + s1, "");
@@ -3171,7 +3171,7 @@ public class Platform {
             i = commandline.getExitValue();
         }
         for (int j = 0; j < array1.size(); j++) {
-            String s3 = (String) array1.at(j);
+            String s3 = (String) array1.get(j);
             array.add(s3.trim());
             if ((platformDebugTrace & kDebugPerfex) != 0)
                 LogManager.log("RunMonitor",
@@ -3192,8 +3192,8 @@ public class Platform {
         vector.addElement("this server");
         String s = "net view";
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s);
-        Enumeration enumeration = array.elements();
+         ArrayList array = commandline.exec(s);
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             String s1 = (String) enumeration.nextElement();
             if (s1.startsWith("\\\\")) {
@@ -3254,10 +3254,10 @@ public class Platform {
         CommandLine commandline = new CommandLine();
         String s = netEthernetStatsCommand();
         String s1 = netConnectionStatsCommand();
-        Array array = commandline.exec(s, monitorLock);
-        Array array1 = commandline.exec(s1, monitorLock);
+         ArrayList array = commandline.exec(s, monitorLock);
+         ArrayList array1 = commandline.exec(s1, monitorLock);
         if (isWindows()) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 String s2 = (String) enumeration.nextElement();
                 if (!TextUtils.readColumn(s2, 1).equals("Bytes"))
@@ -3269,7 +3269,7 @@ public class Platform {
                 break;
             } 
             
-            enumeration = array.elements();
+            enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 String s3 = (String) enumeration.nextElement();
                 if (!TextUtils.readColumn(s3, 1).equals("Errors"))
@@ -3284,7 +3284,7 @@ public class Platform {
                 break;
             }
             
-            enumeration = array1.elements();
+            enumeration = (Enumeration) array1.iterator();
             int i = 0;
             while (enumeration.hasMoreElements()) {
                 String s6 = (String) enumeration.nextElement();
@@ -3352,13 +3352,13 @@ public class Platform {
         return s1;
     }
 
-    public static Array getLocalIPAddress() {
-        Array array = new Array();
-        Array array1 = new Array();
+    public static  ArrayList getLocalIPAddress() {
+         ArrayList array = new ArrayList();
+         ArrayList array1 = new ArrayList();
         String s = "ipconfig";
         CommandLine commandline = new CommandLine();
         array = commandline.exec(s);
-        for (Enumeration enumeration = array.elements(); enumeration
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             String as[] = TextUtils.split(s1, " ");

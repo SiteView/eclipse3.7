@@ -31,7 +31,7 @@ import COM.dragonflow.Utils.ArgsPackagerUtil;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.io.IOException;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class PDHMonitor extends PerfmonMonitorBase
     implements IServerPropMonitor
@@ -132,9 +132,9 @@ public class PDHMonitor extends PerfmonMonitorBase
         super.stopMonitor();
     }
 
-    public Array getPropertiesToPassBetweenPages(HTTPRequest httprequest)
+    public  ArrayList getPropertiesToPassBetweenPages(HTTPRequest httprequest)
     {
-        Array array = super.getPropertiesToPassBetweenPages(httprequest);
+         ArrayList array = super.getPropertiesToPassBetweenPages(httprequest);
         array.add(pPdhServer);
         return array;
     }

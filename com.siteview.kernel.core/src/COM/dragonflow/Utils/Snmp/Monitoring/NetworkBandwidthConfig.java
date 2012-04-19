@@ -212,7 +212,7 @@ public class NetworkBandwidthConfig {
             }
         }
 
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         int k = COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_NetworkBandwidthMaxCustomCounters"));
         if (k > 0) {
             maxProperties = k;

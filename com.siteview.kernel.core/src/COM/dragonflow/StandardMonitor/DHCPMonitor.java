@@ -26,8 +26,8 @@ import java.net.UnknownHostException;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -137,8 +137,8 @@ public class DHCPMonitor extends AtomicMonitor {
         return true;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pRoundTripTime);
         array.add(pLeaseAddress);
         return array;

@@ -22,8 +22,8 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -380,8 +380,8 @@ public class SNMPMonitor extends AtomicMonitor {
             } else {
                 labelsCache.add(defaultValue, defaultValue);
             }
-            Array array = getProperties();
-            Enumeration enumeration = array.elements();
+             ArrayList array = getProperties();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 StringProperty stringproperty = (StringProperty) enumeration.nextElement();
                 if (stringproperty.isThreshold() && stringproperty.getName().indexOf("default") == -1) {
@@ -454,7 +454,7 @@ public class SNMPMonitor extends AtomicMonitor {
                 String s16 = I18N.UnicodeToString(getProperty(p1ContentMatch), I18N.nullEncoding());
                 if (s16.length() != 0) {
                     StringBuffer stringbuffer1 = new StringBuffer();
-                    Array array = new Array();
+                     ArrayList array = new ArrayList();
                     int k = TextUtils.matchExpression(s10, s16, array, stringbuffer1);
                     if (k != Monitor.kURLok) {
                         String s18 = URLMonitor.getHTMLEncoding(s10);
@@ -467,7 +467,7 @@ public class SNMPMonitor extends AtomicMonitor {
                     s7 = getProperty(p2OID);
                     s8 = "0";
                     if (array.size() > 0) {
-                        s8 = (String) array.at(0);
+                        s8 = (String) array.get(0);
                     }
                 }
             }
@@ -566,7 +566,7 @@ public class SNMPMonitor extends AtomicMonitor {
             String s23 = I18N.UnicodeToString(getProperty(pContentMatch), I18N.nullEncoding());
             if (s23.length() != 0) {
                 StringBuffer stringbuffer2 = new StringBuffer();
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 int i1 = TextUtils.matchExpression(s11, s23, array1, stringbuffer2);
                 if (i1 != Monitor.kURLok) {
                     String s26 = URLMonitor.getHTMLEncoding(s11);
@@ -576,8 +576,8 @@ public class SNMPMonitor extends AtomicMonitor {
                     s15 = "content match error, " + s11;
                 }
                 if (array1.size() > 0) {
-                    s11 = "matched " + array1.at(0);
-                    setProperty(pMatchValue, array1.at(0));
+                    s11 = "matched " + array1.get(0);
+                    setProperty(pMatchValue, array1.get(0));
                 }
             }
         }
@@ -617,8 +617,8 @@ public class SNMPMonitor extends AtomicMonitor {
         return true;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pSNMPValue);
         return array;

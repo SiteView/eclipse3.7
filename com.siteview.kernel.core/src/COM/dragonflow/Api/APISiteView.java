@@ -26,8 +26,8 @@ import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.StringProperty;
@@ -105,7 +105,7 @@ public class APISiteView
     protected COM.dragonflow.SiteView.User user;
     protected String account;
     protected boolean debug;
-    protected jgl.HashMap groups;
+    protected HashMap groups;
     private static final double CURRENT_API_VERSION = 2D;
     private static final String SITEVIEW_DATE_FORMAT = "EEE MM-dd-yyyy HH:mm:ss ('GMT'Z)";
     protected static java.util.Vector siteViewObjects = null;
@@ -259,7 +259,7 @@ public class APISiteView
                     "APISiteView", "getSiteViewInfo init"
                 }, 0L, exception1.getMessage());
             }
-            jgl.HashMap hashmap = new HashMap();
+            HashMap hashmap = new HashMap();
             if(s1 != null)
             {
                 hashmap.put("platform", s1);
@@ -458,11 +458,11 @@ public class APISiteView
         java.util.Vector vector = new Vector();
         try
         {
-            jgl.Array array = new Array();
+            ArrayList array = new ArrayList();
             array = COM.dragonflow.SiteView.OSAdapter.getOSs(array);
             for(int i = 0; i < array.size(); i++)
             {
-                vector.add(array.at(i));
+                vector.add(array.get(i));
             }
 
         }
@@ -1318,14 +1318,14 @@ public class APISiteView
         }
 
         COM.dragonflow.Api.APIPreference apipreference = new APIPreference();
-        jgl.Array array = getUserFrames();
-        Enumeration enumeration = array.elements();
+        ArrayList array = getUserFrames();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if(enumeration.hasMoreElements())
         {
             enumeration.nextElement();
         }
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap1 = (jgl.HashMap)enumeration.nextElement();
+            HashMap hashmap1 = (HashMap)enumeration.nextElement();
             String s1 = (String)hashmap1.get("_login");
             if(s1 != null && s1.equals("Flipper"))
             {
@@ -1433,13 +1433,13 @@ public class APISiteView
         }
     }
 
-    protected jgl.Array getPropertiesForClass(COM.dragonflow.SiteView.SiteViewObject siteviewobject, String s, String s1, int i)
+    protected ArrayList getPropertiesForClass(COM.dragonflow.SiteView.SiteViewObject siteviewobject, String s, String s1, int i)
         throws java.lang.Exception
     {
-        jgl.Array array = new Array();
-        jgl.Array array1 = siteviewobject.getProperties();
+        ArrayList array = new ArrayList();
+        ArrayList array1 = siteviewobject.getProperties();
         array1 = COM.dragonflow.Properties.StringProperty.sortByOrder(array1);
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         while (enumeration.hasMoreElements()) {
             boolean flag = false;
             COM.dragonflow.Properties.StringProperty stringproperty3 = (COM.dragonflow.Properties.StringProperty)enumeration.nextElement();
@@ -1485,9 +1485,9 @@ public class APISiteView
         return array;
     }
 
-    protected static jgl.Array getObjects(String s)
+    protected static ArrayList getObjects(String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         if(s.equals("Alert"))
         {
             s = "Action";
@@ -1565,10 +1565,10 @@ public class APISiteView
         return array;
     }
 
-    protected jgl.Array getGroupFrames(String s)
+    protected ArrayList getGroupFrames(String s)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         try
         {
             array = (jgl.Array)groups.get(s);
@@ -1584,10 +1584,10 @@ public class APISiteView
         return array;
     }
 
-    protected jgl.Array ReadGroupFrames(String s)
+    protected ArrayList ReadGroupFrames(String s)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         try
         {
             if(!isGroupAllowedForAccount(s))
@@ -1612,7 +1612,7 @@ public class APISiteView
         return array;
     }
 
-    protected boolean isGroupAllowedForAccount(String s, jgl.Array array)
+    protected boolean isGroupAllowedForAccount(String s, ArrayList array)
     {
         if(array != null && array.size() != 0)
         {
@@ -1629,9 +1629,9 @@ public class APISiteView
         return isGroupAllowedForAccount(s, getGroupFilterForAccount(s1));
     }
 
-    protected jgl.Array getGroupFilterForAccount(String s)
+    protected ArrayList getGroupFilterForAccount(String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         if(COM.dragonflow.SiteView.Platform.isStandardAccount(account))
         {
             Enumeration enumeration = user.getMultipleValues("_group");
@@ -1653,9 +1653,9 @@ public class APISiteView
         return array;
     }
 
-    protected boolean allowedByGroupFilter(String s, jgl.Array array)
+    protected boolean allowedByGroupFilter(String s, ArrayList array)
     {
-        for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();)
         {
             String s1 = (String)enumeration.nextElement();
             if(isRelated(s, s1))
@@ -1667,7 +1667,7 @@ public class APISiteView
         return false;
     }
 
-    protected void WriteGroupFrames(String s, jgl.Array array)
+    protected void WriteGroupFrames(String s, ArrayList array)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         try
@@ -1676,7 +1676,7 @@ public class APISiteView
             COM.dragonflow.Properties.FrameFile.writeToFile(s1, array, "_", true);
 //            if(COM.dragonflow.SiteView.TopazConfigurator.configInTopazAndRegistered())
 //            {
-//                jgl.Array array1 = new Array();
+//                ArrayList array1 = new ArrayList();
 //                COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
 //                COM.dragonflow.SiteView.MonitorGroup monitorgroup = (COM.dragonflow.SiteView.MonitorGroup)siteviewgroup.getElement(s);
 //                array1.add(monitorgroup);
@@ -1738,20 +1738,20 @@ public class APISiteView
         return COM.dragonflow.SiteView.Platform.getRoot() + s2;
     }
 
-    protected int findMonitorIndex(jgl.Array array, String s)
+    protected int findMonitorIndex(ArrayList array, String s)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         if(s.equals("_config"))
         {
             return 0;
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         int i = 0;
         enumeration.nextElement();
         i++;
         int j = -1;
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap = (jgl.HashMap)enumeration.nextElement();
+            HashMap hashmap = (HashMap)enumeration.nextElement();
             if(COM.dragonflow.SiteView.Monitor.isMonitorFrame(hashmap) && hashmap.get("_id").equals(s))
             {
                 j = i;
@@ -1778,7 +1778,7 @@ public class APISiteView
             Enumeration enumeration = groups.keys();
             while (enumeration.hasMoreElements()) {
                 String s = (String)enumeration.nextElement();
-                jgl.Array array = (jgl.Array)groups.get(s);
+                ArrayList array = (jgl.Array)groups.get(s);
                 if(array != null)
                 {
 //                    WriteGroupFrames(s, array);
@@ -1806,7 +1806,7 @@ public class APISiteView
         groups.clear();
     }
 
-    protected String getRawValue(COM.dragonflow.Properties.ScalarProperty scalarproperty, jgl.HashMap hashmap)
+    protected String getRawValue(COM.dragonflow.Properties.ScalarProperty scalarproperty, HashMap hashmap)
     {
         String s = "";
         String s1 = "";
@@ -2016,7 +2016,7 @@ public class APISiteView
                 java.net.InetAddress inetaddress = java.net.InetAddress.getLocalHost();
                 String s = inetaddress.getHostName();
                 java.util.Vector vector1 = getSiteViewInfo(s);
-                jgl.HashMap hashmap = (jgl.HashMap)vector1.get(0);
+                HashMap hashmap = (HashMap)vector1.get(0);
                 if(hashmap.get("platform") != null && hashmap.get("platform").equals("WIN"))
                 {
                     s = "\\\\" + s.toUpperCase();
@@ -2049,12 +2049,12 @@ public class APISiteView
         throws java.io.IOException
     {
         COM.dragonflow.HTTP.HTTPRequest httprequest = new HTTPRequest();
-        jgl.Array array = readMachines(s);
+        ArrayList array = readMachines(s);
         jgl.Sorting.sort(array, new CompareSlot("_name", COM.dragonflow.SiteView.CompareSlot.DIRECTION_LESS));
         boolean flag1 = s.indexOf("NT") == -1;
         for(int i = 0; i < array.size(); i++)
         {
-            jgl.HashMap hashmap = (jgl.HashMap)array.at(i);
+            HashMap hashmap = (HashMap)array.get(i);
             String s1 = "";
             if(flag1)
             {
@@ -2085,11 +2085,11 @@ public class APISiteView
         return vector;
     }
 
-    protected jgl.Array readMachines(String s)
+    protected ArrayList readMachines(String s)
         throws java.io.IOException
     {
-        jgl.Array array = new Array();
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        ArrayList array = new ArrayList();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         String s1;
         for(Enumeration enumeration = hashmap.values(s); enumeration.hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils.stringToHashMap(s1)))
         {
@@ -2138,9 +2138,9 @@ public class APISiteView
         }
     }
 
-    private jgl.Array getUserFrames()
+    private ArrayList getUserFrames()
     {
-        jgl.Array array = null;
+        ArrayList array = null;
         if(isPortalServerRequest())
         {
             try
@@ -2149,9 +2149,9 @@ public class APISiteView
             }
             catch(java.lang.Exception exception)
             {
-                array = new Array();
+                array = new ArrayList();
             }
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             COM.dragonflow.SiteView.User.initializeUsersList(array, hashmap);
         } else
         {
@@ -2206,7 +2206,7 @@ public class APISiteView
         timer = new Timer();
         if(COM.dragonflow.Log.LogManager.loggerRegistered("SSEELog"))
         {
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             String s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_sseeHeartbeatTimer");
             if(s1 != null && s1.length() > 0)
             {
@@ -2257,7 +2257,7 @@ public class APISiteView
         return flag;
     }
 
-    public static String getContext(jgl.Array array, String s)
+    public static String getContext(ArrayList array, String s)
     {
         if(!$assertionsDisabled && array == null)
         {
@@ -2267,10 +2267,10 @@ public class APISiteView
         {
             throw new AssertionError();
         }
-        String s1 = (String)array.at(0);
+        String s1 = (String)array.get(0);
         for(int i = 1; i < array.size(); i++)
         {
-            for(; !COM.dragonflow.Api.APISiteView.childOf(s1, (String)array.at(i)); s1 = COM.dragonflow.Api.APISiteView.getParent(s1)) { }
+            for(; !COM.dragonflow.Api.APISiteView.childOf(s1, (String)array.get(i)); s1 = COM.dragonflow.Api.APISiteView.getParent(s1)) { }
         }
 
         if(s != null && s.length() > 0)
@@ -2282,7 +2282,7 @@ public class APISiteView
 
     public static String getContext(String as[], String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         for(int i = 0; i < as.length; i++)
         {
             array.add(as[i]);
@@ -2346,24 +2346,24 @@ public class APISiteView
         return s1;
     }
 
-    private jgl.Array getAllAllowedGroupIDs()
+    private ArrayList getAllAllowedGroupIDs()
     {
-        jgl.Array array = COM.dragonflow.Utils.I18N.toDefaultArray(COM.dragonflow.SiteView.SiteViewGroup.currentSiteView().getGroupIDs());
+        ArrayList array = COM.dragonflow.Utils.I18N.toDefaultArray(COM.dragonflow.SiteView.SiteViewGroup.currentSiteView().getGroupIDs());
         COM.dragonflow.HTTP.HTTPRequest httprequest = new HTTPRequest();
         httprequest.setValue("account", account);
         httprequest.setUser(user);
-        jgl.Array array1 = COM.dragonflow.Page.CGI.filterGroupsForAccount(array, httprequest);
+        ArrayList array1 = COM.dragonflow.Page.CGI.filterGroupsForAccount(array, httprequest);
         return array1;
     }
 
     protected java.util.Collection getAllAllowedGroups()
     {
-        jgl.Array array = getAllAllowedGroupIDs();
+        ArrayList array = getAllAllowedGroupIDs();
         java.util.ArrayList arraylist = new ArrayList(array.size());
         COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
         for(int i = 0; i < array.size(); i++)
         {
-            String s = (String)array.at(i);
+            String s = (String)array.get(i);
             if(!s.equals("__Health__"))
             {
                 arraylist.add(siteviewgroup.getGroup(s));
@@ -2418,7 +2418,7 @@ public class APISiteView
         }
     }
 
-    protected void fixDisableAlertingParams(jgl.HashMap hashmap)
+    protected void fixDisableAlertingParams(HashMap hashmap)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         String s = (String)hashmap.get("groupAlertsDisable");
@@ -2548,7 +2548,7 @@ public class APISiteView
         vector.add(new SSInstanceProperty("groupAlertsDisable", "schedule"));
     }
 
-    protected void fixDisableGroupOrMonitorParams(jgl.HashMap hashmap)
+    protected void fixDisableGroupOrMonitorParams(HashMap hashmap)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         String s = (String)hashmap.get("monitorsDisable");
@@ -2693,7 +2693,7 @@ public class APISiteView
         }
     }
 
-    protected void processWSDLParameters(jgl.HashMap hashmap)
+    protected void processWSDLParameters(HashMap hashmap)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         String s = "";
@@ -2732,7 +2732,7 @@ public class APISiteView
         }
     }
 
-    protected void removeAPIDisableProperties(jgl.HashMap hashmap)
+    protected void removeAPIDisableProperties(HashMap hashmap)
     {
         hashmap.remove("monitorsDisable");
         hashmap.remove("disableMonitorsTime");

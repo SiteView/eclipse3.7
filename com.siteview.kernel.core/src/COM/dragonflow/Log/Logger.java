@@ -56,7 +56,7 @@ public abstract class Logger {
 
     String getMonitorName(COM.dragonflow.Properties.PropertiedObject propertiedobject) {
         if (fullMonitorName == null) {
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             fullMonitorName = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_fullMonitorName");
         }
         String s = "";
@@ -71,9 +71,9 @@ public abstract class Logger {
 
     public void log(String s, java.util.Date date, COM.dragonflow.Properties.PropertiedObject propertiedobject) {
         StringBuffer stringbuffer = new StringBuffer();
-        jgl.Array array = propertiedobject.getLogProperties();
+        ArrayList array = propertiedobject.getLogProperties();
         String s1;
-        for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); stringbuffer.append(s1)) {
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); stringbuffer.append(s1)) {
             COM.dragonflow.Properties.StringProperty stringproperty = (COM.dragonflow.Properties.StringProperty) enumeration.nextElement();
             if (stringbuffer.length() > 0) {
                 stringbuffer.append("\t");

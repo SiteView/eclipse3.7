@@ -19,18 +19,18 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.SiteView:
 // ScheduleEvent, Action
 
 class CompoundEvent extends ScheduleEvent {
 
-    Array events;
+     ArrayList events;
 
     CompoundEvent(Action action) {
         super(action);
-        events = new Array();
+        events = new ArrayList();
     }
 
     void addEvent(ScheduleEvent scheduleevent) {
