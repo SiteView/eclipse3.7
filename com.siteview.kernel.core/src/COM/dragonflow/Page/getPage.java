@@ -11,8 +11,8 @@ package COM.dragonflow.Page;
 
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequestException;
 import COM.dragonflow.StandardMonitor.URLLoader;
 import COM.dragonflow.Utils.URLInfo;
@@ -81,7 +81,7 @@ public class getPage extends COM.dragonflow.Page.CGI
         } else
         if(s1.length() > 0)
         {
-            jgl.Array array = ReadGroupFrames(s1);
+            ArrayList array = ReadGroupFrames(s1);
             COM.dragonflow.SiteView.AtomicMonitor atomicmonitor = COM.dragonflow.SiteView.AtomicMonitor.MonitorCreate(array, s2, request.getPortalServer());
             s3 = atomicmonitor.getValue("_url");
             s4 = atomicmonitor.getValue("_location");
@@ -208,7 +208,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                     s23 = s23 + enumeration2.nextElement() + COM.dragonflow.StandardMonitor.URLMonitor.CRLF;
                 }
 
-                jgl.HashMap hashmap = getMasterConfig();
+                HashMap hashmap = getMasterConfig();
                 long l1 = -1L;
                 if(COM.dragonflow.Page.getPage.getValue(hashmap, "_urlContentMatchMax").length() > 0)
                 {
@@ -218,7 +218,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                 {
                     l1 = 50000L;
                 }
-                jgl.Array array1 = COM.dragonflow.Utils.TextUtils.enumToArray(enumeration1);
+                ArrayList array1 = COM.dragonflow.Utils.TextUtils.enumToArray(enumeration1);
                 COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
                 String s24 = "" + s1 + "/" + request.getValue("id");
                 COM.dragonflow.SiteView.Monitor monitor = (COM.dragonflow.SiteView.Monitor)siteviewgroup.getElement(s24);
@@ -230,7 +230,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                 }
                 socketsession.setDomain(s9);
                 long al[] = null;
-                jgl.Array array2 = COM.dragonflow.SiteView.Platform.split(',', s10);
+                ArrayList array2 = COM.dragonflow.SiteView.Platform.split(',', s10);
                 String s25 = "";
                 if(array2.size() <= 1)
                 {
@@ -254,7 +254,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                 String s29 = "";
                 if(al[0] == 200L && (flag || flag1))
                 {
-                    jgl.HashMap hashmap1 = new HashMap();
+                    HashMap hashmap1 = new HashMap();
                     int j = COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Page.getPage.getValue(hashmap, "_urlLoadThreads"));
                     if(j == 0)
                     {
@@ -267,7 +267,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                     }
                     if(array1 != null)
                     {
-                        Enumeration enumeration4 = array1.elements();
+                        Enumeration enumeration4 = (Enumeration) array1.iterator();
                         do
                         {
                             if(!enumeration4.hasMoreElements())
@@ -310,14 +310,14 @@ public class getPage extends COM.dragonflow.Page.CGI
                 }
                 long l3 = java.lang.System.currentTimeMillis() - l;
                 String s39 = COM.dragonflow.Utils.TextUtils.floatToString((float)l3 / 1000F, 2) + " seconds";
-                jgl.Array array3 = new Array();
+                ArrayList array3 = new ArrayList();
                 int k = COM.dragonflow.Utils.TextUtils.matchExpression(s36, s5, array3);
                 if(k != COM.dragonflow.SiteView.Monitor.kURLok && COM.dragonflow.Utils.I18N.hasUnicode(s5))
                 {
                     String s32 = COM.dragonflow.StandardMonitor.URLMonitor.getHTMLEncoding(s36);
                     int i1 = COM.dragonflow.Utils.TextUtils.matchExpression(s36, COM.dragonflow.Utils.I18N.UnicodeToString(s5, s32), array3);
                 }
-                jgl.Array array4 = new Array();
+                ArrayList array4 = new ArrayList();
                 int k1 = COM.dragonflow.Utils.TextUtils.matchExpression(s36, s6, array4);
                 if(k1 != COM.dragonflow.SiteView.Monitor.kURLok && COM.dragonflow.Utils.I18N.hasUnicode(s5))
                 {
@@ -337,7 +337,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                 outputStream.print("<p>Content Match Results:");
                 for(int i2 = 0; i2 < array3.size(); i2++)
                 {
-                    String s40 = COM.dragonflow.Utils.I18N.escapeString((String)array3.at(i2), s13);
+                    String s40 = COM.dragonflow.Utils.I18N.escapeString((String)array3.get(i2), s13);
                     if(i2 == 0)
                     {
                         outputStream.print("<br>&nbsp;&nbsp;Matched: <b>" + s40 + " </b>");
@@ -355,7 +355,7 @@ public class getPage extends COM.dragonflow.Page.CGI
                 outputStream.print("<p>Error Content Match Results:");
                 for(int j2 = 0; j2 < array4.size(); j2++)
                 {
-                    String s41 = COM.dragonflow.Utils.I18N.escapeString((String)array4.at(j2), s13);
+                    String s41 = COM.dragonflow.Utils.I18N.escapeString((String)array4.get(j2), s13);
                     if(j2 == 0)
                     {
                         outputStream.print("<br>&nbsp;&nbsp;Matched: <b>" + s41 + " </b>");

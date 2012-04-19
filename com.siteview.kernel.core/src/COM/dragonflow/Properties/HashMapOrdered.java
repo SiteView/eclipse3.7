@@ -20,8 +20,8 @@ package COM.dragonflow.Properties;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class HashMapOrdered extends HashMap
 {
@@ -56,7 +56,7 @@ public class HashMapOrdered extends HashMap
                  ((Array)obj2).add(obj1);
              } else
              {
-                 Array array = new Array();
+                  ArrayList array = new ArrayList();
                  array.add(obj2);
                  array.add(obj1);
                  put(obj, array);

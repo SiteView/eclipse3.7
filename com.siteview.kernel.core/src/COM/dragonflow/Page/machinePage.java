@@ -12,7 +12,7 @@ package COM.dragonflow.Page;
 import java.io.PipedReader;
 import java.io.PipedWriter;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.Page:
 // remoteBase, MachineTestPrinter
@@ -104,7 +104,7 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
         return "Remote Server";
     }
 
-    boolean displayFormTable(jgl.HashMap hashmap, String s)
+    boolean displayFormTable(HashMap hashmap, String s)
     {
         boolean flag = true;
         outputStream.println(field("Server Address", "<input type=text name=host size=50 value=\"" + COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_host") + "\">", "The server address of the remote server (for example, demo." + COM.dragonflow.SiteView.Platform.exampleDomain + ")." + "  For HTTP connections, enter the URL of the CGI\n" + " (for example, http://demo." + COM.dragonflow.SiteView.Platform.exampleDomain + "/cgi-bin/remote.sh). " + " To use the same login credentials for multiple servers, enter multiple server addresses " + " separated by commas. "));
@@ -161,7 +161,7 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
         return flag;
     }
 
-    void saveAddProperties(String s, jgl.HashMap hashmap, String s1)
+    void saveAddProperties(String s, HashMap hashmap, String s1)
     {
         super.saveAddProperties(s, hashmap, s1);
         hashmap.put("_id", s1);
@@ -221,9 +221,9 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
         hashmap.put("_trace", request.getValue("trace"));
     }
 
-    jgl.Array getListTableHeaders(String s)
+    ArrayList getListTableHeaders(String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         array.add(new String("Name"));
         array.add(new String("Server"));
         array.add(new String("Status"));
@@ -239,11 +239,11 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
         return array;
     }
 
-    jgl.Array getListTableRow(jgl.HashMap hashmap, String s)
+    ArrayList getListTableRow(HashMap hashmap, String s)
     {
-        jgl.Array array = new Array();
-        jgl.Array array1 = COM.dragonflow.SiteView.Machine.getAllowedMethods();
-        jgl.Array array2 = COM.dragonflow.SiteView.Machine.getAllowedOSs();
+        ArrayList array = new ArrayList();
+        ArrayList array1 = COM.dragonflow.SiteView.Machine.getAllowedMethods();
+        ArrayList array2 = COM.dragonflow.SiteView.Machine.getAllowedOSs();
         String s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_id");
         String s2 = COM.dragonflow.Page.machinePage.getValue(hashmap, "_name");
         if(s2.length() == 0)
@@ -272,7 +272,7 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
         COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
         if(!siteviewgroup.internalServerActive())
         {
-            jgl.HashMap hashmap = getMasterConfig();
+            HashMap hashmap = getMasterConfig();
             COM.dragonflow.SiteView.Machine.registerMachines(hashmap.values("_remoteMachine"));
         }
         boolean flag1 = false;
@@ -284,7 +284,7 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
             outputStream.println("<p>Testing connection to : <b>" + machine.getProperty(COM.dragonflow.SiteView.Machine.pName) + "</b>");
             outputStream.println("<HR><PRE>");
             outputStream.flush();
-            jgl.Array array1 = remotecommandline.test(s1, machine, flag);
+            ArrayList array1 = remotecommandline.test(s1, machine, flag);
             outputStream.println("</PRE><HR>");
             if(remotecommandline.exitValue != 0)
             {
@@ -293,7 +293,7 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
             }
             for(int i = 0; i < array1.size(); i++)
             {
-                String s2 = (String)array1.at(i);
+                String s2 = (String)array1.get(i);
                 if(s2.indexOf("testing connection") >= 0)
                 {
                     flag1 = true;
@@ -330,8 +330,8 @@ public class machinePage extends COM.dragonflow.Page.remoteBase
             }
             outputStream.println("</PRE>");
         }
-        jgl.Array array = getFrames();
-        jgl.HashMap hashmap1 = findMachine(array, machine.getProperty(COM.dragonflow.SiteView.Machine.pID));
+        ArrayList array = getFrames();
+        HashMap hashmap1 = findMachine(array, machine.getProperty(COM.dragonflow.SiteView.Machine.pID));
         hashmap1.put("_status", s);
         try
         {

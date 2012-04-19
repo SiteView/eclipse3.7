@@ -18,7 +18,7 @@
      */
 import java.io.OutputStreamWriter;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.Utils:
 // TextUtils
@@ -171,16 +171,16 @@ public class I18N
         }
     }
 
-    public static jgl.Array toNullArray(jgl.Array array)
+    public static ArrayList toNullArray(ArrayList array)
     {
         if(!isI18N)
         {
             return array;
         }
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         for(int i = 0; i < array.size(); i++)
         {
-            String s = (String)array.at(i);
+            String s = (String)array.get(i);
             COM.dragonflow.Utils.I18N.test(s, 0);
             array1.add(COM.dragonflow.Utils.I18N.toNullEncoding(s));
         }
@@ -188,18 +188,18 @@ public class I18N
         return array1;
     }
 
-    public static jgl.Array toDefaultArray(jgl.Array array)
+    public static ArrayList toDefaultArray(ArrayList array)
     {
         if(!isI18N)
         {
             return array;
         }
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         for(int i = 0; i < array.size(); i++)
         {
-            String s = (String)array.at(i);
+            String s = (String)array.get(i);
             COM.dragonflow.Utils.I18N.test(s, 1);
-            array1.add(COM.dragonflow.Utils.I18N.toDefaultEncoding((String)array.at(i)));
+            array1.add(COM.dragonflow.Utils.I18N.toDefaultEncoding((String)array.get(i)));
         }
 
         return array1;

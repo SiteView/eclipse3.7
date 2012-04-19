@@ -20,7 +20,7 @@ package COM.dragonflow.StandardMonitor;
 import COM.dragonflow.Properties.BrowsableProperty;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.*;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class DB2Monitor extends BrowsableExeBase
 {
@@ -36,9 +36,9 @@ public class DB2Monitor extends BrowsableExeBase
  {
  }
 
- public Array getConnectionProperties()
+ public  ArrayList getConnectionProperties()
  {
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      array.add(pDb2Server);
      array.add(pUsername);
      array.add(pPassword);
@@ -62,7 +62,7 @@ public class DB2Monitor extends BrowsableExeBase
 
  static 
  {
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      pDb2Server = new StringProperty("_server", "");
      pDb2Server.setDisplayText("Server", "DB2 server name.");
      pDb2Server.setParameterOptions(false, true, BrowsableBase.COUNTER_PROPERTY_INDEX + 1, false);
@@ -83,7 +83,7 @@ public class DB2Monitor extends BrowsableExeBase
      StringProperty astringproperty[] = new StringProperty[array.size()];
      for(int i = 0; i < array.size(); i++)
      {
-         astringproperty[i] = (StringProperty)array.at(i);
+         astringproperty[i] = (StringProperty)array.get(i);
      }
 
      String s = (COM.dragonflow.StandardMonitor.DB2Monitor.class).getName();

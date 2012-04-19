@@ -21,8 +21,8 @@ package COM.dragonflow.StandardMonitor;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.ApacheHttpClientUtils.HTTPRequestSettings;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.SiteView.AtomicMonitor;
@@ -57,12 +57,12 @@ public class URLLoaderusingHTTPClient
     int threads;
     long totalContentMaxBytes;
     HashMap urlMap;
-    Array urlList;
+     ArrayList urlList;
     boolean loadFrames;
     boolean loadImages;
     boolean stopped;
-    Array contentMatches;
-    Array errorMatches;
+     ArrayList contentMatches;
+     ArrayList errorMatches;
     URLLoaderThreadusingHTTPClient threadList[];
     public PrintWriter traceStream;
     static String TARGET_TAGS[] = {
@@ -94,7 +94,7 @@ public class URLLoaderusingHTTPClient
         String s1 = "";
         String s2 = "";
         String s3 = "";
-        Array array = null;
+         ArrayList array = null;
         String s4 = "";
         String s5 = "";
         String s6 = "";
@@ -154,12 +154,12 @@ public class URLLoaderusingHTTPClient
         threads = 1;
         totalContentMaxBytes = 0L;
         urlMap = null;
-        urlList = new Array();
+        urlList = new ArrayList();
         loadFrames = false;
         loadImages = false;
         stopped = false;
-        contentMatches = new Array();
-        errorMatches = new Array();
+        contentMatches = new ArrayList();
+        errorMatches = new ArrayList();
         traceStream = null;
         monitor = atomicmonitor;
         if(atomicmonitor != null)
@@ -494,7 +494,7 @@ label0:
     {
         if(contentMatches.size() > 0)
         {
-            URLLoadInfousingHTTPClient urlloadinfousinghttpclient = (URLLoadInfousingHTTPClient)contentMatches.at(0);
+            URLLoadInfousingHTTPClient urlloadinfousinghttpclient = (URLLoadInfousingHTTPClient)contentMatches.get(0);
             return urlloadinfousinghttpclient.contents;
         } else
         {
@@ -506,7 +506,7 @@ label0:
     {
         if(errorMatches.size() > 0)
         {
-            URLLoadInfousingHTTPClient urlloadinfousinghttpclient = (URLLoadInfousingHTTPClient)errorMatches.at(0);
+            URLLoadInfousingHTTPClient urlloadinfousinghttpclient = (URLLoadInfousingHTTPClient)errorMatches.get(0);
             return urlloadinfousinghttpclient.contents;
         } else
         {

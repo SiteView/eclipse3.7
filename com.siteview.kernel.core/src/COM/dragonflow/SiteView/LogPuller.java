@@ -17,7 +17,7 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Log.LogManager;
 
 // Referenced classes of package COM.dragonflow.SiteView:
@@ -62,10 +62,10 @@ public class LogPuller {
         threads = null;
     }
 
-    public static Array getPortals() {
-        Array array = Portal.getPortal().getRawElements();
+    public static  ArrayList getPortals() {
+         ArrayList array = Portal.getPortal().getRawElements();
         if (array == null) {
-            array = new Array();
+            array = new ArrayList();
         }
         return array;
     }

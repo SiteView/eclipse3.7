@@ -26,8 +26,8 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -497,7 +497,7 @@ public class URLSequenceMonitor extends AtomicMonitor
         StringBuffer stringbuffer2 = new StringBuffer();
         StringBuffer stringbuffer3 = new StringBuffer();
         String s5 = "";
-        Array array = Platform.split(',', s2);
+         ArrayList array = Platform.split(',', s2);
         setProperty(pErrorStepName, "");
         long al[] = null;
         if(array.size() <= 1)
@@ -505,7 +505,7 @@ public class URLSequenceMonitor extends AtomicMonitor
             al = checkURLSequence(s, as, as1, as10, as2, as3, s2, s4, s3, aenumeration, as4, as5, as6, as7, as8, as9, as11, getProperty(pTimeout), flag, stringbuffer2, this, null, null, stepURLs, stepStatus, stringbuffer, stringbuffer1, stringbuffer3, false);
         } else
         {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             do
             {
                 if(!enumeration.hasMoreElements())
@@ -895,9 +895,9 @@ public class URLSequenceMonitor extends AtomicMonitor
         }
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pStatusText);
@@ -918,7 +918,7 @@ public class URLSequenceMonitor extends AtomicMonitor
 
     public Enumeration getStatePropertyObjects(boolean flag)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pRoundTripTime);
         if(flag)
         {
@@ -936,7 +936,7 @@ public class URLSequenceMonitor extends AtomicMonitor
             }
 
         }
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public static long[] checkURLSequence(HashMap hashmap, StringBuffer stringbuffer, PrintWriter printwriter, StringBuffer stringbuffer1, StringBuffer stringbuffer2, StringBuffer stringbuffer3, URLSequenceMonitor urlsequencemonitor)
@@ -1002,7 +1002,7 @@ public class URLSequenceMonitor extends AtomicMonitor
             if(hashmap.count(pPostData[j - 1].getName()) == 1)
             {
                 String as12[] = TextUtils.split(TextUtils.getValue(hashmap, pPostData[j - 1].getName()), "\n");
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 for(int k = 0; k < as12.length; k++)
                 {
                     if(as12[k].length() > 0)
@@ -1013,7 +1013,7 @@ public class URLSequenceMonitor extends AtomicMonitor
 
                 if(array1.size() > 0)
                 {
-                    aenumeration[j] = array1.elements();
+                    aenumeration[j] = (Enumeration) array1.iterator();
                 } else
                 {
                     aenumeration[j] = null;
@@ -1040,7 +1040,7 @@ public class URLSequenceMonitor extends AtomicMonitor
         }
 
         String s2 = TextUtils.getValue(hashmap, pProxy.getName());
-        Array array = Platform.split(',', s2);
+         ArrayList array = Platform.split(',', s2);
         boolean flag1 = TextUtils.getValue(hashmap, pTimeoutPerStep.getName()).length() > 0;
         long al[] = null;
         if(array.size() <= 1)
@@ -1048,7 +1048,7 @@ public class URLSequenceMonitor extends AtomicMonitor
             al = checkURLSequence(s, as, as1, as2, as3, as4, s2, TextUtils.getValue(hashmap, pProxyUserName.getName()), TextUtils.getValue(hashmap, pProxyPassword.getName()), aenumeration, as5, as6, as7, as8, as9, as10, as11, TextUtils.getValue(hashmap, pTimeout.getName()), flag1, stringbuffer, urlsequencemonitor, printwriter, stringbuffer1, null, null, stringbuffer4, stringbuffer2, stringbuffer3, flag);
         } else
         {
-            Enumeration enumeration1 = array.elements();
+            Enumeration enumeration1 = (Enumeration) array.iterator();
             do
             {
                 if(!enumeration1.hasMoreElements())
@@ -1078,7 +1078,7 @@ public class URLSequenceMonitor extends AtomicMonitor
         return s;
     }
 
-    public static Array checkForm(String s, HashMap hashmap, HTMLTagParser htmltagparser, int i, boolean flag)
+    public static  ArrayList checkForm(String s, HashMap hashmap, HTMLTagParser htmltagparser, int i, boolean flag)
     {
         Enumeration enumeration = htmltagparser.findTags(hashmap, "input");
         String s1 = null;
@@ -1175,7 +1175,7 @@ public class URLSequenceMonitor extends AtomicMonitor
                 s2 = TextUtils.getValue(hashmap1, "value");
             }
         }
-        Array array = null;
+         ArrayList array = null;
         if(s1 == null && flag)
         {
             s1 = s;
@@ -1219,10 +1219,10 @@ public class URLSequenceMonitor extends AtomicMonitor
         return s;
     }
 
-    static Array mergeVariable(Array array, String s)
+    static  ArrayList mergeVariable(Array array, String s)
     {
-        Array array1 = new Array();
-        Enumeration enumeration = array.elements();
+         ArrayList array1 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if(s.startsWith(replaceToken))
         {
             String s1 = s.substring(replaceToken.length());
@@ -1363,8 +1363,8 @@ public class URLSequenceMonitor extends AtomicMonitor
         HashMap hashmap = new HashMap();
         URLLoader urlloader = null;
         String s7 = "";
-        Array array = new Array();
-        Array array1 = new Array();
+         ArrayList array = new ArrayList();
+         ArrayList array1 = new ArrayList();
         long l5 = 0L;
         long l6 = 0L;
         long l7 = Monitor.kURLok;
@@ -1407,7 +1407,7 @@ label1:
                 {
                     URLInfo urlinfo;
                     int k3;
-                    Array array7;
+                     ArrayList array7;
                     String s23;
                     HTMLTagParser htmltagparser;
 label2:
@@ -1423,7 +1423,7 @@ label4:
                                 {
                                     return al;
                                 }
-                                for(; array1.size() < k; array1.add(new Array())) { }
+                                for(; array1.size() < k; array1.add(new ArrayList())) { }
                                 long l10 = Platform.timeMillis();
                                 String s11 = socketsession.context.getSetting("_urlOtherHeader");
                                 flag5 = false;
@@ -1442,7 +1442,7 @@ label4:
                                 }
                                 if(enumeration != null)
                                 {
-                                    Array array3 = new Array();
+                                     ArrayList array3 = new ArrayList();
                                     String s12;
                                     for(; enumeration.hasMoreElements(); array3.add(s12))
                                     {
@@ -1463,7 +1463,7 @@ label4:
                                 {
                                     printwriter.println("Step " + k + ": checking URL " + s5);
                                 }
-                                Array array4 = TextUtils.enumToArray(enumeration);
+                                 ArrayList array4 = TextUtils.enumToArray(enumeration);
                                 boolean flag7 = true;
                                 if(array4 != null)
                                 {
@@ -1578,7 +1578,7 @@ label4:
                                 {
                                     appendContentBuffer(s5, stringbuffer2.toString(), stringbuffer1, stringbuffer4, k, k != as.length - 1, as2);
                                 }
-                                array = new Array();
+                                array = new ArrayList();
                                 boolean flag8 = socketsession.context.getSetting("_URLSequenceMonitorIgnoreMatchSummary").length() > 0;
                                 String s17 = I18N.UnicodeToString(stringbuffer3.toString(), I18N.nullEncoding());
                                 if(TextUtils.isValueExpression(s14))
@@ -1588,7 +1588,7 @@ label4:
                                 if(TextUtils.isValueExpression(s16))
                                 {
                                     StringBuffer stringbuffer6 = new StringBuffer("");
-                                    Array array5 = new Array();
+                                     ArrayList array5 = new ArrayList();
                                     array5 = updateMatchValue(socketsession.context, stringbuffer6, s16, s17, "Error Matched: ");
                                     if(array5.size() > 0)
                                     {
@@ -1602,8 +1602,8 @@ label4:
                                         stringbuffer.append(stringbuffer6);
                                     }
                                 }
-                                Enumeration enumeration2 = array.elements();
-                                Array array6 = (Array)array1.at(k - 1);
+                                Enumeration enumeration2 = (Enumeration) array.iterator();
+                                 ArrayList array6 = (Array)array1.get(k - 1);
                                 String s19;
                                 for(; enumeration2.hasMoreElements(); array6.add(s19))
                                 {
@@ -1690,7 +1690,7 @@ label4:
                                     LogManager.log("RunMonitor", "NEXT REFERENCE TYPE=" + s22);
                                     for(int j4 = 0; j4 < htmltagparser.tags.size(); j4++)
                                     {
-                                        LogManager.log("RunMonitor", "TAG=" + htmltagparser.tags.at(j4));
+                                        LogManager.log("RunMonitor", "TAG=" + htmltagparser.tags.get(j4));
                                     }
 
                                 }
@@ -1737,7 +1737,7 @@ label5:
                             {
                                 if(s5.length() == 0 && TextUtils.isValueExpression(s21))
                                 {
-                                    Array array8 = new Array();
+                                     ArrayList array8 = new ArrayList();
                                     int j5 = TextUtils.matchExpression(s20, s21, array8, new StringBuffer());
                                     if(j5 != Monitor.kURLok)
                                     {
@@ -1836,7 +1836,7 @@ label8:
                                             if(aenumeration[k3] != null)
                                             {
                                                 Enumeration enumeration14 = aenumeration[k3];
-                                                Array array10 = new Array();
+                                                 ArrayList array10 = new ArrayList();
                                                 do
                                                 {
                                                     if(!enumeration14.hasMoreElements())
@@ -2092,7 +2092,7 @@ label9:
                             }
                             if(s23.equalsIgnoreCase("get"))
                             {
-                                Array array9 = new Array();
+                                 ArrayList array9 = new ArrayList();
                                 Enumeration enumeration12 = array7.elements();
                                 byte byte0 = -1;
                                 String s34 = s5.indexOf("?") != -1 ? "&" : "?";
@@ -2227,10 +2227,10 @@ label9:
             int i1 = 1;
             for(int j1 = 0; j1 < array1.size(); j1++)
             {
-                Array array2 = (Array)array1.at(j1);
+                 ArrayList array2 = (Array)array1.get(j1);
                 for(int k1 = 0; k1 < array2.size(); k1++)
                 {
-                    s10 = array2.at(k1).toString();
+                    s10 = array2.get(k1).toString();
                     urlsequencemonitor.setProperty("matchValue" + i1++, s10);
                 }
 
@@ -2275,14 +2275,14 @@ label9:
         return s;
     }
 
-    static Array updateMatchValue(SiteViewObject siteviewobject, StringBuffer stringbuffer, String s, String s1)
+    static  ArrayList updateMatchValue(SiteViewObject siteviewobject, StringBuffer stringbuffer, String s, String s1)
     {
         return updateMatchValue(siteviewobject, stringbuffer, s, s1, "matched ");
     }
 
-    static Array updateMatchValue(SiteViewObject siteviewobject, StringBuffer stringbuffer, String s, String s1, String s2)
+    static  ArrayList updateMatchValue(SiteViewObject siteviewobject, StringBuffer stringbuffer, String s, String s1, String s2)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         StringBuffer stringbuffer1 = new StringBuffer();
         I18N.dmp("Match: ", s);
         int i = TextUtils.matchExpression(s1, s, array, stringbuffer1, s2);
@@ -2444,7 +2444,7 @@ label9:
         }
         catch(Exception exception) { }
         allocateStepProperties(numberOfSteps);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         for(int j = 1; j <= numberOfSteps; j++)
         {
             array.add(pReferenceType[j - 1]);
@@ -2591,7 +2591,7 @@ label9:
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for(int k1 = 0; k1 < array.size(); k1++)
         {
-            astringproperty[k1] = (StringProperty)array.at(k1);
+            astringproperty[k1] = (StringProperty)array.get(k1);
         }
 
         addProperties("COM.dragonflow.StandardMonitor.URLSequenceMonitor", astringproperty);

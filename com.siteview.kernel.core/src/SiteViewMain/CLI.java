@@ -6,8 +6,8 @@ package SiteViewMain;
 
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.StandardMonitor.URLMonitor;
 import COM.dragonflow.Utils.FileUtils;
 import COM.dragonflow.Utils.SocketSession;
@@ -203,7 +203,7 @@ public class CLI extends Thread
         String s9 = "http://" + s2 + ":" + s1 + "/SiteView/cgi/go.exe/SiteView";
         if(stringbuffer != null)
             stringbuffer.append("sending request...\n url=" + s9 + "\n");
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add("page=" + s8);
         Enumeration enumeration = hashmap.keys();
         do
@@ -274,7 +274,7 @@ public class CLI extends Thread
     static Object signal = new Object();
     static HashMap globals = null;
     static int activeThreads = 0;
-    static Array requests = new Array();
+    static  ArrayList requests = new ArrayList();
     static int errors = 0;
     static int successes = 0;
     int index;

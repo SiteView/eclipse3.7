@@ -19,7 +19,7 @@ package COM.dragonflow.Health;
 
 import java.io.File;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.Health:
 // FileBase
@@ -28,22 +28,22 @@ public class HistoryHealth extends COM.dragonflow.Health.FileBase
 {
 
     private String mgFiles[];
-    private jgl.Array mgs;
-    jgl.Array checks;
+    private ArrayList mgs;
+    ArrayList checks;
 
     public HistoryHealth()
     {
         mgFiles = null;
-        mgs = new Array();
-        checks = new Array();
+        mgs = new ArrayList();
+        checks = new ArrayList();
         historyHealth("");
     }
 
     public HistoryHealth(String s)
     {
         mgFiles = null;
-        mgs = new Array();
-        checks = new Array();
+        mgs = new ArrayList();
+        checks = new ArrayList();
         historyHealth(s);
     }
 
@@ -68,7 +68,7 @@ public class HistoryHealth extends COM.dragonflow.Health.FileBase
         return "HistoryHealth";
     }
 
-    public jgl.Array errorCheck()
+    public ArrayList errorCheck()
     {
         readHistoryConfig();
         FileBase.DoCheck docheck = new FileBase.DoCheck();
@@ -127,7 +127,7 @@ public class HistoryHealth extends COM.dragonflow.Health.FileBase
 
         for(int i1 = 0; i1 < mgFiles.length; i1++)
         {
-            jgl.Array array = (jgl.Array)mgs.at(i1);
+            ArrayList array = (jgl.Array)mgs.get(i1);
             new FileBase.HealthNode(null, 0, array, mgFiles[i1]);
         }
 

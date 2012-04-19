@@ -25,7 +25,7 @@ import COM.dragonflow.Utils.*;
 
 import java.io.StringReader;
 import java.util.HashMap;
-import jgl.Array;
+import java.util.ArrayList;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -164,9 +164,9 @@ public class SunOneMonitor extends BrowsableURLContentBase
 
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = super.getConnectionProperties();
+         ArrayList array = super.getConnectionProperties();
         array.insert(0, pURL);
         array.insert(1, pPostData);
         return array;
@@ -325,7 +325,7 @@ public class SunOneMonitor extends BrowsableURLContentBase
 
     static 
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pURL = new StringProperty("_server");
         pURL.setDisplayText("Stats-XML URL", "URL of the stats-xml report (example: http://server:port/stats-xml/nesstats.xml)");
         pURL.setParameterOptions(false, true, 1, false);
@@ -337,7 +337,7 @@ public class SunOneMonitor extends BrowsableURLContentBase
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for(int i = 0; i < array.size(); i++)
         {
-            astringproperty[i] = (StringProperty)array.at(i);
+            astringproperty[i] = (StringProperty)array.get(i);
         }
 
         String s = (COM.dragonflow.StandardMonitor.SunOneMonitor.class).getName();

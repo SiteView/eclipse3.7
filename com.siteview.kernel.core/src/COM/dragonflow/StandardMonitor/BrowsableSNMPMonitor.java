@@ -28,7 +28,7 @@ import COM.dragonflow.SiteViewException.SiteViewException;
 import COM.dragonflow.Utils.Snmp.BrowsableMIB;
 import java.io.File;
 import java.util.Vector;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class BrowsableSNMPMonitor extends BrowsableSNMPBase
 {
@@ -37,9 +37,9 @@ public class BrowsableSNMPMonitor extends BrowsableSNMPBase
  {
  }
 
- public Array getConnectionProperties()
+ public  ArrayList getConnectionProperties()
  {
-     Array array = super.getConnectionProperties();
+      ArrayList array = super.getConnectionProperties();
      return array;
  }
 

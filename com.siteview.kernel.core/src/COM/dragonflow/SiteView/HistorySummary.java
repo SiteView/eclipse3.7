@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.io.File;
 import java.util.Date;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Utils.FileUtils;
 import COM.dragonflow.Utils.TextUtils;
@@ -41,7 +41,7 @@ class HistorySummary {
 
     String endTime;
 
-    HistorySummary(String s, String s1, Date date, Array array, Array array1) {
+    HistorySummary(String s, String s1, Date date,  ArrayList array,  ArrayList array1) {
         itemMap = new HashMap();
         startDate = "";
         startTime = "";
@@ -68,7 +68,7 @@ class HistorySummary {
                         as1[i + 2], as1[i + 3], as1[i + 4]));
                 boolean flag = false;
                 for (int j = 0; j < array.size(); j++) {
-                    if (as1[i].equals(array.at(j))) {
+                    if (as1[i].equals(array.get(j))) {
                         flag = true;
                         array1.put(j, as1[i + 1]);
                     }

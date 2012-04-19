@@ -45,7 +45,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -97,7 +97,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
 
     private static StringProperty pLastMeasurementWasNA;
 
-    private static Array mConnectionProps;
+    private static  ArrayList mConnectionProps;
 
     static final String xmlFileExtension = ".XML";
 
@@ -115,7 +115,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
 
     private Map mIDMap;
 
-    static jgl.HashMap noData = new jgl.HashMap();
+    static HashMap noData = new HashMap();
 
     public BrowsableNTCounterMonitor() {
         showDebug = false;
@@ -148,7 +148,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
             getBrowseData(new StringBuffer());
             map = (Map) mBrowseIdMap.get(getCounterFilename());
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         Vector vector = new Vector();
         Vector vector1 = new Vector();
         int i = 0;
@@ -205,18 +205,18 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
         float f = 0.0F;
         boolean flag1 = true;
         Object obj = null;
-        Array array2 = null;
+         ArrayList array2 = null;
         if (monitorDebugLevel == 3) {
-            array2 = new Array();
+            array2 = new ArrayList();
         }
         label0: for (int i1 = 0; flag1 && i1 < 2; i1 ++) {
             if (i1 != 0) {
                 Platform.sleep(4000L);
             }
             StringBuffer stringbuffer1 = new StringBuffer();
-            Array array1 = NTCounterBase.getPerfData(s, array, stringbuffer1, showDebug, this, array2, mIDMap);
+             ArrayList array1 = NTCounterBase.getPerfData(s, array, stringbuffer1, showDebug, this, array2, mIDMap);
             stringbuffer.append(stringbuffer1.toString());
-            enumeration = array1.elements();
+            enumeration = (Enumeration) array1.iterator();
             if (enumeration.hasMoreElements()) {
                 l2 = TextUtils.toLong((String) enumeration.nextElement());
             }
@@ -265,7 +265,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
         int j1 = 0;
         byte byte0 = 2;
         for (; enumeration.hasMoreElements(); j1 ++) {
-            PerfCounter perfcounter1 = (PerfCounter) array.at(j1);
+            PerfCounter perfcounter1 = (PerfCounter) array.get(j1);
             String s8 = (String) enumeration.nextElement();
             float f1 = (0.0F / 0.0F);
             long l7 = 0L;
@@ -425,7 +425,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
                     if (monitorDebugLevel == 3 && array2 != null) {
                         StringBuffer stringbuffer2 = new StringBuffer();
                         for (int j2 = 0; j2 < array2.size(); j2 ++) {
-                            stringbuffer2.append(array2.at(j2) + "\n");
+                            stringbuffer2.append(array2.get(j2) + "\n");
                         }
 
                         LogManager.log("Error", "NTCounterMonitor: " + getFullID() + " failed, output:\n" + stringbuffer2);
@@ -493,14 +493,14 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
         }
         String s2 = getProperty(pMonitorDescription);
         String s3 = "-1";
-        Array array = Platform.split(' ', s2);
+         ArrayList array = Platform.split(' ', s2);
         if (array.size() >= 1) {
-            Array array1 = Platform.split('=', (String) array.at(0));
+             ArrayList array1 = Platform.split('=', (String) array.get(0));
             if (array1.size() == 2) {
-                s3 = (String) array1.at(1);
+                s3 = (String) array1.get(1);
             }
         }
-        Array array2 = new Array();
+         ArrayList array2 = new ArrayList();
         array2.add(s3);
         array2.add(s);
         array2.add(perfcounter.object);
@@ -647,7 +647,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
     }
 
     private Map findCounters(Document document) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         Element element = document.getDocumentElement();
         NodeList nodelist = element.getElementsByTagName("object");
         int i = nodelist.getLength();
@@ -661,10 +661,10 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
 
         StringBuffer stringbuffer = new StringBuffer();
         String s = getHostname();
-        Array array1 = NTCounterBase.getPerfCounters(s, array, stringbuffer, "");
+         ArrayList array1 = NTCounterBase.getPerfCounters(s, array, stringbuffer, "");
         HashMap hashmap = new HashMap();
         for (int k = 0; k < array1.size(); k ++) {
-            PerfCounter perfcounter = (PerfCounter) array1.at(k);
+            PerfCounter perfcounter = (PerfCounter) array1.get(k);
             Object obj = (Map) hashmap.get(perfcounter.object);
             if (obj == null) {
                 obj = new HashMap();
@@ -697,12 +697,12 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
 
     public void setMaxCounters(int i) {
         nMaxCounters = i;
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         hashmap.put("_BrowsableNTMaxCounters", (new Integer(i)).toString());
         MasterConfig.saveMasterConfig(hashmap);
     }
 
-    public Array getConnectionProperties() {
+    public  ArrayList getConnectionProperties() {
         return mConnectionProps;
     }
 
@@ -737,8 +737,8 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
         return false;
     }
 
-    public Array getPropertiesToPassBetweenPages(HTTPRequest httprequest) {
-        Array array = super.getPropertiesToPassBetweenPages(httprequest);
+    public  ArrayList getPropertiesToPassBetweenPages(HTTPRequest httprequest) {
+         ArrayList array = super.getPropertiesToPassBetweenPages(httprequest);
         array.add(pHost);
         return array;
     }
@@ -816,11 +816,11 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
     }
 
     static {
-        mConnectionProps = new Array();
+        mConnectionProps = new ArrayList();
         xmlFileDirName = "templates.perfmon" + File.separator + "browsable";
         nMaxCounters = 40;
         try {
-            jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+            HashMap hashmap = MasterConfig.getMasterConfig();
             nMaxCounters = TextUtils.toInt(TextUtils.getValue(hashmap, "_BrowsableNTMaxCounters"));
             if (nMaxCounters == 0) {
                 nMaxCounters = 40;
@@ -834,7 +834,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
             pFile.setParameterOptions(false, true, 2, false);
             mConnectionProps.add(pHost);
             mConnectionProps.add(pFile);
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(pHost);
             array.add(pFile);
             pValues = new StringProperty[nMaxCounters];
@@ -860,7 +860,7 @@ public class BrowsableNTCounterMonitor extends BrowsableBase implements IServerP
             array.add(pLastMeasurementWasNA);
             StringProperty astringproperty1[] = new StringProperty[array.size()];
             for (int j = 0; j < array.size(); j ++) {
-                astringproperty1[j] = (StringProperty) array.at(j);
+                astringproperty1[j] = (StringProperty) array.get(j);
             }
 
             String s = (COM.dragonflow.StandardMonitor.BrowsableNTCounterMonitor.class).getName();

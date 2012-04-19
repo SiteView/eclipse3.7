@@ -36,8 +36,8 @@ import COM.dragonflow.ems.Shared.EmsTimeDiffProperty;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.Vector;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class BMCPatrolProbeMonitor extends AtomicMonitor
 {
@@ -324,9 +324,9 @@ public class BMCPatrolProbeMonitor extends AtomicMonitor
 //     return PtiServiceRepository.getServiceForPort((short)getPtiPort()).getStats();
 // }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array a = super.getLogProperties();
+      ArrayList a = super.getLogProperties();
      a.add(pTotalMessageCount);
      a.add(pNumOfConnectedPTIs);
      return a;

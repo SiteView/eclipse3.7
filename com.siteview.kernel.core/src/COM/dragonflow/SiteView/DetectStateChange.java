@@ -19,8 +19,8 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Utils.I18N;
 
 // Referenced classes of package COM.dragonflow.SiteView:
@@ -42,10 +42,10 @@ public class DetectStateChange extends Action {
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         long l = siteviewgroup.getPropertyAsLong(Monitor.pLastUpdate);
         if (l > lastStateChange) {
-            Array array = siteviewgroup.getElementsOfClass(
+             ArrayList array = siteviewgroup.getElementsOfClass(
                     "COM.dragonflow.SiteView.MonitorGroup", false);
             HashMap hashmap = new HashMap();
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                  MonitorGroup monitorgroup = (MonitorGroup) enumeration
                         .nextElement();

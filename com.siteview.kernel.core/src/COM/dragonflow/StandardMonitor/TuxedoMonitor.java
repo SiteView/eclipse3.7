@@ -21,7 +21,7 @@ package COM.dragonflow.StandardMonitor;
 import COM.dragonflow.Properties.BrowsableProperty;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.*;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class TuxedoMonitor extends DispatcherMonitor
     implements BrowsableMonitor
@@ -44,9 +44,9 @@ public class TuxedoMonitor extends DispatcherMonitor
         return true;
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pServerName);
         array.add(pPort);
         array.add(pTuxClient);
@@ -88,7 +88,7 @@ public class TuxedoMonitor extends DispatcherMonitor
 
     static 
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pBrowseCounters = new BrowsableProperty("_browse", "browseName");
         pBrowseCounters.setDisplayText("Counters", "Current selection of counters.");
         pBrowseCounters.setParameterOptions(true, 1, false);
@@ -118,7 +118,7 @@ public class TuxedoMonitor extends DispatcherMonitor
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for(int i = 0; i < array.size(); i++)
         {
-            astringproperty[i] = (StringProperty)array.at(i);
+            astringproperty[i] = (StringProperty)array.get(i);
         }
 
         addProperties("COM.dragonflow.StandardMonitor.TuxedoMonitor", astringproperty);

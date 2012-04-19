@@ -23,9 +23,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import jgl.Filtering;
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Api.Alert;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
@@ -377,7 +377,7 @@ public abstract class Monitor extends SiteViewObject {
         String s1 = "";
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         String s2 = siteviewgroup.getSetting("_tracerouteCommand");
-        Array array = Platform.traceRoute(s, s2);
+         ArrayList array = Platform.traceRoute(s, s2);
         s1 = s1
                 + Platform.FILE_NEWLINE
                 + "Trace Route results for "
@@ -396,7 +396,7 @@ public abstract class Monitor extends SiteViewObject {
                 + Platform.FILE_NEWLINE
                 + "The times are in milliseconds -- a large change shows which step is the slowest part of the connection."
                 + Platform.FILE_NEWLINE + Platform.FILE_NEWLINE;
-        for (Enumeration enumeration = array.elements(); enumeration
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements();) {
             String s3 = (String) enumeration.nextElement();
             s3 = s3.replace('\n', ' ');
@@ -422,7 +422,7 @@ public abstract class Monitor extends SiteViewObject {
     public boolean isPropertyExcluded(StringProperty stringproperty,
             HTTPRequest httprequest) {
         if (stringproperty == pTemplateID) {
-            Array array = PropertiedObject.getTemplateConfigFileList();
+             ArrayList array = PropertiedObject.getTemplateConfigFileList();
             return array.size() == 0;
         } else {
             return super.isPropertyExcluded(stringproperty, httprequest);
@@ -518,10 +518,10 @@ public abstract class Monitor extends SiteViewObject {
         while (enumeration1.hasMoreElements()) {
             Object obj = enumeration1.nextElement();
             if (obj instanceof Array) {
-                Array array = (Array) obj;
+                 ArrayList array = (Array) obj;
                 int i = 0;
                 while (i < array.size()) {
-                    String s2 = (String) array.at(i);
+                    String s2 = (String) array.get(i);
                     Rule rule1 = Rule.stringToClassifier(s2);
                     if (rule1 != null)
                         addElement(rule1);
@@ -575,9 +575,9 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     public Enumeration getMonitors() {
-        Array array = getElementsOfClass("COM.dragonflow.SiteView.Monitor",
+         ArrayList array = getElementsOfClass("COM.dragonflow.SiteView.Monitor",
                 false);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public int countMonitors() {
@@ -620,12 +620,12 @@ public abstract class Monitor extends SiteViewObject {
      * @param s1
      * @return
      */
-    public Array getMonitorsOfClass(String s, String s1) {
-        Array array = new Array();
+    public  ArrayList getMonitorsOfClass(String s, String s1) {
+         ArrayList array = new ArrayList();
         Enumeration enumeration;
         if (s1 != null && s1.length() > 0) {
             HashMap hashmap = new HashMap();
-            Array array1 = new Array();
+             ArrayList array1 = new ArrayList();
             SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
             MonitorGroup monitorgroup = (MonitorGroup) siteviewgroup
                     .getElementByID(s1);
@@ -656,7 +656,7 @@ public abstract class Monitor extends SiteViewObject {
             } else {
                 LogManager.log("RunMonitor", "Unable to retrieve group " + s1);
             }
-            enumeration = array1.elements();
+            enumeration = (Enumeration) array1.iterator();
         } else {
             enumeration = getMonitors();
         }
@@ -675,15 +675,15 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     public Enumeration getReports() {
-        Array array = getElementsOfClass(
+         ArrayList array = getElementsOfClass(
                 "COM.dragonflow.SiteView.HistoryReport", false);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public Enumeration getDynamics() {
-        Array array = getElementsOfClass(
+         ArrayList array = getElementsOfClass(
                 "COM.dragonflow.SiteView.VirtualMachine", false);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public Enumeration getRules(int i) {
@@ -716,18 +716,18 @@ public abstract class Monitor extends SiteViewObject {
      */
     protected Enumeration getRules(int i, boolean flag) {
         boolean flag1 = i != 1 || flag;
-        Array array = getElementsOfClass("COM.dragonflow.SiteView.Rule", true,
+         ArrayList array = getElementsOfClass("COM.dragonflow.SiteView.Rule", true,
                 flag1);
-        Array array1 = (Array) Filtering.select(array, new RuleGroupIs(i));
+         ArrayList array1 = (Array) Filtering.select(array, new RuleGroupIs(i));
         if (i == 1 && !flag) {
-            Enumeration enumeration = array1.elements();
+            Enumeration enumeration = (Enumeration) array1.iterator();
             Hashtable hashtable = new Hashtable();
             Rule rule;
             for (; enumeration.hasMoreElements(); hashtable.put(rule
                     .getProperty(Rule.pAction), "seen"))
                 rule = (Rule) enumeration.nextElement();
 
-            Array array2 = (Array) getClassProperty("elements");
+             ArrayList array2 = (Array) getClassProperty("elements");
             if (array2 != null) {
                 Enumeration enumeration1 = array2.elements();
                 while (enumeration1.hasMoreElements()) {
@@ -755,7 +755,7 @@ public abstract class Monitor extends SiteViewObject {
                 do {
                     if (k >= array1.size())
                         break;
-                    Rule rule2 = (Rule) array1.at(k);
+                    Rule rule2 = (Rule) array1.get(k);
                     if (rule2.getOwner() == siteviewgroup) {
                         j = k;
                         break;
@@ -771,13 +771,13 @@ public abstract class Monitor extends SiteViewObject {
 
             }
         }
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
     protected void removeAllRules() {
-        Array array = getElementsOfClass("COM.dragonflow.SiteView.Rule", false);
+         ArrayList array = getElementsOfClass("COM.dragonflow.SiteView.Rule", false);
         Rule rule;
-        for (Enumeration enumeration = array.elements(); enumeration
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements(); removeElement(rule))
             rule = (Rule) enumeration.nextElement();
 
@@ -807,8 +807,8 @@ public abstract class Monitor extends SiteViewObject {
         if (bDisableRules)
             return;
         Enumeration enumeration = getRules(i);
-        Array array = new Array();
-        Array array1 = new Array();
+         ArrayList array = new ArrayList();
+         ArrayList array1 = new ArrayList();
         if (i == 1
                 && (SiteViewGroup.currentSiteView().getSetting("_errorOnly")
                         .length() > 0
@@ -876,7 +876,7 @@ public abstract class Monitor extends SiteViewObject {
                         + AtomicMonitor.alertDebugId + " ---End of Check--- ");
         } 
         
-        enumeration = array.elements();
+        enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             Rule rule1 = (Rule) enumeration.nextElement();
             rule1.doAction(monitor);
@@ -892,7 +892,7 @@ public abstract class Monitor extends SiteViewObject {
         }
         
         Rule rule2;
-        for (Enumeration enumeration1 = array1.elements(); enumeration1
+        for (Enumeration enumeration1 = (Enumeration) array1.iterator(); enumeration1
                 .hasMoreElements(); ruleApplied(rule2))
             rule2 = (Rule) enumeration1.nextElement();
 
@@ -967,9 +967,9 @@ public abstract class Monitor extends SiteViewObject {
         if (s.equals("warning"))
             setProperty("errorCount", String.valueOf(0));
         setProperty(s2, String.valueOf(Platform.timeMillis()));
-        Array array = getCurrentPropertyNames();
+         ArrayList array = getCurrentPropertyNames();
         for (int i = 0; i < array.size(); i++) {
-            String s3 = (String) array.at(i);
+            String s3 = (String) array.get(i);
             if (s3.indexOf("AlertCount") != -1)
                 unsetProperty(s3);
             if (s3.indexOf("TimeSinceAlert") != -1)
@@ -1035,8 +1035,8 @@ public abstract class Monitor extends SiteViewObject {
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pCategory);
         array.add(pOwnerID);
         array.add(pName);
@@ -1154,7 +1154,7 @@ public abstract class Monitor extends SiteViewObject {
                 s7 = isDisabled() ? "Enable" : "Disable";
                 String s11 = I18N.toDefaultEncoding(getProperty(pGroupID));
                 try {
-                    Array array = CGI.ReadGroupFrames(s11, httprequest);
+                     ArrayList array = CGI.ReadGroupFrames(s11, httprequest);
                     HashMap hashmap = CGI.findMonitor(array, s5);
                     s10 = TextUtils.getValue(hashmap, "_group");
                 } catch (Exception exception) {
@@ -1196,12 +1196,12 @@ public abstract class Monitor extends SiteViewObject {
                 + "</TD>");
     }
 
-    public static Array getMonitorAlerts(HTTPRequest httprequest, String s,
-            String s1, Array array) {
+    public static  ArrayList getMonitorAlerts(HTTPRequest httprequest, String s,
+            String s1,  ArrayList array) {
         try {
-            Array array1 = CGI.ReadGroupFrames(s, httprequest);
+             ArrayList array1 = CGI.ReadGroupFrames(s, httprequest);
             HashMap hashmap = CGI.findMonitor(array1, s1);
-            Array array2;
+             ArrayList array2;
             for (Enumeration enumeration = hashmap.values("_alertCondition"); enumeration
                     .hasMoreElements(); array.add(array2)) {
                 array2 = Platform.split('\t', (String) enumeration
@@ -1215,10 +1215,10 @@ public abstract class Monitor extends SiteViewObject {
         return array;
     }
 
-    public static boolean getGroupAlerts(String s, Array array) {
+    public static boolean getGroupAlerts(String s,  ArrayList array) {
         boolean flag = false;
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
-        Array array1;
+         ArrayList array1;
         for (Enumeration enumeration = siteviewgroup
                 .getMultipleValues("_alertCondition"); enumeration
                 .hasMoreElements(); array.add(array1)) {
@@ -1228,7 +1228,7 @@ public abstract class Monitor extends SiteViewObject {
 
         if (!s.equalsIgnoreCase("SiteView") && !s.equalsIgnoreCase("_master")) {
             Monitor monitor = (Monitor) siteviewgroup.getElement(s);
-            Array array2;
+             ArrayList array2;
             for (Enumeration enumeration1 = monitor
                     .getMultipleValues("_alertCondition"); enumeration1
                     .hasMoreElements(); array.add(array2)) {
@@ -1246,7 +1246,7 @@ public abstract class Monitor extends SiteViewObject {
     }
 
     protected void printTableAlertEntry(PrintWriter printwriter,
-            HTTPRequest httprequest, Array array) {
+            HTTPRequest httprequest,  ArrayList array) {
         StringBuffer stringbuffer = createAlertIconLink(true, httprequest);
         printwriter.print(stringbuffer.toString());
     }
@@ -1401,14 +1401,14 @@ public abstract class Monitor extends SiteViewObject {
         StringBuffer stringbuffer = new StringBuffer();
         String s2 = httprequest.getValue("_health").length() <= 0 ? ""
                 : "&_health=true";
-        Array array = reportPage.getReportFrames(httprequest.getAccount());
+         ArrayList array = reportPage.getReportFrames(httprequest.getAccount());
         int i = 0;
         Object obj = null;
         String s3 = "";
         String s4 = "title, report type, schedule";
         Object obj1 = null;
         for (int j = 0; j < array.size(); j++) {
-            HashMap hashmap = (HashMap) array.at(j);
+            HashMap hashmap = (HashMap) array.get(j);
             Enumeration enumeration = hashmap.values("monitors");
             while (enumeration.hasMoreElements()) {
                 String as[] = TextUtils.split((String) enumeration
@@ -1788,7 +1788,7 @@ public abstract class Monitor extends SiteViewObject {
 
     public static final String PHANTOM_ALERT_ICON = "H";
 
-    public static jgl.HashMap categoryMap;
+    public static HashMap categoryMap;
 
     public static String FILTERED_CATEGORY;
 
@@ -1875,11 +1875,11 @@ public abstract class Monitor extends SiteViewObject {
 
     protected static final int nPointsPerMetric = 1;
 
-    static jgl.HashMap statusMapping;
+    static HashMap statusMapping;
 
-    static jgl.HashMap statusHelpMapping;
+    static HashMap statusHelpMapping;
 
-    static jgl.HashMap rtConfig = null;
+    static HashMap rtConfig = null;
 
     static boolean bDisableRules = false;
 

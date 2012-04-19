@@ -42,8 +42,8 @@ import javax.security.cert.CertificateExpiredException;
 import javax.security.cert.CertificateNotYetValidException;
 import javax.security.cert.X509Certificate;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 import org.apache.commons.httpclient.Header;
 
@@ -442,11 +442,11 @@ public class URLOriginalMonitor extends AtomicMonitor {
         String s2 = getProperty(pProxy);
         String s3 = getProperty(pProxyPassword);
         String s4 = getProperty(pProxyUserName);
-        Array array = Platform.split(',', s2);
+         ArrayList array = Platform.split(',', s2);
         if (array.size() <= 1) {
             al = update1(s, s1, s2, s3, s4);
         } else {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             while (enumeration.hasMoreElements()) {
                 String s5 = (String) enumeration.nextElement();
                 s5 = s5.trim();
@@ -477,7 +477,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
             s8 = NT_CHALLENGE_RESPONSE_TAG + s8;
         }
         String s9 = getProperty(pPassword);
-        Array array = TextUtils.enumToArray(getMultipleValues(pPostData));
+         ArrayList array = TextUtils.enumToArray(getMultipleValues(pPostData));
         int i = getPropertyAsInteger(pTimeout) * 1000;
         if (i == 0) {
             i = DEFAULT_TIMEOUT;
@@ -559,7 +559,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                 s22 = s22 + CRLF;
             }
             if (array != null) {
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 do {
                     if (!enumeration.hasMoreElements()) {
                         break;
@@ -767,14 +767,14 @@ public class URLOriginalMonitor extends AtomicMonitor {
 
     void setRollingBaseProperties(long l, StringProperty stringproperty, StringProperty stringproperty1, int i, String s) {
         String s1 = getProperty(stringproperty);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (s1 != null && s1.length() > 0) {
             array = TextUtils.splitArray(s1, "\t");
         }
         float f = 0.0F;
         int j = 0;
         for (int k = 0; k < array.size(); k ++) {
-            float f2 = TextUtils.toFloat((String) array.at(k));
+            float f2 = TextUtils.toFloat((String) array.get(k));
             if (f2 != 0.0F) {
                 f += f2;
                 j ++;
@@ -791,7 +791,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         array.add(TextUtils.floatToString((float) l / 1000F, millisecondPrecision));
         s1 = "";
         for (int i1 = 0; i1 < array.size(); i1 ++) {
-            s1 = s1 + (String) array.at(i1);
+            s1 = s1 + (String) array.get(i1);
             s1 = s1 + "\t";
         }
 
@@ -852,7 +852,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
 
     public String updateMatchValues(String s, String s1, String s2, String s3, boolean flag) {
         StringBuffer stringbuffer = new StringBuffer();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String s4 = I18N.UnicodeToString(s2, I18N.nullEncoding());
         int i = TextUtils.matchExpression(s4, s1, array, stringbuffer, s3);
         if (i != Monitor.kURLok && I18N.hasUnicode(s1)) {
@@ -860,7 +860,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
             TextUtils.matchExpression(s4, I18N.UnicodeToString(s1, s5), array, stringbuffer, s3);
         }
         if (array.size() > 0) {
-            setProperty(getLocationProperty(pMatchValue, s), array.at(0));
+            setProperty(getLocationProperty(pMatchValue, s), array.get(0));
         }
         String s6 = stringbuffer.toString();
         if (flag) {
@@ -893,7 +893,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
      */
     public Enumeration getStatePropertyObjects(boolean flag) {
         Enumeration enumeration = super.getStatePropertyObjects(flag);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration.nextElement();
             if (stringproperty == pDNSTime) {
@@ -916,11 +916,11 @@ public class URLOriginalMonitor extends AtomicMonitor {
                 array.add(stringproperty);
             }
         }
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pStatusText);
@@ -1007,17 +1007,17 @@ public class URLOriginalMonitor extends AtomicMonitor {
         return al;
     }
 
-    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, Array array, String s6, String s7, String s8, StringBuffer stringbuffer, long l, String s9, int i, int j,
+    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, String s6, String s7, String s8, StringBuffer stringbuffer, long l, String s9, int i, int j,
             StringBuffer stringbuffer1) {
         return checkURL(socketsession, s, I18N.getDefaultEncoding(), s1, s2, s3, s4, s5, array, s6, s7, s8, stringbuffer, l, s9, i, j, stringbuffer1, null);
     }
 
-    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, Array array, String s6, String s7, String s8, StringBuffer stringbuffer, long l, String s9, int i, int j,
+    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, String s6, String s7, String s8, StringBuffer stringbuffer, long l, String s9, int i, int j,
             StringBuffer stringbuffer1, StringBuffer stringbuffer2) {
         return checkURL(socketsession, s, I18N.getDefaultEncoding(), s1, s2, s3, s4, s5, array, s6, s7, s8, stringbuffer, l, s9, i, j, stringbuffer1, stringbuffer2);
     }
 
-    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, Array array, String s7, String s8, String s9, StringBuffer stringbuffer, long l, String s10, int i, int j,
+    public static long[] checkURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6,  ArrayList array, String s7, String s8, String s9, StringBuffer stringbuffer, long l, String s10, int i, int j,
             StringBuffer stringbuffer1, StringBuffer stringbuffer2) {
         boolean flag = false;
         if (socketsession == null) {
@@ -1106,7 +1106,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         String s1 = "";
         s = s.toLowerCase();
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             byte byte0 = -1;
             while (enumeration.hasMoreElements()) {
                 String s2 = (String) enumeration.nextElement();
@@ -1146,7 +1146,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     static String getRequestCommand(Array array) {
         String s = "GET";
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             int i = -1;
             while (enumeration.hasMoreElements()) {
                 String s1 = (String) enumeration.nextElement();
@@ -1171,7 +1171,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     static String getContentType(Array array) {
         String s = CONTENT_TYPE_DEFAULT;
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             while (enumeration.hasMoreElements()) {
                 s1 = (String) enumeration.nextElement();
@@ -1193,7 +1193,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     static String getUserAgent(Array array) {
         String s = "";
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             while (enumeration.hasMoreElements()) {
                 s1 = (String) enumeration.nextElement();
@@ -1216,7 +1216,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         String s;
         s = "";
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             while (enumeration.hasMoreElements()) {
                 s1 = (String) enumeration.nextElement();
@@ -1237,7 +1237,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
 
         s2 = "";
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s3;
             while (enumeration.hasMoreElements()) {
                 s3 = (String) enumeration.nextElement();
@@ -1270,7 +1270,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     static String getRequestProtocol(Array array) {
         String s = REQUEST_PROTOCOL_DEFAULT;
         if (array != null) {
-            Enumeration enumeration = array.elements();
+            Enumeration enumeration = (Enumeration) array.iterator();
             String s1;
             while (enumeration.hasMoreElements()) {
                 s1 = (String) enumeration.nextElement();
@@ -1350,7 +1350,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     /**
      * CAUTION: Decompiled by hand.
      */
-    static long sendSSLRequest(String s, SocketSession socketsession, Array array, CounterLock counterlock, Array array1) {
+    static long sendSSLRequest(String s, SocketSession socketsession,  ArrayList array, CounterLock counterlock,  ArrayList array1) {
         long l;
         String as[];
         l = -1000L;
@@ -1359,7 +1359,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         }
         as = new String[array.size()];
         for (int i = 0; i < as.length; i ++) {
-            as[i] = (String) array.at(i);
+            as[i] = (String) array.get(i);
         }
 
         if ((debugURL & kDebugRequest) != 0) {
@@ -1377,7 +1377,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
             if (socketsession.context.getSetting("_sslKeepAlive").length() > 0) {
                 try {
                     if (socketsession.isSSLKeepAliveConnection(as, s)) {
-                        Enumeration enumeration = array.elements();
+                        Enumeration enumeration = (Enumeration) array.iterator();
                         enumeration.nextElement();
                         String s3;
                         while (enumeration.hasMoreElements()) {
@@ -1463,7 +1463,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
             try {
                 String s = Platform.getRoot() + File.separator + "groups" + File.separator + "ssl2.config";
                 if ((new File(s)).exists()) {
-                    Array array = FrameFile.readFromFile(s);
+                     ArrayList array = FrameFile.readFromFile(s);
                     if (!array.isEmpty()) {
                         ssl2Cache = (HashMap) array.front();
                     }
@@ -1484,7 +1484,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         hashmap.remove(s);
         try {
             String s1 = Platform.getRoot() + File.separator + "groups" + File.separator + "ssl2.config";
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(hashmap);
             FrameFile.writeToFile(s1, array);
         } catch (IOException ioexception) {
@@ -1498,7 +1498,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         hashmap.put(s, s1);
         try {
             String s2 = Platform.getRoot() + File.separator + "groups" + File.separator + "ssl2.config";
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(hashmap);
             FrameFile.writeToFile(s2, array);
         } catch (IOException ioexception) {
@@ -1511,7 +1511,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         return hashmap.get(s) != null;
     }
 
-    private static long[] check1URL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, String s7, Array array, String s8, String s9, String s10, StringBuffer stringbuffer, long l, String s11, int i,
+    private static long[] check1URL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, String s7,  ArrayList array, String s8, String s9, String s10, StringBuffer stringbuffer, long l, String s11, int i,
             long l1, StringBuffer stringbuffer1, StringBuffer stringbuffer2) {
         long al[] = checkInternalURL(socketsession, s, s1, s2, s3, s4, s5, s6, s7, array, s8, s9, s10, stringbuffer, l, s11, i, l1, stringbuffer1, stringbuffer2);
         if (al[0] == (long) kSSL2NotFoundError) {
@@ -1533,7 +1533,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
     /**
      * CAUTION: Decompiled by hand.
      */
-    private static long[] checkInternalURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, String s7, Array array, String s8, String s9, String s10, StringBuffer stringbuffer, long l, String s11,
+    private static long[] checkInternalURL(SocketSession socketsession, String s, String s1, String s2, String s3, String s4, String s5, String s6, String s7,  ArrayList array, String s8, String s9, String s10, StringBuffer stringbuffer, long l, String s11,
             int i, long l1, StringBuffer stringbuffer1, StringBuffer stringbuffer2) {
         String s12 = "";
         if (s.lastIndexOf('#') != -1) {
@@ -1685,7 +1685,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                 } else {
                     s32 = s10 + "?host=" + s;
                 }
-                Array array2 = null;
+                 ArrayList array2 = null;
                 String s41 = "";
                 String s43 = "";
                 String s47 = "";
@@ -1834,10 +1834,10 @@ public class URLOriginalMonitor extends AtomicMonitor {
                             if (s5 == null) {
                                 s5 = "";
                             }
-                            Array array1 = new Array();
+                             ArrayList array1 = new ArrayList();
                             array1.add(Platform.getRoot() + "/tools/sslget");
                             if (s19.length() > 0) {
-                                Array array3 = Platform.split(' ', s19);
+                                 ArrayList array3 = Platform.split(' ', s19);
                                 Enumeration enumeration = array3.elements();
                                 while (enumeration.hasMoreElements()) {
                                     array1.add(enumeration.nextElement());
@@ -1864,7 +1864,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                                 array1.add("\"" + CONTENT_TYPE_HEADER + s26 + "\"");
                             }
                             if (array != null) {
-                                Enumeration enumeration1 = array.elements();
+                                Enumeration enumeration1 = (Enumeration) array.iterator();
                                 while (enumeration1.hasMoreElements()) {
                                     String s44 = (String) enumeration1.nextElement();
                                     if (TextUtils.startsWithIgnoreCase(s44, CUSTOM_HEADER)) {
@@ -1892,7 +1892,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                             } else {
                                 LogManager.log("RunMonitor", "ssl start, " + SSLCounter + ", " + s);
                             }
-                            Array array4 = new Array();
+                             ArrayList array4 = new ArrayList();
                             l2 = sendSSLRequest(urlinfo.getHost(), socketsession, array1, sslLock, array4);
                             if (debugURL != 0) {
                                 System.out.println("Status4 sendSSLRequest: " + l2);
@@ -2010,7 +2010,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                         s15 = s15 + CRLF;
                     }
                     if (array != null) {
-                        Enumeration enumeration3 = array.elements();
+                        Enumeration enumeration3 = (Enumeration) array.iterator();
                         while (enumeration3.hasMoreElements()) {
                             String s63 = (String) enumeration3.nextElement();
                             if (TextUtils.startsWithIgnoreCase(s63, CUSTOM_HEADER)) {
@@ -3017,7 +3017,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
         return HTTPUtils.getHTTPPart(s, false);
     }
 
-    public static long[] sendHTTPRequest(String s, String s1, String s2, String s3, String s4, String s5, Array array, StringBuffer stringbuffer, long l, String s6, int i) {
+    public static long[] sendHTTPRequest(String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, StringBuffer stringbuffer, long l, String s6, int i) {
         String s7 = "";
         String s8 = "";
         String s9 = "";
@@ -3036,7 +3036,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                 String s3 = "";
                 String s5 = "";
                 String s8 = "";
-                Array array = new Array();
+                 ArrayList array = new ArrayList();
                 array.add("KEYWORDS=john");
                 array.add("SUBSTRING=substring");
                 String s11 = "";
@@ -3064,7 +3064,7 @@ public class URLOriginalMonitor extends AtomicMonitor {
                 String s7 = "";
                 String s9 = "";
                 String s10 = "";
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 String s13 = "";
                 int i = 0;
                 do {

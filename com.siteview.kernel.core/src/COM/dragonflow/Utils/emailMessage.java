@@ -38,7 +38,7 @@ public class emailMessage
     String returnPath;
     String received;
     String messageID;
-    jgl.Array bodies;
+    ArrayList bodies;
 
     public emailMessage(String as[])
     {
@@ -105,7 +105,7 @@ public class emailMessage
     {
         if(i >= 0 && i < bodies.size())
         {
-            return (String[])bodies.at(i);
+            return (String[])bodies.get(i);
         } else
         {
             return null;
@@ -123,7 +123,7 @@ public class emailMessage
         for(int i = 0; i < bodies.size(); i++)
         {
             stringbuffer.append("\nBody #" + i + "\n");
-            String as[] = (String[])bodies.at(i);
+            String as[] = (String[])bodies.get(i);
             for(int j = 0; j < as.length; j++)
             {
                 stringbuffer.append(as[j]);

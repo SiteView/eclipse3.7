@@ -20,8 +20,8 @@ package COM.dragonflow.StandardMonitor;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -99,9 +99,9 @@ public class DNSMonitor extends AtomicMonitor
      return flag;
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pStatus);
      array.add(pRoundTripTime);
      array.add(pStatusText);

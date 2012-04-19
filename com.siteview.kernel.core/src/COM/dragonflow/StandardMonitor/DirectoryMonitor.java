@@ -27,8 +27,8 @@ import COM.dragonflow.Utils.TextUtils;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Date;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class DirectoryMonitor extends AtomicMonitor
 {
@@ -198,9 +198,9 @@ public class DirectoryMonitor extends AtomicMonitor
      return true;
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pFileCount);
      array.add(pSize);
      array.add(pExists);

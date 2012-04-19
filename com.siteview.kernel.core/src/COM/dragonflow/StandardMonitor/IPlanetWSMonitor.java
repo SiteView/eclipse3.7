@@ -29,7 +29,7 @@ import COM.dragonflow.Utils.Snmp.BrowsableMIB;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.util.Vector;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class IPlanetWSMonitor extends BrowsableSNMPBase
 {
@@ -41,9 +41,9 @@ public class IPlanetWSMonitor extends BrowsableSNMPBase
         IPlanetWSMIB = "NO_IPLANET_WS_MIB_AVAILABLE";
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = super.getConnectionProperties();
+         ArrayList array = super.getConnectionProperties();
         return array;
     }
 
@@ -85,7 +85,7 @@ public class IPlanetWSMonitor extends BrowsableSNMPBase
 
     static 
     {
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         StringProperty astringproperty[] = new StringProperty[0];
         addProperties("COM.dragonflow.StandardMonitor.IPlanetWSMonitor", astringproperty);
         addClassElement("COM.dragonflow.StandardMonitor.IPlanetWSMonitor", Rule.stringToClassifier("countersInError > 0\terror"));

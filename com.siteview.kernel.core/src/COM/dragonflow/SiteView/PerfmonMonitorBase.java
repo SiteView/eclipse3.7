@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -155,7 +155,7 @@ public abstract class PerfmonMonitorBase extends AtomicMonitor {
         if (s.equals("saveMsmts")) {
             loadNewMeasurements(httprequest);
         } else if (s.equals("selectMsmts")) {
-            Array array = getPropertiesToPassBetweenPages(httprequest);
+             ArrayList array = getPropertiesToPassBetweenPages(httprequest);
             loadPropsFromRequest(httprequest, array);
         } else if (s == null || s.length() == 0) {
             returnUrl = httprequest.rawURL;
@@ -180,10 +180,10 @@ public abstract class PerfmonMonitorBase extends AtomicMonitor {
                             "_perfmonMsmtProp", document);
                 }
                 returnUrl = (String) hashmap1.get(KEY_RETURN_URL);
-                Array array = getPropertiesToPassBetweenPages(httprequest);
+                 ArrayList array = getPropertiesToPassBetweenPages(httprequest);
                 for (int i = 0; array != null && i < array.size(); i++) {
                     StringProperty stringproperty = (StringProperty) array
-                            .at(i);
+                            .get(i);
                     String s1 = (String) hashmap1.get(stringproperty.getName());
                     if (s1 != null) {
                         setProperty(stringproperty, (String) hashmap1
@@ -202,9 +202,9 @@ public abstract class PerfmonMonitorBase extends AtomicMonitor {
         HashMap hashmap1 = (HashMap) hashmap.get("mProp");
         hashmap1.put(pMsmtProps.getName(), getProperty(pMsmtProps));
         hashmap1.put(KEY_RETURN_URL, returnUrl);
-        Array array = getPropertiesToPassBetweenPages(httprequest);
+         ArrayList array = getPropertiesToPassBetweenPages(httprequest);
         for (int i = 0; array != null && i < array.size(); i++) {
-            StringProperty stringproperty = (StringProperty) array.at(i);
+            StringProperty stringproperty = (StringProperty) array.get(i);
             hashmap1.put(stringproperty.getName(), getProperty(stringproperty));
         }
 
@@ -343,8 +343,8 @@ public abstract class PerfmonMonitorBase extends AtomicMonitor {
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pCountersInError);
         for (int i = 0; i < measurements.length; i++) {
             array.add(measurements[i]);

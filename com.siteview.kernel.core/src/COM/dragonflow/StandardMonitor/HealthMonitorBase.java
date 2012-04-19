@@ -21,7 +21,7 @@ import COM.dragonflow.Health.FileBase;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.AtomicMonitor;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class HealthMonitorBase extends AtomicMonitor
 {
@@ -37,22 +37,22 @@ public class HealthMonitorBase extends AtomicMonitor
      return "";
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pNumErrors);
      return array;
  }
 
  protected void setStatus(FileBase filebase)
  {
-     Array array = filebase.errorCheck();
+      ArrayList array = filebase.errorCheck();
      if(array.size() > 0)
      {
          StringBuffer stringbuffer = new StringBuffer(256);
          for(int i = 0; i < array.size(); i++)
          {
-             COM.dragonflow.Health.FileBase.ErrorMessage errormessage = (COM.dragonflow.Health.FileBase.ErrorMessage)array.at(i);
+             COM.dragonflow.Health.FileBase.ErrorMessage errormessage = (COM.dragonflow.Health.FileBase.ErrorMessage)array.get(i);
              stringbuffer.append(errormessage.message);
              if(i != array.size() - 1)
              {

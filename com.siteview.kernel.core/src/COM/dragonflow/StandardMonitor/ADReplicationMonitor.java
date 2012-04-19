@@ -32,8 +32,8 @@ import javax.naming.NamingException;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
@@ -277,8 +277,8 @@ public class ADReplicationMonitor extends AtomicMonitor {
         return s;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         for (int i = 0; i < replicationTime.length && getProperty(replicationTime[i]).length() != 0; i ++) {
             array.add(replicationTime[i]);
@@ -288,7 +288,7 @@ public class ADReplicationMonitor extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String as[] = getProperty(pReplicatingDomainControllers).split(",");
         if (as.length != 0 && as[0].length() != 0) {
             for (int i = 0; i < as.length; i ++) {
@@ -296,7 +296,7 @@ public class ADReplicationMonitor extends AtomicMonitor {
             }
 
         }
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public String getTopazCounterDescription(StringProperty stringproperty) {

@@ -63,8 +63,8 @@ public class Registry {
             String s4;
 
             try {
-                jgl.Array array = commandline.exec(s3);
-                Enumeration enumeration = array.elements();
+                ArrayList array = commandline.exec(s3);
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements()) {
                     s4 = (String) enumeration.nextElement();
                     if (s4.startsWith("Registry value=")) {

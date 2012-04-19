@@ -24,9 +24,9 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
-import jgl.HashMapIterator;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
+import HashMapIterator;
 import jgl.Sorting;
 
 import org.w3c.dom.Document;
@@ -152,8 +152,8 @@ public class PropertiedObject {
         return templateCache != null && templateCache.size() > 0;
     }
 
-    public static Array getTemplateConfigFileList() {
-        Array array = new Array();
+    public static  ArrayList getTemplateConfigFileList() {
+         ArrayList array = new ArrayList();
         String s = Platform.getRoot() + "/groups/" + TEMPLATES_FILE;
         File file = new File(s);
         if (file.exists()) {
@@ -172,15 +172,15 @@ public class PropertiedObject {
                 if (templateCache == null) {
                     templateCache = new HashMap();
                     String s = "";
-                    Array array = getTemplateConfigFileList();
+                     ArrayList array = getTemplateConfigFileList();
                     for (int i = 0; i < array.size(); i++)
                         try {
-                            s = (String) array.at(i);
+                            s = (String) array.get(i);
                             HashMap hashmap2 = new HashMap();
-                            Array array1 = FrameFile.readFromFile(s);
+                             ArrayList array1 = FrameFile.readFromFile(s);
                             templateCacheLastUpdate = Platform.timeMillis();
                             for (int j = 1; j < array1.size(); j++) {
-                                HashMap hashmap3 = (HashMap) array1.at(j);
+                                HashMap hashmap3 = (HashMap) array1.get(j);
                                 hashmap2.put(TextUtils.getValue(hashmap3, "__id"), hashmap3);
                             }
 
@@ -281,9 +281,9 @@ public class PropertiedObject {
             s1 = Portal.getPortalSiteViewRootPath(s) + "/groups/" + TEMPLATES_FILE;
         }
         try {
-            Array array = FrameFile.readFromFile(s1);
+             ArrayList array = FrameFile.readFromFile(s1);
             for (int i = 1; i < array.size(); i++) {
-                HashMap hashmap = (HashMap) array.at(i);
+                HashMap hashmap = (HashMap) array.get(i);
                 vector.addElement(TextUtils.getValue(hashmap, "__id"));
                 vector.addElement(TextUtils.getValue(hashmap, "__name"));
             }
@@ -376,8 +376,8 @@ public class PropertiedObject {
             Object obj = hashmap.get(stringproperty);
             if (obj != null && (obj instanceof Array)) {
                 s = "";
-                Array array = (Array) obj;
-                for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements();) {
+                 ArrayList array = (Array) obj;
+                for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
                     if (s.length() != 0) {
                         s = s + stringproperty.multiLineDelimiter + " ";
                     }
@@ -394,9 +394,9 @@ public class PropertiedObject {
         return s;
     }
 
-    public Array getProperties(StringProperty stringproperty) throws NullPointerException {
-        jgl.Array array = new Array();
-        jgl.HashMap hashmap = findTable(stringproperty);
+    public  ArrayList getProperties(StringProperty stringproperty) throws NullPointerException {
+        ArrayList array = new ArrayList();
+        HashMap hashmap = findTable(stringproperty);
         if (hashmap != null) {
             Object obj = hashmap.get(stringproperty);
             if (obj != null && (obj instanceof Array)) {
@@ -415,14 +415,14 @@ public class PropertiedObject {
      * @return
      * @throws NullPointerException
      */
-    public Array getProperties(String s) throws NullPointerException {
+    public  ArrayList getProperties(String s) throws NullPointerException {
         StringProperty stringproperty = getPropertyObject(s);
         if (stringproperty != null) {
             return getProperties(stringproperty);
         }
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         Object obj = null;
-        jgl.HashMap hashmap = findTable(s);
+        HashMap hashmap = findTable(s);
         if (hashmap != null) {
             obj = hashmap.get(s);
         }
@@ -454,7 +454,7 @@ public class PropertiedObject {
 
         Object obj = null;
         String s1 = null;
-        jgl.HashMap hashmap = findTable(s);
+        HashMap hashmap = findTable(s);
         if (hashmap != null) {
             obj = hashmap.get(s);
         }
@@ -464,7 +464,7 @@ public class PropertiedObject {
         } else if (obj instanceof String) {
             s1 = (String) obj;
         } else if (obj instanceof Array) {
-            s1 = (String) ((Array) obj).at(0);
+            s1 = (String) ((Array) obj).get(0);
         } else {
             s1 = "";
         }
@@ -516,7 +516,7 @@ public class PropertiedObject {
     }
 
     public synchronized Enumeration getMultipleValues(StringProperty stringproperty) {
-        jgl.HashMap hashmap = findTable(stringproperty);
+        HashMap hashmap = findTable(stringproperty);
         if (hashmap != null) {
             return hashmap.values(stringproperty);
         } else {
@@ -709,11 +709,11 @@ public class PropertiedObject {
         return Platform.getLocalPlatform();
     }
 
-    public Array getCurrentPropertyNames() {
+    public  ArrayList getCurrentPropertyNames() {
         if (valuesTable != null) {
             Enumeration enumeration = valuesTable.keys();
             String s = "";
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             while (enumeration.hasMoreElements()) {
                 String s1 = enumeration.nextElement().toString();
                 if (!s1.equals(s))
@@ -722,15 +722,15 @@ public class PropertiedObject {
             }
             return array;
         } else {
-            return new Array();
+            return new ArrayList();
         }
     }
 
-    public Array getProperties() {
+    public  ArrayList getProperties() {
         return properties.getProperties(getPlatform());
     }
 
-    public Array getImmediateProperties() {
+    public  ArrayList getImmediateProperties() {
         return properties.getImmediateProperties(getPlatform());
     }
 
@@ -741,8 +741,8 @@ public class PropertiedObject {
      * @return
      */
     public StringProperty getStatePropertyObject(int i) {
-        Array array = getProperties();
-        Enumeration enumeration = array.elements();
+         ArrayList array = getProperties();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration.nextElement();
             if (stringproperty.isStateProperty && stringproperty.getOrder() == i) {
@@ -764,9 +764,9 @@ public class PropertiedObject {
      * @return
      */
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = getProperties();
-        Array array1 = new Array();
-        Enumeration enumeration = array.elements();
+         ArrayList array = getProperties();
+         ArrayList array1 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration.nextElement();
             if (stringproperty.isStateProperty && stringproperty.getOrder() > 0
@@ -775,7 +775,7 @@ public class PropertiedObject {
             }
         }
         Sorting.sort(array1, new GreaterEqualOrder());
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
     /**
@@ -784,9 +784,9 @@ public class PropertiedObject {
      * @return
      */
     public Enumeration getParameterObjects() {
-        Array array = getProperties();
-        Array array1 = new Array();
-        Enumeration enumeration = array.elements();
+         ArrayList array = getProperties();
+         ArrayList array1 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration.nextElement();
             if (stringproperty.isParameter && stringproperty.getOrder() > 0) {
@@ -794,7 +794,7 @@ public class PropertiedObject {
             }
         }
         Sorting.sort(array1, new GreaterEqualOrder());
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
     public HashMap getClassProperties() {
@@ -808,7 +808,7 @@ public class PropertiedObject {
     }
 
     public Object getClassProperty(String s) {
-        jgl.HashMap hashmap = getClassPropertyTable();
+        HashMap hashmap = getClassPropertyTable();
         if (hashmap == null) {
             return null;
         }
@@ -835,17 +835,17 @@ public class PropertiedObject {
         return visitor.visit(this);
     }
 
-    public Array getLogProperties() {
-        return new Array();
+    public  ArrayList getLogProperties() {
+        return new ArrayList();
     }
 
     public String currentStatus;
 
-    static jgl.HashMap cPropertyMap = new jgl.HashMap();
+    static HashMap cPropertyMap = new HashMap();
 
-    static jgl.HashMap cClassValues = new jgl.HashMap();
+    static HashMap cClassValues = new HashMap();
 
-    static jgl.Array cEmptyArray = new jgl.Array();
+    static ArrayList cEmptyArray = new jgl.Array();
 
     protected static final boolean EDITABLE = true;
 
@@ -865,9 +865,9 @@ public class PropertiedObject {
 
     PropertyTable properties;
 
-    public jgl.HashMap valuesTable;
+    public HashMap valuesTable;
 
-    public jgl.HashMap templateTable;
+    public HashMap templateTable;
 
     private long templateTableLastUpdate;
 
@@ -875,7 +875,7 @@ public class PropertiedObject {
 
     private static long templateCacheLastUpdate = 0L;
 
-    private static jgl.HashMap templateCache = null;
+    private static HashMap templateCache = null;
 
     public String templateID;
 

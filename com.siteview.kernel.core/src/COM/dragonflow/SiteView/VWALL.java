@@ -20,8 +20,8 @@ package COM.dragonflow.SiteView;
 import java.io.IOException;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.FrameFile;
 import COM.dragonflow.Utils.CommandLine;
 import COM.dragonflow.Utils.TextUtils;
@@ -73,7 +73,7 @@ public class VWALL {
     public static void runcommand(String s, int i) {
         try {
             CommandLine commandline = new CommandLine();
-            Array array = commandline.exec("..\\scripts\\wall.bat " + i + " " + TextUtils.doSubstitution(s));
+             ArrayList array = commandline.exec("..\\scripts\\wall.bat " + i + " " + TextUtils.doSubstitution(s));
         } catch (Exception exception) {
             System.out.println("Couldn't run command wall.bat: " + exception);
         }
@@ -119,7 +119,7 @@ public class VWALL {
     public static void saveConfig(String s) {
         TextUtils.debugPrint("Saving config from VWALL class");
         messages.put("lastupdate", Long.toString(Platform.timeMillis()));
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(messages);
         try {
             FrameFile.writeToFile(Platform.getRoot() + "/templates.view/" + s + "", array, "", true, true);
@@ -130,9 +130,9 @@ public class VWALL {
 
     public static void loadhashmap(String s) {
         try {
-            Array array = FrameFile.readFromFile(Platform.getRoot() + "/templates.view/" + s + "");
+             ArrayList array = FrameFile.readFromFile(Platform.getRoot() + "/templates.view/" + s + "");
             if (array != null && array.size() > 0) {
-                messages = (HashMap) array.at(0);
+                messages = (HashMap) array.get(0);
             }
         } catch (IOException ioexception) {
             ioexception.printStackTrace();

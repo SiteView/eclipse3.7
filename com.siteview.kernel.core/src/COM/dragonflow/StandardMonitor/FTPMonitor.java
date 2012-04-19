@@ -30,8 +30,8 @@ import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -290,14 +290,14 @@ public class FTPMonitor extends AtomicMonitor {
                 counterlock_6_.release();
         }
         if (ls[0] == (long) kURLok && string.length() > 0) {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             ls[0] = (long) TextUtils.matchExpression(stringbuffer_4_.toString(), string, array, new StringBuffer());
             if (ls[0] != (long) Monitor.kURLok) {
                 String string_10_ = URLMonitor.getHTMLEncoding(stringbuffer_4_.toString());
                 ls[0] = (long) (TextUtils.matchExpression(stringbuffer_4_.toString(), I18N.UnicodeToString(string, string_10_), array, new StringBuffer()));
             }
             if (array.size() > 0)
-                setProperty(pMatchValue, array.at(0));
+                setProperty(pMatchValue, array.get(0));
         }
         long l_11_ = ls[0];
         long l_12_ = ls[2];
@@ -673,7 +673,7 @@ public class FTPMonitor extends AtomicMonitor {
         String string_108_ = "ftp://" + string + string_104_;
         SocketSession socketsession = SocketSession.getSession(monitor);
         String string_109_ = "";
-        Array array = null;
+         ArrayList array = null;
         int i_110_ = 0;
         StringBuffer stringbuffer_111_ = null;
         String string_112_ = "";
@@ -806,8 +806,8 @@ public class FTPMonitor extends AtomicMonitor {
         printwriter.flush();
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pSize);

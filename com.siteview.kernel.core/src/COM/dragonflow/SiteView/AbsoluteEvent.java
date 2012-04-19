@@ -20,7 +20,7 @@ package COM.dragonflow.SiteView;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Utils.TextUtils;
 
 // Referenced classes of package COM.dragonflow.SiteView:
@@ -37,7 +37,7 @@ class AbsoluteEvent extends ScheduleEvent {
      */
     AbsoluteEvent(Action action, String s) throws Exception {
         super(action);
-        scheduleItems = new Array();
+        scheduleItems = new ArrayList();
         String as[] = TextUtils.split(s, ",");
         if (as.length == 0)
             throw new Exception("Invalid Absolute Schedule: " + s);
@@ -210,5 +210,5 @@ class AbsoluteEvent extends ScheduleEvent {
         }
     }
 
-    public Array scheduleItems;
+    public  ArrayList scheduleItems;
 }

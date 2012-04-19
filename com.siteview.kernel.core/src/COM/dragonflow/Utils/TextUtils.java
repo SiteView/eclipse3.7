@@ -29,8 +29,8 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import jgl.LessString;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.oroinc.text.perl.Perl5Util;
@@ -96,7 +96,7 @@ public class TextUtils
             return;
         }
         decValuesInitialized = true;
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         Enumeration enumeration = hashmap.values("_noScientificNotation");
         String s = "";
         while (enumeration.hasMoreElements())
@@ -291,7 +291,7 @@ public class TextUtils
         return COM.dragonflow.Utils.TextUtils.prettyDate(COM.dragonflow.SiteView.Platform.makeDate());
     }
 
-    public static String getValue(jgl.HashMap hashmap, String s)
+    public static String getValue(HashMap hashmap, String s)
     {
         java.lang.Object obj = hashmap.get(s);
         if(obj == null)
@@ -307,28 +307,28 @@ public class TextUtils
         }
     }
 
-    public static jgl.Array getMultipleValues(jgl.HashMap hashmap, String s)
+    public static ArrayList getMultipleValues(HashMap hashmap, String s)
     {
         java.lang.Object obj = hashmap.get(s);
-        jgl.Array array;
+        ArrayList array;
         if(obj instanceof jgl.Array)
         {
             array = (jgl.Array)obj;
         } else
         if(obj instanceof String)
         {
-            array = new Array();
+            array = new ArrayList();
             array.add(obj);
         } else
         {
-            array = new Array();
+            array = new ArrayList();
         }
         return array;
     }
 
-    public static String getSingleValue(jgl.HashMap hashmap, String s)
+    public static String getSingleValue(HashMap hashmap, String s)
     {
-        jgl.Array array = COM.dragonflow.Utils.TextUtils.getMultipleValues(hashmap, s);
+        ArrayList array = COM.dragonflow.Utils.TextUtils.getMultipleValues(hashmap, s);
         if(array == null)
         {
             return "";
@@ -1217,19 +1217,19 @@ public class TextUtils
         return s;
     }
 
-    public static jgl.Array splitArray(String s, String s1)
+    public static ArrayList splitArray(String s, String s1)
     {
         return COM.dragonflow.Utils.TextUtils.splitArrayImplementation(new StringTokenizer(s, s1));
     }
 
-    public static jgl.Array splitArray(String s)
+    public static ArrayList splitArray(String s)
     {
         return COM.dragonflow.Utils.TextUtils.splitArrayImplementation(new StringTokenizer(s));
     }
 
-    private static jgl.Array splitArrayImplementation(java.util.StringTokenizer stringtokenizer)
+    private static ArrayList splitArrayImplementation(java.util.StringTokenizer stringtokenizer)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         for(; stringtokenizer.hasMoreTokens(); array.add(stringtokenizer.nextToken())) { }
         return array;
     }
@@ -1293,7 +1293,7 @@ public class TextUtils
 
     public static String[] tokenize(String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         StringBuffer stringbuffer = new StringBuffer();
         char c = ' ';
         char c1 = ' ';
@@ -1337,7 +1337,7 @@ public class TextUtils
         String as[] = new String[array.size()];
         for(int j = 0; j < array.size(); j++)
         {
-            as[j] = (String)array.at(j);
+            as[j] = (String)array.get(j);
         }
 
         return as;
@@ -1679,7 +1679,7 @@ public class TextUtils
         return String.valueOf(l + 1L);
     }
 
-    public static void incrementEntry(jgl.HashMap hashmap, String s)
+    public static void incrementEntry(HashMap hashmap, String s)
     {
         String s1 = (String)hashmap.get(s);
         if(s1 == null)
@@ -2230,7 +2230,7 @@ public class TextUtils
         return s;
     }
 
-    public static jgl.HashMap stringToHashMap(String s)
+    public static HashMap stringToHashMap(String s)
     {
         String as[] = COM.dragonflow.Utils.TextUtils.split(s);
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
@@ -2253,7 +2253,7 @@ public class TextUtils
         return hashmapordered;
     }
 
-    public static String hashMapToString(jgl.HashMap hashmap)
+    public static String hashMapToString(HashMap hashmap)
     {
         Enumeration enumeration = hashmap.keys();
         StringBuffer stringbuffer = new StringBuffer();
@@ -2306,11 +2306,11 @@ public class TextUtils
         return stringbuffer.toString();
     }
 
-    public static String hashMapToOrderedString(jgl.HashMap hashmap)
+    public static String hashMapToOrderedString(HashMap hashmap)
     {
         Enumeration enumeration = hashmap.keys();
         StringBuffer stringbuffer = new StringBuffer();
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         StringBuffer stringbuffer1;
         for(; enumeration.hasMoreElements(); array.add(stringbuffer1.toString()))
         {
@@ -2333,7 +2333,7 @@ public class TextUtils
         }
 
         jgl.Sorting.sort(array, new LessString());
-        enumeration = array.elements();
+        enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             String s = (String)enumeration.nextElement();
             stringbuffer.append(s);
@@ -2442,7 +2442,7 @@ public class TextUtils
             int i = s.indexOf(GET_PRIVATE);
             if(i >= 0)
             {
-                jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+                HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
                 Object obj = null;
                 Object obj1 = null;
                 String s1 = null;
@@ -2457,7 +2457,7 @@ public class TextUtils
                     if(k > i)
                     {
                         String s4 = s.substring(i + GET_PRIVATE.length(), k);
-                        jgl.Array array = COM.dragonflow.Utils.TextUtils.getMultipleValues(hashmap, "_private");
+                        ArrayList array = COM.dragonflow.Utils.TextUtils.getMultipleValues(hashmap, "_private");
                         int j1 = 0;
                         do
                         {
@@ -2465,7 +2465,7 @@ public class TextUtils
                             {
                                 break;
                             }
-                            jgl.HashMap hashmap1 = COM.dragonflow.Utils.TextUtils.stringToHashMap((String)array.at(j1));
+                            HashMap hashmap1 = COM.dragonflow.Utils.TextUtils.stringToHashMap((String)array.get(j1));
                             String s3 = COM.dragonflow.Utils.TextUtils.getValue(hashmap1, "_name");
                             if(s3.equals(s4))
                             {
@@ -2657,9 +2657,9 @@ public class TextUtils
         return s;
     }
 
-    public static void rewriteMapEntry(jgl.HashMap hashmap, String s)
+    public static void rewriteMapEntry(HashMap hashmap, String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         String s1;
         for(Enumeration enumeration = hashmap.values(s); enumeration.hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils.stringToHashMap(s1)))
         {
@@ -2669,7 +2669,7 @@ public class TextUtils
         hashmap.remove(s);
         for(int i = 0; i < array.size(); i++)
         {
-            hashmap.add(s, COM.dragonflow.Utils.TextUtils.hashMapToString((jgl.HashMap)array.at(i)));
+            hashmap.add(s, COM.dragonflow.Utils.TextUtils.hashMapToString((HashMap)array.get(i)));
         }
 
     }
@@ -2681,17 +2681,17 @@ public class TextUtils
 
     public static int matchExpression(String s, String s1)
     {
-        return COM.dragonflow.Utils.TextUtils.matchExpression(s, s1, new Array(), new StringBuffer());
+        return COM.dragonflow.Utils.TextUtils.matchExpression(s, s1, new ArrayList(), new StringBuffer());
     }
 
-    public static int matchExpression(String s, String s1, jgl.Array array, StringBuffer stringbuffer)
+    public static int matchExpression(String s, String s1, ArrayList array, StringBuffer stringbuffer)
     {
         return COM.dragonflow.Utils.TextUtils.matchExpression(s, s1, array, stringbuffer, "matched ");
     }
 
-    public static int matchExpression(String s, String s1, jgl.Array array, StringBuffer stringbuffer, String s2)
+    public static int matchExpression(String s, String s1, ArrayList array, StringBuffer stringbuffer, String s2)
     {
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         int i = COM.dragonflow.Utils.TextUtils.matchExpression(s, s1, array1);
         if(array1.size() >= 2)
         {
@@ -2701,22 +2701,22 @@ public class TextUtils
         {
             if(array != null)
             {
-                array.add(array1.at(j));
+                array.add(array1.get(j));
             }
             if(j != 1)
             {
                 stringbuffer.append(", ");
             }
-            stringbuffer.append(array1.at(j));
+            stringbuffer.append(array1.get(j));
         }
 
         return i;
     }
 
-    public static int matchExpressionForWebServiceMonitor(String s, String s1, jgl.Array array, StringBuffer stringbuffer)
+    public static int matchExpressionForWebServiceMonitor(String s, String s1, ArrayList array, StringBuffer stringbuffer)
     {
         String s2 = "matched ";
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         int i = COM.dragonflow.Utils.TextUtils.matchExpression(s, s1, array1);
         if(array1.size() >= 1)
         {
@@ -2726,13 +2726,13 @@ public class TextUtils
         {
             if(array != null)
             {
-                array.add(array1.at(j));
+                array.add(array1.get(j));
             }
             if(j != 0)
             {
                 stringbuffer.append(", ");
             }
-            stringbuffer.append(array1.at(j));
+            stringbuffer.append(array1.get(j));
         }
 
         return i;
@@ -2743,7 +2743,7 @@ public class TextUtils
         return s;
     }
 
-    public static int matchExpression(String s, String s1, jgl.Array array)
+    public static int matchExpression(String s, String s1, ArrayList array)
     {
         return COM.dragonflow.Utils.TextUtils.matchExpression(s, s1, array, new Perl5Util());
     }
@@ -2757,7 +2757,7 @@ public class TextUtils
      * @param perl5util
      * @return
      */
-    public static int matchExpression(String s, String s1, jgl.Array array, COM.oroinc.text.perl.Perl5Util perl5util)
+    public static int matchExpression(String s, String s1, ArrayList array, COM.oroinc.text.perl.Perl5Util perl5util)
     {
         int i;
         boolean flag;
@@ -2768,12 +2768,12 @@ public class TextUtils
         if(s1.startsWith("xml."))
         {
             StringBuffer stringbuffer = new StringBuffer();
-            jgl.Array array1 = new Array();
+            ArrayList array1 = new ArrayList();
             i = COM.dragonflow.Utils.XSLUtils.matchXML(s, s1, array1, stringbuffer);
             array.add(stringbuffer.toString());
             for(int j = 0; j < array1.size(); j++)
             {
-                array.add(array1.at(j));
+                array.add(array1.get(j));
             }
         } else 
         if(COM.dragonflow.Utils.TextUtils.isRegularExpression(s1))
@@ -3053,7 +3053,7 @@ public class TextUtils
         return s1;
     }
 
-    public static String replaceMatchValues(String s, jgl.Array array, jgl.Array array1)
+    public static String replaceMatchValues(String s, ArrayList array, ArrayList array1)
     {
         int i = 0;
         do
@@ -3072,10 +3072,10 @@ public class TextUtils
                 int k1 = java.lang.Integer.parseInt(s.substring(l + 1, i1));
                 if(array1.size() >= j1 && k1 > 0 && k1 < 30)
                 {
-                    jgl.Array array2 = (jgl.Array)array1.at(j1 - 1);
+                    ArrayList array2 = (jgl.Array)array1.get(j1 - 1);
                     if(array2.size() >= k1)
                     {
-                        String s3 = (String)array2.at(k1 - 1);
+                        String s3 = (String)array2.get(k1 - 1);
                         s = COM.dragonflow.Utils.TextUtils.replaceString(s, s.substring(j - 3, i1 + 1), s3);
                     }
                 }
@@ -3088,7 +3088,7 @@ public class TextUtils
                 String s1 = "{$" + k + "}";
                 if(s.indexOf(s1) != -1)
                 {
-                    String s2 = (String)array.at(k - 1);
+                    String s2 = (String)array.get(k - 1);
                     s = COM.dragonflow.Utils.TextUtils.replaceString(s, s1, s2);
                 }
             }
@@ -3153,31 +3153,31 @@ public class TextUtils
         stringbuffer.append(s);
     }
 
-    public static jgl.Array sortStrings(Enumeration enumeration, boolean flag)
+    public static ArrayList sortStrings(Enumeration enumeration, boolean flag)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         for(; enumeration.hasMoreElements(); array.add(enumeration.nextElement())) { }
         return COM.dragonflow.Utils.TextUtils.sortStrings(array, flag);
     }
 
-    public static jgl.Array sortStrings(jgl.Array array, boolean flag)
+    public static ArrayList sortStrings(ArrayList array, boolean flag)
     {
         jgl.Sorting.sort(array.begin(), array.end(), new StringBinaryPredicate(flag));
         return array;
     }
 
-    public static jgl.Array sortStringHashMapArray(jgl.Array array, String as[], boolean flag)
+    public static ArrayList sortStringHashMapArray(ArrayList array, String as[], boolean flag)
     {
         jgl.Sorting.sort(array.begin(), array.end(), new StringHashMapBinaryPredicate(as, flag));
         return array;
     }
 
-    public static String arrayToString(jgl.Array array)
+    public static String arrayToString(ArrayList array)
     {
         return COM.dragonflow.Utils.TextUtils.arrayToString(array, ",");
     }
 
-    public static String arrayToString(jgl.Array array, String s)
+    public static String arrayToString(ArrayList array, String s)
     {
         StringBuffer stringbuffer = new StringBuffer();
         for(int i = 0; i < array.size(); i++)
@@ -3186,15 +3186,15 @@ public class TextUtils
             {
                 stringbuffer.append(s);
             }
-            stringbuffer.append(array.at(i));
+            stringbuffer.append(array.get(i));
         }
 
         return stringbuffer.toString();
     }
 
-    public static jgl.Array stringToArray(String s, String s1)
+    public static ArrayList stringToArray(String s, String s1)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         while(s.length() > 0) 
         {
             int i = s.indexOf(s1);
@@ -3211,16 +3211,16 @@ public class TextUtils
         return array;
     }
 
-    public static jgl.Array enumToArray(Enumeration enumeration)
+    public static ArrayList enumToArray(Enumeration enumeration)
     {
-        jgl.Array array = null;
+        ArrayList array = null;
         if(enumeration != null && enumeration.hasMoreElements())
         {
             for(; enumeration.hasMoreElements(); array.add(enumeration.nextElement()))
             {
                 if(array == null)
                 {
-                    array = new Array();
+                    array = new ArrayList();
                 }
             }
 
@@ -3243,21 +3243,21 @@ public class TextUtils
         return 0L;
     }
 
-    public static String keyToDisplayString(String s, jgl.Array array)
+    public static String keyToDisplayString(String s, ArrayList array)
     {
         for(int i = 0; i < array.size(); i += 2)
         {
-            String s1 = (String)array.at(i);
+            String s1 = (String)array.get(i);
             if(s1.equals(s))
             {
-                return (String)array.at(i + 1);
+                return (String)array.get(i + 1);
             }
         }
 
         return "";
     }
 
-    public static String replaceInHashMap(jgl.HashMap hashmap, String as[], jgl.HashMap hashmap1)
+    public static String replaceInHashMap(HashMap hashmap, String as[], HashMap hashmap1)
     {
         String s = "";
         Enumeration enumeration = hashmap.keys();
@@ -3285,50 +3285,50 @@ public class TextUtils
                 } else
                 if(obj1 instanceof jgl.Array)
                 {
-                    jgl.Array array = (jgl.Array)obj1;
+                    ArrayList array = (jgl.Array)obj1;
                     int i = 0;
                     while(i < array.size()) 
                     {
-                        java.lang.Object obj2 = array.at(i);
+                        java.lang.Object obj2 = array.get(i);
                         if(obj2 instanceof String)
                         {
                             String s3 = COM.dragonflow.Utils.TextUtils.replaceString((String)obj2, as);
                             if(!s3.equals(obj2))
                             {
-                                array.put(i, s3);
+                                array.set(i, s3);
                                 s = s + "&nbsp;&nbsp;replaced " + i + ", " + obj2 + " ==> " + s3 + "<br>";
                             }
                         }
                         i++;
                     }
                 } else
-                if(obj1 instanceof jgl.HashMap)
+                if(obj1 instanceof HashMap)
                 {
-                    COM.dragonflow.Utils.TextUtils.replaceInHashMap((jgl.HashMap)obj1, as, null);
+                    COM.dragonflow.Utils.TextUtils.replaceInHashMap((HashMap)obj1, as, null);
                 }
             }
         } 
         return s;
     }
 
-    public static String replaceInHashMapList(jgl.Array array, String as[], jgl.HashMap hashmap)
+    public static String replaceInHashMapList(ArrayList array, String as[], HashMap hashmap)
     {
         StringBuffer stringbuffer = new StringBuffer();
-        jgl.HashMap hashmap1;
-        for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); stringbuffer.append(COM.dragonflow.Utils.TextUtils.replaceInHashMap(hashmap1, as, hashmap)))
+        HashMap hashmap1;
+        for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); stringbuffer.append(COM.dragonflow.Utils.TextUtils.replaceInHashMap(hashmap1, as, hashmap)))
         {
-            hashmap1 = (jgl.HashMap)enumeration.nextElement();
+            hashmap1 = (HashMap)enumeration.nextElement();
         }
 
         return stringbuffer.toString();
     }
 
-    public static jgl.HashMap findItemInHashMapArray(jgl.Array array, jgl.HashMap hashmap, boolean flag)
+    public static HashMap findItemInHashMapArray(ArrayList array, HashMap hashmap, boolean flag)
     {
         return COM.dragonflow.Utils.TextUtils.findItemInHashMapArray(array, 0, -1, hashmap, flag);
     }
 
-    public static jgl.HashMap findItemInHashMapArray(jgl.Array array, int i, int j, jgl.HashMap hashmap, boolean flag)
+    public static HashMap findItemInHashMapArray(ArrayList array, int i, int j, HashMap hashmap, boolean flag)
     {
         if(array == null)
         {
@@ -3350,7 +3350,7 @@ public class TextUtils
 
         lab: for(int k = i; k <= j; k++)
         {
-            jgl.HashMap hashmap1 = (jgl.HashMap)array.at(k);
+            HashMap hashmap1 = (HashMap)array.get(k);
             if(hashmap1 == null)
             {
                 continue;
@@ -3373,7 +3373,7 @@ public class TextUtils
         return null;
     }
 
-    public static void mergeHashMaps(jgl.HashMap hashmap, jgl.HashMap hashmap1, boolean flag, boolean flag1)
+    public static void mergeHashMaps(HashMap hashmap, HashMap hashmap1, boolean flag, boolean flag1)
     {
         if(hashmap == null)
         {

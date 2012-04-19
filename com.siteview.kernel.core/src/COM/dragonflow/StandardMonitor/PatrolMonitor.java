@@ -23,8 +23,8 @@ import COM.dragonflow.Properties.*;
 import COM.dragonflow.SiteView.*;
 import COM.dragonflow.Utils.EmsDummyMonitor;
 import COM.dragonflow.Utils.LUtils;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class PatrolMonitor extends DispatcherMonitor
     implements BrowsableMonitor
@@ -76,9 +76,9 @@ public class PatrolMonitor extends DispatcherMonitor
         }
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array result = new Array();
+         ArrayList result = new ArrayList();
         result.add(DispatcherMonitor.pServerName);
         result.add(pUsername);
         result.add(pPassword);
@@ -105,7 +105,7 @@ public class PatrolMonitor extends DispatcherMonitor
 
     static 
     {
-        Array propertyArray = new Array();
+         ArrayList propertyArray = new ArrayList();
         pBrowseCounters = new BrowsableProperty("_browse", "browseName");
         pBrowseCounters.setDisplayText("Counters", "Current selection of counters.");
         pBrowseCounters.setParameterOptions(true, 1, false);
@@ -126,7 +126,7 @@ public class PatrolMonitor extends DispatcherMonitor
         StringProperty myProperties[] = new StringProperty[propertyArray.size()];
         for(int i = 0; i < propertyArray.size(); i++)
         {
-            myProperties[i] = (StringProperty)propertyArray.at(i);
+            myProperties[i] = (StringProperty)propertyArray.get(i);
         }
 
         PropertiedObject.addProperties("COM.dragonflow.StandardMonitor.PatrolMonitor", myProperties);

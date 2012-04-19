@@ -20,8 +20,8 @@ package COM.dragonflow.Log;
 import java.io.File;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.Log:
 // Logger, LogManager
@@ -38,7 +38,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     int autoCommitCounter;
     int autoCommit;
     java.sql.PreparedStatement logStatementCache;
-    jgl.Array logCache;
+    ArrayList logCache;
     String insertStatement;
     String server;
     int vars;
@@ -51,13 +51,13 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
     boolean usingBackupDatabase;
     boolean debug;
     java.sql.PreparedStatement linkStatementCache;
-    jgl.Array linkCache;
+    ArrayList linkCache;
     String linkServer;
     int linkVars;
-    static jgl.HashMap customCaches = new HashMap();
-    static jgl.HashMap customStatements = new HashMap();
+    static HashMap customCaches = new HashMap();
+    static HashMap customStatements = new HashMap();
 
-    public JdbcLogger(jgl.HashMap hashmap)
+    public JdbcLogger(HashMap hashmap)
     {
         logName = "SiteViewLog";
         connection = null;
@@ -67,7 +67,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         autoCommitCounter = 0;
         autoCommit = 20;
         logStatementCache = null;
-        logCache = new Array();
+        logCache = new ArrayList();
         insertStatement = "";
         server = null;
         vars = 0;
@@ -80,10 +80,10 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         usingBackupDatabase = false;
         debug = false;
         linkStatementCache = null;
-        linkCache = new Array();
+        linkCache = new ArrayList();
         linkServer = "";
         logger = this;
-        logCache = new Array();
+        logCache = new ArrayList();
         method = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_logJdbcMethod" + logName);
         usingBackupDatabase = shouldUseBackupDatabase();
     }
@@ -108,7 +108,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         return (new File(s)).exists();
     }
 
-    synchronized void setupConnection(jgl.HashMap hashmap, String s)
+    synchronized void setupConnection(HashMap hashmap, String s)
         throws java.lang.Exception
     {
         if(connection == null)
@@ -300,12 +300,12 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         
         try {
         Enumeration enumeration;
-        jgl.Array array1;
-        jgl.Array array = propertiedobject.getLogProperties();
-        enumeration = array.elements();
+        ArrayList array1;
+        ArrayList array = propertiedobject.getLogProperties();
+        enumeration = (Enumeration) array.iterator();
         if(method.equals("oneRowPerProperty"))
         {
-        array1 = new Array();
+        array1 = new ArrayList();
         int i = 0;
         for(byte byte0 = 5; enumeration.hasMoreElements() && i < byte0; i++)
         {
@@ -313,11 +313,11 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
             array1.add(stringproperty);
         }
 
-        jgl.Array array2;
+        ArrayList array2;
         java.sql.PreparedStatement preparedstatement1;
         while (enumeration.hasMoreElements())
         {
-        array2 = new Array();
+        array2 = new ArrayList();
         preparedstatement1 = getStatement();
         if(preparedstatement1 == null)
         {
@@ -347,7 +347,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
                 array2.add(propertiedobject.getProperty(COM.dragonflow.SiteView.AtomicMonitor.pSample));
                 k++;
             }
-            Enumeration enumeration1 = array1.elements();
+            Enumeration enumeration1 = (Enumeration) array1.iterator();
             while (enumeration1.hasMoreElements())
                 {
                 COM.dragonflow.Properties.StringProperty stringproperty3 = (COM.dragonflow.Properties.StringProperty)enumeration1.nextElement();
@@ -399,7 +399,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         }
 
         java.sql.PreparedStatement preparedstatement;
-        array1 = new Array();
+        array1 = new ArrayList();
         preparedstatement = getStatement();
         if(preparedstatement == null)
         {
@@ -479,7 +479,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
      */
     public synchronized void logFields(java.util.Date date, COM.dragonflow.Properties.PropertiedObject propertiedobject, String s, String as[], int i)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         try {
         java.sql.PreparedStatement preparedstatement = getStatement();
         if(preparedstatement == null)
@@ -559,7 +559,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
             {
                 return null;
             }
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             String s = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_logJdbcURL" + logName);
             if(s.length() == 0)
             {
@@ -601,9 +601,9 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
      */
     public synchronized void log(String s, java.util.Date date, String s1)
     {
-        jgl.Array array;
+        ArrayList array;
         java.sql.PreparedStatement preparedstatement;
-        array = new Array();
+        array = new ArrayList();
         try {
         preparedstatement = getStatement();
         if(preparedstatement == null)
@@ -649,7 +649,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         return autoCommit == -1 || autoCommitCounter % autoCommit == 0;
     }
 
-    void execute(java.sql.PreparedStatement preparedstatement, jgl.Array array, jgl.Array array1)
+    void execute(java.sql.PreparedStatement preparedstatement, ArrayList array, ArrayList array1)
         throws java.sql.SQLException
     {
         array.add(array1);
@@ -660,7 +660,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         autoCommitCounter++;
     }
 
-    void flush(java.sql.PreparedStatement preparedstatement, jgl.Array array)
+    void flush(java.sql.PreparedStatement preparedstatement, ArrayList array)
         throws java.sql.SQLException
     {
         if(debug)
@@ -671,13 +671,13 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         java.sql.SQLException sqlexception = null;
         while(array.size() > 0) 
         {
-            jgl.Array array1 = (jgl.Array)array.popFront();
+            ArrayList array1 = (jgl.Array)array.popFront();
             int j = array1.size();
             try
             {
                 for(int k = 0; k < j; k++)
                 {
-                    preparedstatement.setObject(k + 1, array1.at(k), 12);
+                    preparedstatement.setObject(k + 1, array1.get(k), 12);
                 }
 
                 preparedstatement.executeUpdate();
@@ -693,7 +693,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
                     {
                         s = s + ",";
                     }
-                    s = s + array1.at(l);
+                    s = s + array1.get(l);
                 }
 
                 COM.dragonflow.Log.LogManager.log("Error", "jdbc logger error: exec, " + sqlexception1 + ", record=" + s);
@@ -714,7 +714,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         }
     }
 
-    void flushsafe(java.sql.PreparedStatement preparedstatement, jgl.Array array)
+    void flushsafe(java.sql.PreparedStatement preparedstatement, ArrayList array)
     {
         try
         {
@@ -741,7 +741,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         {
             String s = (String)enumeration.nextElement();
             java.sql.PreparedStatement preparedstatement = (java.sql.PreparedStatement)customStatements.get(s);
-            jgl.Array array = (jgl.Array)customCaches.get(s);
+            ArrayList array = (jgl.Array)customCaches.get(s);
             try
             {
                 flushsafe(preparedstatement, array);
@@ -827,7 +827,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
             {
                 return null;
             }
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             String s = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_logJdbcURL" + logName);
             if(s.length() == 0)
             {
@@ -892,9 +892,9 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
      */
     public synchronized void logLink(java.util.Date date, COM.dragonflow.Properties.PropertiedObject propertiedobject, String as[])
     {
-        jgl.Array array;
+        ArrayList array;
         java.sql.PreparedStatement preparedstatement;
-        array = new Array();
+        array = new ArrayList();
         
         try {
         preparedstatement = getLinkStatement();
@@ -975,12 +975,12 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         return;
     }
 
-    jgl.Array getCustomCache(String s)
+    ArrayList getCustomCache(String s)
     {
-        jgl.Array array = (jgl.Array)customCaches.get(s);
+        ArrayList array = (jgl.Array)customCaches.get(s);
         if(array == null)
         {
-            array = new Array();
+            array = new ArrayList();
             customCaches.put(s, array);
         }
         return array;
@@ -996,7 +996,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
             {
                 return null;
             }
-            jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+            HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
             String s6 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_logJdbcURL" + logName);
             if(s6.length() == 0)
             {
@@ -1147,12 +1147,12 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         return ((java.sql.PreparedStatement) (obj));
     }
 
-    public synchronized void logCustom(COM.dragonflow.Properties.PropertiedObject propertiedobject, jgl.Array array, String s, String s1, String s2, String s3)
+    public synchronized void logCustom(COM.dragonflow.Properties.PropertiedObject propertiedobject, ArrayList array, String s, String s1, String s2, String s3)
     {
         logCustom(propertiedobject, array, s, s1, null, s2, s3);
     }
 
-    public synchronized void logCustom(COM.dragonflow.Properties.PropertiedObject propertiedobject, jgl.Array array, String s, String s1, String s2, String s3, String s4)
+    public synchronized void logCustom(COM.dragonflow.Properties.PropertiedObject propertiedobject, ArrayList array, String s, String s1, String s2, String s3, String s4)
     {
         logCustom(propertiedobject, array, s, s1, s2, null, s3, s4);
     }
@@ -1169,7 +1169,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
      * @param s4
      * @param s5
      */
-    public synchronized void logCustom(COM.dragonflow.Properties.PropertiedObject propertiedobject, jgl.Array array, String s, String s1, String s2, String s3, String s4, 
+    public synchronized void logCustom(COM.dragonflow.Properties.PropertiedObject propertiedobject, ArrayList array, String s, String s1, String s2, String s3, String s4, 
             String s5)
     {
         java.sql.PreparedStatement preparedstatement;
@@ -1180,7 +1180,7 @@ public class JdbcLogger extends COM.dragonflow.Log.Logger
         {
             return;
         }
-            jgl.Array array1 = getCustomCache(s);
+            ArrayList array1 = getCustomCache(s);
             execute(preparedstatement, array1, array);
         }
         catch(java.lang.Exception exception)

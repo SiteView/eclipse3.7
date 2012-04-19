@@ -25,8 +25,8 @@ import COM.dragonflow.SiteView.*;
 import COM.dragonflow.SiteViewException.SiteViewException;
 import java.net.URLEncoder;
 import java.util.Vector;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 public class DiskSpaceMonitor extends ServerMonitor
 {
@@ -48,10 +48,10 @@ public class DiskSpaceMonitor extends ServerMonitor
  protected boolean update()
  {
      String s = getProperty(diskProperty());
-     Array array = null;
+      ArrayList array = null;
      if(monitorDebugLevel == 3)
      {
-         array = new Array();
+         array = new ArrayList();
      }
      String s1 = getProperty(pMachineName);
      long al[] = Platform.getDiskFull(s, s1, this, array);
@@ -76,7 +76,7 @@ public class DiskSpaceMonitor extends ServerMonitor
                      StringBuffer stringbuffer = new StringBuffer();
                      for(int i = 0; i < array.size(); i++)
                      {
-                         stringbuffer.append(array.at(i) + "\n");
+                         stringbuffer.append(array.get(i) + "\n");
                      }
 
                      LogManager.log("Error", "DiskSpaceMonitor: " + getFullID() + " failed, output:\n" + stringbuffer);
@@ -93,9 +93,9 @@ public class DiskSpaceMonitor extends ServerMonitor
      return true;
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pPercentFull);
      array.add(pFreeSpace);
      return array;

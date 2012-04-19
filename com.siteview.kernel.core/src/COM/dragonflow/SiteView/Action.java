@@ -22,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Properties.StringProperty;
@@ -71,7 +71,7 @@ public abstract class Action extends SiteViewObject {
     }
 
     public static Action createAction(String s, boolean flag) {
-        Array array = Platform.split(' ', s);
+         ArrayList array = Platform.split(' ', s);
         String s1 = (String) array.popFront();
         Action action = null;
         try {
@@ -161,7 +161,7 @@ public abstract class Action extends SiteViewObject {
         do {
             if (--i < 0)
                 break;
-            String s = (String) array.at(i);
+            String s = (String) array.get(i);
             int j = s.indexOf('=');
             if (j > 0) {
                 array.remove(i);
@@ -315,7 +315,7 @@ public abstract class Action extends SiteViewObject {
     public String alertLogEntrySummary(HashMap hashmap) {
         StringBuffer stringbuffer = new StringBuffer();
         for (int i = 0; i < summaryFormat.size(); i++) {
-            String s = (String) summaryFormat.at(i);
+            String s = (String) summaryFormat.get(i);
             if (s.startsWith("alert-"))
                 stringbuffer.append(TextUtils.getValue(hashmap, s));
             else
@@ -391,7 +391,7 @@ public abstract class Action extends SiteViewObject {
 
     static String DEFAULT_ALERT_SUMMARY_FORMAT;
 
-    static Array summaryFormat = new Array();
+    static  ArrayList summaryFormat = new ArrayList();
 
     static {
         pName = new StringProperty("_name", "", "");

@@ -19,7 +19,7 @@ package COM.dragonflow.Properties;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 //Referenced classes of package COM.dragonflow.Properties:
 //         Visitor, PropertiedObject
@@ -27,17 +27,17 @@ import jgl.Array;
 public class FindObjectsVisitor extends Visitor
 {
 
- Array results;
+  ArrayList results;
  boolean stopAfterFirst;
 
  public FindObjectsVisitor()
  {
      results = null;
      stopAfterFirst = false;
-     results = new Array();
+     results = new ArrayList();
  }
 
- public Array getResults()
+ public  ArrayList getResults()
  {
      return results;
  }

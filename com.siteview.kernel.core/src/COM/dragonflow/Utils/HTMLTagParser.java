@@ -20,8 +20,8 @@
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.HashMapOrdered;
 
 // Referenced classes of package COM.dragonflow.Utils:
@@ -31,7 +31,7 @@ public class HTMLTagParser
     implements jgl.BinaryPredicate
 {
 
-    static jgl.HashMap closeMap;
+    static HashMap closeMap;
     public static String POST_EQUALS_TAG = "\\eq.";
     private boolean reading;
     private boolean endOfTag;
@@ -40,53 +40,53 @@ public class HTMLTagParser
     private String lastAttribute;
     private String lastValue;
     private char currentChar;
-    public jgl.Array tags;
+    public ArrayList tags;
     boolean ignoreComments;
     public boolean ignoreScripts;
     public boolean ignoreNoscripts;
     public boolean recordIndexes;
-    private jgl.HashMap currentTag;
+    private HashMap currentTag;
     private int currentOrder;
-    private jgl.HashMap tagMap;
-    private jgl.HashMap openTagStartIndexes;
-    private jgl.HashMap openTagObjectLists;
-    private jgl.HashMap openTagFrames;
+    private HashMap tagMap;
+    private HashMap openTagStartIndexes;
+    private HashMap openTagObjectLists;
+    private HashMap openTagFrames;
     public String terminatorTag;
     static final String TEST_INPUT = "<HTML><HEAD><TITLE>Test Page</TITLE></HEAD><BODY FGCOLOR=#FFFFFF>\n<H3>Heading</H3>\n<SCRIPT LANGUAGE=\"JavaScript\">\\nimtag = \"<P><input type=radio name=radioscript value=radios checked>\";\n</SCRIPT>\n<P><A HREF=\"http://global.link.com\">Fully-qualified link with quotes</A>\n<P><a href=/partial/path.htm>Partial link with no quotes</A>\n<form method=POST action=\"http://post.form.com\">\n<P><input type=text value=\"text value\" name=textname size=40>\n<P><INPUT TYPE=PASSWORD value=\"password value\" name=passwordname size=40>\n<P><textarea col2=40 row=3 name=textareaname>This is a long bunch of text in a text area</textarea>\n<P><input type=checkbox name=\"checkname\" value=checkvalue checked>\n<P><input type=checkbox name=\"checkname2\" value=checkvalue2>\n<P><input type=image src=http://www.colorado.gov/images/bannerBtnHm_r1_c1.gif >\n<P><input type=radio name=radio1 value=radio11>\n<P><input type=radio name=radio1 value=radio12 checked>\n<P><input type=radio name=radio1 value=radio13>\n<P><input type=radio name=radio2 value=radio21>\n<P><input type=radio name=radio2 value=radio22>\n<P><input type=radio name=radio2 value=radio23>\n<P><select multiple name=selectname>\n<option selected value=\"one\">One\n<OPTION value=two>Two</option>\n<option value=three>Three things</option>\n<option value=\"four\">Four\n<option value=five selected>Five\n</select><P><select name=selectname1>\n<option>One\n<OPTION>Two\n<option>Three things\n<option>Four\n<option selected>Five\n</select><!--onelinecomment-->\n<P><input type=submit name=button value=\"Click Button\">\n<P><input type=submit name=image value=\"Click Image\">\n<input type=reset><!-- <A href=in/comment.gif>In a Comment</A> --><P><A href=last/link.htm>Last Link</a>\n</body></html>";
 
-    public jgl.Array getVariables(jgl.HashMap hashmap, String s, String s1)
+    public ArrayList getVariables(HashMap hashmap, String s, String s1)
     {
-        jgl.Array array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
         if(array != null)
         {
             return getVariables(array, s, s1);
         } else
         {
-            return new Array();
+            return new ArrayList();
         }
     }
 
-    public jgl.Array getFormInputs(jgl.HashMap hashmap)
+    public ArrayList getFormInputs(HashMap hashmap)
     {
-        jgl.Array array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
         if(array != null)
         {
             return getFormInputs(array, null, null);
         } else
         {
-            return new Array();
+            return new ArrayList();
         }
     }
 
-    public jgl.Array getFormInputs(jgl.Array array)
+    public ArrayList getFormInputs(ArrayList array)
     {
         return getFormInputs(array, null, null);
     }
 
-    public String FindVar(jgl.Array array, String s)
+    public String FindVar(ArrayList array, String s)
     {
         s = s + "=";
-        for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();)
         {
             String s1 = (String)enumeration.nextElement();
             if(s1.startsWith(s))
@@ -98,12 +98,12 @@ public class HTMLTagParser
         return null;
     }
 
-    public jgl.HashMap FindVariable(jgl.Array array, String s)
+    public HashMap FindVariable(ArrayList array, String s)
     {
         s = s + "=";
-        for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();)
         {
-            jgl.HashMap hashmap = (jgl.HashMap)enumeration.nextElement();
+            HashMap hashmap = (HashMap)enumeration.nextElement();
             String s1 = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_value");
             if(s1.startsWith(s))
             {
@@ -114,7 +114,7 @@ public class HTMLTagParser
         return null;
     }
 
-    void AddValue(jgl.Array array, jgl.HashMap hashmap, String s, String s1)
+    void AddValue(ArrayList array, HashMap hashmap, String s, String s1)
     {
         if(s.indexOf("=") >= 0)
         {
@@ -124,26 +124,26 @@ public class HTMLTagParser
         array.add(hashmap);
     }
 
-    public jgl.Array getVariables(jgl.Array array, String s, String s1)
+    public ArrayList getVariables(ArrayList array, String s, String s1)
     {
-        jgl.Array array1 = getFormInputs(array, s, s1);
-        jgl.Array array2 = new Array();
-        jgl.HashMap hashmap;
-        for(Enumeration enumeration = array1.elements(); enumeration.hasMoreElements(); array2.add(COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_value")))
+        ArrayList array1 = getFormInputs(array, s, s1);
+        ArrayList array2 = new ArrayList();
+        HashMap hashmap;
+        for(Enumeration enumeration = (Enumeration) array1.iterator(); enumeration.hasMoreElements(); array2.add(COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_value")))
         {
-            hashmap = (jgl.HashMap)enumeration.nextElement();
+            hashmap = (HashMap)enumeration.nextElement();
         }
 
         return array2;
     }
 
-    private jgl.Array getFormInputs(jgl.Array array, String s, String s1)
+    private ArrayList getFormInputs(ArrayList array, String s, String s1)
     {
-        jgl.Array array1 = new Array();
-        jgl.HashMap hashmap = new HashMap();
+        ArrayList array1 = new ArrayList();
+        HashMap hashmap = new HashMap();
         Enumeration enumeration = findTags(array, "input");
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap1 = (jgl.HashMap)enumeration.nextElement();
+            HashMap hashmap1 = (HashMap)enumeration.nextElement();
             String s2 = COM.dragonflow.Utils.TextUtils.getValue(hashmap1, "type").toLowerCase();
             if(s2.length() == 0)
             {
@@ -188,7 +188,7 @@ public class HTMLTagParser
             } else
             if(s2.equals("image"))
             {
-                jgl.HashMap hashmap2 = new HashMap(hashmap1);
+                HashMap hashmap2 = new HashMap(hashmap1);
                 if(hashmap1.get("name") != null)
                 {
                     if(s == null)
@@ -207,28 +207,28 @@ public class HTMLTagParser
         Enumeration enumeration1 = hashmap.keys();
         while (enumeration1.hasMoreElements()) {
             String s3 = (String)enumeration1.nextElement();
-            jgl.HashMap hashmap3 = (jgl.HashMap)hashmap.get(s3);
+            HashMap hashmap3 = (HashMap)hashmap.get(s3);
             if(FindVariable(array1, s3) == null)
             {
                 AddValue(array1, hashmap3, s3, COM.dragonflow.Utils.TextUtils.getValue(hashmap3, "value"));
             }
         }
-        jgl.HashMap hashmap4;
+        HashMap hashmap4;
         for(Enumeration enumeration2 = findTags(array, "textarea"); enumeration2.hasMoreElements(); AddValue(array1, hashmap4, COM.dragonflow.Utils.TextUtils.getValue(hashmap4, "name"), COM.dragonflow.Utils.TextUtils.getValue(hashmap4, "contents")))
         {
-            hashmap4 = (jgl.HashMap)enumeration2.nextElement();
+            hashmap4 = (HashMap)enumeration2.nextElement();
         }
 
         Enumeration enumeration3 = findTags(array, "select");
         while (enumeration3.hasMoreElements()) {
-            jgl.HashMap hashmap5 = (jgl.HashMap)enumeration3.nextElement();
-            jgl.HashMap hashmap6 = null;
+            HashMap hashmap5 = (HashMap)enumeration3.nextElement();
+            HashMap hashmap6 = null;
             String s5 = COM.dragonflow.Utils.TextUtils.getValue(hashmap5, "name");
             boolean flag = hashmap5.get("multiple") != null;
             boolean flag1 = false;
             Enumeration enumeration4 = findTags(hashmap5, "option");
             while (enumeration4.hasMoreElements()) {
-                jgl.HashMap hashmap7 = (jgl.HashMap)enumeration4.nextElement();
+                HashMap hashmap7 = (HashMap)enumeration4.nextElement();
                 if(hashmap7.get("selected") != null)
                 {
                     flag1 = true;
@@ -273,32 +273,32 @@ public class HTMLTagParser
 
     public boolean execute(java.lang.Object obj, java.lang.Object obj1)
     {
-        jgl.HashMap hashmap = (jgl.HashMap)obj;
-        jgl.HashMap hashmap1 = (jgl.HashMap)obj1;
+        HashMap hashmap = (HashMap)obj;
+        HashMap hashmap1 = (HashMap)obj1;
         return COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_order")) < COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Utils.TextUtils.getValue(hashmap1, "_order"));
     }
 
-    public Enumeration findTags(jgl.HashMap hashmap, String s)
+    public Enumeration findTags(HashMap hashmap, String s)
     {
-        jgl.Array array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
         if(array != null)
         {
             return findTags(array, s);
         } else
         {
-            return (new Array()).elements();
+            return (new ArrayList()).elements();
         }
     }
 
-    public Enumeration findTags(jgl.HashMap hashmap, String as[])
+    public Enumeration findTags(HashMap hashmap, String as[])
     {
-        jgl.Array array = (jgl.Array)hashmap.get("contentObjects");
+        ArrayList array = (jgl.Array)hashmap.get("contentObjects");
         if(array != null)
         {
             return findTags(array, as);
         } else
         {
-            return (new Array()).elements();
+            return (new ArrayList()).elements();
         }
     }
 
@@ -307,13 +307,13 @@ public class HTMLTagParser
         return findTags(tags, s);
     }
 
-    public Enumeration findTags(jgl.Array array, String s)
+    public Enumeration findTags(ArrayList array, String s)
     {
         s = s.toLowerCase();
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         for(int i = 0; i < array.size(); i++)
         {
-            jgl.HashMap hashmap = (jgl.HashMap)array.at(i);
+            HashMap hashmap = (HashMap)array.get(i);
             if(!s.equals(hashmap.get("tag")))
             {
                 continue;
@@ -329,10 +329,10 @@ public class HTMLTagParser
             array1.add(hashmap);
         }
 
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
-    public Enumeration findTags(jgl.Array array, String as[])
+    public Enumeration findTags(ArrayList array, String as[])
     {
         int i = as.length;
         String as1[] = new String[i];
@@ -341,10 +341,10 @@ public class HTMLTagParser
             as1[j] = as[j].toLowerCase();
         }
 
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         for(int l = 0; l < array.size(); l++)
         {
-            jgl.HashMap hashmap = (jgl.HashMap)array.at(l);
+            HashMap hashmap = (HashMap)array.get(l);
             String s = (String)hashmap.get("tag");
             for(int k = 0; k < i; k++)
             {
@@ -356,7 +356,7 @@ public class HTMLTagParser
 
         }
 
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
     public HTMLTagParser(String s, String as[])
@@ -378,7 +378,7 @@ public class HTMLTagParser
         lastAttribute = null;
         lastValue = null;
         currentChar = ' ';
-        tags = new Array();
+        tags = new ArrayList();
         ignoreComments = true;
         ignoreScripts = true;
         ignoreNoscripts = true;
@@ -409,7 +409,7 @@ public class HTMLTagParser
         return new String(source);
     }
 
-    public jgl.Array process()
+    public ArrayList process()
     {
         StringBuffer stringbuffer = new StringBuffer();
         stripSpace();
@@ -499,17 +499,17 @@ public class HTMLTagParser
         } while(true);
     }
 
-    void addToOpenTags(jgl.HashMap hashmap)
+    void addToOpenTags(HashMap hashmap)
     {
         String s;
-        jgl.Array array;
+        ArrayList array;
         for(Enumeration enumeration = openTagFrames.keys(); enumeration.hasMoreElements(); openTagObjectLists.put(s, array))
         {
             s = (String)enumeration.nextElement();
             array = (jgl.Array)openTagObjectLists.get(s);
             if(array == null)
             {
-                array = new Array();
+                array = new ArrayList();
             }
             array.add(hashmap);
         }
@@ -529,7 +529,7 @@ public class HTMLTagParser
         {
             s1 = "/" + s;
         }
-        jgl.HashMap hashmap = (jgl.HashMap)openTagFrames.get(s1);
+        HashMap hashmap = (HashMap)openTagFrames.get(s1);
         if(hashmap != null)
         {
             int i = ((java.lang.Integer)openTagStartIndexes.get(s1)).intValue();
@@ -547,7 +547,7 @@ public class HTMLTagParser
                 hashmap.put("_endContentIndex", "" + j);
                 hashmap.put("_endTagIndex", "" + readIndex);
             }
-            jgl.Array array = (jgl.Array)openTagObjectLists.get(s1);
+            ArrayList array = (jgl.Array)openTagObjectLists.get(s1);
             if(array != null)
             {
                 hashmap.put("contentObjects", array);

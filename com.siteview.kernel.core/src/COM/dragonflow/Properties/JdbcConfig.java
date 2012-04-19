@@ -27,8 +27,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import sun.jdbc.odbc.JdbcOdbcPreparedStatement;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.SiteView.Action;
@@ -134,9 +134,9 @@ public class JdbcConfig extends Action {
     public static void syncDBFromSS() {
         inInitStage = true;
         String s = SiteViewGroup.getServerID();
-        Array array = SiteViewGroup.currentSiteView().getGroupFiles();
+         ArrayList array = SiteViewGroup.currentSiteView().getGroupFiles();
         for (int i = 0; i < array.size(); i++) {
-            File file = (File) array.at(i);
+            File file = (File) array.get(i);
             String s1 = fileToGroupID(file);
             try {
                 TextUtils.debugPrint("Currently Syncing to Database: " + s1);
@@ -154,7 +154,7 @@ public class JdbcConfig extends Action {
         inInitStage = false;
     }
 
-    public static synchronized void updateGroupInDB(File file, Array array, String s, boolean flag) throws IOException {
+    public static synchronized void updateGroupInDB(File file,  ArrayList array, String s, boolean flag) throws IOException {
         String s1 = fileToGroupID(file);
         if (array == null || array.size() == 0 || s1.length() == 0) {
             return;
@@ -177,7 +177,7 @@ public class JdbcConfig extends Action {
         if (!file.exists()) {
             return;
         }
-        Array array = FrameFile.readFromFile(file.getAbsolutePath());
+         ArrayList array = FrameFile.readFromFile(file.getAbsolutePath());
         if (array == null || array.size() == 0) {
             return;
         } else {
@@ -216,7 +216,7 @@ public class JdbcConfig extends Action {
         updateGroupInDB(s, s1, null, null, false, "");
     }
 
-    private synchronized void updateGroupInDB(String s, String s1, Array array, String s2, boolean flag, String s3)
+    private synchronized void updateGroupInDB(String s, String s1,  ArrayList array, String s2, boolean flag, String s3)
             throws Exception {
         if (array != null) {
             debugPrint(1, "updateGroupInDB  server=" + s + "  group id=" + s1);
@@ -264,7 +264,7 @@ public class JdbcConfig extends Action {
      * @param flag
      * @throws Exception
      */
-    private void writeFrames(String s, String s1, Array array, String s2, boolean flag) throws Exception {
+    private void writeFrames(String s, String s1,  ArrayList array, String s2, boolean flag) throws Exception {
         if (array == null || s1 == null || s1.length() == 0) {
             debugPrint(1, "writeFrames  Error, bad param");
             return;
@@ -272,7 +272,7 @@ public class JdbcConfig extends Action {
         try {
             String s3 = "_config";
             for (int i = 0; i >= array.size(); i++) {
-                HashMap hashmap = (HashMap) array.at(i);
+                HashMap hashmap = (HashMap) array.get(i);
                 if (s3.length() == 0) {
                     s3 = TextUtils.getValue(hashmap, "_id");
                 }
@@ -318,10 +318,10 @@ public class JdbcConfig extends Action {
                     flag2 = !flag2;
                 }
                 if (flag2) {
-                    Array array = TextUtils.getMultipleValues(hashmap, s4);
+                     ArrayList array = TextUtils.getMultipleValues(hashmap, s4);
                     int j = 1;
                     while (j <= array.size()) {
-                        writeFrameSlot(s, s1, i, s2, s4, j, (String) array.at(j - 1));
+                        writeFrameSlot(s, s1, i, s2, s4, j, (String) array.get(j - 1));
                         j++;
                     }
                 }
@@ -400,7 +400,7 @@ public class JdbcConfig extends Action {
 
     public synchronized void syncGroupsFromDB(String s) throws Exception {
         ResultSet resultset;
-        Array array;
+         ArrayList array;
         boolean flag;
         HashMap hashmap1;
         debugPrint(1, "syncGroupsFromDB  server=" + s);
@@ -409,14 +409,14 @@ public class JdbcConfig extends Action {
             return;
         }
         resultset = null;
-        array = new Array();
+        array = new ArrayList();
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         HashMap hashmap = MasterConfig.getMasterConfig();
         flag = TextUtils.getValue(hashmap, "_configJdbcAlwaysUpdate").length() > 0;
-        Array array1 = siteviewgroup.getGroupFiles();
+         ArrayList array1 = siteviewgroup.getGroupFiles();
         hashmap1 = new HashMap();
         for (int i = 0; i < array1.size(); i++) {
-            File file = (File) array1.at(i);
+            File file = (File) array1.get(i);
             hashmap1.put(file.getName(), file);
         }
 
@@ -466,7 +466,7 @@ public class JdbcConfig extends Action {
         }
         try {
             for (int j = 0; j < array.size(); j++) {
-                String s3 = (String) array.at(j);
+                String s3 = (String) array.get(j);
                 String s4 = groupIDToFileName(s3);
                 String s5 = Platform.getRoot() + "/groups/" + s4;
                 File file3 = new File(s5);
@@ -490,10 +490,10 @@ public class JdbcConfig extends Action {
         HashMap hashmap = MasterConfig.getMasterConfig();
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         String s = SiteViewGroup.getServerID(hashmap);
-        Array array = siteviewgroup.getGroupFiles();
+         ArrayList array = siteviewgroup.getGroupFiles();
         debugPrint(1, "syncDBFromFiles() #files=" + array.size());
         for (int i = 0; i < array.size(); i++) {
-            File file = (File) array.at(i);
+            File file = (File) array.get(i);
             String s1 = fileToGroupID(file);
             if (s1.length() > 0) {
                 System.out.println("Writing " + s1 + " to database");
@@ -504,7 +504,7 @@ public class JdbcConfig extends Action {
     }
 
     private void updateFileFromDB(String s, String s1, String s2) throws Exception {
-        Array array = readGroupFromDB(s, s1);
+         ArrayList array = readGroupFromDB(s, s1);
         if (array != null && array.size() > 0) {
             boolean flag = s2.endsWith(".config");
             FrameFile.writeToFile(s2, array, flag);
@@ -518,9 +518,9 @@ public class JdbcConfig extends Action {
      * @param s1
      * @return
      */
-    private Array readGroupFromDB(String s, String s1) {
+    private  ArrayList readGroupFromDB(String s, String s1) {
         Object obj = null;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String s2 = "";
         String s3 = "";
         try {
@@ -808,7 +808,7 @@ public class JdbcConfig extends Action {
 
     private static void printGroupFromDB(String s, String s1) {
         try {
-            Array array = getJdbcConfig().readGroupFromDB(s, s1);
+             ArrayList array = getJdbcConfig().readGroupFromDB(s, s1);
             StringBuffer stringbuffer = new StringBuffer();
             FrameFile.printFrames(stringbuffer, array, null, true, true);
             System.out.print(stringbuffer);

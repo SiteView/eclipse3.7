@@ -18,7 +18,7 @@ package COM.dragonflow.XmlApi;
  */
 
 
-public class XmlApiResponse extends jgl.HashMap
+public class XmlApiResponse extends HashMap
 {
 
     public static final int OPERATIONAL_ERROR = 0;

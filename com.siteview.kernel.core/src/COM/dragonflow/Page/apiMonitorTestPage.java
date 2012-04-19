@@ -11,7 +11,7 @@ package COM.dragonflow.Page;
 
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.datachannel.xml.om.Document;
 import COM.dragonflow.Api.APIMonitor;
 import COM.dragonflow.Api.APISiteView;
@@ -894,9 +894,9 @@ public class apiMonitorTestPage extends apiMasterTestPage
         return "<img src=/SiteView/htdocs/artwork/empty1111.gif height=11 width=" + j + " border=0>";
     }
 
-    jgl.Array getNodeNames(org.w3c.dom.Node node)
+    ArrayList getNodeNames(org.w3c.dom.Node node)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         String s = ((org.w3c.dom.Element)node).getAttribute("name");
         if(s == null)
         {
@@ -921,9 +921,9 @@ public class apiMonitorTestPage extends apiMasterTestPage
         return array;
     }
 
-    jgl.Array getNodeIdNames(org.w3c.dom.Node node)
+    ArrayList getNodeIdNames(org.w3c.dom.Node node)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         String s = "id";
         String s1 = ((org.w3c.dom.Element)node).getAttribute(s);
         if(s1 == null || s1.length() == 0)
@@ -956,7 +956,7 @@ public class apiMonitorTestPage extends apiMasterTestPage
 
     private String[] splitString(String s, String s1)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         int i = s1.length();
         int j = 0;
         for(int k = s.indexOf(s1); k != -1; k = s.indexOf(s1, j))
@@ -968,7 +968,7 @@ public class apiMonitorTestPage extends apiMasterTestPage
         String as[] = new String[array.size()];
         for(int l = 0; l < as.length; l++)
         {
-            as[l] = (String)array.at(l);
+            as[l] = (String)array.get(l);
         }
 
         return as;

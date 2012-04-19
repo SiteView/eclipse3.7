@@ -23,7 +23,7 @@ import COM.dragonflow.SiteView.Platform;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.io.*;
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLThread, URLListMonitor
@@ -31,7 +31,7 @@ import jgl.Array;
 class URLList
 {
 
-    Array urls;
+     ArrayList urls;
     URLListMonitor monitor;
     String proxy;
     String username;
@@ -41,10 +41,10 @@ class URLList
     int retriesLeft;
     String proxyUsername;
     String proxyPassword;
-    Array postData;
+     ArrayList postData;
     String otherHeaders;
     int timeout;
-    Array errorURLs;
+     ArrayList errorURLs;
     int index;
     long nBadURLs;
     long nGoodURLs;
@@ -58,11 +58,11 @@ class URLList
     boolean stopped;
     RandomAccessFile goodLog;
 
-    URLList(URLListMonitor urllistmonitor, Array array, long l, long l1, String s, 
-            String s1, String s2, String s3, String s4, int i, Array array1, int j, 
+    URLList(URLListMonitor urllistmonitor,  ArrayList array, long l, long l1, String s, 
+            String s1, String s2, String s3, String s4, int i,  ArrayList array1, int j, 
             String s5, String s6, String s7, String s8)
     {
-        errorURLs = new Array();
+        errorURLs = new ArrayList();
         index = 0;
         nBadURLs = 0L;
         nGoodURLs = 0L;
@@ -114,7 +114,7 @@ class URLList
         {
             retriesLeft--;
             urls = errorURLs;
-            errorURLs = new Array();
+            errorURLs = new ArrayList();
             start();
             while(done < (long)urls.size() && !stopped) 
             {
@@ -209,7 +209,7 @@ class URLList
         }
         if(index < urls.size())
         {
-            return (String)urls.at(index++);
+            return (String)urls.get(index++);
         } else
         {
             return null;

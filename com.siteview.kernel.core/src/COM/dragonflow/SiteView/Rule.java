@@ -20,7 +20,7 @@ package COM.dragonflow.SiteView;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.Properties.StringProperty;
@@ -40,15 +40,15 @@ public class Rule extends SiteViewObject {
     public static final int kClassifierRuleGroup = 1;
     static final int kActionRuleGroup = 2;
     static String cRulePackages[] = { "COM.dragonflow.SiteView.", "COM.dragonflow.StandardAction.", "CustomAction." };
-    private static jgl.HashMap cCurrentActions = new jgl.HashMap();
-    static jgl.HashMap setting;
+    private static HashMap cCurrentActions = new HashMap();
+    static HashMap setting;
     private static int topazAlertsEnabled = 0;
     int ruleGroup;
     boolean stopOnMatch;
     public boolean isDefaultRule;
     Expression cachedExpression;
-    public Array includeFilter;
-    public Array excludeFilter;
+    public  ArrayList includeFilter;
+    public  ArrayList excludeFilter;
 
     public Rule() {
         ruleGroup = 2;
@@ -71,7 +71,7 @@ public class Rule extends SiteViewObject {
         }
     }
 
-    public static Rule createRule(jgl.HashMap hashmap) throws ClassNotFoundException, IllegalAccessException,
+    public static Rule createRule(HashMap hashmap) throws ClassNotFoundException, IllegalAccessException,
             InstantiationException {
         return (Rule) createObject(hashmap, false, cRulePackages);
     }
@@ -131,10 +131,10 @@ public class Rule extends SiteViewObject {
                 if (as.length > 3) {
                     String s1 = as[3];
                     if (!s1.startsWith("_UIContext=") && s1.length() != 0) {
-                        rule.includeFilter = new Array();
-                        Array array = Platform.split(',', s1);
+                        rule.includeFilter = new ArrayList();
+                         ArrayList array = Platform.split(',', s1);
                         String s2;
-                        for (Enumeration en = array.elements(); en.hasMoreElements(); rule.includeFilter.add(s2)) {
+                        for (Enumeration en = (Enumeration) array.iterator(); en.hasMoreElements(); rule.includeFilter.add(s2)) {
                             s2 = (String) en.nextElement();
                             s2 = '/' + s2.replace(' ', '/') + '/';
                         }
@@ -251,7 +251,7 @@ public class Rule extends SiteViewObject {
         if (doAction(monitor, null) && topazAlertsEnabled > 0) {
 //            TopazServerSettings topazserversettings = TopazManager.getInstance().getTopazServerSettings();
 //            if (TopazManager.getInstance().isAMServerIntegrationActived()) {
-//                Array array = Platform.split(' ', getProperty(pAction));
+//                 ArrayList array = Platform.split(' ', getProperty(pAction));
 //                String s = (String) array.popFront();
 //                if (!s.startsWith("Set")) {
 //                    HashMap hashmap = new HashMap(1);

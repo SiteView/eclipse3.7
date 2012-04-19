@@ -23,5 +23,5 @@ public interface ISSHSession extends COM.dragonflow.SSH.ISSHCloseable {
 
     public abstract boolean connect(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, COM.dragonflow.SiteView.Machine machine, int i, java.io.PrintWriter printwriter);
 
-    public abstract int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, int i, java.io.PrintWriter printwriter, jgl.Array array);
+    public abstract int execute(COM.dragonflow.Utils.RemoteCommandLine remotecommandline, String s, int i, java.io.PrintWriter printwriter, ArrayList array);
 }

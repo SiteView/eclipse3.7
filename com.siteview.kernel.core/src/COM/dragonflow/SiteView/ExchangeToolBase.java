@@ -33,8 +33,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -147,13 +147,13 @@ public abstract class ExchangeToolBase extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pStatus);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties() {
-        Array array = new Array();
+    public  ArrayList getLogProperties() {
+         ArrayList array = new ArrayList();
         array.add(pStatus);
         return array;
     }

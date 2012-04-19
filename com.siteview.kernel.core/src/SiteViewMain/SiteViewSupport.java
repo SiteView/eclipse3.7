@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.HashSet;
 
 import jgl.*;
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 
 public class SiteViewSupport
 {
@@ -234,7 +234,7 @@ public class SiteViewSupport
             int j = (int)(f * 60F * 60F) * 1000;
             PlatformNew.fixTimeZoneDefault(j);
         }
-        Array array = Platform.setupTimeZoneOffset();
+         ArrayList array = Platform.setupTimeZoneOffset();
         int k = TextUtils.toInt(TextUtils.getValue(hashmap, "_maxMonitorSkips"));
         if(k > 0)
             AtomicMonitor.maxMonitorSkips = k;
@@ -322,7 +322,7 @@ public class SiteViewSupport
         else
             LogManager.log("RunMonitor", " Java Runtime " + System.getProperty("java.version"));
         LogManager.log("RunMonitor", " Time zone offset is " + (double)Platform.timeZoneOffset / 3600D + " hours");
-        for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", " (" + enumeration.nextElement() + ")"));
+        for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", " (" + enumeration.nextElement() + ")"));
         int i3 = TextUtils.toInt(TextUtils.getValue(hashmap, "_maxMonitorsRunning"));
         if(i3 > 0)
             MonitorQueue.monitorThrottle = new CounterLock(i3);
@@ -355,7 +355,7 @@ public class SiteViewSupport
         try
         {
             Enumeration enumeration1 = hashmap.values("_urlLocation");
-            HTTPUtils.locations = new Array();
+            HTTPUtils.locations = new ArrayList();
             if(enumeration1.hasMoreElements())
             {
                 String s10;
@@ -421,7 +421,7 @@ public class SiteViewSupport
             if(!Platform.isWindows())
                 s1 = "chmod -R u+rw " + s;
             CommandLine commandline = new CommandLine();
-            Array array = commandline.exec(s1);
+             ArrayList array = commandline.exec(s1);
             String as[] = file.list();
             for(int i = 0; i < as.length; i++)
             {
@@ -496,7 +496,7 @@ label0:
 
     public static void mergeDefault(Array array, String s)
     {
-        for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements();)
+        for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();)
             if(s.equals(enumeration.nextElement()))
                 return;
 
@@ -545,7 +545,7 @@ label0:
 			Array array = FrameFile.readFromFile(s);
 	        if(array != null && array.size() > 0)
 	        {
-	            hashmap1 = (HashMap)array.at(0);
+	            hashmap1 = (HashMap)array.get(0);
 	//            break MISSING_BLOCK_LABEL_127;
 	        }
 	        return hashmap;
@@ -568,7 +568,7 @@ label0:
                 }
                 if(!(obj3 instanceof Array))
                     continue;
-                Array array2 = new Array();
+                 ArrayList array2 = new ArrayList();
                 mergeDefaults(array2, obj2);
                 if(array2.size() == 0 || !addOnlyIfMissing.contains(s1))
                     mergeDefaults(array2, obj3);
@@ -579,7 +579,7 @@ label0:
             if(flag1)
             {
                 File file = new File(Platform.getRoot() + "/groups/master.config");
-                Array array1 = new Array();
+                 ArrayList array1 = new ArrayList();
                 array1.add(hashmap);
                 if(FrameFile.printFile(file, array1, "_", true, true))
                     System.out.println("Error saving Master.config at startup");
@@ -623,7 +623,7 @@ label0:
             if(!(new File(Platform.getRoot() + "/groups/portal.config")).exists())
             {
                 FileUtils.copyFile(Platform.getRoot() + "/classes/defaultportal.config", Platform.getRoot() + "/groups/portal.config");
-                Array array = null;
+                 ArrayList array = null;
                 try
                 {
                     array = FrameFile.readFromFile(Platform.getRoot() + "/groups/portal.config");
@@ -633,7 +633,7 @@ label0:
                     System.out.println("Exception: trouble setting up defualt portal.config" + exception);
                     return;
                 }
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 do
                 {
                     if(!enumeration.hasMoreElements())

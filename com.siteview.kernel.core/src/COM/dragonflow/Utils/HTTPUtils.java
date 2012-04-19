@@ -19,8 +19,8 @@ package COM.dragonflow.Utils;
 
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.HashMapOrdered;
 
 // Referenced classes of package COM.dragonflow.Utils:
@@ -28,9 +28,9 @@ import COM.dragonflow.Properties.HashMapOrdered;
 
 public class HTTPUtils {
 
-    public static jgl.Array locations;
+    public static ArrayList locations;
 
-    public static jgl.HashMap locationMap = new HashMap();
+    public static HashMap locationMap = new HashMap();
 
     public static final String DEFAULT_LOCATION_SPEC = "this_server,this server,";
 
@@ -62,7 +62,7 @@ public class HTTPUtils {
     }
 
     public static int getDisplayOrder(String s) {
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         int i = COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_URLLocationComponent"));
         if (i <= 0) {
             i = 6;
@@ -189,7 +189,7 @@ public class HTTPUtils {
     }
 
     public static String getLocationPart(String s, int i) {
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         int j = COM.dragonflow.Utils.TextUtils.toInt(COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_URLLocationComponent"));
         if (j <= 0) {
             j = 6;
@@ -245,7 +245,7 @@ public class HTTPUtils {
     }
 
     static {
-        locations = new Array();
+        locations = new ArrayList();
         locations.add("this_server,this server,");
     }
 }

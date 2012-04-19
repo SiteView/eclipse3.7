@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Utils.CommandLine;
 import COM.dragonflow.Utils.WindowsMediaPlayerMonitorUtils;
 
@@ -49,7 +49,7 @@ public class WindowsMediaPlayerPage extends COM.dragonflow.Page.CGI {
                     mediaLog);
             outputStream.println("<b>Command: </b>" + s);
             outputStream.flush();
-            jgl.Array array = new Array();
+            ArrayList array = new ArrayList();
             long l = java.lang.System.currentTimeMillis();
             outputStream.println("Begin at " + l + " ms.");
             outputStream.println("Playing...");
@@ -66,8 +66,8 @@ public class WindowsMediaPlayerPage extends COM.dragonflow.Page.CGI {
             int i = commandline.getExitValue();
             outputStream.println("Exit Value: " + i);
             outputStream.flush();
-            Enumeration enumeration = array.elements();
-            outputStream.println("Results jgl.Array " + i);
+            Enumeration enumeration = (Enumeration) array.iterator();
+            outputStream.println("Results ArrayList " + i);
             for (; enumeration.hasMoreElements(); outputStream
                     .println("Results: " + enumeration.nextElement())) {
             }

@@ -9,9 +9,9 @@ import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
+import java.util.ArrayList;
 import jgl.BinaryPredicate;
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 import jgl.Sorting;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -110,18 +110,18 @@ public class SupportDocs
         if(s.length() > 0)
             try
             {
-                Array array = SupportNoteUtils.readNotes(sourceDirectoryName);
+                 ArrayList array = SupportNoteUtils.readNotes(sourceDirectoryName);
                 IndexWriter indexwriter = new IndexWriter(s + "index", new StandardAnalyzer(), true);
                 indexwriter.mergeFactor = 20;
                 for(int j = 0; j < array.size(); j++)
                 {
-                    HashMap hashmap = (HashMap)array.at(j);
+                    HashMap hashmap = (HashMap)array.get(j);
                     indexNote(indexwriter, hashmap);
                 }
 
                 indexwriter.optimize();
                 indexwriter.close();
-                Array array1 = null;
+                 ArrayList array1 = null;
                 if(debug)
                     System.out.println("Generating support pages");
                 array1 = FrameFile.readFromFile(sourceDirectoryName + "topics.txt");
@@ -153,21 +153,21 @@ public class SupportDocs
         indexwriter.addDocument(document);
     }
 
-    static void writeSupportDocs(String s, String s1, Array array, Array array1)
+    static void writeSupportDocs(String s, String s1,  ArrayList array,  ArrayList array1)
     {
         System.out.println("Sorting notes...");
         HashMap hashmap = new HashMap();
         for(int i = 0; i < array.size(); i++)
         {
-            HashMap hashmap1 = (HashMap)array.at(i);
+            HashMap hashmap1 = (HashMap)array.get(i);
             String s2 = TOPICS_DIRECTORY + "topic" + TextUtils.getValue(hashmap1, "id") + ".htm";
             hashmap1.put("filename", s2);
             System.out.println("Processing topic " + TextUtils.getValue(hashmap1, "title"));
             String s3 = TextUtils.getValue(hashmap1, "match");
-            Array array2 = new Array();
+             ArrayList array2 = new ArrayList();
             for(int j1 = 0; j1 < array1.size(); j1++)
             {
-                HashMap hashmap7 = (HashMap)array1.at(j1);
+                HashMap hashmap7 = (HashMap)array1.get(j1);
                 boolean flag1 = false;
                 Enumeration enumeration = hashmap7.values("topic");
                 do
@@ -183,10 +183,10 @@ public class SupportDocs
                 if(!flag1)
                     continue;
                 array2.add(hashmap7);
-                Array array4 = (Array)hashmap7.get("topicList");
+                 ArrayList array4 = (Array)hashmap7.get("topicList");
                 if(array4 == null)
                 {
-                    array4 = new Array();
+                    array4 = new ArrayList();
                     hashmap7.put("topicList", array4);
                 }
                 array4.add(hashmap1);
@@ -201,10 +201,10 @@ public class SupportDocs
                 HashMap hashmap8 = (HashMap)hashmap.get(s5);
                 if(hashmap8 == null)
                     continue;
-                Array array3 = (Array)hashmap8.get("topicList");
+                 ArrayList array3 = (Array)hashmap8.get("topicList");
                 if(array3 == null)
                 {
-                    array3 = new Array();
+                    array3 = new ArrayList();
                     hashmap8.put("topicList", array3);
                 }
                 array3.add(hashmap1);
@@ -219,7 +219,7 @@ public class SupportDocs
         System.out.println("Looking for note inconsistencies...");
         for(int j = 0; j < array1.size(); j++)
         {
-            HashMap hashmap3 = (HashMap)array1.at(j);
+            HashMap hashmap3 = (HashMap)array1.get(j);
             if(hashmap3.get("topicList") == null)
             {
                 flag = true;
@@ -236,7 +236,7 @@ public class SupportDocs
         HashMap hashmap2 = new HashMap();
         for(int k = 0; k < array1.size(); k++)
         {
-            HashMap hashmap4 = (HashMap)array1.at(k);
+            HashMap hashmap4 = (HashMap)array1.get(k);
             String s4 = TextUtils.getValue(hashmap4, "idnum");
             HashMap hashmap6 = (HashMap)hashmap2.get(s4);
             if(hashmap6 != null)
@@ -259,17 +259,17 @@ public class SupportDocs
         System.out.println("Writing note files...");
         for(int l = 0; l < array1.size(); l++)
         {
-            HashMap hashmap5 = (HashMap)array1.at(l);
+            HashMap hashmap5 = (HashMap)array1.get(l);
             SupportNoteUtils.writeNoteFile(s, hashmap5, notePublicTemplate);
             if(TextUtils.getValue(hashmap5, "id").length() > 0)
                 SupportNoteUtils.writeIDNoteFile(s, hashmap5, noteRedirectTemplate);
             if(s1.length() > 0)
-                SupportNoteUtils.writeNoteFile(s1, (HashMap)array1.at(l), noteInternalTemplate);
+                SupportNoteUtils.writeNoteFile(s1, (HashMap)array1.get(l), noteInternalTemplate);
         }
 
         System.out.println("Writing topic files...");
         for(int i1 = 0; i1 < array.size(); i1++)
-            writeTopicFile(s, (HashMap)array.at(i1));
+            writeTopicFile(s, (HashMap)array.get(i1));
 
         System.out.println("Writing index files...");
         writeIndexFiles(s, array, "", "");
@@ -295,7 +295,7 @@ public class SupportDocs
         writeBugIndexFile(s, array);
     }
 
-    static void writeIndexFiles(String s, Array array, String s1, String s2)
+    static void writeIndexFiles(String s,  ArrayList array, String s1, String s2)
     {
         writeIndexFile(s, array, s1, s2);
         writeSiteViewIndexFile(s, array, s1, s2);
@@ -306,8 +306,8 @@ public class SupportDocs
 
     static String writeTopicFile(String s, HashMap hashmap)
     {
-        Array array = (Array)hashmap.get("notes");
-        Array array1 = (Array)hashmap.get("topicList");
+         ArrayList array = (Array)hashmap.get("notes");
+         ArrayList array1 = (Array)hashmap.get("topicList");
         if(array == null && array1 == null)
         {
             System.out.println("No notes or subtopics for topic " + hashmap.get("title"));
@@ -319,7 +319,7 @@ public class SupportDocs
             stringbuffer.append("Subtopics: <BR>\n");
             for(int i = 0; i < array1.size(); i++)
             {
-                HashMap hashmap1 = (HashMap)array1.at(i);
+                HashMap hashmap1 = (HashMap)array1.get(i);
                 stringbuffer.append("<BR><A HREF=../" + TextUtils.getValue(hashmap1, "filename") + ">" + TextUtils.getValue(hashmap1, "title") + "</A>\n");
             }
 
@@ -328,7 +328,7 @@ public class SupportDocs
         stringbuffer.append("<P>Notes on this topic: <P>\n");
         for(int j = 0; j < array.size(); j++)
         {
-            HashMap hashmap2 = (HashMap)array.at(j);
+            HashMap hashmap2 = (HashMap)array.get(j);
             stringbuffer.append("<P><A HREF=../" + TextUtils.getValue(hashmap2, "filename") + ">" + TextUtils.getValue(hashmap2, "title") + "</A>\n");
         }
 
@@ -346,17 +346,17 @@ public class SupportDocs
             return s;
     }
 
-    static void writeAllFile(String s, Array array, String s1, String s2)
+    static void writeAllFile(String s,  ArrayList array, String s1, String s2)
     {
         writeIndexFile(s, array, "Notes (full version)", "all.htm", true, (String[][])null, s1, s2);
     }
 
-    static void writeIndexFile(String s, Array array, String s1, String s2)
+    static void writeIndexFile(String s,  ArrayList array, String s1, String s2)
     {
         writeIndexFile(s, array, "Notes", "index.htm", false, (String[][])null, s1, s2);
     }
 
-    static void writeSiteViewIndexFile(String s, Array array, String s1, String s2)
+    static void writeSiteViewIndexFile(String s,  ArrayList array, String s1, String s2)
     {
         String as[][] = {
             {
@@ -366,7 +366,7 @@ public class SupportDocs
         writeIndexFile(s, array, "SiteView Notes", "SiteViewIndex.htm", false, as, s1, s2);
     }
 
-    static void writeSiteViewNTIndexFile(String s, Array array, String s1, String s2)
+    static void writeSiteViewNTIndexFile(String s,  ArrayList array, String s1, String s2)
     {
         String as[][] = {
             {
@@ -378,7 +378,7 @@ public class SupportDocs
         writeIndexFile(s, array, "SiteView NT Notes", "SiteViewNTIndex.htm", false, as, s1, s2);
     }
 
-    static void writeSiteViewUnixIndexFile(String s, Array array, String s1, String s2)
+    static void writeSiteViewUnixIndexFile(String s,  ArrayList array, String s1, String s2)
     {
         String as[][] = {
             {
@@ -390,7 +390,7 @@ public class SupportDocs
         writeIndexFile(s, array, "SiteView Unix Notes", "SiteViewUnixIndex.htm", false, as, s1, s2);
     }
 
-    static void writeSiteSeerIndexFile(String s, Array array, String s1, String s2)
+    static void writeSiteSeerIndexFile(String s,  ArrayList array, String s1, String s2)
     {
         String as[][] = {
             {
@@ -400,7 +400,7 @@ public class SupportDocs
         writeIndexFile(s, array, "SiteSeer Notes", "SiteSeerIndex.htm", false, as, s1, s2);
     }
 
-    static void writeBugIndexFile(String s, Array array)
+    static void writeBugIndexFile(String s,  ArrayList array)
     {
         String as[][] = {
             {
@@ -412,7 +412,7 @@ public class SupportDocs
         writeIndexFile(s, array, "SiteView Known Bugs for Release " + bugVersion, "BugIndex.htm", false, as, "", "");
     }
 
-    static void writePatchIndexFile(String s, Array array)
+    static void writePatchIndexFile(String s,  ArrayList array)
     {
         String as[][] = {
             {
@@ -424,7 +424,7 @@ public class SupportDocs
         writeIndexFile(s, array, "SiteView Patches for Release " + patchVersion, "PatchIndex.htm", false, as, "", "");
     }
 
-    static void writeIndexFile(String s, Array array, String s1, String s2, boolean flag, String as[][], String s3, String s4)
+    static void writeIndexFile(String s,  ArrayList array, String s1, String s2, boolean flag, String as[][], String s3, String s4)
     {
         HashMap hashmap = new HashMap();
         String s5 = "";
@@ -470,14 +470,14 @@ public class SupportDocs
         for(int i = 0; i < array.size(); i++)
         {
             boolean flag1 = false;
-            HashMap hashmap2 = (HashMap)array.at(i);
-            Array array1 = (Array)hashmap2.get("notes");
+            HashMap hashmap2 = (HashMap)array.get(i);
+             ArrayList array1 = (Array)hashmap2.get("notes");
             StringBuffer stringbuffer4 = new StringBuffer();
             if(array1 == null)
                 continue;
             for(int j = 0; j < array1.size(); j++)
             {
-                HashMap hashmap3 = (HashMap)array1.at(j);
+                HashMap hashmap3 = (HashMap)array1.get(j);
                 boolean flag2 = true;
                 if(as != null)
                 {

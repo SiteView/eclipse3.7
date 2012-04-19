@@ -27,8 +27,8 @@ import COM.dragonflow.Utils.TextUtils;
 
 import java.io.*;
 import java.net.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            NewsGroupStatus, NewsAuthorizationException, URLMonitor
@@ -457,9 +457,9 @@ public class NewsMonitor extends AtomicMonitor
         return socket;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         array.add(pArticleCount);

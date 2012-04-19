@@ -21,8 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.FrameFile;
@@ -59,11 +59,11 @@ public class Portal extends SiteViewObject {
 
     private static long queryConfigLastModified = 0L;
 
-    private static Array queryCache = new Array();
+    private static  ArrayList queryCache = new ArrayList();
 
     private static long viewConfigLastModified = 0L;
 
-    private static Array viewCache = new Array();
+    private static  ArrayList viewCache = new ArrayList();
 
     public Portal() {
         checkConfiguration = null;
@@ -96,9 +96,9 @@ public class Portal extends SiteViewObject {
     void loadAllPortalSiteViews() {
         Object obj = null;
         try {
-            Array array = FrameFile.readFromFile(PORTAL_SERVERS_CONFIG_PATH);
+             ArrayList array = FrameFile.readFromFile(PORTAL_SERVERS_CONFIG_PATH);
             for (int i = 1; i < array.size(); i++) {
-                HashMap hashmap = (HashMap) array.at(i);
+                HashMap hashmap = (HashMap) array.get(i);
                 loadPortalSiteView(hashmap);
             }
 
@@ -268,8 +268,8 @@ public class Portal extends SiteViewObject {
         return ((SiteViewObject) (obj));
     }
 
-    public static Array findObjects(String s, int i, HTTPRequest httprequest) {
-        Array array = new Array();
+    public static  ArrayList findObjects(String s, int i, HTTPRequest httprequest) {
+         ArrayList array = new ArrayList();
         PortalQuery portalquery = new PortalQuery(PortalFilter
                 .queryStringToMap(s), array, httprequest);
         portalquery.findObjects = i;
@@ -277,34 +277,34 @@ public class Portal extends SiteViewObject {
         return array;
     }
 
-    public static Array findMonitors(String s, HTTPRequest httprequest) {
+    public static  ArrayList findMonitors(String s, HTTPRequest httprequest) {
         return findObjects(s, 1, httprequest);
     }
 
-    public static Array getQueries() {
+    public static  ArrayList getQueries() {
         File file = new File(Platform.getRoot() + "/groups/query.config");
         long l = file.lastModified();
         if (queryConfigLastModified != l) {
             queryConfigLastModified = l;
-            queryCache = new Array();
+            queryCache = new ArrayList();
             refreshCache("query.config", file, queryCache);
         }
         return queryCache;
     }
 
-    public static Array getEditableQueryArray() {
+    public static  ArrayList getEditableQueryArray() {
         return internalGetQueryArray(false);
     }
 
-    public static Array getQueryArray() {
+    public static  ArrayList getQueryArray() {
         return internalGetQueryArray(true);
     }
 
-    public static Array internalGetQueryArray(boolean flag) {
-        Array array = getQueries();
-        Array array1 = new Array();
+    public static  ArrayList internalGetQueryArray(boolean flag) {
+         ArrayList array = getQueries();
+         ArrayList array1 = new ArrayList();
         for (int i = 0; i < array.size(); i++) {
-            HashMap hashmap = (HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             String s = TextUtils.getValue(hashmap, "_package");
             if (s.length() == 0) {
                 array1.add(TextUtils.getValue(hashmap, "_id"));
@@ -326,9 +326,9 @@ public class Portal extends SiteViewObject {
     }
 
     public static HashMap getQuery(String s) {
-        Array array = getQueries();
+         ArrayList array = getQueries();
         for (int i = 0; i < array.size(); i++) {
-            HashMap hashmap = (HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             if (TextUtils.getValue(hashmap, "_id").equalsIgnoreCase(s)) {
                 return hashmap;
             }
@@ -337,38 +337,38 @@ public class Portal extends SiteViewObject {
         return null;
     }
 
-    public static Array getViews() {
+    public static  ArrayList getViews() {
         File file = new File(Platform.getRoot() + "/groups/views.config");
         long l = file.lastModified();
         if (viewConfigLastModified != l) {
             viewConfigLastModified = l;
-            viewCache = new Array();
+            viewCache = new ArrayList();
             refreshCache("views.config", file, viewCache);
         }
         return viewCache;
     }
 
-    public static Array getEditableViewArray() {
+    public static  ArrayList getEditableViewArray() {
         return internalGetViewArray(false, true);
     }
 
-    public static Array getViewArray() {
+    public static  ArrayList getViewArray() {
         return internalGetViewArray(true, true);
     }
 
-    public static Array getTopViewArray() {
+    public static  ArrayList getTopViewArray() {
         return internalGetViewArray(true, false);
     }
 
-    public static Array getParentViewArray() {
+    public static  ArrayList getParentViewArray() {
         return internalGetViewArray(true, true, false);
     }
 
-    private static Array internalGetViewArray(boolean flag, boolean flag1) {
-        Array array = getViews();
-        Array array1 = new Array();
+    private static  ArrayList internalGetViewArray(boolean flag, boolean flag1) {
+         ArrayList array = getViews();
+         ArrayList array1 = new ArrayList();
         for (int i = 0; i < array.size(); i++) {
-            HashMap hashmap = (HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             if (!flag1 && TextUtils.getValue(hashmap, "_parent").length() > 0) {
                 continue;
             }
@@ -388,12 +388,12 @@ public class Portal extends SiteViewObject {
         return array1;
     }
 
-    private static Array internalGetViewArray(boolean flag, boolean flag1,
+    private static  ArrayList internalGetViewArray(boolean flag, boolean flag1,
             boolean flag2) {
-        Array array = getViews();
-        Array array1 = new Array();
+         ArrayList array = getViews();
+         ArrayList array1 = new ArrayList();
         for (int i = 0; i < array.size(); i++) {
-            HashMap hashmap = (HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             if (!flag1 && TextUtils.getValue(hashmap, "_parent").length() > 0) {
                 continue;
             }
@@ -419,9 +419,9 @@ public class Portal extends SiteViewObject {
     }
 
     public static HashMap getView(String s) {
-        Array array = getViews();
+         ArrayList array = getViews();
         for (int i = 0; i < array.size(); i++) {
-            HashMap hashmap = (HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             if (TextUtils.getValue(hashmap, "_id").equalsIgnoreCase(s)) {
                 return hashmap;
             }
@@ -433,9 +433,9 @@ public class Portal extends SiteViewObject {
         return null;
     }
 
-    public static Array getEditableViewContentsArray(String s, boolean flag)
+    public static  ArrayList getEditableViewContentsArray(String s, boolean flag)
             throws IOException {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if (flag) {
             array.add("");
             array.add("");
@@ -473,11 +473,11 @@ public class Portal extends SiteViewObject {
         return s1;
     }
 
-    private static void refreshCache(String s, File file, Array array) {
+    private static void refreshCache(String s, File file,  ArrayList array) {
         try {
-            Array array1 = FrameFile.readFromFile(file.getAbsolutePath());
+             ArrayList array1 = FrameFile.readFromFile(file.getAbsolutePath());
             for (int i = 1; i < array1.size(); i++) {
-                HashMap hashmap = (HashMap) array1.at(i);
+                HashMap hashmap = (HashMap) array1.get(i);
                 array.add(hashmap);
             }
 
@@ -488,7 +488,7 @@ public class Portal extends SiteViewObject {
         }
     }
 
-    public static void readExtraItems(String s, Array array) throws IOException {
+    public static void readExtraItems(String s,  ArrayList array) throws IOException {
         File file = new File(Platform.getRoot() + File.separator
                 + "templates.view");
         if (!file.exists()) {
@@ -507,9 +507,9 @@ public class Portal extends SiteViewObject {
             if (!file2.exists()) {
                 continue;
             }
-            Array array1 = FrameFile.readFromFile(file2.getAbsolutePath());
+             ArrayList array1 = FrameFile.readFromFile(file2.getAbsolutePath());
             for (int j = 0; j < array1.size(); j++) {
-                HashMap hashmap = (HashMap) array1.at(j);
+                HashMap hashmap = (HashMap) array1.get(j);
                 String s1 = TextUtils.getValue(hashmap, "_id");
                 s1 = file1.getName() + "-" + s1;
                 hashmap.put("_id", s1);
@@ -531,9 +531,9 @@ public class Portal extends SiteViewObject {
 
     public static void main(String args[]) {
         getPortal();
-        Array array = Platform.getProcesses("remote:10@pete:");
+         ArrayList array = Platform.getProcesses("remote:10@pete:");
         for (int i = 0; i < array.size(); i++) {
-            System.out.println("PROCESS=" + array.at(i));
+            System.out.println("PROCESS=" + array.get(i));
         }
 
         System.exit(0);

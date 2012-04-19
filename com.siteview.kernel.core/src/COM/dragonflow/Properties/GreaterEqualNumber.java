@@ -18,7 +18,7 @@ package COM.dragonflow.Properties;
  *
  */
 import jgl.BinaryPredicate;
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 
 public class GreaterEqualNumber
  implements BinaryPredicate

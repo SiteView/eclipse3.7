@@ -20,8 +20,8 @@ package COM.dragonflow.StandardMonitor;
 
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.ApacheHttpClientUtils.HTTPRequestSettings;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.NumericProperty;
@@ -127,8 +127,8 @@ public class URLContentMonitor extends URLMonitor
                 labelsCache.add("matchValue9", "ninth content match");
                 labelsCache.add("matchValue10", "tenth content match");
             }
-            Array array = getProperties();
-            Enumeration enumeration = array.elements();
+             ArrayList array = getProperties();
+            Enumeration enumeration = (Enumeration) array.iterator();
             do
             {
                 if(!enumeration.hasMoreElements())
@@ -193,7 +193,7 @@ public class URLContentMonitor extends URLMonitor
         unsetProperty(getLocationProperty(pMatchValue9, s3));
         unsetProperty(getLocationProperty(pMatchValue10, s3));
         StringBuffer stringbuffer = new StringBuffer();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         int i = TextUtils.matchExpression(s1, s, array, stringbuffer);
         if(i != Monitor.kURLok)
         {
@@ -202,43 +202,43 @@ public class URLContentMonitor extends URLMonitor
         }
         if(array.size() > 0)
         {
-            setProperty(getLocationProperty(pMatchValue, s3), array.at(0));
+            setProperty(getLocationProperty(pMatchValue, s3), array.get(0));
         }
         if(array.size() > 1)
         {
-            setProperty(getLocationProperty(pMatchValue2, s3), array.at(1));
+            setProperty(getLocationProperty(pMatchValue2, s3), array.get(1));
         }
         if(array.size() > 2)
         {
-            setProperty(getLocationProperty(pMatchValue3, s3), array.at(2));
+            setProperty(getLocationProperty(pMatchValue3, s3), array.get(2));
         }
         if(array.size() > 3)
         {
-            setProperty(getLocationProperty(pMatchValue4, s3), array.at(3));
+            setProperty(getLocationProperty(pMatchValue4, s3), array.get(3));
         }
         if(array.size() > 4)
         {
-            setProperty(getLocationProperty(pMatchValue5, s3), array.at(4));
+            setProperty(getLocationProperty(pMatchValue5, s3), array.get(4));
         }
         if(array.size() > 5)
         {
-            setProperty(getLocationProperty(pMatchValue6, s3), array.at(5));
+            setProperty(getLocationProperty(pMatchValue6, s3), array.get(5));
         }
         if(array.size() > 6)
         {
-            setProperty(getLocationProperty(pMatchValue7, s3), array.at(6));
+            setProperty(getLocationProperty(pMatchValue7, s3), array.get(6));
         }
         if(array.size() > 7)
         {
-            setProperty(getLocationProperty(pMatchValue8, s3), array.at(7));
+            setProperty(getLocationProperty(pMatchValue8, s3), array.get(7));
         }
         if(array.size() > 8)
         {
-            setProperty(getLocationProperty(pMatchValue9, s3), array.at(8));
+            setProperty(getLocationProperty(pMatchValue9, s3), array.get(8));
         }
         if(array.size() > 9)
         {
-            setProperty(getLocationProperty(pMatchValue10, s3), array.at(9));
+            setProperty(getLocationProperty(pMatchValue10, s3), array.get(9));
         }
         String s5 = stringbuffer.toString();
         return s5;
@@ -261,7 +261,7 @@ public class URLContentMonitor extends URLMonitor
 
     public Enumeration getStatePropertyObjects(boolean flag)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pRoundTripTime);
         int i = getMatchCount();
         if(i >= 1)
@@ -304,12 +304,12 @@ public class URLContentMonitor extends URLMonitor
         {
             array.add(pMatchValue10);
         }
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.remove(pMatchValue);
         array.remove(pOverallStatus);
         array.remove(pTotalErrors);
@@ -326,7 +326,7 @@ public class URLContentMonitor extends URLMonitor
         return array;
     }
 
-    public static long[] checkURL(String s, String s1, String s2, String s3, String s4, String s5, Array array, String s6, 
+    public static long[] checkURL(String s, String s1, String s2, String s3, String s4, String s5,  ArrayList array, String s6, 
             String s7, String s8, StringBuffer stringbuffer, long l, String s9, int i, 
             int j, StringBuffer stringbuffer1)
     {

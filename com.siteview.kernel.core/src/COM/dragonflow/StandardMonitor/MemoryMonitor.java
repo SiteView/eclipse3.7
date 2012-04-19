@@ -24,7 +24,7 @@ import COM.dragonflow.SiteView.*;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.net.URLEncoder;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class MemoryMonitor extends ServerMonitor
 {
@@ -50,10 +50,10 @@ public class MemoryMonitor extends ServerMonitor
             l1 = Long.parseLong(getProperty(pLastPageFaults));
         }
         catch(NumberFormatException numberformatexception) { }
-        Array array = null;
+         ArrayList array = null;
         if(monitorDebugLevel == 3)
         {
-            array = new Array();
+            array = new ArrayList();
         }
         long al[] = Platform.getMemoryFull(s, l1, l, this, array);
         long l2 = al[0];
@@ -94,7 +94,7 @@ public class MemoryMonitor extends ServerMonitor
                         StringBuffer stringbuffer = new StringBuffer();
                         for(int i = 0; i < array.size(); i++)
                         {
-                            stringbuffer.append(array.at(i) + "\n");
+                            stringbuffer.append(array.get(i) + "\n");
                         }
 
                         LogManager.log("Error", "MemoryMonitor: " + getFullID() + " failed, output:\n" + stringbuffer);
@@ -120,9 +120,9 @@ public class MemoryMonitor extends ServerMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pPercentFull);
         array.add(pFreeSpace);
         array.add(pPageFaultsPerSecond);

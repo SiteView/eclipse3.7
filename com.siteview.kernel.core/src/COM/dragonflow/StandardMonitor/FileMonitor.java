@@ -27,8 +27,8 @@ import COM.dragonflow.Utils.*;
 
 import java.io.*;
 import java.util.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 //Referenced classes of package COM.dragonflow.StandardMonitor:
 //         URLMonitor
@@ -121,7 +121,7 @@ public class FileMonitor extends AtomicMonitor
                  }
                  if(s4.length() > 0)
                  {
-                     Array array = new Array();
+                      ArrayList array = new ArrayList();
                      i = TextUtils.matchExpression(s7, s4, array, new StringBuffer());
                      if(i != Monitor.kURLok)
                      {
@@ -130,7 +130,7 @@ public class FileMonitor extends AtomicMonitor
                      }
                      if(array.size() > 0)
                      {
-                         s2 = array.at(0).toString();
+                         s2 = array.get(0).toString();
                      }
                  }
              }
@@ -178,9 +178,9 @@ public class FileMonitor extends AtomicMonitor
      return true;
  }
 
- public Array getLogProperties()
+ public  ArrayList getLogProperties()
  {
-     Array array = super.getLogProperties();
+      ArrayList array = super.getLogProperties();
      array.add(pSize);
      array.add(pAge);
      array.add(pMatchValue);
@@ -216,7 +216,7 @@ public class FileMonitor extends AtomicMonitor
      {
          flag1 = true;
      }
-     Array array = new Array();
+      ArrayList array = new ArrayList();
      do
      {
          if(!enumeration.hasMoreElements())
@@ -235,7 +235,7 @@ public class FileMonitor extends AtomicMonitor
              array.add(stringproperty);
          }
      } while(true);
-     return array.elements();
+     return (Enumeration) array.iterator();
  }
 
  public String verify(StringProperty stringproperty, String s, HTTPRequest httprequest, HashMap hashmap)

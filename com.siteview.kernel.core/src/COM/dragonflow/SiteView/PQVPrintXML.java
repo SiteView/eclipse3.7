@@ -22,8 +22,8 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.Properties.StringProperty;
@@ -445,8 +445,8 @@ public class PQVPrintXML extends PortalQueryVisitor {
     void printXML(SiteViewObject siteviewobject) {
         println("<_class>" + xmlEncode(siteviewobject.getProperty("_class"))
                 + "</_class>");
-        Array array = siteviewobject.getProperties();
-        Enumeration enumeration = array.elements();
+         ArrayList array = siteviewobject.getProperties();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration
                     .nextElement();
@@ -495,7 +495,7 @@ public class PQVPrintXML extends PortalQueryVisitor {
         } else {
             as = new String[0];
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         HashMapOrdered hashmapordered = new HashMapOrdered(true);
         for (int j = 0; j < as.length; j++) {
             int k = as[j].indexOf("=");

@@ -19,8 +19,8 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
@@ -65,12 +65,12 @@ public abstract class URLContentBase extends ApplicationBase {
         return null;
     }
 
-    public Array getAvailableCounters() {
+    public  ArrayList getAvailableCounters() {
         return getURLContentCounters("", true);
     }
 
-    private Array getURLContentCounters(String s, boolean flag) {
-        Array array = null;
+    private  ArrayList getURLContentCounters(String s, boolean flag) {
+         ArrayList array = null;
         try {
             String s1 = "";
             if (!flag && s.length() > 0) {
@@ -79,7 +79,7 @@ public abstract class URLContentBase extends ApplicationBase {
                 s1 = getTemplateContent(getTemplatePath(), getTemplateFile(),
                         flag);
             }
-            array = new Array();
+            array = new ArrayList();
             String as[];
             if (s1.indexOf(",") == -1) {
                 as = TextUtils.split(s1, URLMonitor.CRLF);
@@ -102,10 +102,10 @@ public abstract class URLContentBase extends ApplicationBase {
     public synchronized HashMap getLabels() {
         if (labelsCache == null) {
             labelsCache = new HashMap();
-            Array array = getURLContentCounters(
+             ArrayList array = getURLContentCounters(
                     getProperty(getCountersProperty()), false);
             for (int i = 0; i < array.size(); i++) {
-                String s = (String) array.at(i);
+                String s = (String) array.get(i);
                 labelsCache.add("Counter " + (i + 1) + " Value", s);
             }
 
@@ -132,13 +132,13 @@ public abstract class URLContentBase extends ApplicationBase {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String as[] = buildThresholdsArray();
         for (int i = 0; i < as.length; i++) {
             array.add(getPropertyObject("value" + i));
         }
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public void updateErrorValues(String s, String s1) {
@@ -154,7 +154,7 @@ public abstract class URLContentBase extends ApplicationBase {
 
     public String updateMatchValues(String s, String s1, String s2, boolean flag) {
         StringBuffer stringbuffer = new StringBuffer();
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String as[] = buildThresholdsArray();
         int i = TextUtils.matchExpression(s2, s1, array, stringbuffer);
         if (i != Monitor.kURLok) {
@@ -172,9 +172,9 @@ public abstract class URLContentBase extends ApplicationBase {
             }
             if (getProperty("value" + j).length() > 0) {
                 setProperty(getLocationProperty(getPropertyObject("value" + j),
-                        s), array.at(j));
+                        s), array.get(j));
             }
-            s4 = s4 + as[j] + " = " + array.at(j);
+            s4 = s4 + as[j] + " = " + array.get(j);
         }
 
         if (flag) {
@@ -186,8 +186,8 @@ public abstract class URLContentBase extends ApplicationBase {
         return s4;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         for (int i = 0; i < nMaxCounters; i++) {
             if (getProperty("value" + i).length() > 0) {
                 array.add(getPropertyObject("value" + i));
@@ -220,7 +220,7 @@ public abstract class URLContentBase extends ApplicationBase {
     }
 
     static {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pValues = new StringProperty[nMaxCounters];
         for (int i = 0; i < nMaxCounters; i++) {
             pValues[i] = new NumericProperty("value" + i, "n/a");
@@ -233,7 +233,7 @@ public abstract class URLContentBase extends ApplicationBase {
         array.add(pStateString);
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for (int j = 0; j < array.size(); j++) {
-            astringproperty[j] = (StringProperty) array.at(j);
+            astringproperty[j] = (StringProperty) array.get(j);
         }
 
         addProperties("COM.dragonflow.SiteView.URLContentBase", astringproperty);

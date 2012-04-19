@@ -17,11 +17,11 @@ package COM.dragonflow.SiteView;
  * 
  * 
  */
-import jgl.Array;
+import java.util.ArrayList;
 
 public interface BrowsableMonitor {
 
-    public abstract Array getConnectionProperties();
+    public abstract  ArrayList getConnectionProperties();
 
     public abstract String getBrowseData(StringBuffer stringbuffer);
 

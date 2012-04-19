@@ -29,8 +29,8 @@ import java.net.URLEncoder;
 import java.util.Hashtable;
 import javax.naming.*;
 import javax.naming.directory.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLMonitor
@@ -79,7 +79,7 @@ public class LDAPMonitor extends AtomicMonitor
         l = TextUtils.toLong(as[3]);
         if(s3.length() != 0)
         {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             l = TextUtils.matchExpression(as[1], s3, array, new StringBuffer());
             if(l != (long)Monitor.kURLok)
             {
@@ -92,8 +92,8 @@ public class LDAPMonitor extends AtomicMonitor
                 s6 = "matched: " + s6;
             } else
             {
-                setProperty(pMatchValue, array.at(0));
-                s6 = "matched " + array.at(0) + " " + s6;
+                setProperty(pMatchValue, array.get(0));
+                s6 = "matched " + array.get(0) + " " + s6;
             }
         }
         int i = getSettingAsLong("_ldapMaxSummary", 100);
@@ -142,9 +142,9 @@ public class LDAPMonitor extends AtomicMonitor
         return as;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         return array;

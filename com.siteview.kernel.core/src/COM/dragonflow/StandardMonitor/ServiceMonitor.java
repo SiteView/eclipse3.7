@@ -22,8 +22,8 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -90,10 +90,10 @@ public class ServiceMonitor extends ServerMonitor
         long l1 = -1L;
         long l2 = -1L;
         long l3 = 1L;
-        Array array = null;
+         ArrayList array = null;
         if(monitorDebugLevel == 3)
         {
-            array = new Array();
+            array = new ArrayList();
         }
         if(Platform.isWindows(getPlatform()) && s1.length() > 0)
         {
@@ -184,7 +184,7 @@ public class ServiceMonitor extends ServerMonitor
                         StringBuffer stringbuffer = new StringBuffer();
                         for(int i = 0; i < array.size(); i++)
                         {
-                            stringbuffer.append(array.at(i) + "\n");
+                            stringbuffer.append(array.get(i) + "\n");
                         }
 
                         LogManager.log("Error", "ServiceMonitor: " + getFullID() + ", returned: " + s3 + ", output:\n" + stringbuffer);
@@ -212,7 +212,7 @@ public class ServiceMonitor extends ServerMonitor
     public Enumeration getStatePropertyObjects(boolean flag)
     {
         Enumeration enumeration = super.getStatePropertyObjects(flag);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -242,12 +242,12 @@ public class ServiceMonitor extends ServerMonitor
                 array.add(stringproperty);
             }
         } while(true);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pProcessCount);
         array.add(pProcessCPU);
@@ -260,8 +260,8 @@ public class ServiceMonitor extends ServerMonitor
     {
         if(scalarproperty == pServiceName || scalarproperty == pUnixServiceName)
         {
-            Array array = Platform.getProcesses(Machine.getFullMachineID(getProperty(pMachineName), httprequest), true);
-            Enumeration enumeration = array.elements();
+             ArrayList array = Platform.getProcesses(Machine.getFullMachineID(getProperty(pMachineName), httprequest), true);
+            Enumeration enumeration = (Enumeration) array.iterator();
             Vector vector = new Vector();
             String s;
             for(; enumeration.hasMoreElements(); vector.addElement(s))

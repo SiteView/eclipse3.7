@@ -25,8 +25,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.Page.supportPage;
@@ -170,10 +170,10 @@ public class MailMonitor extends AtomicMonitor {
                     setProperty(pRoundTripTime, "n/a");
                     setProperty(pNoData, "n/a");
                 } else {
-                    Array array = new Array();
+                     ArrayList array = new ArrayList();
                     int l = TextUtils.matchExpression(s13, s5, array, new StringBuffer());
                     if (l == Monitor.kURLok && array.size() > 0) {
-                        s9 = (String) array.at(0);
+                        s9 = (String) array.get(0);
                     }
                     setProperty(pStatus, "ok");
                     setProperty(pRoundTripTime, i);
@@ -284,13 +284,13 @@ public class MailMonitor extends AtomicMonitor {
                 s = s3 + "@" + s2;
             }
             updateProgress(mailmonitor, printwriter, "Sending message to " + s + " at mail server " + s1);
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             String s18 = "";
             s10 = MailUtils.mail(hashmap1, s, s11, stringbuffer.toString(), "", array, flag5, s18, null);
             long l4 = Platform.timeMillis();
             l1 = l4 - l;
             if (flag) {
-                for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); updateProgress(mailmonitor, printwriter, (String) enumeration.nextElement())) {
+                for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); updateProgress(mailmonitor, printwriter, (String) enumeration.nextElement())) {
                 }
             }
         }
@@ -796,7 +796,7 @@ public class MailMonitor extends AtomicMonitor {
 
     static boolean sameMessageSimple(String s, String as[]) {
         for (int j = 0; j < as.length; j ++) {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             int i = TextUtils.matchExpression(as[j], s, array, new StringBuffer());
             if (i == Monitor.kURLok) {
                 return true;
@@ -807,8 +807,8 @@ public class MailMonitor extends AtomicMonitor {
     }
 
     static boolean sameMessage(String s, String s1) {
-        Array array = new Array();
-        array = new Array();
+         ArrayList array = new ArrayList();
+        array = new ArrayList();
         int i;
         if (s1.indexOf(s) >= 0) {
             i = Monitor.kURLok;
@@ -831,7 +831,7 @@ public class MailMonitor extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pRoundTripTime);
         if (!getProperty(pReceiveOnly).equals("true")) {
             array.add(pSMTPTime);
@@ -840,11 +840,11 @@ public class MailMonitor extends AtomicMonitor {
         if (TextUtils.isNumber(getProperty(pMatchValue)) && getProperty(pMatchValue).length() > 0) {
             array.add(pMatchValue);
         }
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pRoundTripTime);
         array.add(pStatus);
         array.add(pMatchValue);

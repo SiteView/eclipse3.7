@@ -26,8 +26,8 @@ import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import jgl.Sorting;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.SiteView.DetectConfigurationChange;
@@ -67,20 +67,20 @@ public class FrameFile {
     }
 
     public static void writeToFile(String s, HashMap hashmap, boolean flag) throws IOException {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(hashmap);
         writeToFile(s, array, null, false, flag);
     }
 
-    public static void writeToFile(String s, Array array) throws IOException {
+    public static void writeToFile(String s,  ArrayList array) throws IOException {
         writeToFile(s, array, false);
     }
 
-    public static void writeToFile(String s, Array array, boolean flag) throws IOException {
+    public static void writeToFile(String s,  ArrayList array, boolean flag) throws IOException {
         writeToFile(s, array, null, false, flag);
     }
 
-    public static void writeToFile(String s, Array array, String s1, boolean flag) throws IOException {
+    public static void writeToFile(String s,  ArrayList array, String s1, boolean flag) throws IOException {
         writeToFile(s, array, s1, flag, false);
     }
 
@@ -130,7 +130,7 @@ public class FrameFile {
             String s3 = s.substring(Math.max(j, k) + 1);
             File file2 = new File(s2);
             String as[] = file2.list();
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             for (int l = 0; l < as.length; l++) {
                 if (as[l].indexOf(s3 + ".bak.") >= 0) {
                     array.add(as[l]);
@@ -139,14 +139,14 @@ public class FrameFile {
 
             File file3 = new File(s2 + s3 + ".bak");
             int i1 = array == null ? 0 : array.size();
-            Array array1 = new Array();
+             ArrayList array1 = new ArrayList();
             if (file3.exists()) {
                 array1.add(s3 + ".bak");
                 if (i1 == 0) {
                     array1.add(s3 + ".bak.1");
                 }
                 for (int j1 = 1; j1 < i1 + 1; j1++) {
-                    array1.add(array.at(j1 - 1));
+                    array1.add(array.get(j1 - 1));
                 }
 
                 if (i1 < i) {
@@ -155,18 +155,18 @@ public class FrameFile {
                 array = array1;
             }
             for (int k1 = 1; k1 < array.size(); k1++) {
-                int i2 = getFileNum((String) array.at(k1));
-                String s4 = new String((String) array.at(k1));
+                int i2 = getFileNum((String) array.get(k1));
+                String s4 = new String((String) array.get(k1));
                 int k2;
-                for (k2 = k1 - 1; k2 >= 0 && i2 > getFileNum((String) array.at(k2)); k2--) {
-                    array.put(k2 + 1, array.at(k2));
+                for (k2 = k1 - 1; k2 >= 0 && i2 > getFileNum((String) array.get(k2)); k2--) {
+                    array.set(k2 + 1, array.get(k2));
                 }
 
-                array.put(k2 + 1, s4);
+                array.set(k2 + 1, s4);
             }
 
             for (int l1 = 0; l1 < array.size(); l1++) {
-                File file4 = new File(s2 + (String) array.at(l1));
+                File file4 = new File(s2 + (String) array.get(l1));
                 int j2 = array.size() - l1;
                 if (j2 >= i && file4.exists()) {
                     file4.delete();
@@ -208,7 +208,7 @@ public class FrameFile {
             String s2 = s.substring(Math.max(j, k) + 1);
             File file2 = new File(s1);
             String as[] = file2.list();
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             for (int l = 0; l < as.length; l++) {
                 if (as[l].indexOf(s2 + ".bak.") >= 0) {
                     array.add(as[l]);
@@ -220,22 +220,22 @@ public class FrameFile {
                 return flag;
             }
             for (int i1 = 1; i1 < array.size(); i1++) {
-                int k1 = getFileNum((String) array.at(i1));
-                String s3 = new String((String) array.at(i1));
+                int k1 = getFileNum((String) array.get(i1));
+                String s3 = new String((String) array.get(i1));
                 int l1;
-                for (l1 = i1 - 1; l1 >= 0 && k1 < getFileNum((String) array.at(l1)); l1--) {
-                    array.put(l1 + 1, array.at(l1));
+                for (l1 = i1 - 1; l1 >= 0 && k1 < getFileNum((String) array.get(l1)); l1--) {
+                    array.set(l1 + 1, array.get(l1));
                 }
 
-                array.put(l1 + 1, s3);
+                array.set(l1 + 1, s3);
             }
 
             for (int j1 = 0; j1 < array.size() - 1; j1++) {
-                File file4 = new File(s1 + (String) array.at(j1));
+                File file4 = new File(s1 + (String) array.get(j1));
                 if (file4.exists()) {
                     file4.delete();
                 }
-                File file5 = new File(s1 + (String) array.at(j1 + 1));
+                File file5 = new File(s1 + (String) array.get(j1 + 1));
                 file5.renameTo(file4);
             }
 
@@ -253,7 +253,7 @@ public class FrameFile {
      * @param flag1
      * @throws IOException
      */
-    public static void writeToFile(String s, Array array, String s1, boolean flag, boolean flag1) throws IOException {
+    public static void writeToFile(String s,  ArrayList array, String s1, boolean flag, boolean flag1) throws IOException {
         synchronized (FileUtils.getFileLock(s)) {
             SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
             int i = siteviewgroup.getSettingAsLong("_backups2Keep", 1);
@@ -298,7 +298,7 @@ public class FrameFile {
      * @return
      * @throws IOException
      */
-    public static boolean printFile(File file, Array array, String s, boolean flag, boolean flag1) throws IOException {
+    public static boolean printFile(File file,  ArrayList array, String s, boolean flag, boolean flag1) throws IOException {
         PrintWriter printwriter = null;
         FileOutputStream fileoutputstream = null;
         boolean flag2 = false;
@@ -332,11 +332,11 @@ public class FrameFile {
         return flag2;
     }
 
-    public static void printFrames(PrintWriter printwriter, Array array, String s, boolean flag, boolean flag1) {
+    public static void printFrames(PrintWriter printwriter,  ArrayList array, String s, boolean flag, boolean flag1) {
     }
 
-    static void printFrames(StringBuffer stringbuffer, Array array, String s, boolean flag, boolean flag1) {
-        Enumeration enumeration = array.elements();
+    static void printFrames(StringBuffer stringbuffer,  ArrayList array, String s, boolean flag, boolean flag1) {
+        Enumeration enumeration = (Enumeration) array.iterator();
         for (boolean flag2 = true; enumeration.hasMoreElements(); flag2 = false) {
             HashMap hashmap = (HashMap) enumeration.nextElement();
             if (!flag2) {
@@ -356,11 +356,11 @@ public class FrameFile {
         }
         Enumeration enumeration = hashmap.keys();
         if (flag1) {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             for (; enumeration.hasMoreElements(); array.add(enumeration.nextElement())) {
             }
             Sorting.sort(array, new LessEqualPropertyName());
-            enumeration = array.elements();
+            enumeration = (Enumeration) array.iterator();
         }
         while (enumeration.hasMoreElements()) {
             Object obj = enumeration.nextElement();
@@ -430,11 +430,11 @@ public class FrameFile {
             if (!file.exists()) {
                 throwError("master.config", "missing");
             }
-            Array array = readFromFile(s1);
+             ArrayList array = readFromFile(s1);
             if (array.size() != 1) {
                 throwError("master.config", "truncated");
             }
-            HashMap hashmap = (HashMap) array.at(0);
+            HashMap hashmap = (HashMap) array.get(0);
             if (hashmap.get("_initialMonitorDelay") == null) {
                 throwError("master.config", "corrupt");
             }
@@ -447,7 +447,7 @@ public class FrameFile {
             if (array.size() < 3) {
                 throwError("users.config", "truncated");
             }
-            HashMap hashmap1 = (HashMap) array.at(1);
+            HashMap hashmap1 = (HashMap) array.get(1);
             if (hashmap1.get("_realName") == null) {
                 throwError("users.config", "corrupt");
             }
@@ -477,7 +477,7 @@ public class FrameFile {
             if (isConfig(s2)) {
                 stringbuffer.append(s2 + '\n');
                 String s3 = Platform.getRoot() + File.separator + "groups" + File.separator + s2;
-                Array array = readFromFile(s3);
+                 ArrayList array = readFromFile(s3);
                 writeToFile(s3, array);
             }
         }
@@ -520,7 +520,7 @@ public class FrameFile {
         throw new IOException(s + ", " + s1);
     }
 
-    public static Array readFromFile(String s) throws IOException {
+    public static  ArrayList readFromFile(String s) throws IOException {
         boolean flag = forceMangleOnReading();
         return readFromFile(s, flag);
     }
@@ -533,10 +533,10 @@ public class FrameFile {
      * @return
      * @throws IOException
      */
-    static Array readFromFile(String s, boolean flag) throws IOException {
+    static  ArrayList readFromFile(String s, boolean flag) throws IOException {
         synchronized (FileUtils.getFileLock(s)) {
             StringBuffer stringbuffer = null;
-            Array array = null;
+             ArrayList array = null;
             try {
                 stringbuffer = FileUtils.readUTF8File(s);
             } catch (IOException e) {
@@ -580,7 +580,7 @@ public class FrameFile {
             if (s.indexOf("master.config") >= 0) {
                 readMasterConfig = true;
                 for (int i = 0; i < array.size(); i++) {
-                    String s1 = (String) array.at(i);
+                    String s1 = (String) array.get(i);
                     if (s1.trim().startsWith("#")) {
                         array.remove(i);
                         i--;
@@ -588,11 +588,11 @@ public class FrameFile {
                 }
 
             }
-            return readFrames(array.elements());
+            return readFrames((Enumeration) array.iterator());
         }
     }
 
-    static Array mangleIt(String s, String s1, boolean flag) throws IOException {
+    static  ArrayList mangleIt(String s, String s1, boolean flag) throws IOException {
         boolean flag1 = s1.startsWith("=");
         if (flag1) {
             int i = s1.indexOf("(0x)");
@@ -610,11 +610,11 @@ public class FrameFile {
             throwError(s, "encoding problem");
         }
         s1 = TextUtils.replaceChar(s1, '\r', "");
-        Array array = Platform.split('\n', s1);
+         ArrayList array = Platform.split('\n', s1);
         return array;
     }
 
-    public static Array readFrames(BufferedReader bufferedreader) throws IOException {
+    public static  ArrayList readFrames(BufferedReader bufferedreader) throws IOException {
         throw new IOException("unimplemented");
     }
 
@@ -625,8 +625,8 @@ public class FrameFile {
      * @return
      * @throws IOException
      */
-    static Array readFrames(Enumeration enumeration) throws IOException {
-        Array array = new Array();
+    static  ArrayList readFrames(Enumeration enumeration) throws IOException {
+         ArrayList array = new ArrayList();
         while (true) {
             HashMap hashmap = readFrame(enumeration, "#");
             if (hashmap != null) {
@@ -752,7 +752,7 @@ public class FrameFile {
             StringBuffer stringbuffer = new StringBuffer();
             if (args.length == 2) {
                 String s2 = args[1];
-                Array array = readFromFile(s2, false);
+                 ArrayList array = readFromFile(s2, false);
                 boolean flag6 = s2.endsWith(".config");
                 printFrames(stringbuffer, array, null, false, flag6);
                 if (flag) {
@@ -785,8 +785,8 @@ public class FrameFile {
                 if (!args1[i1].endsWith(".mg") && !args1[i1].endsWith(".config")) {
                     continue;
                 }
-                Array array2 = readFromFile(s4 + "/" + args1[i1]);
-                Array array3 = new Array();
+                 ArrayList array2 = readFromFile(s4 + "/" + args1[i1]);
+                 ArrayList array3 = new ArrayList();
                 Enumeration enumeration = array2.elements();
                 while (enumeration.hasMoreElements()) {
                     HashMap hashmap = (HashMap) enumeration.nextElement();
@@ -829,8 +829,8 @@ public class FrameFile {
                 if (!args2[l1].endsWith(".mg")) {
                     continue;
                 }
-                Array array4 = readFromFile(s7 + "/" + args2[l1]);
-                Array array5 = new Array();
+                 ArrayList array4 = readFromFile(s7 + "/" + args2[l1]);
+                 ArrayList array5 = new ArrayList();
                 Enumeration enumeration1 = array4.elements();
                 HashMap hashmap1 = new HashMap();
                 if (enumeration1.hasMoreElements()) {
@@ -926,7 +926,7 @@ public class FrameFile {
         }
         try {
             System.out.print("Reading " + s + "...");
-            Array array1 = readFromFile(s);
+             ArrayList array1 = readFromFile(s);
             if (s3.length() > 0 && s5.length() > 0) {
                 String args3[] = { s3, s5 };
                 TextUtils.replaceInHashMapList(array1, args3, null);

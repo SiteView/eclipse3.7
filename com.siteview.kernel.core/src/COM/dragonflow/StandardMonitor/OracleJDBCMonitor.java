@@ -27,7 +27,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
@@ -123,8 +123,8 @@ public class OracleJDBCMonitor extends BrowsableBase {
         return "";
     }
 
-    public Array getConnectionProperties() {
-        Array array = new Array();
+    public  ArrayList getConnectionProperties() {
+         ArrayList array = new ArrayList();
         array.add(pServerName);
         array.add(pUser);
         array.add(pPassword);
@@ -137,9 +137,9 @@ public class OracleJDBCMonitor extends BrowsableBase {
     HashMap getStatNameMap() {
         StringBuffer stringbuffer = new StringBuffer();
         HashMap hashmap = new HashMap();
-        Array array = getResult(stringbuffer, statCounterQuery);
+         ArrayList array = getResult(stringbuffer, statCounterQuery);
         for (int i = 0; i < array.size(); i ++) {
-            String as[] = TextUtils.split((String) array.at(i), "\t");
+            String as[] = TextUtils.split((String) array.get(i), "\t");
             hashmap.put(as[1], as[0]);
         }
 
@@ -158,7 +158,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
         StringBuffer stringbuffer = new StringBuffer();
         HashMap hashmap = new HashMap();
         try {
-            Array array = null;
+             ArrayList array = null;
             int i;
             for (i = 0; i < nMaxCounters && getProperty(PROPERTY_NAME_COUNTER_ID + (i + 1)).length() != 0; i ++) {
             }
@@ -166,7 +166,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
             label0: for (int j = 0; j < i; j ++) {
                 String s = getProperty(PROPERTY_NAME_COUNTER_ID + (j + 1));
                 if (s.indexOf("V$SYSSTAT") >= 0) {
-                    Array array1;
+                     ArrayList array1;
                     if ((array1 = (Array) hashmap.get(sysResults)) == null) {
                         array1 = getResult(stringbuffer, sysResults);
                         hashmap.put(sysResults, array1);
@@ -178,7 +178,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
                         if (l1 >= array1.size()) {
                             continue label0;
                         }
-                        String s11 = (String) array1.at(l1);
+                        String s11 = (String) array1.get(l1);
                         if (s11.indexOf(s4) >= 0) {
                             String as2[] = TextUtils.split(s11, "\t");
                             as[j] = as2[1];
@@ -197,7 +197,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
                     }
                     String s7 = (String) statNameMap.get(s2);
                     String s12 = sesResults + " WHERE SID =" + s5;
-                    Array array3;
+                     ArrayList array3;
                     if ((array3 = (Array) hashmap.get(s12)) == null) {
                         array3 = getResult(stringbuffer, s12);
                         hashmap.put(s12, array3);
@@ -207,7 +207,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
                         if (i2 >= array3.size()) {
                             continue label0;
                         }
-                        String s15 = (String) array3.at(i2);
+                        String s15 = (String) array3.get(i2);
                         String as3[] = TextUtils.split(s15, "\t");
                         if (as3[1].equals(s7)) {
                             as[j] = as3[2];
@@ -226,7 +226,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
                         if (j1 >= array.size()) {
                             continue label0;
                         }
-                        String s8 = (String) array.at(j1);
+                        String s8 = (String) array.get(j1);
                         if (s8.indexOf(s3) >= 0) {
                             String as1[] = TextUtils.split(s8, "\t");
                             as[j] = "" + (100 - TextUtils.toInt(as1[1]));
@@ -240,7 +240,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
                         continue;
                     }
                     String s9 = (String) tableQueryVector.get(k);
-                    Array array2;
+                     ArrayList array2;
                     if ((array2 = (Array) hashmap.get(s9)) == null) {
                         array2 = getResult(stringbuffer, s9);
                         hashmap.put(s9, array2);
@@ -249,7 +249,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
                     s = s.substring(s.indexOf(s13) + s13.length(), s.length());
                     String s14 = s.substring(s.indexOf(" ") + 1, s.length());
                     for (int j2 = 0; j2 < array2.size(); j2 ++) {
-                        String s16 = (String) array2.at(j2);
+                        String s16 = (String) array2.get(j2);
                         if (s16.toUpperCase().indexOf(s14.toUpperCase()) >= 0) {
                             String as4[] = TextUtils.split(s16, "\t");
                             as[j] = as4[1];
@@ -311,7 +311,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
      * @param s
      * @return
      */
-    public Array getResult(StringBuffer stringbuffer, String s) {
+    public  ArrayList getResult(StringBuffer stringbuffer, String s) {
         String s1 = getProperty(pDriver);
         String s2 = getProperty(pServerName);
         String s3 = getProperty(pUser);
@@ -321,7 +321,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
         boolean flag = false;
         Statement statement = null;
         ResultSet resultset = null;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
 
         try {
             if (!driverLoaded) {
@@ -417,17 +417,17 @@ public class OracleJDBCMonitor extends BrowsableBase {
     public String getBrowseData(StringBuffer stringbuffer) {
         try {
             String s2;
-            Array array = new Array();
-            Array array1 = new Array();
-            Array aarray[] = new Array[tableNameVector.size()];
-            Array array2 = getResult(stringbuffer, counterNameQuery);
+             ArrayList array = new ArrayList();
+             ArrayList array1 = new ArrayList();
+             ArrayList aarray[] = new Array[tableNameVector.size()];
+             ArrayList array2 = getResult(stringbuffer, counterNameQuery);
             if (stringbuffer.length() <= 0) {
                 array = getResult(stringbuffer, instanceNameQuery);
                 if (stringbuffer.length() <= 0) {
                     array1 = getResult(stringbuffer, sidValueQuery);
                 }
             }
-            Array array3 = getResult(stringbuffer, freeTableSpaceQuery);
+             ArrayList array3 = getResult(stringbuffer, freeTableSpaceQuery);
             int i = 0;
             for (int j = 0; j < tableQueryVector.size(); j ++) {
                 String s1 = (String) tableQueryVector.get(j);
@@ -458,27 +458,27 @@ public class OracleJDBCMonitor extends BrowsableBase {
         }
     }
 
-    String buildXML(Array array, Array array1, Array array2, Array array3, Array aarray[]) {
+    String buildXML(Array array,  ArrayList array1,  ArrayList array2,  ArrayList array3,  ArrayList aarray[]) {
         StringBuffer stringbuffer = new StringBuffer();
         RawXmlWriter rawxmlwriter = new RawXmlWriter(stringbuffer);
         rawxmlwriter.startElement("browse_data");
         rawxmlwriter.startElement("object name =\"V$SYSSTAT\"");
         for (int i = 0; i < array.size(); i ++) {
-            String s = (String) array.at(i);
+            String s = (String) array.get(i);
             rawxmlwriter.emptyElement("counter name=\"" + s + "\" ");
         }
 
         rawxmlwriter.endElement("object");
         rawxmlwriter.startElement("object name =\"V$SESSTAT\"");
         for (int j = 0; j < array2.size(); j ++) {
-            String s1 = (String) array2.at(j);
+            String s1 = (String) array2.get(j);
             s1 = s1.replace('\t', '/');
             if (!s1.endsWith("/")) {
                 s1 = s1 + "/";
             }
             rawxmlwriter.startElement("object name=\"" + s1 + "\" ");
             for (int i1 = 0; i1 < array.size(); i1 ++) {
-                String s4 = (String) array.at(i1);
+                String s4 = (String) array.get(i1);
                 rawxmlwriter.emptyElement("counter name=\"" + s4 + "\" ");
             }
 
@@ -488,7 +488,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
         rawxmlwriter.endElement("object");
         rawxmlwriter.startElement("object name=\"% Free Table Space\"");
         for (int k = 0; k < array3.size(); k ++) {
-            String s2 = (String) array3.at(k);
+            String s2 = (String) array3.get(k);
             s2 = s2.toUpperCase();
             if (!s2.startsWith("--") && !s2.startsWith("TSNAME")) {
                 rawxmlwriter.emptyElement("counter name=\"" + s2.substring(0, s2.indexOf("\t")) + "\" ");
@@ -502,14 +502,14 @@ public class OracleJDBCMonitor extends BrowsableBase {
                 if (l >= aarray.length) {
                     break;
                 }
-                Array array4 = aarray[l];
+                 ArrayList array4 = aarray[l];
                 if (array4 == null) {
                     break;
                 }
                 String s3 = (String) tableNameVector.get(l);
                 rawxmlwriter.startElement("object name=\"" + s3 + "\"");
                 for (int j1 = 0; j1 < array4.size(); j1 ++) {
-                    String s5 = (String) array4.at(j1);
+                    String s5 = (String) array4.get(j1);
                     s5 = s5.toUpperCase();
                     if (s5.startsWith("--") || s5.startsWith("TSNAME")) {
                         continue;
@@ -544,7 +544,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
 
     public void setMaxCounters(int i) {
         nMaxCounters = i;
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         hashmap.put("_oracleJDBCMaxCounters", (new Integer(i)).toString());
         MasterConfig.saveMasterConfig(hashmap);
     }
@@ -554,8 +554,8 @@ public class OracleJDBCMonitor extends BrowsableBase {
         tableNameVector = new Vector();
 //        template_path = Platform.getRoot() + File.separator + "templates.applications" + File.separator + "commands.oraclejdbc";
         nMaxCounters = 30;
-        Array array = new Array();
-        jgl.HashMap hashmap = MasterConfig.getMasterConfig();
+         ArrayList array = new ArrayList();
+        HashMap hashmap = MasterConfig.getMasterConfig();
         nMaxCounters = TextUtils.toInt(TextUtils.getValue(hashmap, "_oracleJDBCMaxCounters"));
         if (nMaxCounters == 0) {
             nMaxCounters = 30;
@@ -603,7 +603,7 @@ public class OracleJDBCMonitor extends BrowsableBase {
         array.add(pDBMachineName);
         StringProperty astringproperty1[] = new StringProperty[array.size()];
         for (int j = 0; j < array.size(); j ++) {
-            astringproperty1[j] = (StringProperty) array.at(j);
+            astringproperty1[j] = (StringProperty) array.get(j);
         }
 
         String s1 = (COM.dragonflow.StandardMonitor.OracleJDBCMonitor.class).getName();

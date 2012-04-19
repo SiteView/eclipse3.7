@@ -19,7 +19,7 @@ package COM.dragonflow.SiteView;
  */
 import java.io.IOException;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 // Referenced classes of package COM.dragonflow.SiteView:
 // PortalQueryVisitor, AtomicMonitor, MonitorGroup, PortalSiteView,
@@ -27,7 +27,7 @@ import jgl.Array;
 
 public class PQVMatchingObjects extends PortalQueryVisitor {
 
-    Array matchingObjects;
+     ArrayList matchingObjects;
 
     public PQVMatchingObjects(Array array) {
         matchingObjects = null;

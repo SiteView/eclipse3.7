@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.StandardMonitor.URLMonitor;
@@ -346,9 +346,9 @@ public class PortalSync {
         if (l < 1L) {
             l = 0x7a120L;
         }
-        Array array = null;
+         ArrayList array = null;
         if (s1.equals("delete") || s1.equals("put")) {
-            array = new Array();
+            array = new ArrayList();
             array.add("page=file");
             array.add("file=" + s);
             array.add("operation=" + s1);

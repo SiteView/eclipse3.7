@@ -24,8 +24,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Page.CGI;
@@ -138,8 +138,8 @@ public abstract class BrowsableSNMPBase extends BrowsableBase {
     public BrowsableSNMPBase() {
     }
 
-    public Array getConnectionProperties() {
-        Array array = new Array();
+    public  ArrayList getConnectionProperties() {
+         ArrayList array = new ArrayList();
         array.add(pServerName);
         array.add(pMIB);
         array.add(pPort);
@@ -370,8 +370,8 @@ public abstract class BrowsableSNMPBase extends BrowsableBase {
         return snmpsession;
     }
 
-    public Array getPropertiesToPassBetweenPages(HTTPRequest httprequest) {
-        Array array = super.getPropertiesToPassBetweenPages(httprequest);
+    public  ArrayList getPropertiesToPassBetweenPages(HTTPRequest httprequest) {
+         ArrayList array = super.getPropertiesToPassBetweenPages(httprequest);
         array.add(pServerName);
         array.add(pMIB);
         array.add(pCommunity);

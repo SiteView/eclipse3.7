@@ -11,8 +11,8 @@ package COM.dragonflow.Page;
 
 import java.io.File;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.HashMapOrdered;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -40,11 +40,11 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         return "CentraPrefs.htm";
     }
 
-    void printEditForm(String s, jgl.Array array, jgl.HashMap hashmap)
+    void printEditForm(String s, ArrayList array, HashMap hashmap)
         throws java.lang.Exception
     {
         String s1 = request.getValue("id");
-        jgl.HashMap hashmap1;
+        HashMap hashmap1;
         if(s.startsWith("Edit"))
         {
             hashmap1 = COM.dragonflow.Page.portalPreferencePage.findFrameByID(array, s1);
@@ -55,7 +55,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         printEditForm(s, hashmap1, hashmap);
     }
 
-    void printEditForm(String s, jgl.HashMap hashmap, jgl.HashMap hashmap1)
+    void printEditForm(String s, HashMap hashmap, HashMap hashmap1)
         throws java.lang.Exception
     {
         String s1 = s;
@@ -84,17 +84,17 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         printFooter(outputStream);
     }
 
-    void printBasicSiteSeerProperties(jgl.HashMap hashmap, jgl.HashMap hashmap1)
+    void printBasicSiteSeerProperties(HashMap hashmap, HashMap hashmap1)
         throws java.io.IOException
     {
     }
 
-    void printBasicProperties(jgl.HashMap hashmap, jgl.HashMap hashmap1)
+    void printBasicProperties(HashMap hashmap, HashMap hashmap1)
         throws java.io.IOException
     {
     }
 
-    void printAdvancedProperties(jgl.HashMap hashmap, jgl.HashMap hashmap1)
+    void printAdvancedProperties(HashMap hashmap, HashMap hashmap1)
         throws java.io.IOException
     {
     }
@@ -108,7 +108,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
     {
     }
 
-    void printListItem(jgl.HashMap hashmap)
+    void printListItem(HashMap hashmap)
     {
     }
 
@@ -117,40 +117,40 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         printwriter.println("<HEAD>\n" + COM.dragonflow.Page.CGI.nocacheHeader + s2 + s1 + "<TITLE>" + s + "</TITLE>\n</HEAD>");
     }
 
-    public static jgl.HashMap findFrameByID(jgl.Array array, String s)
+    public static HashMap findFrameByID(ArrayList array, String s)
     {
         int i = COM.dragonflow.Page.portalPreferencePage.findFrameIndexByID(array, s);
         if(i >= 0)
         {
-            return (jgl.HashMap)array.at(i);
+            return (HashMap)array.get(i);
         } else
         {
             return null;
         }
     }
 
-    public static int findFrameIndexByID(jgl.Array array, String s)
+    public static int findFrameIndexByID(ArrayList array, String s)
     {
         return COM.dragonflow.Page.portalPreferencePage.findFrameIndex(array, "_id", s, 1);
     }
 
-    public static jgl.HashMap findFrame(jgl.Array array, String s, String s1, int i)
+    public static HashMap findFrame(ArrayList array, String s, String s1, int i)
     {
         int j = COM.dragonflow.Page.portalPreferencePage.findFrameIndex(array, s, s1, i);
         if(j >= 0)
         {
-            return (jgl.HashMap)array.at(j);
+            return (HashMap)array.get(j);
         } else
         {
             return null;
         }
     }
 
-    public static int findFrameIndex(jgl.Array array, String s, String s1, int i)
+    public static int findFrameIndex(ArrayList array, String s, String s1, int i)
     {
         for(int j = i; j < array.size(); j++)
         {
-            jgl.HashMap hashmap = (jgl.HashMap)array.at(j);
+            HashMap hashmap = (HashMap)array.get(j);
             if(COM.dragonflow.Utils.TextUtils.getValue(hashmap, s).equals(s1))
             {
                 return j;
@@ -160,34 +160,34 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         return -1;
     }
 
-    void verify(jgl.HashMap hashmap, jgl.HashMap hashmap1)
+    void verify(HashMap hashmap, HashMap hashmap1)
     {
     }
 
-    jgl.HashMap getResultFrame()
+    HashMap getResultFrame()
     {
         return fillInResultFrame(new HashMapOrdered(true));
     }
 
-    jgl.HashMap fillInResultFrame(jgl.HashMap hashmap)
+    HashMap fillInResultFrame(HashMap hashmap)
     {
         return hashmap;
     }
 
-    void preProcessAdd(jgl.HashMap hashmap)
+    void preProcessAdd(HashMap hashmap)
     {
     }
 
-    void postProcessAdd(jgl.HashMap hashmap)
+    void postProcessAdd(HashMap hashmap)
     {
     }
 
-    boolean preProcessDelete(jgl.HashMap hashmap, StringBuffer stringbuffer)
+    boolean preProcessDelete(HashMap hashmap, StringBuffer stringbuffer)
     {
         return true;
     }
 
-    void postProcessDelete(jgl.HashMap hashmap)
+    void postProcessDelete(HashMap hashmap)
     {
     }
 
@@ -196,7 +196,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         return "";
     }
 
-    void setUniqueID(jgl.HashMap hashmap, jgl.HashMap hashmap1)
+    void setUniqueID(HashMap hashmap, HashMap hashmap1)
     {
         String s = COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_nextID");
         if(s.length() == 0)
@@ -218,7 +218,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
             outputStream.println("<hr>Access Permission Error.<hr>");
             return;
         }
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         array.add(new HashMapOrdered(true));
         try
         {
@@ -238,12 +238,12 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         }
         if(request.isPost())
         {
-            jgl.HashMap hashmap = null;
+            HashMap hashmap = null;
             if(s.startsWith("Add"))
             {
                 hashmap = getResultFrame();
                 array.add(hashmap);
-                jgl.HashMap hashmap2 = (jgl.HashMap)array.at(0);
+                HashMap hashmap2 = (HashMap)array.get(0);
                 setUniqueID(hashmap2, hashmap);
                 postProcessAdd(hashmap);
             } else
@@ -258,7 +258,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
                     throw new Exception(getTitle() + " id (" + s4 + ") could not be found");
                 }
             }
-            jgl.HashMap hashmap3 = new HashMap();
+            HashMap hashmap3 = new HashMap();
             verify(hashmap, hashmap3);
             if(hashmap3.size() == 0)
             {
@@ -271,7 +271,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
             }
         } else
         {
-            jgl.HashMap hashmap1 = new HashMap();
+            HashMap hashmap1 = new HashMap();
             preProcessAdd(hashmap1);
             printEditForm(s, array, hashmap1);
         }
@@ -292,7 +292,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         printButtonBar(getHelpPage(), "");
         outputStream.println("<p><H2>" + s3 + " List</H2><TABLE WIDTH=100% BORDER=2>");
         printListHeader();
-        jgl.Array array = readListFrames();
+        ArrayList array = readListFrames();
         if(array.size() < 2)
         {
             outputStream.println("<TR><TD>no " + s3 + "s</TD></TR>");
@@ -300,7 +300,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         {
             for(int i = 1; i < array.size(); i++)
             {
-                jgl.HashMap hashmap = (jgl.HashMap)array.at(i);
+                HashMap hashmap = (HashMap)array.get(i);
                 printListItem(hashmap);
             }
 
@@ -312,9 +312,9 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         printFooter(outputStream);
     }
 
-    jgl.Array readListFrames()
+    ArrayList readListFrames()
     {
-        jgl.Array array = null;
+        ArrayList array = null;
         try
         {
             array = COM.dragonflow.Properties.FrameFile.readFromFile(getConfigFilePath());
@@ -322,7 +322,7 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
         catch(java.io.IOException ioexception)
         {
             COM.dragonflow.Log.LogManager.log("Error", "could not read configuration file " + getConfigFilePath() + ": " + ioexception.getMessage());
-            array = new Array();
+            array = new ArrayList();
         }
         return array;
     }
@@ -347,8 +347,8 @@ public class portalPreferencePage extends COM.dragonflow.Page.CGI
             return;
         }
         String s3 = request.getValue("id");
-        jgl.Array array = COM.dragonflow.Properties.FrameFile.readFromFile(getConfigFilePath());
-        jgl.HashMap hashmap = COM.dragonflow.Page.portalPreferencePage.findFrameByID(array, s3);
+        ArrayList array = COM.dragonflow.Properties.FrameFile.readFromFile(getConfigFilePath());
+        HashMap hashmap = COM.dragonflow.Page.portalPreferencePage.findFrameByID(array, s3);
         String s4 = COM.dragonflow.Page.portalPreferencePage.getValue(hashmap, "_title");
         if(request.isPost())
         {

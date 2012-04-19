@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.AtomicMonitor;
@@ -89,14 +89,14 @@ public class MAPIMonitor extends AtomicMonitor {
         vector.add("timeout=" + getProperty(pTimeout));
         vector.add("subject=" + s);
         vector.add("attachment=" + (flag ? "true" : "false"));
-        Array array = commandline.exec(vector);
+         ArrayList array = commandline.exec(vector);
         int i = commandline.getExitValue();
-        if (i == 0 && array.size() >= 1 && array.at(0).toString().startsWith("true")) {
+        if (i == 0 && array.size() >= 1 && array.get(0).toString().startsWith("true")) {
             return true;
         }
         if (array.size() >= 2) {
             for (int j = 1; j < array.size(); j ++) {
-                stringbuffer.append(array.at(j).toString() + "\n");
+                stringbuffer.append(array.get(j).toString() + "\n");
             }
 
         } else {
@@ -134,14 +134,14 @@ public class MAPIMonitor extends AtomicMonitor {
         vector.add("recipientAddressType=" + s1);
         vector.add("recipientAddress=" + s2);
         vector.add("attachment=false");
-        Array array = commandline.exec(vector);
+         ArrayList array = commandline.exec(vector);
         int i = commandline.getExitValue();
-        if (i == 0 && array.size() >= 1 && array.at(0).toString().startsWith("true")) {
+        if (i == 0 && array.size() >= 1 && array.get(0).toString().startsWith("true")) {
             return true;
         }
         if (array.size() >= 2) {
             for (int j = 1; j < array.size(); j ++) {
-                stringbuffer.append(array.at(j).toString() + "\n");
+                stringbuffer.append(array.get(j).toString() + "\n");
             }
 
         } else {
@@ -163,16 +163,16 @@ public class MAPIMonitor extends AtomicMonitor {
         vector1.add("timeout=" + getProperty(pTimeout));
         vector1.add("subject=dummy");
         vector1.add("attachment=false");
-        Array array = commandline.exec(vector1);
+         ArrayList array = commandline.exec(vector1);
         int i = commandline.getExitValue();
-        if (i == 0 && array.size() == 3 && array.at(0).toString().startsWith("true")) {
-            vector.add(array.at(1));
-            vector.add(array.at(2));
+        if (i == 0 && array.size() == 3 && array.get(0).toString().startsWith("true")) {
+            vector.add(array.get(1));
+            vector.add(array.get(2));
             return true;
         }
         if (array.size() >= 2) {
             for (int j = 1; j < array.size(); j ++) {
-                stringbuffer.append(array.at(j).toString() + "\n");
+                stringbuffer.append(array.get(j).toString() + "\n");
             }
 
         } else {
@@ -303,8 +303,8 @@ public class MAPIMonitor extends AtomicMonitor {
     public static void main(String args[]) {
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pRoundTripValue);
         return array;
     }
@@ -319,9 +319,9 @@ public class MAPIMonitor extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pRoundTripValue);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public String GetPropertyLabel(StringProperty stringproperty, boolean flag) {

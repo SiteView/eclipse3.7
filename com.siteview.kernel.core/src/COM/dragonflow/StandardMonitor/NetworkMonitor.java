@@ -24,7 +24,7 @@ import COM.dragonflow.Utils.TextUtils;
 
 import java.io.PrintStream;
 import java.util.Date;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class NetworkMonitor extends AtomicMonitor
 {
@@ -153,9 +153,9 @@ public class NetworkMonitor extends AtomicMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pBytesInPerSecond);
         array.add(pBytesOutPerSecond);
         array.add(pPacketErrorsPerSecond);

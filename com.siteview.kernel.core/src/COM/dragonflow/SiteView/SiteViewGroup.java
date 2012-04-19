@@ -35,9 +35,9 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
-import jgl.HashMapIterator;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
+import HashMapIterator;
 import jgl.Reversing;
 import jgl.Sorting;
 import COM.dragonflow.HTTP.HTTPRequest;
@@ -344,9 +344,9 @@ public class SiteViewGroup extends MonitorGroup {
             if (s.length() > 0) {
                 LogManager.log("RunMonitor", "Running startup script " + s);
                 CommandLine commandline = new CommandLine();
-                Array array = commandline.exec(s);
+                 ArrayList array = commandline.exec(s);
                 long l = commandline.getExitValue();
-                for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", "   " + enumeration.nextElement())) 
+                for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", "   " + enumeration.nextElement())) 
 				{
                 }
                 if (l == 0L) {
@@ -632,8 +632,8 @@ public class SiteViewGroup extends MonitorGroup {
                 String s9 = getProperty("_lockWebserverAddress");
                 if (s9.length() == 0 && (!TextUtils.hasLetters(s8) || s8.equals("localhost"))) {
                     boolean flag1 = false;
-                    Array array = Platform.getIPAddresses("");
-                    Enumeration enumeration = array.elements();
+                     ArrayList array = Platform.getIPAddresses("");
+                    Enumeration enumeration = (Enumeration) array.iterator();
                     while (enumeration.hasMoreElements()) {
                         String s12 = (String) enumeration.nextElement();
                         if (s8.equals(s12)) {
@@ -780,8 +780,8 @@ public class SiteViewGroup extends MonitorGroup {
                 String s11 = getProperty("_lockWebserverAddress");
                 if (s11.length() == 0 && (!TextUtils.hasLetters(s10) || s10.equals("localhost"))) {
                     boolean flag1 = false;
-                    Array array = Platform.getIPAddresses("");
-                    Enumeration enumeration = array.elements();
+                     ArrayList array = Platform.getIPAddresses("");
+                    Enumeration enumeration = (Enumeration) array.iterator();
                     while (enumeration.hasMoreElements()) {
                         String s14 = (String) enumeration.nextElement();
                         if (s10.equals(s14)) {
@@ -1140,7 +1140,7 @@ public class SiteViewGroup extends MonitorGroup {
     public void saveSettings() {
         String s = groupsDirectory.getAbsolutePath() + File.separator + "master.config";
         try {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             array.add(getValuesTable());
             FrameFile.writeToFile(s, array, "_", true, true);
             Platform.chmod(s, "rw");
@@ -1169,8 +1169,8 @@ public class SiteViewGroup extends MonitorGroup {
         return s;
     }
 
-    public Array getGroupFiles() {
-        Array array = new Array();
+    public  ArrayList getGroupFiles() {
+         ArrayList array = new ArrayList();
         if (groupsDirectory.exists() && groupsDirectory.isDirectory()) {
             File file = new File(groupsDirectory, "master.config");
             if (file.exists()) {
@@ -1207,16 +1207,16 @@ public class SiteViewGroup extends MonitorGroup {
         return array;
     }
 
-    public Array getGroupIDs() {
-        Array array;
+    public  ArrayList getGroupIDs() {
+         ArrayList array;
         if (!allGroupsLoaded) {
             array = getGroupFileIDs();
             for (int i = 0; i < array.size(); i ++) {
-                array.put(i, I18N.toNullEncoding((String) array.at(i)));
+                array.set(i, I18N.toNullEncoding((String) array.get(i)));
             }
 
         } else {
-            array = new Array();
+            array = new ArrayList();
             Monitor monitor;
             for (Enumeration enumeration = getMonitors(); enumeration.hasMoreElements(); array.add(monitor.getProperty("_id"))) {
                 monitor = (Monitor) enumeration.nextElement();
@@ -1226,8 +1226,8 @@ public class SiteViewGroup extends MonitorGroup {
         return array;
     }
 
-    public Array getGroupFileIDs() {
-        Array array = new Array();
+    public  ArrayList getGroupFileIDs() {
+         ArrayList array = new ArrayList();
         File file = new File(Platform.getRoot() + "/groups");
         String as[] = file.list();
         for (int i = 0; i < as.length; i ++) {
@@ -1265,9 +1265,9 @@ public class SiteViewGroup extends MonitorGroup {
 
     void loadAllGroups() {
         removeAllElements();
-        Array array = getGroupFileIDs();
+         ArrayList array = getGroupFileIDs();
         String s;
-        for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); loadGroup(s)) {
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); loadGroup(s)) {
             s = I18N.toNullEncoding((String) enumeration.nextElement());
         }
 
@@ -1289,7 +1289,7 @@ public class SiteViewGroup extends MonitorGroup {
      * @param array
      */
     protected void removeGroups(Array array) {
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             File file = (File) enumeration.nextElement();
             String s = file.getName();
@@ -1331,8 +1331,8 @@ public class SiteViewGroup extends MonitorGroup {
      * @return
      */
     private Enumeration addGroups(Array array) {
-        Array array1 = new Array();
-        Enumeration enumeration = array.elements();
+         ArrayList array1 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             File file = (File) enumeration.nextElement();
             String s = file.getName();
@@ -1369,10 +1369,10 @@ public class SiteViewGroup extends MonitorGroup {
                 }
             }
         }
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
-    public synchronized void adjustGroups(Array array, Array array1, Array array2, HashMap hashmap) {
+    public synchronized void adjustGroups(Array array,  ArrayList array1,  ArrayList array2, HashMap hashmap) {
         monitorScheduler.suspendScheduler();
         monitorsStarted = 0;
         removeGroups(array2);
@@ -1444,8 +1444,8 @@ public class SiteViewGroup extends MonitorGroup {
         file = new File(s);
         if (file.exists()) {
             try {
-                Array array = FrameFile.readFromFile(s);
-                Enumeration enumeration = array.elements();
+                 ArrayList array = FrameFile.readFromFile(s);
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements()) {
                     HashMap hashmap = (HashMap) enumeration.nextElement();
                     VirtualMachine virtualmachine = VirtualMachine.createVirtualMachineObject(hashmap);
@@ -1487,8 +1487,8 @@ public class SiteViewGroup extends MonitorGroup {
         file = new File(s);
         if (file.exists()) {
             try {
-                Array array = FrameFile.readFromFile(s);
-                Enumeration enumeration = array.elements();
+                 ArrayList array = FrameFile.readFromFile(s);
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements()) {
                     HashMap hashmap = (HashMap) enumeration.nextElement();
                     HistoryReport historyreport = HistoryReport.createHistoryReportObject(hashmap);
@@ -1662,7 +1662,7 @@ public class SiteViewGroup extends MonitorGroup {
     }
 
     boolean isParentInFilter(Array array, String s) {
-        for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements();) {
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             if (CGI.isRelated(s, s1)) {
                 return true;
@@ -1678,10 +1678,10 @@ public class SiteViewGroup extends MonitorGroup {
      * @param httprequest
      * @return
      */
-    public Array getTopLevelMonitors(HTTPRequest httprequest) {
+    public  ArrayList getTopLevelMonitors(HTTPRequest httprequest) {
         Enumeration enumeration = getMonitors();
-        Array array = new Array();
-        Array array1 = CGI.getGroupFilterForAccount(httprequest);
+         ArrayList array = new ArrayList();
+         ArrayList array1 = CGI.getGroupFilterForAccount(httprequest);
         while (enumeration.hasMoreElements()) {
             Monitor monitor = (Monitor) enumeration.nextElement();
             String s = monitor.getProperty("_health");
@@ -1777,7 +1777,7 @@ public class SiteViewGroup extends MonitorGroup {
 
     private int printCreateGroupGauge(StringBuffer stringbuffer, HTTPRequest httprequest, int i) {
         String s = "";
-        Array array = CGI.getGroupFilterForAccount(httprequest);
+         ArrayList array = CGI.getGroupFilterForAccount(httprequest);
         if (httprequest.actionAllowed("_groupEdit") && array.size() == 0) {
             s = "<A HREF=/SiteView/cgi/go.exe/SiteView?page=group&operation=Add&account=" + httprequest.getAccount() + "><img src=/SiteView/htdocs/artwork/create_group.gif height=17 width=97 border=0></A>";
         }
@@ -1788,11 +1788,11 @@ public class SiteViewGroup extends MonitorGroup {
 
     public void printPage(PrintWriter printwriter, HTTPRequest httprequest) throws Exception 
     {	
-        Array array = getTopLevelMonitors(httprequest);
+         ArrayList array = getTopLevelMonitors(httprequest);
         String s = httprequest.getAccount();
         if (array.size() == 0 && s.startsWith("login")) {
-            Array array1 = CGI.getGroupFilterForAccount(httprequest);
-            String s1 = (String) array1.at(0);
+             ArrayList array1 = CGI.getGroupFilterForAccount(httprequest);
+            String s1 = (String) array1.get(0);
             MonitorGroup monitorgroup = (MonitorGroup) getElementByID(s1);
             if (monitorgroup == null) {
                 throw new HTTPRequestException(404);
@@ -1830,9 +1830,9 @@ public class SiteViewGroup extends MonitorGroup {
         int l = 0;
         String s3 = Monitor.NODATA_CATEGORY;
         if (array.size() > 0) {
-            MonitorGroup monitorgroup1 = (MonitorGroup) array.at(0);
+            MonitorGroup monitorgroup1 = (MonitorGroup) array.get(0);
             String s4 = monitorgroup1.getProperty(pName).trim();
-            for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements();) {
+            for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
                 if (l % j == 0) {
                     stringbuffer.append(createNewTableRow(35));
                 }
@@ -1889,7 +1889,7 @@ public class SiteViewGroup extends MonitorGroup {
         }
         String s6 = "";
         if (httprequest.actionAllowed("_alertEdit") && httprequest.actionAllowed("_alertList") && getSetting("_alertIconLink").length() > 0) {
-            Array array2 = new Array();
+             ArrayList array2 = new ArrayList();
             getGroupAlerts("SiteView", array2);
             s6 = "<td valign=\"middle\" align=\"right\"><p style=\"color: #a5a5a5; font-size:8pt; font-weight: bold; font-family: 'Arial', 'Helvetica', sans-serif;\">Global Alerts: </td>" + printAlertIconLink(httprequest, "_master", "_config", array2);
         }
@@ -2298,9 +2298,9 @@ public class SiteViewGroup extends MonitorGroup {
         Hashtable hashtable = new Hashtable();
         Hashtable hashtable1 = new Hashtable();
         SiteViewGroup siteviewgroup = currentSiteView();
-        Array array = getGroupIDs();
+         ArrayList array = getGroupIDs();
         label0: for (int j1 = 0; j1 < array.size(); j1 ++) {
-            String s1 = I18N.toDefaultEncoding((String) array.at(j1));
+            String s1 = I18N.toDefaultEncoding((String) array.get(j1));
             MonitorGroup monitorgroup = (MonitorGroup) siteviewgroup.getElement(s1);
             if (monitorgroup == null) {
                 continue;
@@ -2373,11 +2373,11 @@ public class SiteViewGroup extends MonitorGroup {
                 String s7 = (String) hashmap.get("_extendedMonitorCountLog");
                 String s6;
                 if (s7 != null && s7.length() > 0) {
-                    Array array1 = monitorPage.getMonitorClasses();
-                    Array array2 = sortClassList(array1);
+                     ArrayList array1 = monitorPage.getMonitorClasses();
+                     ArrayList array2 = sortClassList(array1);
                     s6 = s4 + ": ";
                     for (int l2 = 0; l2 < array1.size(); l2 ++) {
-                        String s9 = (String) array2.at(l2);
+                        String s9 = (String) array2.get(l2);
                         Integer integer = (Integer) hashtable.get(s9);
                         Integer integer1 = (Integer) hashtable1.get(s9);
                         String s11 = TextUtils.numberToString(0);
@@ -2435,10 +2435,10 @@ public class SiteViewGroup extends MonitorGroup {
      * @param array
      * @return
      */
-    private Array sortClassList(Array array) {
-        Array array1 = new Array();
+    private  ArrayList sortClassList(Array array) {
+         ArrayList array1 = new ArrayList();
         boolean flag = false;
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             Class class1 = (Class) enumeration.nextElement();
             try {
@@ -2447,7 +2447,7 @@ public class SiteViewGroup extends MonitorGroup {
                 if (s != null && s.length() > 0) {
                     int i = 0;
                     while (i < array1.size()) {
-                        String s1 = (String) array1.at(i);
+                        String s1 = (String) array1.get(i);
                         if (s.toLowerCase().compareTo(s1.toLowerCase()) <= 0) {
                             array1.insert(i, s);
                             break;
@@ -2471,13 +2471,13 @@ public class SiteViewGroup extends MonitorGroup {
     public static HashMap loadRTConfig(HashMap hashmap) {
         HashMap hashmap1 = new HashMap();
         if (Platform.customConfigPath.length() > 0) {
-            Array array = null;
+             ArrayList array = null;
             try {
                 array = FrameFile.readFromFile(Platform.customConfigPath);
             } catch (Exception exception) {
             }
             if (array != null && array.size() > 0) {
-                hashmap1 = (HashMap) array.at(0);
+                hashmap1 = (HashMap) array.get(0);
             }
             for (HashMapIterator hashmapiterator = hashmap1.begin(); !hashmapiterator.atEnd(); hashmapiterator.advance()) {
                 hashmap.put(hashmapiterator.key(), hashmapiterator.value());

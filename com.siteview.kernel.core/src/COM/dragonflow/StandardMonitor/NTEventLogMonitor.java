@@ -29,8 +29,8 @@ import COM.dragonflow.Utils.*;
 import java.io.PrintStream;
 import java.net.URLEncoder;
 import java.util.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLMonitor
@@ -139,7 +139,7 @@ public class NTEventLogMonitor extends ServerMonitor
             s11 = s11.substring(2);
         }
         Machine machine = Machine.getNTMachine(s11);
-        Array array = null;
+         ArrayList array = null;
         int k = 0;
         if(machine != null && Machine.isNTSSH(s11))
         {
@@ -157,7 +157,7 @@ public class NTEventLogMonitor extends ServerMonitor
             array = commandline.exec(s3, Platform.getLock(s));
             k = commandline.getExitValue();
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         String s12 = "";
         resetStateProperties();
         String s13 = getIntervalEvents(getProperty(pInterval), getProperty(pIntervalEvents));
@@ -165,7 +165,7 @@ public class NTEventLogMonitor extends ServerMonitor
         int l = 0;
         int i1 = -1;
         int j1 = 0;
-        Array array1 = new Array();
+         ArrayList array1 = new ArrayList();
         long l1 = getSettingAsLong("_eventLogMessagesToSave", 10);
         StringBuffer stringbuffer = new StringBuffer();
         long l2 = getSettingAsLong("_NTEventLogMonitorDetailsMax", 1000);
@@ -333,7 +333,7 @@ public class NTEventLogMonitor extends ServerMonitor
                     }
                     if(flag2 && s7.length() != 0)
                     {
-                        Array array2 = new Array();
+                         ArrayList array2 = new ArrayList();
                         StringBuffer stringbuffer2 = new StringBuffer();
                         int i3 = TextUtils.matchExpression(getProperty(pCurrentEventMessage), s7, array2, stringbuffer2);
                         if(i3 != Monitor.kURLok)
@@ -349,29 +349,29 @@ public class NTEventLogMonitor extends ServerMonitor
                             }
                             if(array2.size() == 1)
                             {
-                                setProperty(pValue, array2.at(0));
-                                s17 = s17 + "Positive: " + array2.at(0) + " ";
+                                setProperty(pValue, array2.get(0));
+                                s17 = s17 + "Positive: " + array2.get(0) + " ";
                             } else
                             {
                                 if(array2.size() >= 1)
                                 {
-                                    setProperty(pValue, array2.at(0));
-                                    s17 = s17 + "value: " + array2.at(0) + " ";
+                                    setProperty(pValue, array2.get(0));
+                                    s17 = s17 + "value: " + array2.get(0) + " ";
                                 }
                                 if(array2.size() >= 2)
                                 {
-                                    setProperty(pValue2, array2.at(1));
-                                    s17 = s17 + "value2: " + array2.at(1) + " ";
+                                    setProperty(pValue2, array2.get(1));
+                                    s17 = s17 + "value2: " + array2.get(1) + " ";
                                 }
                                 if(array2.size() >= 3)
                                 {
-                                    setProperty(pValue3, array2.at(2));
-                                    s17 = s17 + " value3: " + array2.at(2) + " ";
+                                    setProperty(pValue3, array2.get(2));
+                                    s17 = s17 + " value3: " + array2.get(2) + " ";
                                 }
                                 if(array2.size() >= 4)
                                 {
-                                    setProperty(pValue4, array2.at(3));
-                                    s17 = s17 + "value4: " + array2.at(3) + " ";
+                                    setProperty(pValue4, array2.get(3));
+                                    s17 = s17 + "value4: " + array2.get(3) + " ";
                                 }
                             }
                         } else
@@ -470,7 +470,7 @@ public class NTEventLogMonitor extends ServerMonitor
                     }
 
                 }
-                Enumeration enumeration1 = array1.elements();
+                Enumeration enumeration1 = (Enumeration) array1.iterator();
                 StringBuffer stringbuffer1 = new StringBuffer();
                 for(; enumeration1.hasMoreElements(); stringbuffer1.append("\n\n"))
                 {
@@ -608,9 +608,9 @@ public class NTEventLogMonitor extends ServerMonitor
         }
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pMatchCount);
         array.add(pRecordCount);
         array.add(pIntervalMatchCount);
@@ -620,7 +620,7 @@ public class NTEventLogMonitor extends ServerMonitor
     public Enumeration getStatePropertyObjects(boolean flag)
     {
         Enumeration enumeration = super.getStatePropertyObjects(flag);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         do
         {
             if(!enumeration.hasMoreElements())
@@ -639,7 +639,7 @@ public class NTEventLogMonitor extends ServerMonitor
                 array.add(stringproperty);
             }
         } while(true);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public String getProperty(StringProperty stringproperty)

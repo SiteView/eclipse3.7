@@ -24,8 +24,8 @@ import java.util.Enumeration;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.SiteViewException.SiteViewOperationalException;
@@ -133,8 +133,8 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 throw new AssertionError();
             }
-            jgl.HashMap hashmap = processToOtherProperties(assinstanceproperty);
-            jgl.HashMap hashmap1 = new HashMap();
+            HashMap hashmap = processToOtherProperties(assinstanceproperty);
+            HashMap hashmap1 = new HashMap();
             if(action != null && (hashmap1 = editActionProperties(action, hashmap, flag)).size() == 0)
             {
                 String s3 = action.getActionString();
@@ -183,10 +183,10 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     private COM.dragonflow.SiteView.Action getAction(COM.dragonflow.Api.Alert alert)
     {
         COM.dragonflow.SiteView.Action action = null;
-        jgl.Array array = COM.dragonflow.SiteView.Platform.split('\t', alert.getCondStr());
+        ArrayList array = COM.dragonflow.SiteView.Platform.split('\t', alert.getCondStr());
         if(array.size() > 1)
         {
-            String s = (String)array.at(1);
+            String s = (String)array.get(1);
             action = COM.dragonflow.SiteView.Action.createAction(getActionClass(s));
             String s1 = "";
             if((s1 = alert.getContext()) != null)
@@ -397,12 +397,12 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
      * @param flag
      * @return
      */
-    private jgl.HashMap editActionProperties(COM.dragonflow.SiteView.Action action, jgl.HashMap hashmap, boolean flag)
+    private HashMap editActionProperties(COM.dragonflow.SiteView.Action action, HashMap hashmap, boolean flag)
     {
-        jgl.HashMap hashmap1 = new HashMap();
-        jgl.Array array = action.getProperties();
+        HashMap hashmap1 = new HashMap();
+        ArrayList array = action.getProperties();
         array = COM.dragonflow.Properties.StringProperty.sortByOrder(array);
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
 
         while (enumeration.hasMoreElements())
             {
@@ -431,7 +431,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             }
             if((stringproperty instanceof COM.dragonflow.Properties.ScalarProperty) && ((COM.dragonflow.Properties.ScalarProperty)stringproperty).multiple)
             {
-                Enumeration enumeration1 = hashmap.values(stringproperty.getName());
+                Enumeration enumeration1 = (Enumeration) hashmap.values(stringproperty.getName());
                 if((!flag || !enumeration1.hasMoreElements()) && flag)
                 {
                     continue;
@@ -473,9 +473,9 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return hashmap1;
     }
 
-    private jgl.HashMap processToOtherProperties(COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[])
+    private HashMap processToOtherProperties(COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[])
     {
-        jgl.HashMap hashmap = new HashMap(true);
+        HashMap hashmap = new HashMap(true);
         String s1 = "";
         for(int i = 0; i < assinstanceproperty.length; i++)
         {
@@ -515,7 +515,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = null;
         try
         {
-            jgl.HashMap hashmap = getClassAttribs(s);
+            HashMap hashmap = getClassAttribs(s);
             int i = 0;
             assinstanceproperty = new COM.dragonflow.Api.SSInstanceProperty[hashmap.size()];
             for(Enumeration enumeration = hashmap.keys(); enumeration.hasMoreElements();)
@@ -545,7 +545,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return assinstanceproperty;
     }
 
-    public COM.dragonflow.Api.SSPropertyDetails getClassPropertyDetails(String s, String s1, jgl.HashMap hashmap)
+    public COM.dragonflow.Api.SSPropertyDetails getClassPropertyDetails(String s, String s1, HashMap hashmap)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         COM.dragonflow.Api.SSPropertyDetails sspropertydetails = null;
@@ -587,7 +587,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return sspropertydetails;
     }
 
-    public COM.dragonflow.Api.SSPropertyDetails[] getClassPropertiesDetails(String s, int i, jgl.HashMap hashmap)
+    public COM.dragonflow.Api.SSPropertyDetails[] getClassPropertiesDetails(String s, int i, HashMap hashmap)
         throws COM.dragonflow.SiteViewException.SiteViewException
     {
         COM.dragonflow.Api.SSPropertyDetails asspropertydetails[] = null;
@@ -599,17 +599,17 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             java.lang.Class class1 = java.lang.Class.forName(s1);
             COM.dragonflow.SiteView.SiteViewObject siteviewobject = (COM.dragonflow.SiteView.SiteViewObject)class1.newInstance();
             s1 = "COM.dragonflow.StandardAction." + s;
-            jgl.Array array = getPropertiesForClass(siteviewobject, s1, "Action", i);
-            jgl.Array array1 = getSynthesizedAlertProperties(null, null, null, i);
+            ArrayList array = getPropertiesForClass(siteviewobject, s1, "Action", i);
+            ArrayList array1 = getSynthesizedAlertProperties(null, null, null, i);
             asspropertydetails = new COM.dragonflow.Api.SSPropertyDetails[array.size() + array1.size()];
             for(int j = 0; j < array.size(); j++)
             {
-                asspropertydetails[j] = getClassProperty((COM.dragonflow.Properties.StringProperty)array.at(j), (COM.dragonflow.SiteView.Action)siteviewobject, hashmap);
+                asspropertydetails[j] = getClassProperty((COM.dragonflow.Properties.StringProperty)array.get(j), (COM.dragonflow.SiteView.Action)siteviewobject, hashmap);
             }
 
             for(int k = 0; k < array1.size(); k++)
             {
-                asspropertydetails[k + array.size()] = new SSPropertyDetails(((COM.dragonflow.Api.SSInstanceProperty)array1.at(k)).getName(), "TEXT", "", ((COM.dragonflow.Api.SSInstanceProperty)array1.at(k)).getLabel(), true, false, (String)((COM.dragonflow.Api.SSInstanceProperty)array1.at(k)).getValue(), new String[0], new String[0], "", true, false, 1000 + k, "", false, false, siteviewobject.getProperty(((COM.dragonflow.Api.SSInstanceProperty)array1.at(k)).getName()));
+                asspropertydetails[k + array.size()] = new SSPropertyDetails(((COM.dragonflow.Api.SSInstanceProperty)array1.get(k)).getName(), "TEXT", "", ((COM.dragonflow.Api.SSInstanceProperty)array1.get(k)).getLabel(), true, false, (String)((COM.dragonflow.Api.SSInstanceProperty)array1.get(k)).getValue(), new String[0], new String[0], "", true, false, 1000 + k, "", false, false, siteviewobject.getProperty(((COM.dragonflow.Api.SSInstanceProperty)array1.get(k)).getName()));
             }
 
         }
@@ -638,13 +638,13 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 s1 = s1.substring(i + 1);
             }
-            jgl.Array array = getConditions();
+            ArrayList array = getConditions();
             if(array.size() > 0)
             {
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements())
                     {
-                    jgl.HashMap hashmap = (jgl.HashMap)enumeration.nextElement();
+                    HashMap hashmap = (HashMap)enumeration.nextElement();
                     String s4 = COM.dragonflow.Utils.I18N.toDefaultEncoding((String)hashmap.get("group"));
                     if(s3.length() == 0 && s4.equals("_master") || s4.equals(s3))
                     {
@@ -652,17 +652,17 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                         String s6 = (String)hashmap.get("monitor");
                         if((s2.length() == 0 && s6.equals("_config") || s6.equals(s2)) && s5.equals(s1))
                         {
-                            jgl.Array array1 = findCondition(COM.dragonflow.Utils.I18N.toDefaultEncoding(s4), s6, s5);
+                            ArrayList array1 = findCondition(COM.dragonflow.Utils.I18N.toDefaultEncoding(s4), s6, s5);
                             if(array1.size() > 1)
                             {
-                                String s7 = (String)array1.at(1);
+                                String s7 = (String)array1.get(1);
                                 COM.dragonflow.SiteView.Action action = COM.dragonflow.SiteView.Action.createAction(getActionClass(s7));
-                                jgl.Array array2 = new Array();
+                                ArrayList array2 = new ArrayList();
                                 COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
                                 getActionArguments(s7, array2, hashmapordered);
                                 action.initializeFromArguments(array2, hashmapordered);
                                 boolean flag = false;
-                                jgl.Array array3 = action.getProperties();
+                                ArrayList array3 = action.getProperties();
                                 array3 = COM.dragonflow.Properties.StringProperty.sortByOrder(array3);
                                 enumeration = array3.elements();
                                 while (enumeration.hasMoreElements())
@@ -674,13 +674,13 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                                         flag = true;
                                     }
                                 }
-                                jgl.Array array4 = getSynthesizedAlertProperties(null, null, null, COM.dragonflow.Api.APISiteView.FILTER_ALL);
+                                ArrayList array4 = getSynthesizedAlertProperties(null, null, null, COM.dragonflow.Api.APISiteView.FILTER_ALL);
                                 int j = 0;
                                 while(j < array4.size()) 
                                 {
-                                    if(!flag && s.equals(((COM.dragonflow.Api.SSInstanceProperty)array4.at(j)).getName()))
+                                    if(!flag && s.equals(((COM.dragonflow.Api.SSInstanceProperty)array4.get(j)).getName()))
                                     {
-                                        sspropertydetails = new SSPropertyDetails(((COM.dragonflow.Api.SSInstanceProperty)array4.at(j)).getName(), "TEXT", "", ((COM.dragonflow.Api.SSInstanceProperty)array4.at(j)).getLabel(), true, false, (String)((COM.dragonflow.Api.SSInstanceProperty)array4.at(j)).getValue(), new String[0], new String[0], "", true, false, 1000 + j, "", false, false, action.getProperty(((COM.dragonflow.Api.SSInstanceProperty)array4.at(j)).getName()));
+                                        sspropertydetails = new SSPropertyDetails(((COM.dragonflow.Api.SSInstanceProperty)array4.get(j)).getName(), "TEXT", "", ((COM.dragonflow.Api.SSInstanceProperty)array4.get(j)).getLabel(), true, false, (String)((COM.dragonflow.Api.SSInstanceProperty)array4.get(j)).getValue(), new String[0], new String[0], "", true, false, 1000 + j, "", false, false, action.getProperty(((COM.dragonflow.Api.SSInstanceProperty)array4.get(j)).getName()));
                                         flag = true;
                                     }
                                     j++;
@@ -766,13 +766,13 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 s = s.substring(j + 1);
             }
-            jgl.Array array = getConditions();
+            ArrayList array = getConditions();
             if(array.size() > 0)
             {
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements())
                     {
-                    jgl.HashMap hashmap = (jgl.HashMap)enumeration.nextElement();
+                    HashMap hashmap = (HashMap)enumeration.nextElement();
                     String s3 = COM.dragonflow.Utils.I18N.toDefaultEncoding((String)hashmap.get("group"));
                     if(s3.equals("_master") || s3.equals(s2))
                     {
@@ -780,11 +780,11 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                         String s5 = (String)hashmap.get("monitor");
                         if((s5.equals("_config") || s5.equals(s1)) && s4.equals(s))
                         {
-                            jgl.Array array1 = findCondition(COM.dragonflow.Utils.I18N.toDefaultEncoding(s3), s5, s4);
+                            ArrayList array1 = findCondition(COM.dragonflow.Utils.I18N.toDefaultEncoding(s3), s5, s4);
                             if(array1.size() > 2)
                             {
-                                String s6 = (String)array1.at(0);
-                                String s7 = (String)array1.at(1);
+                                String s6 = (String)array1.get(0);
+                                String s7 = (String)array1.get(1);
                                 packCondition(hashmap, s7, new HashMap());
                                 COM.dragonflow.SiteView.Action action = COM.dragonflow.SiteView.Action.createAction(getActionClass(s7));
                                 String s8 = "";
@@ -793,7 +793,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                                 {
                                     for(int k = 3; k < array1.size(); k++)
                                     {
-                                        String s10 = (String)array1.at(k);
+                                        String s10 = (String)array1.get(k);
                                         if(s10.startsWith("_UIContext="))
                                         {
                                             s8 = s10.substring("_UIContext".length() + 1);
@@ -809,7 +809,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                                 action.setProperty("_uniqueID", s);
                                 action.setProperty("_UIContext", s8);
                                 action.setProperty("_name", s9);
-                                jgl.Array array2 = new Array();
+                                ArrayList array2 = new ArrayList();
                                 COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
                                 getActionArguments(s7, array2, hashmapordered);
                                 action.initializeFromArguments(array2, hashmapordered);
@@ -857,12 +857,12 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 s1 = s1.substring(i + 1);
             }
-            jgl.Array array = getConditions();
+            ArrayList array = getConditions();
             if(array.size() > 0)
             {
-                Enumeration enumeration = array.elements();
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements()) {
-                    jgl.HashMap hashmap = (jgl.HashMap)enumeration.nextElement();
+                    HashMap hashmap = (HashMap)enumeration.nextElement();
                     String s4 = COM.dragonflow.Utils.I18N.toDefaultEncoding((String)hashmap.get("group"));
                     if(s3.length() == 0 && s4.equals("_master") || s4.equals(s3))
                     {
@@ -870,14 +870,14 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                         String s6 = (String)hashmap.get("monitor");
                         if((s2.length() == 0 && s6.equals("_config") || s6.equals(s2)) && s5.equals(s1))
                         {
-                            jgl.Array array1 = findCondition(COM.dragonflow.Utils.I18N.toDefaultEncoding(s4), s6, s5);
+                            ArrayList array1 = findCondition(COM.dragonflow.Utils.I18N.toDefaultEncoding(s4), s6, s5);
                             if(array1.size() > 1)
                             {
-                                String s7 = (String)array1.at(0);
-                                String s8 = (String)array1.at(1);
+                                String s7 = (String)array1.get(0);
+                                String s8 = (String)array1.get(1);
                                 packCondition(hashmap, s8, new HashMap());
                                 COM.dragonflow.SiteView.Action action = COM.dragonflow.SiteView.Action.createAction(getActionClass(s8));
-                                jgl.Array array2 = new Array();
+                                ArrayList array2 = new ArrayList();
                                 COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
                                 getActionArguments(s8, array2, hashmapordered);
                                 action.initializeFromArguments(array2, hashmapordered);
@@ -918,11 +918,11 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         try
         {
             int i = findType("Alert");
-            jgl.Array array = (jgl.Array)ssChildObjects.elementAt(i);
+            ArrayList array = (jgl.Array)ssChildObjects.elementAt(i);
             assstringreturnvalue = new COM.dragonflow.Api.SSStringReturnValue[array.size()];
             for(int j = 0; j < array.size(); j++)
             {
-                COM.dragonflow.Api.SSStringReturnValue ssstringreturnvalue = new SSStringReturnValue(((String[])array.at(j))[0]);
+                COM.dragonflow.Api.SSStringReturnValue ssstringreturnvalue = new SSStringReturnValue(((String[])array.get(j))[0]);
                 int k = ssstringreturnvalue.getValue().lastIndexOf(".");
                 if(k != -1)
                 {
@@ -944,7 +944,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
     public COM.dragonflow.Api.SSStringReturnValue getClassAttribute(String s, String s1)
         throws java.lang.Exception
     {
-        jgl.HashMap hashmap = getClassAttribs(s);
+        HashMap hashmap = getClassAttribs(s);
         return new SSStringReturnValue((String)hashmap.get(s1));
     }
 
@@ -953,10 +953,10 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         mungeCondition(alert, null);
     }
 
-    private jgl.HashMap getClassAttribs(String s)
+    private HashMap getClassAttribs(String s)
         throws java.lang.Exception
     {
-        jgl.HashMap hashmap = null;
+        HashMap hashmap = null;
         String s1 = "";
         s1 = "COM.dragonflow.StandardAction." + s;
         java.lang.Class class1 = java.lang.Class.forName(s1);
@@ -965,7 +965,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return hashmap;
     }
 
-    private COM.dragonflow.Api.SSPropertyDetails getClassProperty(COM.dragonflow.Properties.StringProperty stringproperty, COM.dragonflow.SiteView.Action action, jgl.HashMap hashmap)
+    private COM.dragonflow.Api.SSPropertyDetails getClassProperty(COM.dragonflow.Properties.StringProperty stringproperty, COM.dragonflow.SiteView.Action action, HashMap hashmap)
         throws java.lang.Exception
     {
         boolean flag = false;
@@ -1101,29 +1101,29 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return new SSPropertyDetails(stringproperty.getName(), s2, stringproperty.getDescription(), stringproperty.getLabel(), stringproperty.isEditable, stringproperty.isMultivalued, "", as, as1, s, !stringproperty.isAdvanced, flag, stringproperty.getOrder(), s1, stringproperty.isAdvanced, stringproperty.isPassword, action.getProperty(stringproperty.getName()));
     }
 
-    private jgl.Array getConditions()
+    private ArrayList getConditions()
         throws java.lang.Exception
     {
         COM.dragonflow.Api.APIAlertCacheManager apialertcachemanager = COM.dragonflow.Api.APIAlertCacheManager.getInstance();
-        jgl.Array array = apialertcachemanager.getConditionsCache();
+        ArrayList array = apialertcachemanager.getConditionsCache();
         if(array != null)
         {
             return array;
         }
-        array = new Array();
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
+        array = new ArrayList();
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig.getMasterConfig();
         addConditions(array, hashmap, "_master", "_config");
-        jgl.Array array1 = new Array();
-        jgl.Array array2 = getAllowedGroupIDs();
+        ArrayList array1 = new ArrayList();
+        ArrayList array2 = getAllowedGroupIDs();
         for(Enumeration enumeration = array2.elements(); enumeration.hasMoreElements();)
         {
             String s = (String)enumeration.nextElement();
-            jgl.Array array3 = ReadGroupFrames(s);
+            ArrayList array3 = ReadGroupFrames(s);
             Enumeration enumeration2 = getMonitors(array3);
-            jgl.HashMap hashmap1 = null;
+            HashMap hashmap1 = null;
             if(enumeration2.hasMoreElements())
             {
-                hashmap1 = (jgl.HashMap)enumeration2.nextElement();
+                hashmap1 = (HashMap)enumeration2.nextElement();
             } else
             {
                 hashmap1 = new HashMap();
@@ -1131,12 +1131,12 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             addConditions(array, hashmap1, COM.dragonflow.Utils.I18N.toNullEncoding(s), "_config");
             while(enumeration2.hasMoreElements()) 
             {
-                jgl.HashMap hashmap2 = (jgl.HashMap)enumeration2.nextElement();
+                HashMap hashmap2 = (HashMap)enumeration2.nextElement();
                 addConditions(array1, hashmap2, COM.dragonflow.Utils.I18N.toNullEncoding(s), (String)hashmap2.get("_id"));
             }
         }
 
-        for(Enumeration enumeration1 = array1.elements(); enumeration1.hasMoreElements(); array.add(enumeration1.nextElement())) { }
+        for(Enumeration enumeration1 = (Enumeration) array1.iterator(); enumeration1.hasMoreElements(); array.add(enumeration1.nextElement())) { }
         apialertcachemanager.setConditionsCache(array);
         return array;
     }
@@ -1153,7 +1153,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         }
     }
 
-    void addConditions(jgl.Array array, jgl.HashMap hashmap, String s, String s1)
+    void addConditions(ArrayList array, HashMap hashmap, String s, String s1)
     {
         COM.dragonflow.Utils.I18N.test(s, 1);
         for(Enumeration enumeration = hashmap.values("_alertCondition"); enumeration.hasMoreElements();)
@@ -1161,7 +1161,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             String s2 = (String)enumeration.nextElement();
             try
             {
-                jgl.HashMap hashmap1 = parseCondition(s2, hashmap, s, s1);
+                HashMap hashmap1 = parseCondition(s2, hashmap, s, s1);
                 array.add(hashmap1);
             }
             catch(java.lang.Exception exception) { }
@@ -1169,18 +1169,18 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
 
     }
 
-    private jgl.HashMap parseCondition(String s, jgl.HashMap hashmap, String s1, String s2)
+    private HashMap parseCondition(String s, HashMap hashmap, String s1, String s2)
         throws java.lang.Exception
     {
-        jgl.HashMap hashmap1 = new HashMap();
+        HashMap hashmap1 = new HashMap();
         hashmap1.put("raw", s);
         hashmap1.put("group", s1);
         hashmap1.put("monitor", s2);
-        jgl.Array array = COM.dragonflow.SiteView.Platform.split('\t', s);
+        ArrayList array = COM.dragonflow.SiteView.Platform.split('\t', s);
         int i = array.size();
-        String s3 = (String)array.at(0);
-        String s4 = (String)array.at(1);
-        String s5 = (String)array.at(2);
+        String s3 = (String)array.get(0);
+        String s4 = (String)array.get(1);
+        String s5 = (String)array.get(2);
         hashmap1.put("expression", s3);
         hashmap1.put("id", s5);
         hashmap1.put("action", s4);
@@ -1188,7 +1188,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         {
             for(int j = 3; j < i; j++)
             {
-                String s6 = (String)array.at(j);
+                String s6 = (String)array.get(j);
                 if(s6.startsWith("_UIContext="))
                 {
                     hashmap1.put("_UIContext", s6.substring("_UIContext".length() + 1));
@@ -1214,7 +1214,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             s7 = s7 + "/" + s2;
         }
         hashmap1.put("fullID", s7 + "/" + s5);
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
         getActionArguments(s4, array1, hashmapordered);
         action.initializeFromArguments(array1, hashmapordered);
@@ -1273,16 +1273,16 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return hashmap1;
     }
 
-    private jgl.Array findCondition(String s, String s1, String s2)
+    private ArrayList findCondition(String s, String s1, String s2)
         throws java.lang.Exception
     {
-        jgl.Array array = ReadGroupFrames(s);
-        jgl.HashMap hashmap = findMonitor(array, s1);
+        ArrayList array = ReadGroupFrames(s);
+        HashMap hashmap = findMonitor(array, s1);
         for(Enumeration enumeration = hashmap.values("_alertCondition"); enumeration.hasMoreElements();)
         {
             String s3 = (String)enumeration.nextElement();
-            jgl.Array array1 = COM.dragonflow.SiteView.Platform.split('\t', s3);
-            if(s2.equals(array1.at(2)))
+            ArrayList array1 = COM.dragonflow.SiteView.Platform.split('\t', s3);
+            if(s2.equals(array1.get(2)))
             {
                 return array1;
             }
@@ -1291,19 +1291,19 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return null;
     }
 
-    private jgl.HashMap findMonitor(jgl.Array array, String s)
+    private HashMap findMonitor(ArrayList array, String s)
         throws java.lang.Exception
     {
         int i = findMonitorIndex(array, s);
-        return (jgl.HashMap)array.at(i);
+        return (HashMap)array.get(i);
     }
 
-    private String conditionName(String s, jgl.HashMap hashmap, jgl.Array array)
+    private String conditionName(String s, HashMap hashmap, ArrayList array)
     {
         String s2 = null;
         if(array.size() > 3)
         {
-            s2 = (String)array.at(3);
+            s2 = (String)array.get(3);
             if(s2.startsWith("_UIContext"))
             {
                 s2 = "";
@@ -1337,10 +1337,10 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         {
             COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup.currentSiteView();
             StringBuffer stringbuffer = new StringBuffer();
-            jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(',', s2);
+            ArrayList array1 = COM.dragonflow.SiteView.Platform.split(',', s2);
             for(int i = 0; i < array1.size(); i++)
             {
-                String s3 = (String)array1.at(i);
+                String s3 = (String)array1.get(i);
                 if(s3.indexOf(' ') < 0)
                 {
                     continue;
@@ -1363,7 +1363,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         }
     }
 
-    void getActionArguments(String s, jgl.Array array, jgl.HashMap hashmap)
+    void getActionArguments(String s, ArrayList array, HashMap hashmap)
     {
         int i = s.indexOf(" ");
         String as[];
@@ -1390,13 +1390,13 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
 
     }
 
-    private COM.dragonflow.Api.SSInstanceProperty[] getPropertiesForAlertInstance(COM.dragonflow.SiteView.Action action, String s, jgl.HashMap hashmap, int i)
+    private COM.dragonflow.Api.SSInstanceProperty[] getPropertiesForAlertInstance(COM.dragonflow.SiteView.Action action, String s, HashMap hashmap, int i)
         throws java.lang.Exception
     {
-        jgl.Array array = new Array();
-        jgl.Array array1 = action.getProperties();
+        ArrayList array = new ArrayList();
+        ArrayList array1 = action.getProperties();
         array1 = COM.dragonflow.Properties.StringProperty.sortByOrder(array1);
-        Enumeration enumeration = array1.elements();
+        Enumeration enumeration = (Enumeration) array1.iterator();
         while (enumeration.hasMoreElements()) {
             boolean flag = false;
             COM.dragonflow.Properties.StringProperty stringproperty = (COM.dragonflow.Properties.StringProperty)enumeration.nextElement();
@@ -1408,10 +1408,10 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
                 array.add(stringproperty);
             }
         } 
-        jgl.Array array2 = getSynthesizedAlertProperties(action, s, hashmap, i);
+        ArrayList array2 = getSynthesizedAlertProperties(action, s, hashmap, i);
         COM.dragonflow.Api.SSInstanceProperty assinstanceproperty[] = new COM.dragonflow.Api.SSInstanceProperty[array.size() + array2.size()];
         int j = 0;
-        for(Enumeration enumeration1 = array.elements(); enumeration1.hasMoreElements(); j++)
+        for(Enumeration enumeration1 = (Enumeration) array.iterator(); enumeration1.hasMoreElements(); j++)
         {
             COM.dragonflow.Properties.StringProperty stringproperty1 = (COM.dragonflow.Properties.StringProperty)enumeration1.nextElement();
             String s2 = stringproperty1.getName();
@@ -1474,16 +1474,16 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
 
         for(int k = 0; k < array2.size(); k++)
         {
-            assinstanceproperty[j + k] = (COM.dragonflow.Api.SSInstanceProperty)array2.at(k);
+            assinstanceproperty[j + k] = (COM.dragonflow.Api.SSInstanceProperty)array2.get(k);
         }
 
         return assinstanceproperty;
     }
 
-    private jgl.Array getSynthesizedAlertProperties(COM.dragonflow.SiteView.Action action, String s, jgl.HashMap hashmap, int i)
+    private ArrayList getSynthesizedAlertProperties(COM.dragonflow.SiteView.Action action, String s, HashMap hashmap, int i)
         throws java.lang.Exception
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         if(i == FILTER_CONFIGURATION_ADD_ALL || i == FILTER_CONFIGURATION_ADD_BASIC || i == FILTER_CONFIGURATION_ADD_ADVANCED || i == FILTER_CONFIGURATION_EDIT_ALL || i == FILTER_CONFIGURATION_EDIT_BASIC || i == FILTER_CONFIGURATION_EDIT_ADVANCED || i == FILTER_CONFIGURATION_ALL || i == COM.dragonflow.Api.APISiteView.FILTER_ALL)
         {
             String s1 = "undo";
@@ -1757,7 +1757,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         }
     }
 
-    private boolean isGroup(jgl.HashMap hashmap)
+    private boolean isGroup(HashMap hashmap)
     {
         return hashmap.get("_id") == null;
     }
@@ -1767,13 +1767,13 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return COM.dragonflow.SiteView.Portal.getSiteViewForID("");
     }
 
-    private String displayName(String s, jgl.Array array)
+    private String displayName(String s, ArrayList array)
         throws java.lang.Exception
     {
         String s1 = null;
         if(array.size() > 3)
         {
-            s1 = (String)array.at(3);
+            s1 = (String)array.get(3);
             if(s1.startsWith("_UIContext"))
             {
                 s1 = "";
@@ -1795,10 +1795,10 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 COM.dragonflow.SiteView.SiteViewObject siteviewobject = getSiteView();
                 StringBuffer stringbuffer = new StringBuffer();
-                jgl.Array array1 = COM.dragonflow.SiteView.Platform.split(',', s1);
+                ArrayList array1 = COM.dragonflow.SiteView.Platform.split(',', s1);
                 for(int i = 0; i < array1.size(); i++)
                 {
-                    String s2 = (String)array1.at(i);
+                    String s2 = (String)array1.get(i);
                     String as[] = COM.dragonflow.Utils.TextUtils.split(s2);
                     String s4 = as[0];
                     COM.dragonflow.SiteView.MonitorGroup monitorgroup = (COM.dragonflow.SiteView.MonitorGroup)siteviewobject.getElement(s4);
@@ -1831,10 +1831,10 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 COM.dragonflow.SiteView.SiteViewObject siteviewobject1 = getSiteView();
                 StringBuffer stringbuffer1 = new StringBuffer();
-                jgl.Array array2 = COM.dragonflow.SiteView.Platform.split(',', s1);
+                ArrayList array2 = COM.dragonflow.SiteView.Platform.split(',', s1);
                 for(int j = 0; j < array2.size(); j++)
                 {
-                    String s3 = (String)array2.at(j);
+                    String s3 = (String)array2.get(j);
                     String as1[] = COM.dragonflow.Utils.TextUtils.split(s3);
                     String s5 = as1[0];
                     COM.dragonflow.SiteView.MonitorGroup monitorgroup1 = (COM.dragonflow.SiteView.MonitorGroup)siteviewobject1.getElement(s5);
@@ -1944,12 +1944,12 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         throws java.lang.Exception
     {
         COM.dragonflow.Utils.I18N.test(s, 0);
-        jgl.HashMap hashmap = null;
-        jgl.Array array = ReadGroupFrames(s);
-        Enumeration enumeration = array.elements();
+        HashMap hashmap = null;
+        ArrayList array = ReadGroupFrames(s);
+        Enumeration enumeration = (Enumeration) array.iterator();
         if(enumeration.hasMoreElements())
         {
-            hashmap = (jgl.HashMap)enumeration.nextElement();
+            hashmap = (HashMap)enumeration.nextElement();
         } else
         {
             hashmap = new HashMap();
@@ -1957,7 +1957,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return getGroupName(hashmap, s);
     }
 
-    private String getGroupName(jgl.HashMap hashmap, String s)
+    private String getGroupName(HashMap hashmap, String s)
     {
         String s1 = null;
         if(hashmap != null)
@@ -1971,24 +1971,24 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return s1;
     }
 
-    private jgl.Array getAllowedGroupIDs()
+    private ArrayList getAllowedGroupIDs()
     {
         return getAllowedGroupIDsForAccount();
     }
 
-    private jgl.Array getAllowedGroupIDsForAccount()
+    private ArrayList getAllowedGroupIDsForAccount()
     {
-        jgl.Array array = COM.dragonflow.Utils.I18N.toDefaultArray(COM.dragonflow.SiteView.SiteViewGroup.currentSiteView().getGroupIDs());
+        ArrayList array = COM.dragonflow.Utils.I18N.toDefaultArray(COM.dragonflow.SiteView.SiteViewGroup.currentSiteView().getGroupIDs());
         return filterGroupsForAccount(array);
     }
 
-    private jgl.Array filterGroupsForAccount(jgl.Array array)
+    private ArrayList filterGroupsForAccount(ArrayList array)
     {
-        jgl.Array array1 = getGroupFilterForAccount("");
+        ArrayList array1 = getGroupFilterForAccount("");
         if(array1 != null && array1.size() != 0)
         {
-            Enumeration enumeration = array.elements();
-            array = new Array();
+            Enumeration enumeration = (Enumeration) array.iterator();
+            array = new ArrayList();
             while (enumeration.hasMoreElements()) {
                 String s = (String)enumeration.nextElement();
                 if(allowedByGroupFilter(s, array1))
@@ -2187,35 +2187,35 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return "";
     }
 
-    private Enumeration getMonitors(jgl.Array array)
+    private Enumeration getMonitors(ArrayList array)
     {
-        jgl.Array array1 = new Array();
-        Enumeration enumeration = array.elements();
+        ArrayList array1 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if(enumeration.hasMoreElements())
         {
             array1.add(enumeration.nextElement());
         }
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap = (jgl.HashMap)enumeration.nextElement();
+            HashMap hashmap = (HashMap)enumeration.nextElement();
             if(COM.dragonflow.SiteView.Monitor.isMonitorFrame(hashmap))
             {
                 array1.add(hashmap);
             }
         } 
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
-    private jgl.HashMap addCondition(COM.dragonflow.Api.Alert alert, String s)
+    private HashMap addCondition(COM.dragonflow.Api.Alert alert, String s)
     {
         return mungeCondition(alert, s);
     }
 
-    private jgl.HashMap mungeCondition(COM.dragonflow.Api.Alert alert, String s)
+    private HashMap mungeCondition(COM.dragonflow.Api.Alert alert, String s)
     {
-        jgl.HashMap hashmap = null;
+        HashMap hashmap = null;
         try
         {
-            jgl.Array array = ReadGroupFrames(alert.getGroup());
+            ArrayList array = ReadGroupFrames(alert.getGroup());
             hashmap = findMonitor(array, alert.getMonitorID());
             String s1 = alert.getIDStr();
             String s2 = s + "\t" + s1;
@@ -2231,13 +2231,13 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
             {
                 s2 = s2 + "\t_name=" + alert.getName();
             }
-            jgl.Array array1 = new Array();
+            ArrayList array1 = new ArrayList();
             boolean flag = false;
             Enumeration enumeration = hashmap.values("_alertCondition");
             while (enumeration.hasMoreElements()) {
                 String s3 = (String)enumeration.nextElement();
-                jgl.Array array2 = COM.dragonflow.SiteView.Platform.split('\t', s3);
-                if(array2.at(2).equals(s1))
+                ArrayList array2 = COM.dragonflow.SiteView.Platform.split('\t', s3);
+                if(array2.get(2).equals(s1))
                 {
                     if(s != null)
                     {
@@ -2263,7 +2263,7 @@ public class APIAlert extends COM.dragonflow.Api.APISiteView
         return hashmap;
     }
 
-    private String packCondition(jgl.HashMap hashmap, String s, jgl.HashMap hashmap1)
+    private String packCondition(HashMap hashmap, String s, HashMap hashmap1)
     {
         String s1 = "";
         String s2 = "";

@@ -29,8 +29,8 @@ import COM.dragonflow.Utils.*;
 
 import java.io.File;
 import java.util.*;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            NTCounterMonitor
@@ -61,7 +61,7 @@ public class UnixCounterMonitor extends ServerMonitor
     boolean hasSubscription;
     static boolean showDebug = false;
     static HashMap allSettings = new HashMap();
-    Array countersCache;
+     ArrayList countersCache;
     HashMap labelsCache;
     static HashMap noData = new HashMap();
 
@@ -90,14 +90,14 @@ public class UnixCounterMonitor extends ServerMonitor
         return nMaxCounters;
     }
 
-    synchronized Array getCounters()
+    synchronized  ArrayList getCounters()
     {
         if(countersCache == null)
         {
             String s = getProperty(pObject);
             if(s.length() > 0)
             {
-                countersCache = new Array();
+                countersCache = new ArrayList();
                 PerfCounter perfcounter = new PerfCounter();
                 perfcounter.object = getProperty(pObject);
                 perfcounter.counterName = getProperty(pCounter);
@@ -116,7 +116,7 @@ public class UnixCounterMonitor extends ServerMonitor
                     }
                     catch(Exception exception)
                     {
-                        countersCache = new Array();
+                        countersCache = new ArrayList();
                         LogManager.log("Error", "error reading Perf Chart file, " + s1 + ", " + exception);
                     }
                 }
@@ -127,7 +127,7 @@ public class UnixCounterMonitor extends ServerMonitor
 
     int getActiveCounters()
     {
-        Array array = getCounters();
+         ArrayList array = getCounters();
         if(array == null)
         {
             return 0;
@@ -150,10 +150,10 @@ public class UnixCounterMonitor extends ServerMonitor
                 labelsCache.add("Counter 1 Value", getProperty(pCounter));
             } else
             {
-                Array array = getCounters();
+                 ArrayList array = getCounters();
                 for(int i = 0; i < array.size(); i++)
                 {
-                    PerfCounter perfcounter = (PerfCounter)array.at(i);
+                    PerfCounter perfcounter = (PerfCounter)array.get(i);
                     labelsCache.add("Counter " + (i + 1) + " Value", perfcounter.counterName);
                 }
 
@@ -246,20 +246,20 @@ public class UnixCounterMonitor extends ServerMonitor
         }
         String s2 = getProperty(pMonitorDescription);
         String s3 = "-1";
-        Array array = Platform.split(' ', s2);
+         ArrayList array = Platform.split(' ', s2);
         if(array.size() >= 1)
         {
-            Array array1 = Platform.split('=', (String)array.at(0));
+             ArrayList array1 = Platform.split('=', (String)array.get(0));
             if(array1.size() == 2)
             {
-                s3 = (String)array1.at(1);
+                s3 = (String)array1.get(1);
             }
         }
         if(showDebug)
         {
             LogManager.log("RunMonitor", "server=" + s3 + ", data=" + s + ", object=" + perfcounter.object + ", counter=" + perfcounter.counterName + ", instance=" + perfcounter.instance + ", value=" + f);
         }
-        Array array2 = new Array();
+         ArrayList array2 = new ArrayList();
         array2.add(s3);
         array2.add(s);
         array2.add(perfcounter.object);
@@ -277,7 +277,7 @@ public class UnixCounterMonitor extends ServerMonitor
         long l2 = 0L;
         long l3 = 1L;
         long l4 = 0L;
-        Array array = getCounters();
+         ArrayList array = getCounters();
         if(array.size() == 0)
         {
             setProperty(pLastMeasurementTime, 0);
@@ -310,9 +310,9 @@ public class UnixCounterMonitor extends ServerMonitor
         for(int j = 0; flag && j < 2; j++)
         {
             StringBuffer stringbuffer = new StringBuffer();
-            Array array1 = getUnixData(s, array, stringbuffer);
+             ArrayList array1 = getUnixData(s, array, stringbuffer);
             s3 = stringbuffer.toString();
-            enumeration = array1.elements();
+            enumeration = (Enumeration) array1.iterator();
             if(enumeration.hasMoreElements())
             {
                 l2 = TextUtils.toLong((String)enumeration.nextElement());
@@ -378,7 +378,7 @@ public class UnixCounterMonitor extends ServerMonitor
         long l7 = getSettingAsLong("_NTCounterSummaryMax", 3);
         while(enumeration.hasMoreElements()) 
         {
-            PerfCounter perfcounter = (PerfCounter)array.at(k);
+            PerfCounter perfcounter = (PerfCounter)array.get(k);
             String s5 = (String)enumeration.nextElement();
             float f2 = (0.0F / 0.0F);
             long l8 = 0L;
@@ -656,7 +656,7 @@ public class UnixCounterMonitor extends ServerMonitor
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if(commandline.getExitValue() != 0)
         {
@@ -712,14 +712,14 @@ public class UnixCounterMonitor extends ServerMonitor
         return 0;
     }
 
-    static void appendOutput(String s, String s1, int i, Array array)
+    static void appendOutput(String s, String s1, int i,  ArrayList array)
     {
         if(showDebug)
         {
             LogManager.log("RunMonitor", "asset command=" + s1);
             LogManager.log("RunMonitor", " result=" + i);
             LogManager.log("RunMonitor", " machine=" + s);
-            for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", " output=" + enumeration.nextElement())) { }
+            for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); LogManager.log("RunMonitor", " output=" + enumeration.nextElement())) { }
         }
     }
 
@@ -740,13 +740,13 @@ public class UnixCounterMonitor extends ServerMonitor
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if(commandline.getExitValue() != 0)
         {
             return commandline.getExitValue();
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         int i = osadapter.getCommandSettingAsInteger("disks", "total");
         int j = osadapter.getCommandSettingAsInteger("disks", "free");
         int k = osadapter.getCommandSettingAsInteger("disks", "mount");
@@ -854,7 +854,7 @@ public class UnixCounterMonitor extends ServerMonitor
         int i = osadapter.getCommandSettingAsInteger("paging", "blocks");
         int j = osadapter.getCommandSettingAsInteger("paging", "free");
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if(commandline.getExitValue() != 0)
         {
@@ -922,7 +922,7 @@ public class UnixCounterMonitor extends ServerMonitor
             return -1;
         }
         CommandLine commandline = new CommandLine();
-        Array array = commandline.exec(s1, s, Platform.getLock(s));
+         ArrayList array = commandline.exec(s1, s, Platform.getLock(s));
         appendOutput(s, s1, commandline.getExitValue(), array);
         if(commandline.getExitValue() != 0)
         {
@@ -981,7 +981,7 @@ public class UnixCounterMonitor extends ServerMonitor
         return s2;
     }
 
-    public static Array getUnixData(String s, Array array, StringBuffer stringbuffer)
+    public static  ArrayList getUnixData(String s,  ArrayList array, StringBuffer stringbuffer)
     {
         long l = Platform.timeMillis();
         String s1 = "" + l;
@@ -1023,7 +1023,7 @@ public class UnixCounterMonitor extends ServerMonitor
         {
             for(int i1 = 0; i1 < i; i1++)
             {
-                PerfCounter perfcounter = (PerfCounter)array.at(i1);
+                PerfCounter perfcounter = (PerfCounter)array.get(i1);
                 String s4 = (String)hashmap.get(getKey(perfcounter.counterName, perfcounter.instance));
                 if(s4 == null)
                 {
@@ -1042,7 +1042,7 @@ public class UnixCounterMonitor extends ServerMonitor
             }
 
         }
-        Array array1 = new Array();
+         ArrayList array1 = new ArrayList();
         array1.add(s1);
         array1.add(s3);
         array1.add(s2);
@@ -1065,9 +1065,9 @@ public class UnixCounterMonitor extends ServerMonitor
         return array1;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         int i = getActiveCounters();
         for(int j = 0; j < i; j++)
         {
@@ -1081,14 +1081,14 @@ public class UnixCounterMonitor extends ServerMonitor
 
     public Enumeration getStatePropertyObjects(boolean flag)
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         int i = getActiveCounters();
         for(int j = 0; j < i; j++)
         {
             array.add(pValues[j]);
         }
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public String defaultTitle()
@@ -1205,7 +1205,7 @@ public class UnixCounterMonitor extends ServerMonitor
     static 
     {
         nMaxCounters = 0;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         HashMap hashmap = MasterConfig.getMasterConfig();
         nMaxCounters = TextUtils.toInt(TextUtils.getValue(hashmap, "_UnixCounterMonitorMaxCounters"));
         if(nMaxCounters == 0)
@@ -1262,7 +1262,7 @@ public class UnixCounterMonitor extends ServerMonitor
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for(int j = 0; j < array.size(); j++)
         {
-            astringproperty[j] = (StringProperty)array.at(j);
+            astringproperty[j] = (StringProperty)array.get(j);
         }
 
         addProperties("COM.dragonflow.StandardMonitor.UnixCounterMonitor", astringproperty);

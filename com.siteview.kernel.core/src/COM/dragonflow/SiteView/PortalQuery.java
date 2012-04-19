@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.HashMapOrdered;
 import COM.dragonflow.Utils.TextUtils;
@@ -71,7 +71,7 @@ public class PortalQuery {
                 httprequest);
     }
 
-    public PortalQuery(HashMap hashmap, Array array, HTTPRequest httprequest) {
+    public PortalQuery(HashMap hashmap,  ArrayList array, HTTPRequest httprequest) {
         this(hashmap, ((PortalQueryVisitor) (new PQVMatchingObjects(array))),
                 httprequest);
     }
@@ -133,8 +133,8 @@ public class PortalQuery {
      * 
      * @return
      */
-    public Array getServers() {
-        Array array = new Array();
+    public  ArrayList getServers() {
+         ArrayList array = new ArrayList();
         Enumeration enumeration = Portal.getPortal().getElements();
         while (enumeration.hasMoreElements()) {
             PortalSiteView portalsiteview = (PortalSiteView) enumeration
@@ -150,12 +150,12 @@ public class PortalQuery {
         itemFilter.addFilter(portalfilter);
     }
 
-    public Array getSortedGroupIDs(PortalSiteView portalsiteview) {
-        Array array = new Array();
+    public  ArrayList getSortedGroupIDs(PortalSiteView portalsiteview) {
+         ArrayList array = new ArrayList();
         int i = 0;
-        Array array1 = portalsiteview.getGroups();
+         ArrayList array1 = portalsiteview.getGroups();
         for (int j = 0; j < array1.size(); j++) {
-            MonitorGroup monitorgroup = (MonitorGroup) array1.at(j);
+            MonitorGroup monitorgroup = (MonitorGroup) array1.get(j);
             if (monitorgroup.getProperty(MonitorGroup.pParent).length() == 0) {
                 array.add(monitorgroup.getProperty(Monitor.pID));
                 monitorgroup.setProperty("groupLevel", "0");
@@ -173,9 +173,9 @@ public class PortalQuery {
     public void runQuery() {
         boolean flag = visitor.enterprisePre();
         if (flag) {
-            Array array = getServers();
+             ArrayList array = getServers();
             PortalSiteView portalsiteview;
-            for (Enumeration enumeration = array.elements(); enumeration
+            for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                     .hasMoreElements(); processSiteView(portalsiteview)) {
                 portalsiteview = (PortalSiteView) enumeration.nextElement();
                 if (debug) {
@@ -198,9 +198,9 @@ public class PortalQuery {
                 TextUtils.debugPrint("search groups: "
                         + portalsiteview.getProperty(PortalSiteView.pTitle));
             }
-            Array array = getSortedGroupIDs(portalsiteview);
+             ArrayList array = getSortedGroupIDs(portalsiteview);
             for (int i = 0; i < array.size(); i++) {
-                String s = (String) array.at(i);
+                String s = (String) array.get(i);
                 MonitorGroup monitorgroup = (MonitorGroup) portalsiteview
                         .getElement(s);
                 if (monitorgroup == null
@@ -216,10 +216,10 @@ public class PortalQuery {
             }
 
             if (addAlerts) {
-                Array array1 = portalsiteview.getElementsOfClass(
+                 ArrayList array1 = portalsiteview.getElementsOfClass(
                         "COM.dragonflow.SiteView.Rule", false, false);
                 Rule rule;
-                for (Enumeration enumeration = array1.elements(); enumeration
+                for (Enumeration enumeration = (Enumeration) array1.iterator(); enumeration
                         .hasMoreElements(); processAlert(rule, null, null,
                         portalsiteview)) {
                     rule = (Rule) enumeration.nextElement();
@@ -240,10 +240,10 @@ public class PortalQuery {
         boolean flag = visitor.groupPre(monitorgroup, portalsiteview);
         if (flag) {
             if (addAlerts) {
-                Array array = monitorgroup.getElementsOfClass(
+                 ArrayList array = monitorgroup.getElementsOfClass(
                         "COM.dragonflow.SiteView.Rule", false, false);
                 Rule rule;
-                for (Enumeration enumeration1 = array.elements(); enumeration1
+                for (Enumeration enumeration1 = (Enumeration) array.iterator(); enumeration1
                         .hasMoreElements(); processAlert(rule, null,
                         monitorgroup, portalsiteview)) {
                     rule = (Rule) enumeration1.nextElement();
@@ -272,10 +272,10 @@ public class PortalQuery {
         boolean flag = visitor.monitorPre(monitor, monitorgroup,
                 portalsiteview);
         if (flag && addAlerts) {
-            Array array = monitor.getElementsOfClass(
+             ArrayList array = monitor.getElementsOfClass(
                     "COM.dragonflow.SiteView.Rule", false, false);
             Rule rule;
-            for (Enumeration enumeration = array.elements(); enumeration
+            for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                     .hasMoreElements(); processAlert(rule, monitor,
                     monitorgroup, portalsiteview)) {
                 rule = (Rule) enumeration.nextElement();
@@ -296,7 +296,7 @@ public class PortalQuery {
         } else {
             as = new String[0];
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         HashMapOrdered hashmapordered = new HashMapOrdered(true);
         for (int j = 0; j < as.length; j++) {
             int k = as[j].indexOf("=");
@@ -327,7 +327,7 @@ public class PortalQuery {
      * @param i
      */
     void findSubgroups(PortalSiteView portalsiteview,
-            MonitorGroup monitorgroup, Array array, int i) {
+            MonitorGroup monitorgroup,  ArrayList array, int i) {
         Enumeration enumeration = monitorgroup.getMonitors();
         while (enumeration.hasMoreElements()) {
             Monitor monitor = (Monitor) enumeration.nextElement();

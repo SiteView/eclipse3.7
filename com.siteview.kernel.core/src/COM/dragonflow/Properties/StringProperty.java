@@ -20,8 +20,9 @@ package COM.dragonflow.Properties;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
+
 import jgl.Sorting;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
@@ -665,7 +666,7 @@ public class StringProperty {
         return l;
     }
 
-    public static Array sortByOrder(Array array) {
+    public static  ArrayList sortByOrder(Array array) {
         Sorting.sort(array, new GreaterEqualOrder(true));
         return array;
     }

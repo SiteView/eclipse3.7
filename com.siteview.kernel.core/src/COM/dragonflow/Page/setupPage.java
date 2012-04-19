@@ -12,8 +12,8 @@ package COM.dragonflow.Page;
 import java.io.File;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.Properties.HashMapOrdered;
 
 // Referenced classes of package COM.dragonflow.Page:
@@ -52,10 +52,10 @@ public class setupPage extends COM.dragonflow.Page.CGI
         {
             outputStream.println("<b>Creating default monitors and groups ...</b><p>");
             outputStream.flush();
-            jgl.Array array = new Array();
-            jgl.Array array1 = new Array();
-            jgl.HashMap hashmap = new HashMap();
-            jgl.HashMap hashmap1 = new HashMap();
+            ArrayList array = new ArrayList();
+            ArrayList array1 = new ArrayList();
+            HashMap hashmap = new HashMap();
+            HashMap hashmap1 = new HashMap();
             int i = 0;
             char c = '\u0258';
             array.add("Examples");
@@ -89,7 +89,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
             hashmap.put("_nextID", "" + i);
             writeFrameFile(array1, "Examples", "mg");
             array.add("Heartbeats");
-            array1 = new Array();
+            array1 = new ArrayList();
             hashmap = new HashMap();
             hashmap.put("_name", "Heartbeat monitors subgroup");
             hashmap.put("_parent", "Examples");
@@ -122,7 +122,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
                 String as[] = {
                     "init", "inetd", "ttymon"
                 };
-                jgl.Array array2 = COM.dragonflow.SiteView.Platform.processList();
+                ArrayList array2 = COM.dragonflow.SiteView.Platform.processList();
                 int k = 0;
                 do
                 {
@@ -161,7 +161,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
             hashmap.put("_nextID", "" + i);
             writeFrameFile(array1, "Heartbeats", "mg");
             array.add("Applications");
-            array1 = new Array();
+            array1 = new ArrayList();
             hashmap = new HashMap();
             hashmap.put("_name", "Application monitors subgroup");
             hashmap.put("_parent", "Examples");
@@ -242,7 +242,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
                 String as1[] = {
                     "IIS Admin", "World Wide Web", "Netscape", "FTP", "HTTP"
                 };
-                jgl.Array array3 = COM.dragonflow.SiteView.Platform.processList();
+                ArrayList array3 = COM.dragonflow.SiteView.Platform.processList();
                 for(Enumeration enumeration1 = array3.elements(); enumeration1.hasMoreElements();)
                 {
                     String s2 = (String)enumeration1.nextElement();
@@ -269,7 +269,7 @@ public class setupPage extends COM.dragonflow.Page.CGI
                 String as2[] = {
                     "http", "ftp", "sendmail"
                 };
-                jgl.Array array4 = COM.dragonflow.SiteView.Platform.processList();
+                ArrayList array4 = COM.dragonflow.SiteView.Platform.processList();
 label0:
                 for(int l = 0; l < as2.length; l++)
                 {
@@ -303,7 +303,7 @@ label0:
             hashmap.put("_nextID", "" + i);
             writeFrameFile(array1, "Applications", "mg");
             array.add("Systems");
-            array1 = new Array();
+            array1 = new ArrayList();
             hashmap = new HashMap();
             hashmap.put("_name", "System monitors subgroup");
             hashmap.put("_parent", "Examples");
@@ -385,7 +385,7 @@ label0:
             hashmap.put("_nextID", "" + i);
             writeFrameFile(array1, "Systems", "mg");
             array.add("Network");
-            array1 = new Array();
+            array1 = new ArrayList();
             hashmap = new HashMap();
             hashmap.put("_name", "Network monitors subgroup");
             hashmap.put("_parent", "Examples");
@@ -424,7 +424,7 @@ label0:
             hashmap.put("_nextID", "" + i);
             writeFrameFile(array1, "Network", "mg");
             array.add("SNMP_Subgroup");
-            array1 = new Array();
+            array1 = new ArrayList();
             hashmap = new HashMap();
             hashmap.put("_name", "SNMP Subgroup");
             hashmap.put("_parent", "Network");
@@ -507,7 +507,7 @@ label0:
             hashmap.put("_nextID", "" + i);
             writeFrameFile(array1, "SNMP_Subgroup", "mg");
             array.add("Database_Subgroup");
-            array1 = new Array();
+            array1 = new ArrayList();
             hashmap = new HashMap();
             hashmap.put("_name", "Database Subgroup");
             hashmap.put("_parent", "Applications");
@@ -565,12 +565,12 @@ label0:
             writeFrameFile(array1, "Database_Subgroup", "mg");
             outputStream.println("<p>Adding default daily and weekly reports...<p>");
             outputStream.flush();
-            jgl.Array array5 = new Array();
+            ArrayList array5 = new ArrayList();
             int i1 = 1;
             for(int j1 = 0; j1 < array.size(); j1++)
             {
-                array5.add(createDailyFrame(i1++, (String)array.at(j1)));
-                array5.add(createWeeklyFrame(i1++, (String)array.at(j1)));
+                array5.add(createDailyFrame(i1++, (String)array.get(j1)));
+                array5.add(createWeeklyFrame(i1++, (String)array.get(j1)));
             }
 
             writeFrameFile(array5, "history", "config");
@@ -588,12 +588,12 @@ label0:
 
     public void printBody()
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
         try
         {
-            jgl.Array array1 = COM.dragonflow.Properties.FrameFile.readFromFile(COM.dragonflow.SiteView.Platform.getRoot() + java.io.File.separator + "classes" + java.io.File.separator + "setup.config");
-            jgl.HashMap hashmap = (jgl.HashMap)array1.front();
+            ArrayList array1 = COM.dragonflow.Properties.FrameFile.readFromFile(COM.dragonflow.SiteView.Platform.getRoot() + java.io.File.separator + "classes" + java.io.File.separator + "setup.config");
+            HashMap hashmap = (HashMap)array1.front();
             if(request.isPost())
             {
                 if(request.getValue("licenseAccepted").length() > 0)
@@ -700,7 +700,7 @@ label0:
         }
     }
 
-    void writeFrameFile(jgl.Array array, String s, String s1)
+    void writeFrameFile(ArrayList array, String s, String s1)
     {
         try
         {
@@ -760,7 +760,7 @@ label0:
         return s;
     }
 
-    void updateStatusPage(jgl.Array array)
+    void updateStatusPage(ArrayList array)
     {
         outputStream.println("<p>Updating status pages and config file ...<p>");
         outputStream.flush();
@@ -771,7 +771,7 @@ label0:
             siteviewgroup.saveSettings();
             for(int i = 0; i < array.size(); i++)
             {
-                COM.dragonflow.SiteView.SiteViewGroup.updateStaticPages((String)array.at(i));
+                COM.dragonflow.SiteView.SiteViewGroup.updateStaticPages((String)array.get(i));
             }
 
             siteviewgroup.startingUp = false;
@@ -779,7 +779,7 @@ label0:
         catch(java.lang.Exception exception) { }
     }
 
-    jgl.HashMap createHistoryFrame(int i, String s)
+    HashMap createHistoryFrame(int i, String s)
     {
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(true);
         hashmapordered.add("startHour", "now");
@@ -792,17 +792,17 @@ label0:
         return hashmapordered;
     }
 
-    jgl.HashMap createDailyFrame(int i, String s)
+    HashMap createDailyFrame(int i, String s)
     {
-        jgl.HashMap hashmap = createHistoryFrame(i, s);
+        HashMap hashmap = createHistoryFrame(i, s);
         hashmap.add("window", String.valueOf(0x15180));
         hashmap.add("schedule", "weekday\tM,T,W,R,F,S,U\t01:00");
         return hashmap;
     }
 
-    jgl.HashMap createWeeklyFrame(int i, String s)
+    HashMap createWeeklyFrame(int i, String s)
     {
-        jgl.HashMap hashmap = createHistoryFrame(i, s);
+        HashMap hashmap = createHistoryFrame(i, s);
         hashmap.add("window", String.valueOf(0x93a80));
         hashmap.add("schedule", "weekday\tU\t02:00");
         return hashmap;

@@ -104,7 +104,7 @@ public class appServerSolutionTemplatePage extends
                 .println("<!--\nfunction getSelectedModulesHTML() {\nvar selectedModulesHTML = \"<UL><h4>Modules Selected for Monitoring</h4>\"\nvar appsForm = document."
                         + s
                         + "; \n"
-                        + "var selectedBoxes = new Array(); \n"
+                        + "var selectedBoxes = new ArrayList(); \n"
                         + "var selectedIdx = 0; \n"
                         + "for (var i = 0; i < appsForm.length; i++) {\n"
                         + "if ( (appsForm.elements[i].type == \"checkbox\" && "

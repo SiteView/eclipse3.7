@@ -15,8 +15,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import jgl.LessString;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Properties.HashMapOrdered;
@@ -55,7 +55,7 @@ public abstract class CGI {
         }
     }
 
-    public static class menus extends jgl.Array {
+    public static class menus extends ArrayList {
 
         public menus() {
             add(new menuItems("Multi-view", "overview", "", "script",
@@ -78,11 +78,11 @@ public abstract class CGI {
 
     public static String CONTENT_REGEX = "/<!--CONTENTSTART-->(.*)<!--CONTENTEND-->/s";
 
-    private jgl.HashMap privateConfigCache;
+    private HashMap privateConfigCache;
 
-    private jgl.HashMap privateLocalConfigCache;
+    private HashMap privateLocalConfigCache;
 
-    private jgl.Array settingsArray;
+    private ArrayList settingsArray;
 
     public static final int SHOW_MONITORS = 1;
 
@@ -247,13 +247,13 @@ public abstract class CGI {
         COM.dragonflow.Page.CGI.printFooter(printwriter, httprequest, false);
     }
 
-    jgl.Array _getUsedMonitorClasses() {
-        jgl.Array array = new Array();
+    ArrayList _getUsedMonitorClasses() {
+        ArrayList array = new ArrayList();
         COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup
                 .currentSiteView();
         Enumeration enumeration = siteviewgroup.getGroupIDs()
                 .elements();
-        jgl.HashMap hashmap = new HashMap();
+        HashMap hashmap = new HashMap();
         while (enumeration.hasMoreElements()) {
             COM.dragonflow.SiteView.MonitorGroup monitorgroup = COM.dragonflow.SiteView.SiteViewGroup
                     .currentSiteView().getGroup(
@@ -428,7 +428,7 @@ public abstract class CGI {
                 .print("<TABLE class=\"subnav\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"4\"><TR class=\"subnav\"><TD><img src=/SiteView/htdocs/artwork/empty1111.gif width=10 height=10 border=0></td>");
         if (menus1.size() != 0) {
             for (int j = 0; j < menus1.size(); j++) {
-                menuItems menuitems = (menuItems) menus1.at(j);
+                menuItems menuitems = (menuItems) menus1.get(j);
                 if (menuitems.linkClass.equals("url")) {
                     printwriter
                             .print("<TD><p class=navbar align=center> <font size=-1 face=Arial, sans-serif><b><a href=\"/SiteView/"
@@ -553,14 +553,14 @@ public abstract class CGI {
 
     public static void printButtonBar(java.io.PrintWriter printwriter,
             String s, String s1,
-            COM.dragonflow.HTTP.HTTPRequest httprequest, jgl.HashMap hashmap) {
+            COM.dragonflow.HTTP.HTTPRequest httprequest, HashMap hashmap) {
         COM.dragonflow.Page.CGI.printButtonBar(printwriter, s, s1, httprequest,
                 hashmap, false);
     }
 
     public static void printButtonBar(java.io.PrintWriter printwriter,
             String s, String s1,
-            COM.dragonflow.HTTP.HTTPRequest httprequest, jgl.HashMap hashmap,
+            COM.dragonflow.HTTP.HTTPRequest httprequest, HashMap hashmap,
             boolean flag) {
         menus menus1 = new menus();
         COM.dragonflow.Page.CGI.printButtonBar(printwriter, s, s1, httprequest,
@@ -569,7 +569,7 @@ public abstract class CGI {
 
     public static void printButtonBar(java.io.PrintWriter printwriter,
             String s, String s1,
-            COM.dragonflow.HTTP.HTTPRequest httprequest, jgl.HashMap hashmap,
+            COM.dragonflow.HTTP.HTTPRequest httprequest, HashMap hashmap,
             menus menus1, boolean flag) {
         if (COM.dragonflow.SiteView.Platform.isPortal()) {
             if (httprequest.getValue("toolbar").equals("off")) {
@@ -973,11 +973,11 @@ public abstract class CGI {
         printCGIFooter();
     }
 
-    boolean isGroup(jgl.HashMap hashmap) {
+    boolean isGroup(HashMap hashmap) {
         return hashmap.get("_id") == null;
     }
 
-    jgl.Array getAllowedGroupIDs() {
+    ArrayList getAllowedGroupIDs() {
         return COM.dragonflow.Page.CGI.getAllowedGroupIDsForAccount(request);
     }
 
@@ -1011,15 +1011,15 @@ public abstract class CGI {
         return false;
     }
 
-    public static jgl.Array getAllowedGroupIDsForAccount(
+    public static ArrayList getAllowedGroupIDsForAccount(
             COM.dragonflow.HTTP.HTTPRequest httprequest) {
         if (COM.dragonflow.Page.CGI.isPortalServerRequest(httprequest)) {
-            jgl.Array array = COM.dragonflow.SiteView.Portal.findObjects(
+            ArrayList array = COM.dragonflow.SiteView.Portal.findObjects(
                     "item=" + httprequest.getPortalServer(), 2, httprequest);
-            jgl.Array array2 = new Array();
+            ArrayList array2 = new ArrayList();
             for (int i = 0; i < array.size(); i++) {
                 COM.dragonflow.SiteView.MonitorGroup monitorgroup = (COM.dragonflow.SiteView.MonitorGroup) array
-                        .at(i);
+                        .get(i);
                 array2
                         .add(COM.dragonflow.Utils.I18N
                                 .toDefaultEncoding(monitorgroup
@@ -1028,7 +1028,7 @@ public abstract class CGI {
 
             return array2;
         } else {
-            jgl.Array array1 = COM.dragonflow.Utils.I18N
+            ArrayList array1 = COM.dragonflow.Utils.I18N
                     .toDefaultArray(COM.dragonflow.SiteView.SiteViewGroup
                             .currentSiteView().getGroupIDs());
             return COM.dragonflow.Page.CGI.filterGroupsForAccount(array1,
@@ -1036,9 +1036,9 @@ public abstract class CGI {
         }
     }
 
-    public static jgl.Array getGroupFilterForAccount(
+    public static ArrayList getGroupFilterForAccount(
             COM.dragonflow.HTTP.HTTPRequest httprequest) {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         String s = httprequest.getAccount();
         String s1 = httprequest.getValue("groupFilter");
         if (COM.dragonflow.SiteView.Platform.isStandardAccount(s)) {
@@ -1071,8 +1071,8 @@ public abstract class CGI {
                     && s.equals(monitorgroup.getProperty("_partnerFilter"))) {
                 COM.dragonflow.SiteView.SiteViewGroup siteviewgroup1 = COM.dragonflow.SiteView.SiteViewGroup
                         .currentSiteView();
-                jgl.Array array1 = siteviewgroup1.getGroupIDs();
-                Enumeration enumeration1 = array1.elements();
+                ArrayList array1 = siteviewgroup1.getGroupIDs();
+                Enumeration enumeration1 = (Enumeration) array1.iterator();
                 while (enumeration1.hasMoreElements()) {
                     String s3 = COM.dragonflow.Utils.I18N
                             .toDefaultEncoding((String) enumeration1
@@ -1090,8 +1090,8 @@ public abstract class CGI {
     }
 
     public static boolean allowedByGroupFilter(String s,
-            jgl.Array array) {
-        for (Enumeration enumeration = array.elements(); enumeration
+            ArrayList array) {
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration
                 .hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             if (COM.dragonflow.Page.CGI.isRelated(s, s1)) {
@@ -1109,7 +1109,7 @@ public abstract class CGI {
     }
 
     public static boolean isGroupAllowedForAccount(String s,
-            jgl.Array array) {
+            ArrayList array) {
         if (array != null && array.size() != 0) {
             return COM.dragonflow.Page.CGI.allowedByGroupFilter(s, array);
         } else {
@@ -1117,13 +1117,13 @@ public abstract class CGI {
         }
     }
 
-    public static jgl.Array filterGroupsForAccount(jgl.Array array,
+    public static ArrayList filterGroupsForAccount(ArrayList array,
             COM.dragonflow.HTTP.HTTPRequest httprequest) {
-        jgl.Array array1 = COM.dragonflow.Page.CGI
+        ArrayList array1 = COM.dragonflow.Page.CGI
                 .getGroupFilterForAccount(httprequest);
         if (array1 != null && array1.size() != 0) {
-            Enumeration enumeration = array.elements();
-            array = new Array();
+            Enumeration enumeration = (Enumeration) array.iterator();
+            array = new ArrayList();
             while (enumeration.hasMoreElements()) {
                 String s = (String) enumeration
                         .nextElement();
@@ -1216,12 +1216,12 @@ public abstract class CGI {
 
     public static String getGroupName(String s) {
         COM.dragonflow.Utils.I18N.test(s, 0);
-        jgl.HashMap hashmap = null;
+        HashMap hashmap = null;
         try {
-            jgl.Array array = COM.dragonflow.Page.CGI.ReadGroupFrames(s, null);
-            Enumeration enumeration = array.elements();
+            ArrayList array = COM.dragonflow.Page.CGI.ReadGroupFrames(s, null);
+            Enumeration enumeration = (Enumeration) array.iterator();
             if (enumeration.hasMoreElements()) {
-                hashmap = (jgl.HashMap) enumeration.nextElement();
+                hashmap = (HashMap) enumeration.nextElement();
             } else {
                 hashmap = new HashMap();
             }
@@ -1232,11 +1232,11 @@ public abstract class CGI {
         return COM.dragonflow.Page.CGI.getGroupName(hashmap, s);
     }
 
-    public static String getGroupName(jgl.Array array,
+    public static String getGroupName(ArrayList array,
             String s) {
         COM.dragonflow.Utils.I18N.test(s, 0);
         if (array.size() > 0) {
-            jgl.HashMap hashmap = (jgl.HashMap) array.at(0);
+            HashMap hashmap = (HashMap) array.get(0);
             return COM.dragonflow.Page.CGI.getGroupName(hashmap, s);
         } else {
             java.lang.System.out.println("GROUP : " + s + " IS EMPTY.");
@@ -1244,7 +1244,7 @@ public abstract class CGI {
         }
     }
 
-    public static String getGroupName(jgl.HashMap hashmap,
+    public static String getGroupName(HashMap hashmap,
             String s) {
         String s1 = null;
         COM.dragonflow.Utils.I18N.test(s, 0);
@@ -1323,10 +1323,10 @@ public abstract class CGI {
         s = s.replace(' ', '_');
         COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup
                 .currentSiteView();
-        jgl.Array array = siteviewgroup.getGroupFileIDs();
+        ArrayList array = siteviewgroup.getGroupFileIDs();
         String s2 = s.toUpperCase() + ".";
         int i = -1;
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         while (enumeration.hasMoreElements()) {
             String s3 = (String) enumeration.nextElement();
             s3 = s3.toUpperCase() + '.';
@@ -1384,12 +1384,12 @@ public abstract class CGI {
         return s4;
     }
 
-    public jgl.Array ReadGroupFrames(String s)
+    public ArrayList ReadGroupFrames(String s)
             throws java.io.IOException {
         return COM.dragonflow.Page.CGI.ReadGroupFrames(s, request);
     }
 
-    public static jgl.Array ReadGroupFrames(String s,
+    public static ArrayList ReadGroupFrames(String s,
             COM.dragonflow.HTTP.HTTPRequest httprequest)
             throws java.io.IOException {
         if (httprequest != null
@@ -1400,25 +1400,25 @@ public abstract class CGI {
         }
         String s1 = COM.dragonflow.Page.CGI.getGroupFilePath(s,
                 httprequest);
-        jgl.Array array = COM.dragonflow.Properties.FrameFile.readFromFile(s1);
+        ArrayList array = COM.dragonflow.Properties.FrameFile.readFromFile(s1);
         if (array.size() == 0) {
             array.add(new HashMap());
         }
         return array;
     }
 
-    public void WriteGroupFrames(String s, jgl.Array array)
+    public void WriteGroupFrames(String s, ArrayList array)
             throws java.io.IOException {
         COM.dragonflow.Page.CGI.WriteGroupFrames(s, array, request);
     }
 
-    public static void WriteGroupFrames(String s, jgl.Array array,
+    public static void WriteGroupFrames(String s, ArrayList array,
             COM.dragonflow.HTTP.HTTPRequest httprequest)
             throws java.io.IOException {
         String s1 = COM.dragonflow.Page.CGI.getGroupFilePath(s,
                 httprequest);
         for (int i = 0; i < array.size(); i++) {
-            jgl.HashMap hashmap = (jgl.HashMap) array.at(i);
+            HashMap hashmap = (HashMap) array.get(i);
             if (COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_encoding")
                     .length() == 0) {
                 hashmap.put("_encoding", COM.dragonflow.Utils.I18N
@@ -1429,34 +1429,34 @@ public abstract class CGI {
         COM.dragonflow.Properties.FrameFile.writeToFile(s1, array, "_", true);
     }
 
-    public static Enumeration getMonitors(jgl.Array array) {
-        jgl.Array array1 = new Array();
-        Enumeration enumeration = array.elements();
+    public static Enumeration getMonitors(ArrayList array) {
+        ArrayList array1 = new ArrayList();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if (enumeration.hasMoreElements()) {
             array1.add(enumeration.nextElement());
         }
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap = (jgl.HashMap) enumeration.nextElement();
+            HashMap hashmap = (HashMap) enumeration.nextElement();
             if (COM.dragonflow.SiteView.Monitor.isMonitorFrame(hashmap)) {
                 array1.add(hashmap);
             }
         } 
         
-        return array1.elements();
+        return (Enumeration) array1.iterator();
     }
 
-    public static int findMonitorIndex(jgl.Array array, String s)
+    public static int findMonitorIndex(ArrayList array, String s)
             throws java.lang.Exception {
         if (s.equals("_config")) {
             return 0;
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         int i = 0;
         enumeration.nextElement();
         i++;
         int j = -1;
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap = (jgl.HashMap) enumeration.nextElement();
+            HashMap hashmap = (HashMap) enumeration.nextElement();
             if (COM.dragonflow.SiteView.Monitor.isMonitorFrame(hashmap)
                     && hashmap.get("_id").equals(s)) {
                 j = i;
@@ -1472,16 +1472,16 @@ public abstract class CGI {
         }
     }
 
-    public static int findSubGroupIndex(jgl.Array array, String s)
+    public static int findSubGroupIndex(ArrayList array, String s)
             throws java.lang.Exception {
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         int i = 0;
         s = COM.dragonflow.Page.CGI.getGroupIDRelative(s);
         enumeration.nextElement();
         i++;
         int j = -1;
         for (; enumeration.hasMoreElements(); i++) {
-            jgl.HashMap hashmap = (jgl.HashMap) enumeration.nextElement();
+            HashMap hashmap = (HashMap) enumeration.nextElement();
             if (!COM.dragonflow.SiteView.Monitor.isMonitorFrame(hashmap)) {
                 continue;
             }
@@ -1501,7 +1501,7 @@ public abstract class CGI {
         }
     }
 
-    public static String getValue(jgl.HashMap hashmap,
+    public static String getValue(HashMap hashmap,
             String s) {
         String s1 = (String) hashmap.get(s);
         if (s1 == null) {
@@ -1511,19 +1511,19 @@ public abstract class CGI {
         }
     }
 
-    public static Enumeration getValues(jgl.HashMap hashmap,
+    public static Enumeration getValues(HashMap hashmap,
             String s) {
         return hashmap.values(s);
     }
 
-    public jgl.HashMap getMasterConfig() {
+    public HashMap getMasterConfig() {
         if (privateConfigCache == null) {
             privateConfigCache = loadMasterConfig();
         }
         return privateConfigCache;
     }
 
-    public jgl.HashMap getLocalMasterConfig() {
+    public HashMap getLocalMasterConfig() {
         if (privateLocalConfigCache == null) {
             privateLocalConfigCache = COM.dragonflow.Page.CGI
                     .loadMasterConfig(null);
@@ -1531,33 +1531,33 @@ public abstract class CGI {
         return privateLocalConfigCache;
     }
 
-    public jgl.HashMap loadMasterConfig() {
+    public HashMap loadMasterConfig() {
         return COM.dragonflow.Page.CGI.loadMasterConfig(request);
     }
 
-    public static jgl.HashMap loadMasterConfig(
+    public static HashMap loadMasterConfig(
             COM.dragonflow.HTTP.HTTPRequest httprequest) {
         java.lang.Object obj = new HashMapOrdered(true);
         try {
             String s = COM.dragonflow.Page.CGI.getGroupFilePath(
                     "_master", httprequest);
-            jgl.Array array = COM.dragonflow.Properties.FrameFile
+            ArrayList array = COM.dragonflow.Properties.FrameFile
                     .readFromFile(s);
-            obj = (jgl.HashMap) array.front();
+            obj = (HashMap) array.front();
         } catch (java.lang.Exception exception) {
         }
-        return ((jgl.HashMap) (obj));
+        return ((HashMap) (obj));
     }
 
-    public void saveMasterConfig(jgl.HashMap hashmap)
+    public void saveMasterConfig(HashMap hashmap)
             throws java.io.IOException {
         COM.dragonflow.Page.CGI.saveMasterConfig(hashmap, request);
     }
 
-    public static void saveMasterConfig(jgl.HashMap hashmap,
+    public static void saveMasterConfig(HashMap hashmap,
             COM.dragonflow.HTTP.HTTPRequest httprequest)
             throws java.io.IOException {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         array.add(hashmap);
         String s = COM.dragonflow.Page.CGI.getGroupFilePath("_master",
                 httprequest);
@@ -1565,27 +1565,27 @@ public abstract class CGI {
         COM.dragonflow.SiteView.SiteViewGroup.updateStaticPages(httprequest);
     }
 
-    public static jgl.HashMap findMonitor(jgl.Array array, String s)
+    public static HashMap findMonitor(ArrayList array, String s)
             throws java.lang.Exception {
         int i = COM.dragonflow.Page.CGI.findMonitorIndex(array, s);
-        return (jgl.HashMap) array.at(i);
+        return (HashMap) array.get(i);
     }
 
-    public jgl.HashMap getSettings() {
+    public HashMap getSettings() {
         java.lang.Object obj = new HashMapOrdered(true);
         if (request.isStandardAccount()) {
             obj = getMasterConfig();
         } else {
             try {
                 settingsArray = ReadGroupFrames(request.getAccount());
-                obj = (jgl.HashMap) settingsArray.at(0);
+                obj = (HashMap) settingsArray.get(0);
             } catch (java.lang.Exception exception) {
             }
         }
-        return ((jgl.HashMap) (obj));
+        return ((HashMap) (obj));
     }
 
-    void saveSettings(jgl.HashMap hashmap) throws java.io.IOException {
+    void saveSettings(HashMap hashmap) throws java.io.IOException {
         if (request.isStandardAccount()) {
             saveMasterConfig(hashmap);
         } else {
@@ -1598,15 +1598,15 @@ public abstract class CGI {
 
     String getMonitorOptionsHTML(String s,
             String s1, int i) throws java.lang.Exception {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         array.add(s);
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         array1.add(s1);
         return getMonitorOptionsHTML(array, array1, null, i);
     }
 
-    String getMonitorOptionsHTML(jgl.Array array, jgl.Array array1,
-            jgl.Array array2, int i) throws java.lang.Exception {
+    String getMonitorOptionsHTML(ArrayList array, ArrayList array1,
+            ArrayList array2, int i) throws java.lang.Exception {
         StringBuffer stringbuffer = new StringBuffer();
         StringBuffer stringbuffer1 = new StringBuffer();
         StringBuffer stringbuffer2 = new StringBuffer();
@@ -1618,25 +1618,25 @@ public abstract class CGI {
         if ((i & 0x10) != 0) {
             stringbuffer2.append("<option value=\"\">-- SiteView Panel --");
         }
-        jgl.HashMap hashmap = new HashMap();
+        HashMap hashmap = new HashMap();
         if (array != null) {
             for (int j = 0; j < array.size(); j++) {
-                hashmap.put(array.at(j), "true");
+                hashmap.put(array.get(j), "true");
             }
 
         }
-        jgl.HashMap hashmap1 = new HashMap();
+        HashMap hashmap1 = new HashMap();
         if (array1 != null) {
             for (int k = 0; k < array1.size(); k++) {
-                hashmap1.put(array1.at(k), "true");
+                hashmap1.put(array1.get(k), "true");
             }
 
         }
-        jgl.HashMap hashmap2 = null;
+        HashMap hashmap2 = null;
         if (array2 != null) {
             hashmap2 = new HashMap();
             for (int l = 0; l < array2.size(); l++) {
-                hashmap2.put(array2.at(l), "true");
+                hashmap2.put(array2.get(l), "true");
             }
 
         }
@@ -1654,7 +1654,7 @@ public abstract class CGI {
         }
         COM.dragonflow.Properties.HashMapOrdered hashmapordered = new HashMapOrdered(
                 true);
-        jgl.Array array3 = getGroupNameList(hashmapordered, hashmap1, hashmap2,
+        ArrayList array3 = getGroupNameList(hashmapordered, hashmap1, hashmap2,
                 false);
         for (Enumeration enumeration = array3.elements(); enumeration
                 .hasMoreElements();) {
@@ -1755,21 +1755,21 @@ public abstract class CGI {
                 + stringbuffer.toString();
     }
 
-    public String getSelectedOptionsHTML(jgl.Array array,
-            String s, String s1, jgl.Array array1,
-            jgl.Array array2, int i) throws java.lang.Exception {
+    public String getSelectedOptionsHTML(ArrayList array,
+            String s, String s1, ArrayList array1,
+            ArrayList array2, int i) throws java.lang.Exception {
         StringBuffer stringbuffer = new StringBuffer();
         return stringbuffer.toString();
     }
 
-    public jgl.Array getGroupNameList(jgl.HashMap hashmap,
-            jgl.HashMap hashmap1, jgl.HashMap hashmap2, boolean flag) {
+    public ArrayList getGroupNameList(HashMap hashmap,
+            HashMap hashmap1, HashMap hashmap2, boolean flag) {
         COM.dragonflow.SiteView.SiteViewGroup siteviewgroup = COM.dragonflow.SiteView.SiteViewGroup
                 .currentSiteView();
-        jgl.Array array = null;
+        ArrayList array = null;
         array = getAllowedGroupIDs();
-        Enumeration enumeration = array.elements();
-        jgl.Array array1 = new Array();
+        Enumeration enumeration = (Enumeration) array.iterator();
+        ArrayList array1 = new ArrayList();
         String s = "";
         String s1 = null;
         while (enumeration.hasMoreElements()) {
@@ -1847,11 +1847,11 @@ public abstract class CGI {
         return stringbuffer.toString();
     }
 
-    public static String getOptionsHTML(jgl.Array array,
+    public static String getOptionsHTML(ArrayList array,
             String s) {
         java.util.Vector vector = new Vector();
         for (int i = 0; i < array.size(); i++) {
-            vector.addElement(array.at(i));
+            vector.addElement(array.get(i));
         }
 
         return COM.dragonflow.Page.CGI.getOptionsHTML(vector, s);
@@ -1859,7 +1859,7 @@ public abstract class CGI {
 
     public static String getOptionsHTML(java.util.Vector vector,
             String s) {
-        jgl.HashMap hashmap = new HashMap();
+        HashMap hashmap = new HashMap();
         if (s.length() > 0) {
             hashmap.put(s, "true");
         }
@@ -1867,7 +1867,7 @@ public abstract class CGI {
     }
 
     public static String getOptionsHTML(java.util.Vector vector,
-            jgl.HashMap hashmap) {
+            HashMap hashmap) {
         String s = "";
         for (int i = 0; i < vector.size(); i += 2) {
             String s1 = "";
@@ -1895,20 +1895,20 @@ public abstract class CGI {
         return s;
     }
 
-    public static jgl.Array expandSubgroupIDs(String s) {
+    public static ArrayList expandSubgroupIDs(String s) {
         COM.dragonflow.Utils.I18N.test(s, 0);
         return COM.dragonflow.Page.CGI.expandSubgroupIDs(s, null);
     }
 
-    public static jgl.Array expandSubgroupIDs(String s,
+    public static ArrayList expandSubgroupIDs(String s,
             COM.dragonflow.Page.CGI cgi) {
         COM.dragonflow.Utils.I18N.test(s, 0);
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         COM.dragonflow.Page.CGI.expandSubgroupIDs(s, array, cgi);
         return array;
     }
 
-    public static void expandSubgroupIDs(String s, jgl.Array array,
+    public static void expandSubgroupIDs(String s, ArrayList array,
             COM.dragonflow.Page.CGI cgi) {
         COM.dragonflow.Utils.I18N.test(s, 0);
         java.lang.Object obj = COM.dragonflow.SiteView.SiteViewGroup
@@ -2070,9 +2070,9 @@ public abstract class CGI {
         }
     }
 
-    jgl.Array readMachines(String s) throws java.io.IOException {
-        jgl.Array array = new Array();
-        jgl.HashMap hashmap = getMasterConfig();
+    ArrayList readMachines(String s) throws java.io.IOException {
+        ArrayList array = new ArrayList();
+        HashMap hashmap = getMasterConfig();
         String s1;
         for (Enumeration enumeration = hashmap.values(s); enumeration
                 .hasMoreElements(); array.add(COM.dragonflow.Utils.TextUtils
@@ -2098,12 +2098,12 @@ public abstract class CGI {
         return array;
     }
 
-    void saveMachines(jgl.Array array, String s)
+    void saveMachines(ArrayList array, String s)
             throws java.io.IOException {
-        jgl.HashMap hashmap = getMasterConfig();
+        HashMap hashmap = getMasterConfig();
         hashmap.remove(s);
         for (int i = 0; i < array.size(); i++) {
-            jgl.HashMap hashmap1 = (jgl.HashMap) array.at(i);
+            HashMap hashmap1 = (HashMap) array.get(i);
             hashmap.add(s, COM.dragonflow.Utils.TextUtils
                     .hashMapToString(hashmap1));
         }
@@ -2111,11 +2111,11 @@ public abstract class CGI {
         saveMasterConfig(hashmap);
     }
 
-    jgl.HashMap findMachine(jgl.Array array, String s) {
-        Enumeration enumeration = array.elements();
-        jgl.HashMap hashmap = new HashMap();
+    HashMap findMachine(ArrayList array, String s) {
+        Enumeration enumeration = (Enumeration) array.iterator();
+        HashMap hashmap = new HashMap();
         while (enumeration.hasMoreElements()) {
-            jgl.HashMap hashmap1 = (jgl.HashMap) enumeration.nextElement();
+            HashMap hashmap1 = (HashMap) enumeration.nextElement();
             if (s.equals(COM.dragonflow.Utils.TextUtils.getValue(hashmap1,
                     "_id"))) {
             hashmap = hashmap1;
@@ -2170,7 +2170,7 @@ public abstract class CGI {
     }
 
     private static void printNavBarMessages(java.io.PrintWriter printwriter) {
-        jgl.HashMap hashmap = COM.dragonflow.SiteView.MasterConfig
+        HashMap hashmap = COM.dragonflow.SiteView.MasterConfig
                 .getMasterConfig();
         if (COM.dragonflow.Utils.TextUtils.getValue(hashmap, "_suspendMonitors")
                 .equals("CHECKED")) {

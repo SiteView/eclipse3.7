@@ -22,7 +22,7 @@ import COM.dragonflow.Properties.NumericProperty;
 import COM.dragonflow.Properties.StringProperty;
 import COM.dragonflow.SiteView.*;
 import java.util.Random;
-import jgl.Array;
+import java.util.ArrayList;
 
 public class SimulationMonitor extends AtomicMonitor
 {
@@ -84,9 +84,9 @@ public class SimulationMonitor extends AtomicMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pReading);
         array.add(pResult);
         return array;

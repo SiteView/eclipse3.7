@@ -53,8 +53,8 @@ public class CGIRequestHandler extends COM.dragonflow.HTTP.HTTPRequestHandler {
         if (s1.equals("perfex")) {
             printDebugHeader(httprequest, s1);
             outputStream.println("<PRE>");
-            jgl.Array array = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/perfex " + httprequest.getValue("option"));
-            for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); outputStream.println((String) enumeration.nextElement())) {
+            ArrayList array = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/perfex " + httprequest.getValue("option"));
+            for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); outputStream.println((String) enumeration.nextElement())) {
             }
             outputStream.println("</PRE>");
             printDebugFooter();
@@ -75,15 +75,15 @@ public class CGIRequestHandler extends COM.dragonflow.HTTP.HTTPRequestHandler {
         } else if (s1.equals("SendModem")) {
             printDebugHeader(httprequest, s1);
             outputStream.println("<PRE>");
-            jgl.Array array1 = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/SendModem " + httprequest.getValue("option"));
-            for (Enumeration enumeration1 = array1.elements(); enumeration1.hasMoreElements(); outputStream.println((String) enumeration1.nextElement())) {
+            ArrayList array1 = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/SendModem " + httprequest.getValue("option"));
+            for (Enumeration enumeration1 = (Enumeration) array1.iterator(); enumeration1.hasMoreElements(); outputStream.println((String) enumeration1.nextElement())) {
             }
             outputStream.println("</PRE>");
             printDebugFooter();
         } else if (s1.equals("dialup")) {
             printDebugHeader(httprequest, s1);
             outputStream.println("<PRE>");
-            jgl.Array array2 = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/dialup " + httprequest.getValue("option"));
+            ArrayList array2 = (new CommandLine()).exec(COM.dragonflow.SiteView.Platform.getRoot() + "/tools/dialup " + httprequest.getValue("option"));
             for (Enumeration enumeration2 = array2.elements(); enumeration2.hasMoreElements(); outputStream.println((String) enumeration2.nextElement())) {
             }
             outputStream.println("</PRE>");

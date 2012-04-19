@@ -29,8 +29,8 @@ import java.io.InterruptedIOException;
 import java.io.PrintStream;
 import java.net.*;
 import java.util.Random;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLMonitor
@@ -123,7 +123,7 @@ public class RadiusMonitor extends AtomicMonitor
         }
         if(l2 == (long)kURLok && s.length() > 0)
         {
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             l2 = TextUtils.matchExpression(stringbuffer.toString(), s, array, new StringBuffer());
             if(l2 != (long)Monitor.kURLok)
             {
@@ -132,7 +132,7 @@ public class RadiusMonitor extends AtomicMonitor
             }
             if(array.size() > 0)
             {
-                setProperty(pMatchValue, array.at(0));
+                setProperty(pMatchValue, array.get(0));
             }
         }
         if(stillActive())
@@ -168,9 +168,9 @@ public class RadiusMonitor extends AtomicMonitor
         return true;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pStatus);
         array.add(pRoundTripTime);
         return array;

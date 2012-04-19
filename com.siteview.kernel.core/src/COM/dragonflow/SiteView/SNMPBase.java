@@ -19,8 +19,8 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
@@ -62,7 +62,7 @@ public abstract class SNMPBase extends ApplicationBase {
     }
 
     int getActiveCounters() {
-        Array array = getCounters(getCountersContent());
+         ArrayList array = getCounters(getCountersContent());
         if (array == null) {
             return 0;
         }
@@ -76,9 +76,9 @@ public abstract class SNMPBase extends ApplicationBase {
     public synchronized HashMap getLabels() {
         if (labelsCache == null) {
             labelsCache = new HashMap();
-            Array array = getCounters(getCountersContent());
+             ArrayList array = getCounters(getCountersContent());
             for (int i = 0; i < array.size(); i++) {
-                String s = (String) array.at(i);
+                String s = (String) array.get(i);
                 String s1 = s.substring(0, s.indexOf(":"));
                 labelsCache.add("Counter " + (i + 1) + " Value", s1);
             }
@@ -88,7 +88,7 @@ public abstract class SNMPBase extends ApplicationBase {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String as[] = buildThresholdsArray();
         for (int i = 0; i < as.length; i++) {
             if (getProperty("value1").length() > 0) {
@@ -96,11 +96,11 @@ public abstract class SNMPBase extends ApplicationBase {
             }
         }
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         int i = getActiveCounters();
         for (int j = 0; j < i; j++) {
             if (getProperty("value1").length() > 0) {
@@ -111,11 +111,11 @@ public abstract class SNMPBase extends ApplicationBase {
         return array;
     }
 
-    public Array getCounters(String s) {
+    public  ArrayList getCounters(String s) {
         return getSNMPCounters(s, false);
     }
 
-    public Array getAvailableCounters() {
+    public  ArrayList getAvailableCounters() {
         return getSNMPCounters("", true);
     }
 
@@ -125,7 +125,7 @@ public abstract class SNMPBase extends ApplicationBase {
 
     public String getCountersParameter(String s, String s1) {
         String s2 = "";
-        Array array = getAvailableCounters();
+         ArrayList array = getAvailableCounters();
         boolean flag = true;
         String as[] = TextUtils.split(s, ",");
         int i = 0;
@@ -139,7 +139,7 @@ public abstract class SNMPBase extends ApplicationBase {
                 if (k >= array.size()) {
                     continue label0;
                 }
-                if (s3.equals(array.at(k))) {
+                if (s3.equals(array.get(k))) {
                     i++;
                     if (flag) {
                         s2 = s2 + k;
@@ -158,8 +158,8 @@ public abstract class SNMPBase extends ApplicationBase {
 
     protected abstract boolean update();
 
-    private Array getSNMPCounters(String s, boolean flag) {
-        Array array = null;
+    private  ArrayList getSNMPCounters(String s, boolean flag) {
+         ArrayList array = null;
         try {
             String s1 = "";
             if (!flag && s.length() > 0) {
@@ -168,7 +168,7 @@ public abstract class SNMPBase extends ApplicationBase {
                 s1 = getTemplateContent(getTemplatePath(), getTemplateFile(),
                         flag);
             }
-            array = new Array();
+            array = new ArrayList();
             String as[];
             if (s1.indexOf(",") == -1) {
                 as = TextUtils.split(s1, URLMonitor.CRLF);
@@ -198,7 +198,7 @@ public abstract class SNMPBase extends ApplicationBase {
 
     public abstract String getAppServerTestOID();
 
-    protected abstract void getSNMPData(String s, Array array);
+    protected abstract void getSNMPData(String s,  ArrayList array);
 
     protected String getTestMachine() {
         return "testwin2k1.qa.Dragonflow.com";
@@ -258,7 +258,7 @@ public abstract class SNMPBase extends ApplicationBase {
         if (snmpLock == null) {
             snmpLock = new CounterLock(i);
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pValues = new StringProperty[nMaxCounters];
         for (int j = 0; j < nMaxCounters; j++) {
             pValues[j] = new NumericProperty("value" + j);
@@ -271,7 +271,7 @@ public abstract class SNMPBase extends ApplicationBase {
         array.add(pStateString);
         StringProperty astringproperty[] = new StringProperty[array.size()];
         for (int k = 0; k < array.size(); k++) {
-            astringproperty[k] = (StringProperty) array.at(k);
+            astringproperty[k] = (StringProperty) array.get(k);
         }
 
         addProperties("COM.dragonflow.SiteView.SNMPBase", astringproperty);

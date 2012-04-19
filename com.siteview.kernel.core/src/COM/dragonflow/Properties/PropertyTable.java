@@ -19,8 +19,8 @@ package COM.dragonflow.Properties;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.Properties:
 // StringProperty
@@ -61,8 +61,8 @@ public class PropertyTable extends HashMap {
         return null;
     }
 
-    public Array getProperties(int i) {
-        Array array = new Array();
+    public  ArrayList getProperties(int i) {
+         ArrayList array = new ArrayList();
         getProperties(array, i);
         return array;
     }
@@ -92,8 +92,8 @@ public class PropertyTable extends HashMap {
      * @param i
      * @return
      */
-    public Array getImmediateProperties(int i) {
-        Array array = new Array();
+    public  ArrayList getImmediateProperties(int i) {
+         ArrayList array = new ArrayList();
         Enumeration enumeration = elements();
         while (enumeration.hasMoreElements()) {
             StringProperty stringproperty = (StringProperty) enumeration.nextElement();

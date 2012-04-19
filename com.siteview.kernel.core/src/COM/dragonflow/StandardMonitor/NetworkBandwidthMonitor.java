@@ -16,8 +16,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xml.serialize.OutputFormat;
@@ -255,8 +255,8 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
         return i;
     }
 
-    public Array getPropertiesToPassBetweenPages(HTTPRequest httprequest) {
-        Array array = super.getPropertiesToPassBetweenPages(httprequest);
+    public  ArrayList getPropertiesToPassBetweenPages(HTTPRequest httprequest) {
+         ArrayList array = super.getPropertiesToPassBetweenPages(httprequest);
         array.add(pShowRTTraffic);
         array.add(pIndexingMethod);
         array.add(pDeviceType);
@@ -755,22 +755,22 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         getLogOrStateProperties(array);
         return array;
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         for (Enumeration enumeration = super.getStatePropertyObjects(flag); enumeration.hasMoreElements(); array.add(enumeration.nextElement())) {
         }
         getLogOrStateProperties(array);
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getProperties() {
-        Array array = super.getProperties();
+    public  ArrayList getProperties() {
+         ArrayList array = super.getProperties();
         array.remove(pMIB);
         array.remove(pCounterCalculationMode);
         return array;
@@ -963,8 +963,8 @@ public class NetworkBandwidthMonitor extends BrowsableSNMPBase implements RealTi
         }
     }
 
-    public Array getConnectionProperties() {
-        Array array = super.getConnectionProperties();
+    public  ArrayList getConnectionProperties() {
+         ArrayList array = super.getConnectionProperties();
         array.add(pMonitorVersion);
         return array;
     }

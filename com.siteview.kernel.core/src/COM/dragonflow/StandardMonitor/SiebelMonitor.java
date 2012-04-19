@@ -35,8 +35,8 @@ import COM.dragonflow.Utils.SocketSession;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.io.File;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLSequenceMonitor, URLMonitor
@@ -71,9 +71,9 @@ public class SiebelMonitor extends BrowsableBase
         findEnd = "<br></td>";
     }
 
-    public Array getConnectionProperties()
+    public  ArrayList getConnectionProperties()
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pURL);
         array.add(pPassword);
         array.add(pUsername);
@@ -133,7 +133,7 @@ public class SiebelMonitor extends BrowsableBase
         } else
         {
             SocketSession socketsession = SocketSession.getSession(null);
-            al = URLMonitor.checkURL(socketsession, s, null, null, s3, s4, s5, new Array(), s2, s1, null, stringbuffer, 0x7fffffffffffffffL, null, 0, 15000, null);
+            al = URLMonitor.checkURL(socketsession, s, null, null, s3, s4, s5, new ArrayList(), s2, s1, null, stringbuffer, 0x7fffffffffffffffL, null, 0, 15000, null);
         }
         StringBuffer stringbuffer1 = new StringBuffer();
         int i;
@@ -151,7 +151,7 @@ public class SiebelMonitor extends BrowsableBase
             String s7 = getProperty(PROPERTY_NAME_COUNTER_ID + (k + 1));
             s7 = s7.substring(s7.indexOf(" ", 0) + 1);
             StringBuffer stringbuffer2 = new StringBuffer();
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             int j1 = TextUtils.matchExpression(s6, s7, array, stringbuffer2);
             if(j1 != Monitor.kURLok)
             {
@@ -165,7 +165,7 @@ public class SiebelMonitor extends BrowsableBase
             }
             if(array.size() > 0)
             {
-                as[k] = (String)array.at(0);
+                as[k] = (String)array.get(0);
                 as1[k] = "";
             }
         }
@@ -233,7 +233,7 @@ public class SiebelMonitor extends BrowsableBase
         } else
         {
             SocketSession socketsession = SocketSession.getSession(null);
-            al = URLMonitor.checkURL(socketsession, s, null, null, s3, s4, s5, new Array(), s2, s1, null, stringbuffer1, 0x7fffffffffffffffL, null, 0, 15000, null);
+            al = URLMonitor.checkURL(socketsession, s, null, null, s3, s4, s5, new ArrayList(), s2, s1, null, stringbuffer1, 0x7fffffffffffffffL, null, 0, 15000, null);
         }
         if(al[0] != 200L && al[0] != -996L)
         {
@@ -273,7 +273,7 @@ public class SiebelMonitor extends BrowsableBase
         rawxmlwriter.startElement("browse_data");
         String as[] = TextUtils.split(stringbuffer.toString(), URLMonitor.CRLF);
         String s2 = "";
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String s3 = "";
         String s4 = "";
         for(int i = 0; i < as.length; i++)
@@ -341,7 +341,7 @@ public class SiebelMonitor extends BrowsableBase
         return stringbuffer1.toString();
     }
 
-    void buildApplicationXML(String s, RawXmlWriter rawxmlwriter, String s1, Array array)
+    void buildApplicationXML(String s, RawXmlWriter rawxmlwriter, String s1,  ArrayList array)
     {
         int i = s.indexOf(s1);
         if(i < 0)
@@ -359,7 +359,7 @@ public class SiebelMonitor extends BrowsableBase
         String s4 = s3.substring(0, j);
         for(int k = 0; k < array.size(); k++)
         {
-            String s6 = (String)array.at(k);
+            String s6 = (String)array.get(k);
             String as[] = TextUtils.split(s6, "\t");
             if(as[0].startsWith("startobject") && as[3].startsWith("dynamic"))
             {
@@ -472,7 +472,7 @@ public class SiebelMonitor extends BrowsableBase
             nMaxCounters = 30;
         }
         StringProperty astringproperty[] = BrowsableBase.staticInitializer(nMaxCounters, true);
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pURL = new StringProperty("_server");
         pURL.setDisplayText("Application URL", "URL of the web plug-in server stats page for the application.\n For example, http://siebelsrv/service/_stats.swe ");
         pURL.setParameterOptions(false, true, 4, false);
@@ -522,7 +522,7 @@ public class SiebelMonitor extends BrowsableBase
         StringProperty astringproperty1[] = new StringProperty[array.size()];
         for(int i = 0; i < array.size(); i++)
         {
-            astringproperty1[i] = (StringProperty)array.at(i);
+            astringproperty1[i] = (StringProperty)array.get(i);
         }
 
         String s = (COM.dragonflow.StandardMonitor.SiebelMonitor.class).getName();

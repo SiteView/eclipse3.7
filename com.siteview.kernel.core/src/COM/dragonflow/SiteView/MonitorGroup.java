@@ -26,9 +26,9 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import jgl.Array;
+import java.util.ArrayList;
 import jgl.Filtering;
-import jgl.HashMap;
+import com.recursionsw.jgl.HashMap;
 import jgl.Reversing;
 import jgl.Sorting;
 import COM.dragonflow.HTTP.HTTPRequest;
@@ -163,8 +163,8 @@ public class MonitorGroup extends Monitor {
         }
     }
 
-    protected Array calculateIPAddresses() {
-        return new Array();
+    protected  ArrayList calculateIPAddresses() {
+        return new ArrayList();
     }
 
     protected void startMonitor() {
@@ -261,12 +261,12 @@ public class MonitorGroup extends Monitor {
 
 
     void readMonitors(String s, String s1) throws IOException {
-        Array array = FrameFile.readFromFile(s);
+         ArrayList array = FrameFile.readFromFile(s);
         String s2 = "";
         if (Platform.isPortal()) {
             s2 = PortalSync.getPortalServerFromPath(s);
         }
-        Enumeration enumeration = array.elements();
+        Enumeration enumeration = (Enumeration) array.iterator();
         if (enumeration.hasMoreElements()) {
             HashMap hashmap = (HashMap) enumeration.nextElement();
             hashmap.put("_id", s1);
@@ -309,8 +309,8 @@ public class MonitorGroup extends Monitor {
         int i = 0;
         if ((new File(s)).exists()) {
             try {
-                Array array = FrameFile.readFromFile(s);
-                Enumeration enumeration = array.elements();
+                 ArrayList array = FrameFile.readFromFile(s);
+                Enumeration enumeration = (Enumeration) array.iterator();
                 while (enumeration.hasMoreElements()) {
                     HashMap hashmap = (HashMap) enumeration.nextElement();
                     String s1 = (String) hashmap.get("id");
@@ -333,12 +333,12 @@ public class MonitorGroup extends Monitor {
     }
 
     public synchronized void saveDynamic() {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         setProperty("id", "-1");
         array.add(getValuesTable());
-        Array array1 = getElementsOfClass("COM.dragonflow.SiteView.Monitor", false);
+         ArrayList array1 = getElementsOfClass("COM.dragonflow.SiteView.Monitor", false);
         Monitor monitor;
-        for (Enumeration enumeration = array1.elements(); enumeration.hasMoreElements(); array.add(monitor.getValuesTable())) {
+        for (Enumeration enumeration = (Enumeration) array1.iterator(); enumeration.hasMoreElements(); array.add(monitor.getValuesTable())) {
             monitor = (Monitor) enumeration.nextElement();
             monitor.setProperty("id", monitor.getProperty(pID));
         }
@@ -364,14 +364,14 @@ public class MonitorGroup extends Monitor {
             SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
             MonitorGroup monitorgroup = (MonitorGroup) siteviewgroup.getElement(I18N.toDefaultEncoding(getProperty(pParent)));
             if (monitorgroup != null) {
-                Array array = monitorgroup.getElementsOfClass("COM.dragonflow.SiteView.Rule", false, false);
-                Array array1 = (Array) Filtering.select(array, new RuleGroupIs(2));
+                 ArrayList array = monitorgroup.getElementsOfClass("COM.dragonflow.SiteView.Rule", false, false);
+                 ArrayList array1 = (Array) Filtering.select(array, new RuleGroupIs(2));
                 Rule rule;
                 for (Enumeration enumeration = monitorgroup.getParentActionRules(); enumeration.hasMoreElements(); array1.add(rule)) {
                     rule = (Rule) enumeration.nextElement();
                 }
 
-                return array1.elements();
+                return (Enumeration) array1.iterator();
             }
         }
         return cEmptyArray.elements();
@@ -588,8 +588,8 @@ public class MonitorGroup extends Monitor {
         if (s != null && s.length() > 0) {
             String groupfile = Platform.getRoot() + File.separator + "groups" + File.separator + s + ".mg";
             try {
-                Array array = FrameFile.readFromFile(groupfile);
-                HashMap hashmap = (HashMap) array.at(0);
+                 ArrayList array = FrameFile.readFromFile(groupfile);
+                HashMap hashmap = (HashMap) array.get(0);
                 String s3 = (String) hashmap.get("_logInGroup");
                 if (s3 != null && s3.length() > 0) {
                     s1 = s;
@@ -605,7 +605,7 @@ public class MonitorGroup extends Monitor {
         return s1;
     }
 
-    public String printAlertIconLink(HTTPRequest httprequest, String s, String s1, Array array) {
+    public String printAlertIconLink(HTTPRequest httprequest, String s, String s1,  ArrayList array) {
         boolean flag = false;
         if (s1.equals("_config") || s1.equals(s)) {
             flag = false;
@@ -794,9 +794,9 @@ public class MonitorGroup extends Monitor {
             COM.dragonflow.Page.CGI.menus menus2 = getNavItems(httprequest);
             CGI.printButtonBar(printwriter, "Group.htm#detail", "", httprequest, MasterConfig.getMasterConfig(), menus2, false);
         }
-        Array array = CGI.getGroupFilterForAccount(httprequest);
+         ArrayList array = CGI.getGroupFilterForAccount(httprequest);
         String s3;
-        if (array.size() > 0 && !array.at(0).equals(httprequest.getAccount())) {
+        if (array.size() > 0 && !array.get(0).equals(httprequest.getAccount())) {
             s3 = CGI.getGroupFullName(I18N.toDefaultEncoding(getProperty(pID)));
         } else {
             s3 = CGI.getGroupFullLinks(this, httprequest);
@@ -846,7 +846,7 @@ public class MonitorGroup extends Monitor {
         int ai[] = { CATEGORY_COLUMN, ACKNOWLEDGE_COLUMN, GAUGE_COLUMN, ALERT_COLUMN, REPORT_COLUMN, STATUS_COLUMN, NAME_COLUMN, MORE_COLUMN, EDIT_COLUMN, REFRESH_COLUMN, CUSTOM_COLUMN, UPDATED_COLUMN, DELETE_COLUMN };
         String s11 = "";
         String s13 = "";
-        Array array1 = new Array();
+         ArrayList array1 = new ArrayList();
         SiteViewGroup siteviewgroup1 = SiteViewGroup.currentSiteView();
         Monitor monitor = (Monitor) siteviewgroup1.getElement(s1);
         String s14 = flag ? "Health" : "Group";
@@ -1011,7 +1011,7 @@ public class MonitorGroup extends Monitor {
     }
 
     public static String printMonitorTable(PrintWriter printwriter, HTTPRequest httprequest, String s, String s1, int ai[], Enumeration enumeration) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         boolean flag = false;
         return printMonitorTable(printwriter, httprequest, s, s1, ai, enumeration, array, flag);
     }
@@ -1029,7 +1029,7 @@ public class MonitorGroup extends Monitor {
      * @param flag
      * @return
      */
-    public static String printMonitorTable(PrintWriter printwriter, HTTPRequest httprequest, String s, String s1, int ai[], Enumeration enumeration, Array array, boolean flag) {
+    public static String printMonitorTable(PrintWriter printwriter, HTTPRequest httprequest, String s, String s1, int ai[], Enumeration enumeration,  ArrayList array, boolean flag) {
         // TODO need review
         SiteViewGroup siteviewgroup = SiteViewGroup.currentSiteView();
         HashMap hashmap = MasterConfig.getMasterConfig();
@@ -1213,7 +1213,7 @@ public class MonitorGroup extends Monitor {
                     }
                     if (ai[j1] == ALERT_COLUMN) {
                         if (TextUtils.getValue(hashmap, "_alertIconLink").equalsIgnoreCase("CHECKED")) {
-                            Array array1 = getMonitorAlerts(httprequest, s8, monitor.getProperty(pID), array);
+                             ArrayList array1 = getMonitorAlerts(httprequest, s8, monitor.getProperty(pID), array);
                             monitor.printTableAlertEntry(printwriter, httprequest, array1);
                         }
                         continue;
@@ -1365,7 +1365,7 @@ public class MonitorGroup extends Monitor {
     }
 
     static boolean isParentPresent(Array array, String s) {
-        for (Enumeration enumeration = array.elements(); enumeration.hasMoreElements();) {
+        for (Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements();) {
             String s1 = (String) enumeration.nextElement();
             if (CGI.isRelated(s, s1)) {
                 return true;
@@ -1382,9 +1382,9 @@ public class MonitorGroup extends Monitor {
      * @param enumeration
      * @return
      */
-    public static Array getAllowedGroups(HTTPRequest httprequest, Enumeration enumeration) {
-        Array array = new Array();
-        Array array1 = CGI.getGroupFilterForAccount(httprequest);
+    public static  ArrayList getAllowedGroups(HTTPRequest httprequest, Enumeration enumeration) {
+         ArrayList array = new ArrayList();
+         ArrayList array1 = CGI.getGroupFilterForAccount(httprequest);
         HashMap hashmap = new HashMap();
         if (!Platform.isStandardAccount(httprequest.getAccount()) && array1.contains(httprequest.getAccount())) {
             return array = null;
@@ -1449,7 +1449,7 @@ public class MonitorGroup extends Monitor {
      * @param monitorgroup
      * @param array
      */
-    public static void getChildren(MonitorGroup monitorgroup, Array array) {
+    public static void getChildren(MonitorGroup monitorgroup,  ArrayList array) {
         Enumeration enumeration = monitorgroup.getMonitors();
         if (enumeration.hasMoreElements()) {
             while (enumeration.hasMoreElements()) {
@@ -1463,7 +1463,7 @@ public class MonitorGroup extends Monitor {
         }
     }
 
-    public void getGroupDepends(Array array, Array array1, boolean flag) {
+    public void getGroupDepends(Array array,  ArrayList array1, boolean flag) {
         String s = getProperty(AtomicMonitor.DEPENDS_ON);
         if (s != null && s.length() > 0) {
             array.add(s);
@@ -1512,7 +1512,7 @@ public class MonitorGroup extends Monitor {
         long l2 = 0L;
         long l3 = 0L;
         long l4 = 0L;
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         String s = "";
         if (args[0].equals("-d")) {
             s = args[1];
@@ -1545,9 +1545,9 @@ public class MonitorGroup extends Monitor {
         try {
             HashMap hashmap = null;
             if (file2 != null && file2.exists()) {
-                Array array1 = FrameFile.readFromFile(file2.getAbsolutePath());
+                 ArrayList array1 = FrameFile.readFromFile(file2.getAbsolutePath());
                 if (array1.size() > 0) {
-                    HashMap hashmap1 = (HashMap) array1.at(0);
+                    HashMap hashmap1 = (HashMap) array1.get(0);
                     hashmap = (HashMap) MasterConfig.getMasterConfig().clone();
                     String s4;
                     for (Enumeration enumeration1 = hashmap1.keys(); enumeration1.hasMoreElements(); hashmap.put(s4, hashmap1.get(s4))) {
@@ -1560,7 +1560,7 @@ public class MonitorGroup extends Monitor {
             hashmap = (HashMap) MasterConfig.getMasterConfig().clone();
             Machine.registerMachines(hashmap.values("_remoteMachine"));
             Enumeration enumeration = hashmap.values("_urlLocation");
-            HTTPUtils.locations = new Array();
+            HTTPUtils.locations = new ArrayList();
             if (enumeration.hasMoreElements()) {
                 String s2;
                 for (; enumeration.hasMoreElements(); HTTPUtils.locationMap.add(HTTPUtils.getLocationID(s2), s2)) {
@@ -1574,7 +1574,7 @@ public class MonitorGroup extends Monitor {
             System.exit(0);
         }
         for (int k = 0; k < array.size(); k ++) {
-            String s1 = (String) array.at(k);
+            String s1 = (String) array.get(k);
             File file3 = new File(s1);
             String s3 = file3.getName();
             s3 = s3.substring(0, s3.lastIndexOf('.'));

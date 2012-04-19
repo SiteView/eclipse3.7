@@ -25,8 +25,8 @@ import COM.dragonflow.Utils.*;
 
 import java.io.PrintStream;
 import java.net.URLEncoder;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLMonitor, URLContentMonitor
@@ -120,7 +120,7 @@ public class Oracle9iMonitor extends URLContentBase
         {
             String s9 = stringbuffer1.toString();
             StringBuffer stringbuffer2 = new StringBuffer();
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             int k;
             if(stringbuffer.length() == 0 || (k = TextUtils.matchExpression(s9, stringbuffer.toString())) == Monitor.kURLok)
             {
@@ -169,7 +169,7 @@ public class Oracle9iMonitor extends URLContentBase
         return true;
     }
 
-    public String updateMatchValues(String s, String s1, boolean flag, Array array)
+    public String updateMatchValues(String s, String s1, boolean flag,  ArrayList array)
     {
         String s2 = "";
         String as[] = buildThresholdsArray();
@@ -185,9 +185,9 @@ public class Oracle9iMonitor extends URLContentBase
             }
             if(getProperty("value" + i).length() > 0)
             {
-                setProperty(getLocationProperty(getPropertyObject("value" + i), s), array.at(i));
+                setProperty(getLocationProperty(getPropertyObject("value" + i), s), array.get(i));
             }
-            s2 = s2 + as[i] + " = " + array.at(i);
+            s2 = s2 + as[i] + " = " + array.get(i);
         }
 
         if(flag)

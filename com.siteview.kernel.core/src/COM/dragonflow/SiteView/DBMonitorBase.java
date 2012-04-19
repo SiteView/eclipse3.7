@@ -26,8 +26,8 @@ import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.StringProperty;
@@ -323,7 +323,7 @@ public abstract class DBMonitorBase extends AtomicMonitor {
                             I18N.nullEncoding());
             if (s17.length() != 0) {
                 StringBuffer stringbuffer = new StringBuffer();
-                Array array = new Array();
+                 ArrayList array = new ArrayList();
                 i1 = TextUtils.matchExpression(s8, s17, array, stringbuffer);
                 if (i1 != Monitor.kURLok) {
                     i1 = TextUtils.matchExpression(s8, I18N.StringToUnicode(
@@ -333,7 +333,7 @@ public abstract class DBMonitorBase extends AtomicMonitor {
                     s7 = "content match error, " + s7;
                 }
                 if (array.size() > 0) {
-                    String s18 = I18N.UnicodeToString((String) array.at(0), "");
+                    String s18 = I18N.UnicodeToString((String) array.get(0), "");
                     s18 = I18N.StringToUnicode(s18, I18N.nullEncoding());
                     setProperty(getMatchValueProperty(), s18);
                     s7 = "matched: " + TextUtils.escapeHTML(s18) + ", " + s7;
@@ -490,8 +490,8 @@ public abstract class DBMonitorBase extends AtomicMonitor {
         return as;
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(getStatusProperty());
         array.add(getRoundTripTimeProperty());
         array.add(getColumn1Property());
@@ -544,7 +544,7 @@ public abstract class DBMonitorBase extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(getRoundTripTimeProperty());
         array.add(getColumn1Property());
         if (getProperty(getColumn2Property()).length() > 0) {
@@ -552,7 +552,7 @@ public abstract class DBMonitorBase extends AtomicMonitor {
         }
         array.add(getRowsProperty());
         array.add(getMatchValueProperty());
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
     public String GetPropertyLabel(StringProperty stringproperty, boolean flag) {

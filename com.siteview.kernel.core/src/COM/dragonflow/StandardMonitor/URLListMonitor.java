@@ -26,8 +26,8 @@ import COM.dragonflow.Utils.FileUtils;
 import COM.dragonflow.Utils.TextUtils;
 
 import java.io.File;
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 
 // Referenced classes of package COM.dragonflow.StandardMonitor:
 //            URLList, URLMonitor
@@ -55,7 +55,7 @@ public class URLListMonitor extends AtomicMonitor
     static NumericProperty pBad;
     static NumericProperty pLastModified;
     URLList urls;
-    Array urlData;
+     ArrayList urlData;
 
     public URLListMonitor()
     {
@@ -137,10 +137,10 @@ public class URLListMonitor extends AtomicMonitor
         return true;
     }
 
-    private Array getURLsFromFile(String s, String s1, boolean flag)
+    private  ArrayList getURLsFromFile(String s, String s1, boolean flag)
         throws Exception
     {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         if(s1.length() > 0)
         {
             s1 = ";" + s1 + ";";
@@ -225,9 +225,9 @@ public class URLListMonitor extends AtomicMonitor
         return array;
     }
 
-    public Array getLogProperties()
+    public  ArrayList getLogProperties()
     {
-        Array array = super.getLogProperties();
+         ArrayList array = super.getLogProperties();
         array.add(pDuration);
         array.add(pBad);
         array.add(pGood);
@@ -267,7 +267,7 @@ public class URLListMonitor extends AtomicMonitor
         String s = getProperty(pFilename);
         try
         {
-            Array array = getURLsFromFile(s, "", false);
+             ArrayList array = getURLsFromFile(s, "", false);
             i = array.size();
         }
         catch(Exception exception)

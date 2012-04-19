@@ -24,8 +24,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.ApacheHttpClientUtils.ApacheHttpMethod;
 import COM.dragonflow.ApacheHttpClientUtils.ApacheHttpUtils;
 import COM.dragonflow.ApacheHttpClientUtils.HTTPRequestSettings;
@@ -130,9 +130,9 @@ public class MirrorConfiguration extends Action {
             String s = fixPath(Platform.getRoot() + "/groups/"
                     + MIRROR_CONFIG_FILENAME);
             try {
-                Array array = FrameFile.readFromFile(s);
+                 ArrayList array = FrameFile.readFromFile(s);
                 if (array.size() > 0) {
-                    mirrorConfig = (HashMap) array.at(0);
+                    mirrorConfig = (HashMap) array.get(0);
                 }
                 isHAVersion = Boolean.TRUE;
             } catch (Exception exception) {
@@ -287,7 +287,7 @@ public class MirrorConfiguration extends Action {
         if (j >= 0) {
             s1 = s1.substring(j + 2);
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         HashMap hashmap = new HashMap();
         hashmap.put("_name", "config");
         hashmap.put("_nextID", "4");
@@ -306,7 +306,7 @@ public class MirrorConfiguration extends Action {
         hashmap1.put("_timeout", "300");
         hashmap1.put("_dependsCondition", "good");
         hashmap1.put("_notLogToTopaz", "on");
-        Array array1 = new Array();
+         ArrayList array1 = new ArrayList();
         array1
                 .add("category eq 'error' and errorCount == 1\tdisable enable Failover/"
                         + byte0 + "\t3");
@@ -345,9 +345,9 @@ public class MirrorConfiguration extends Action {
         File file = new File(s);
         if (file.exists()) {
             try {
-                Array array = FrameFile.readFromFile(s);
+                 ArrayList array = FrameFile.readFromFile(s);
                 if (array.size() > 1) {
-                    hashmap = (HashMap) array.at(1);
+                    hashmap = (HashMap) array.get(1);
                     String s1 = TextUtils.getValue(hashmap, "_password");
                     String s2 = TextUtils.getValue(hashmap, "_username");
                     String s3 = TextUtils.getValue(hashmap, "_url");
@@ -411,7 +411,7 @@ public class MirrorConfiguration extends Action {
         mirrorConfig.put("username", s2);
         mirrorConfig.put("password", s3);
         mirrorConfig.put("isSecure", s4);
-        Array array = (Array) mirrorConfig.get("masterExclusion");
+         ArrayList array = (Array) mirrorConfig.get("masterExclusion");
         for (int i = 0; i < masterConfigExcludes.length; i++) {
             if (array == null || !array.contains(masterConfigExcludes[i])) {
                 mirrorConfig.add("masterExclusion", masterConfigExcludes[i]);
@@ -449,9 +449,9 @@ public class MirrorConfiguration extends Action {
         if (enumeration.hasMoreElements()) {
             Object obj1 = enumeration.nextElement();
             if (obj1 instanceof Array) {
-                Array array = (Array) obj1;
+                 ArrayList array = (Array) obj1;
                 for (int i = 0; array != null && i < array.size(); i++) {
-                    String s5 = (String) array.at(i);
+                    String s5 = (String) array.get(i);
                     String s6 = siteviewgroup.getSetting(s5);
                     hashmapordered.put(s5, s6);
                 }
@@ -479,9 +479,9 @@ public class MirrorConfiguration extends Action {
         HashMap hashmap = new HashMap();
         Object obj2 = mirrorConfig.get("fileExclusion");
         if (obj2 instanceof Array) {
-            Array array1 = (Array) obj2;
+             ArrayList array1 = (Array) obj2;
             for (int j = 0; array1 != null && j < array1.size(); j++) {
-                String s9 = (String) array1.at(j);
+                String s9 = (String) array1.get(j);
                 hashmap.put(s9.toUpperCase(), new Boolean("false"));
             }
 
@@ -507,9 +507,9 @@ public class MirrorConfiguration extends Action {
         HashMap hashmap1 = new HashMap();
         Object obj3 = mirrorConfig.get("fileExclusionRegex");
         if (obj3 instanceof Array) {
-            Array array2 = (Array) obj3;
+             ArrayList array2 = (Array) obj3;
             for (int l = 0; array2 != null && l < array2.size(); l++) {
-                String s12 = (String) array2.at(l);
+                String s12 = (String) array2.get(l);
                 hashmap1.put(s12.toUpperCase(), new Boolean("false"));
             }
 
@@ -869,7 +869,7 @@ public class MirrorConfiguration extends Action {
         for (Enumeration enumeration = hashmap.keys(); enumeration
                 .hasMoreElements();) {
             String s2 = (String) enumeration.nextElement();
-            Array array = new Array();
+             ArrayList array = new ArrayList();
             TextUtils.matchExpression(s1, s2, array);
             if (array.size() > 0) {
                 return !flag;
@@ -1089,7 +1089,7 @@ public class MirrorConfiguration extends Action {
             l = 0x7a120L;
         }
         StringBuffer stringbuffer1 = new StringBuffer();
-        Array array = null;
+         ArrayList array = null;
         SocketSession socketsession = SocketSession.getSession(null);
         long al[] = URLMonitor.checkURL(socketsession, s6, s7, "", s8, s9, s10,
                 array, s11, s12, "", stringbuffer1, l, "", 0, i, null);
@@ -1296,7 +1296,7 @@ public class MirrorConfiguration extends Action {
                         s
                                 + "/SiteView/cgi/go.exe/SiteView?page=HATransition&operation=copyConfiguration");
         hashmap.put("_notLogToTopaz", "on");
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add("roundTripTime > 100000000\terror");
         array.add("totalErrors < 10\tgood");
         hashmap.put("_classifier", array);

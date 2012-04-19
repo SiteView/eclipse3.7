@@ -7,8 +7,8 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Page.CGI;
 import COM.dragonflow.SiteView.MasterConfig;
@@ -80,15 +80,15 @@ public class go
          if(s.equals("perfex"))
          {
              printwriter.println("<PRE>");
-             Array array = (new CommandLine()).exec(Platform.getRoot() + "/tools/perfex " + httprequest.getValue("option"));
-             for(Enumeration enumeration = array.elements(); enumeration.hasMoreElements(); printwriter.println((String)enumeration.nextElement()));
+              ArrayList array = (new CommandLine()).exec(Platform.getRoot() + "/tools/perfex " + httprequest.getValue("option"));
+             for(Enumeration enumeration = (Enumeration) array.iterator(); enumeration.hasMoreElements(); printwriter.println((String)enumeration.nextElement()));
              printwriter.println("</PRE>");
          } else
          if(s.equals("SendModem"))
          {
              printwriter.println("<PRE>");
-             Array array1 = (new CommandLine()).exec(Platform.getRoot() + "/tools/SendModem " + httprequest.getValue("option"));
-             for(Enumeration enumeration1 = array1.elements(); enumeration1.hasMoreElements(); printwriter.println((String)enumeration1.nextElement()));
+              ArrayList array1 = (new CommandLine()).exec(Platform.getRoot() + "/tools/SendModem " + httprequest.getValue("option"));
+             for(Enumeration enumeration1 = (Enumeration) array1.iterator(); enumeration1.hasMoreElements(); printwriter.println((String)enumeration1.nextElement()));
              printwriter.println("</PRE>");
          } else
          if(s.equals("Platform"))
@@ -100,8 +100,8 @@ public class go
          if(s.equals("dialup"))
          {
              printwriter.println("<PRE>");
-             Array array2 = (new CommandLine()).exec(Platform.getRoot() + "/tools/dialup " + httprequest.getValue("option"));
-             for(Enumeration enumeration2 = array2.elements(); enumeration2.hasMoreElements(); printwriter.println((String)enumeration2.nextElement()));
+              ArrayList array2 = (new CommandLine()).exec(Platform.getRoot() + "/tools/dialup " + httprequest.getValue("option"));
+             for(Enumeration enumeration2 = (Enumeration) array2.iterator(); enumeration2.hasMoreElements(); printwriter.println((String)enumeration2.nextElement()));
              printwriter.println("</PRE>");
          } else
          {

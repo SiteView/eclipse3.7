@@ -19,8 +19,8 @@ package COM.dragonflow.SiteView;
  */
 import java.util.Enumeration;
 
-import jgl.Array;
-import jgl.HashMap;
+import java.util.ArrayList;
+import com.recursionsw.jgl.HashMap;
 import COM.dragonflow.HTTP.HTTPRequest;
 import COM.dragonflow.Log.LogManager;
 import COM.dragonflow.Properties.NumericProperty;
@@ -200,11 +200,11 @@ public class DispatcherMonitor extends AtomicMonitor {
     public String getData(DispatcherConnection dispatcherconnection, String s,
             HashMap hashmap) {
         HashMap hashmap1 = new HashMap();
-        Array array = getConnectionProperties();
+         ArrayList array = getConnectionProperties();
         for (int i = 0; i < array.size(); i++) {
-            String s2 = ((StringProperty) array.at(i)).getName();
+            String s2 = ((StringProperty) array.get(i)).getName();
             String s3 = getProperty(s2);
-            if (((StringProperty) array.at(i)).isPassword && isBase64Encoded()) {
+            if (((StringProperty) array.get(i)).isPassword && isBase64Encoded()) {
                 s3 = (new Base64Encoder(s3)).processString();
             }
             hashmap1.add(s2.substring(1), s3);
@@ -403,8 +403,8 @@ public class DispatcherMonitor extends AtomicMonitor {
         }
     }
 
-    public Array getLogProperties() {
-        Array array = super.getLogProperties();
+    public  ArrayList getLogProperties() {
+         ArrayList array = super.getLogProperties();
         array.add(pCountersInError);
         for (int i = 0; i < nMaxCounters
                 && getProperty(NAME_PROPERTY + (i + 1)).length() > 0; i++) {
@@ -415,18 +415,18 @@ public class DispatcherMonitor extends AtomicMonitor {
     }
 
     public Enumeration getStatePropertyObjects(boolean flag) {
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         array.add(pCountersInError);
         for (int i = 0; i < nMaxCounters
                 && getProperty(NAME_PROPERTY + (i + 1)).length() > 0; i++) {
             array.add(getPropertyObject("value" + (i + 1)));
         }
 
-        return array.elements();
+        return (Enumeration) array.iterator();
     }
 
-    public Array getConnectionProperties() {
-        Array array = new Array();
+    public  ArrayList getConnectionProperties() {
+         ArrayList array = new ArrayList();
         array.add(pServerName);
         return array;
     }
@@ -484,7 +484,7 @@ public class DispatcherMonitor extends AtomicMonitor {
             if (s.length() > 0) {
                 s = s + "/";
             }
-            s = s + (String) array.at(i);
+            s = s + (String) array.get(i);
         }
 
         return s;
@@ -496,7 +496,7 @@ public class DispatcherMonitor extends AtomicMonitor {
             return s;
         }
         for (int i = array.size() - 1; i >= 0; i--) {
-            String s1 = (String) array.at(i);
+            String s1 = (String) array.get(i);
             s = s + s1.length() + " " + s1;
         }
 
@@ -529,7 +529,7 @@ public class DispatcherMonitor extends AtomicMonitor {
         if (nMaxCounters <= 0) {
             nMaxCounters = 30;
         }
-        Array array = new Array();
+         ArrayList array = new ArrayList();
         pServerName = new StringProperty("_server");
         pServerName.setDisplayText("Server", "the name of the server");
         pServerName.setParameterOptions(false, 4, false);
@@ -564,7 +564,7 @@ public class DispatcherMonitor extends AtomicMonitor {
         array.add(pCountersInError);
         StringProperty astringproperty3[] = new StringProperty[array.size()];
         for (int j = 0; j < array.size(); j++) {
-            astringproperty3[j] = (StringProperty) array.at(j);
+            astringproperty3[j] = (StringProperty) array.get(j);
         }
 
         addProperties("COM.dragonflow.SiteView.DispatcherMonitor",

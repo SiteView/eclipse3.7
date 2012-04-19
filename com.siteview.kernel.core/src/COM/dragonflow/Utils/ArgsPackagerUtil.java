@@ -19,7 +19,7 @@
 
 import java.util.Properties;
 
-import jgl.Array;
+import java.util.ArrayList;
 
 public class ArgsPackagerUtil
 {
@@ -28,25 +28,25 @@ public class ArgsPackagerUtil
     {
     }
 
-    public static String packageArgs(jgl.Array array)
+    public static String packageArgs(ArrayList array)
     {
         return COM.dragonflow.Utils.ArgsPackagerUtil.packageArgs(array, 0, array.size() - 1);
     }
 
-    public static String packageArgs(jgl.Array array, int i, int j)
+    public static String packageArgs(ArrayList array, int i, int j)
     {
         StringBuffer stringbuffer = new StringBuffer();
         int k = array.size();
         for(int l = i; l <= j; l++)
         {
-            java.lang.Object obj = array.at(l);
+            java.lang.Object obj = array.get(l);
             String s = "";
             if(obj instanceof String)
             {
                 s = (String)obj;
             } else
             {
-                jgl.Array array1 = (jgl.Array)array.at(l);
+                ArrayList array1 = (jgl.Array)array.get(l);
                 s = COM.dragonflow.Utils.ArgsPackagerUtil.packageArgs(array1, 0, array1.size() - 1);
             }
             stringbuffer.append(COM.dragonflow.Utils.ArgsPackagerUtil.packageArg(s));
@@ -89,9 +89,9 @@ public class ArgsPackagerUtil
         }
     }
 
-    public static jgl.Array unpackageArgs(String s)
+    public static ArrayList unpackageArgs(String s)
     {
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         int i = 0;
         do
         {
@@ -225,7 +225,7 @@ public class ArgsPackagerUtil
         String s = "str1_1";
         String s1 = "str1_2";
         String s2 = "";
-        jgl.Array array = new Array();
+        ArrayList array = new ArrayList();
         array.add(s);
         array.add(s1);
         array.add(s2);
@@ -240,7 +240,7 @@ public class ArgsPackagerUtil
         }
         java.lang.System.out.println("input   : " + s4);
         java.lang.System.out.println("output  : " + s3);
-        jgl.Array array1 = new Array();
+        ArrayList array1 = new ArrayList();
         String s5 = "str2";
         array1.add(array);
         array1.add(s5);
